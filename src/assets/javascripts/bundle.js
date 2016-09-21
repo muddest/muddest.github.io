@@ -21713,7 +21713,7 @@
 	            }
 	            return _react2.default.createElement(
 	                'div',
-	                { key: this.props.id, className: 'event' },
+	                { key: this.props.id, className: 'col-md-3' },
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'eventcontainer' },
@@ -21988,7 +21988,7 @@
 	                    onKeyUp: this.handleSearch }),
 	                _react2.default.createElement(
 	                    'div',
-	                    { id: 'filter' },
+	                    { id: 'filter', className: 'col-md-4 col-md-offset-3' },
 	                    _react2.default.createElement(
 	                        'span',
 	                        { id: 'showfilters', onClick: this.toggleFilter },

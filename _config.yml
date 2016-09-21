@@ -28,7 +28,7 @@ github_username:  jekyll
 markdown: kramdown
 theme: minima
 
-destination: public
+
 source: src
 exclude: [‘node_modules’]
 

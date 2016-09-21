@@ -210,7 +210,7 @@ class Event extends React.Component {
             )
         }
         return (
-            <div key={this.props.id} className="event">
+            <div key={this.props.id} className="col-md-3">
                 <div className="eventcontainer">
                     <div className="eventhead">
                         <h2>{this.props.title}</h2>
@@ -370,7 +370,7 @@ class EventSearch extends React.Component {
                     onKeyUp={this.handleSearch} />
                 
 
-                <div id="filter">
+                <div id="filter" className="col-md-4 col-md-offset-3">
                     <span id="showfilters" onClick={this.toggleFilter}>{this.state.showfilters ? <Fonty class="filterbtn" textbefore="Stäng filter" icon="fa-chevron-up" /> : <Fonty class="filterbtn" textbefore="Visa filter" icon="fa-chevron-down" />}</span>
                     <span id="filters" className={this.state.showfilters ? '' : 'hidden'}>
 
