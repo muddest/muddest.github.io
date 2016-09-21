@@ -32,4 +32,9 @@ destination: public
 source: src
 exclude: [‘node_modules’]
 
+sass:
+  style: compressed
+
+gems:
+ - jekyll-coffeescript
 
