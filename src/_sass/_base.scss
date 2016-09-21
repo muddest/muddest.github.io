@@ -1,0 +1,196 @@
+@mixin border-radius($radius)
+{
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -o-border-radius: $radius;
+  border-radius: $radius;
+}
+
+
+
+
+@mixin text-shadow($horizOffset, $vertOffset, $blur, $color)
+{
+  -webkit-text-shadow: $horizOffset $vertOffset $blur $color;
+  -moz-text-shadow: $horizOffset $vertOffset $blur $color;
+  -ms-text-shadow: $horizOffset $vertOffset $blur $color;
+  -o-text-shadow: $horizOffset $vertOffset $blur $color;
+  text-shadow: $horizOffset $vertOffset $blur $color;
+}
+
+
+@mixin text-shadow-multiple($horizOffset:0, $vertOffset:0, $blur:0, $color:"0",$horizOffset2:0, $vertOffset2:0, $blur2:0, $color2:white)
+{
+  -webkit-text-shadow: $horizOffset $vertOffset $blur $color, $horizOffset2 $vertOffset2 $blur2 $color2;
+  -moz-text-shadow: $horizOffset $vertOffset $blur $color, $horizOffset2 $vertOffset2 $blur2 $color2;
+  -ms-text-shadow: $horizOffset $vertOffset $blur $color, $horizOffset2 $vertOffset2 $blur2 $color2;
+  -o-text-shadow: $horizOffset $vertOffset $blur $color, $horizOffset2 $vertOffset2 $blur2 $color2;
+  text-shadow: $horizOffset $vertOffset $blur $color, $horizOffset2 $vertOffset2 $blur2 $color2;
+}
+
+
+
+
+
+@mixin box-shadow($top, $left, $blur, $shadow, $color, $inset:"")
+{
+  -webkit-box-shadow: $top $left $blur $shadow $color #{$inset};
+  -moz-box-shadow: $top $left $blur $shadow $color #{$inset};
+  -ms-box-shadow: $top $left $blur $shadow $color #{$inset};
+  -o-box-shadow: $top $left $blur $shadow $color #{$inset};
+  box-shadow: $top $left $blur $shadow $color #{$inset};
+}
+
+@mixin box-shadow-multiple($horiz:0, $vert:0, $blur:0, $shadow:0, $color:"0",$horiz2:0, $vert2:0, $blur2:0, $shadow2:0, $color2:white)
+{
+  -webkit-box-shadow: $horiz $vert $blur $shadow $color, $horiz2 $vert2 $blur2 $shadow2 $color2;
+  -moz-box-shadow: $horiz $vert $blur $shadow $color, $horiz2 $vert2 $blur2 $shadow2 $color2;
+  -ms-box-shadow: $horiz $vert $blur $shadow $color, $horiz2 $vert2 $blur2 $shadow2 $color2;
+  -o-box-shadow: $horiz $vert $blur $shadow $color, $horiz2 $vert2 $blur2 $shadow2 $color2;
+  box-shadow: $horiz $vert $blur $shadow $color, $horiz2 $vert2 $blur2 $shadow2 $color2;
+}
+
+
+@mixin box-shadow-direction($direction, $top, $left, $blur, $shadow, $color)
+{
+  -webkit-box-shadow: $direction $top $left $blur $shadow $color;
+  -moz-box-shadow: $direction $top $left $blur $shadow $color;
+  -ms-box-shadow: $direction $top $left $blur $shadow $color;
+  -o-box-shadow: $direction $top $left $blur $shadow $color;
+  box-shadow: $direction $top $left $blur $shadow $color;
+}
+
+
+
+
+
+
+
+@mixin background-linear($color1, $color2)
+{
+  -webkit-background: linear-gradient($color1, $color2);
+  -moz-background: linear-gradient($color1, $color2);
+  -ms-background: linear-gradient($color1, $color2);
+  -o-background: linear-gradient($color1, $color2);
+  background: linear-gradient($color1, $color2);
+}
+
+
+
+
+
+
+@mixin user-select($value)
+{
+  -webkit-user-select: $value;
+  -khtml-user-select: $value;
+  -moz-user-select: $value;
+  -ms-user-select: $value;
+  user-select: $value;
+}
+
+@mixin touch-callout($value)
+{
+  -webkit-touch-callout: $value;
+  -khtml-touch-callout: $value;
+  -moz-touch-callout: $value;
+  -ms-touch-callout: $value;
+  touch-callout: $value;
+}
+
+@mixin text-size-adjust($value)
+{
+  -webkit-text-size-adjust: none;
+  -khtml-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+
+
+
+
+@mixin transition-multiple($property, $speed, $easing, $property2:0, $speed2:0, $easing2:0)
+{
+  -webkit-touch-callout-transition: $property $speed $easing, $property2, $speed2, $easing2;
+  -webkit-transition: $property $speed $easing, $property2, $speed2, $easing2;
+  -khtml-transition: $property $speed $easing, $property2, $speed2, $easing2;
+  -moz-transition: $property $speed $easing, $property2, $speed2, $easing2;
+  -ms-transition: $property $speed $easing, $property2, $speed2, $easing2;
+  -o-transition: $property $speed $easing, $property2, $speed2, $easing2;
+  transition: $property $speed $easing, $property2, $speed2, $easing2;
+}
+
+@mixin transition($property, $speed, $easing)
+{
+  -webkit-touch-callout-transition: $property $speed $easing;
+  -webkit-transition: $property $speed $easing;
+  -khtml-transition: $property $speed $easing;
+  -moz-transition: $property $speed $easing;
+  -ms-transition: $property $speed $easing;
+  -o-transition: $property $speed $easing;
+  transition: $property $speed $easing;
+}
+
+@mixin transition-delay($property, $duration, $delay, $function)
+{
+  -webkit-transition: $property $duration $delay $function;
+  -moz-transition: $property $duration $delay $function;
+  -ms-transition: $property $duration $delay $function;
+  -o-transition: $property $duration $delay $function;
+  transition: $property $duration $delay $function;
+}
+
+
+
+@mixin border-radius($top_left:0, $top_right:0, $bottom_right:0, $bottom_left:0)
+{
+  -webkit-border-radius: $top_left $top_right $bottom_right $bottom_left;
+  -khtml-border-radius: $top_left $top_right $bottom_right $bottom_left;
+  -moz-border-radius: $top_left $top_right $bottom_right $bottom_left;
+  -ms-border-radius: $top_left $top_right $bottom_right $bottom_left;
+  border-radius: $top_left $top_right $bottom_right $bottom_left;
+}
+
+
+
+@mixin box-sizing($thisBox)
+{
+  -webkit-box-sizing: $thisBox;
+  -khtml-box-sizing: $thisBox;
+  -moz-box-sizing: $thisBox;
+  -ms-box-sizing: $thisBox;
+  box-sizing: $thisBox;
+}
+
+
+@mixin gridCols($rows: 4, $padding: 0 10px, $margin: 0 0 22px 0, $gutter: 20px) {
+  //width: ($max-width / $columns) * $rows - $gutter;
+  width: (100% / $columns) * $rows;
+  max-width: 100%;
+  float: left;
+  padding: $padding;
+  margin: $margin;
+  @include box-sizing(border-box);
+}
+
+
+@mixin background-color($color)
+{
+  -webkit-background-color: $color;
+  -khtml-background-color: $color;
+  -moz-background-color: $color;
+  -ms-background-color: $color;
+  background-color: $color;
+}
+
+@mixin animation($effect, $time)
+{
+  -webkit-animation: $effect $time;
+  -moz-animation: $effect $time;
+  -ms-animation: $effect $time;
+  -o-animation: $effect $time;
+  animation: $effect $time;
+}
