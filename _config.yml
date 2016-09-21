@@ -34,7 +34,7 @@ exclude: [‘node_modules’]
 
 sass:
   style: compressed
-  sass_dir: _sass
+  sass_dir: src/_sass
 
 gems:
  - jekyll-coffeescript
