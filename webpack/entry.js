@@ -5,7 +5,7 @@ import EventBox from './components/eventbox.jsx';
 class App extends Component {
     render() {
         return (
-            <EventBox eventurl="http://vvv.tobiassjosten.net/muddest/data/events.json" />
+            <EventBox eventurl="/muddest/data/events.json" />
         )
     }
 }
