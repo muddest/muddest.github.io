@@ -37,6 +37,7 @@ class EventBox extends React.Component {
     }
 
     loadEvent() {
+        console.log(this.props.eventurl);
         $.ajax({
             url: this.props.eventurl,
             dataType: 'json',

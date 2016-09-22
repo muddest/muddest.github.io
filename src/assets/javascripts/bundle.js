@@ -21533,6 +21533,7 @@
 	        value: function loadEvent() {
 	            var _this2 = this;
 
+	            console.log(this.props.eventurl);
 	            $.ajax({
 	                url: this.props.eventurl,
 	                dataType: 'json',
