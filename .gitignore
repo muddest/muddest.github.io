@@ -5,3 +5,4 @@ _site
 public
 src/assets/bundle.js
 node_modules
+/vendor
