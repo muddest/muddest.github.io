@@ -30,6 +30,10 @@ theme: minima
 
 
 exclude: [‘node_modules’]
+exclude:
+    - node_modules
+    - webpack
+    - vendor
 
 sass:
   style: compressed

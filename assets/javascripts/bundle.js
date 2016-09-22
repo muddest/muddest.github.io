@@ -78,7 +78,7 @@
 	    _createClass(App, [{
 	        key: 'render',
 	        value: function render() {
-	            return _react2.default.createElement(_eventbox2.default, { eventurl: '/muddest/data/events.json' });
+	            return _react2.default.createElement(_eventbox2.default, { eventurl: '/data/events.json' });
 	        }
 	    }]);
 
@@ -21533,12 +21533,15 @@
 	        value: function loadEvent() {
 	            var _this2 = this;
 
-	            console.log(this.props.eventurl);
 	            $.ajax({
 	                url: this.props.eventurl,
 	                dataType: 'json',
 	                cache: false,
 	                success: function success(data) {
+	                    data.sort(function (a, b) {
+	                        return new Date(a.date) - new Date(b.date);
+	                    });
+
 	                    _this2.setState({ data: data });
 	                },
 	                error: function error(xhr, status, err) {
@@ -21550,6 +21553,10 @@
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            this.loadEvent();
+
+	            $.get("http://ipinfo.io", function (response) {
+	                console.log(response.city, response.country);
+	            }, "jsonp");
 	        }
 	    }, {
 	        key: 'render',
@@ -21927,12 +21934,10 @@
 	        _this8.state = {
 	            searchVal: '',
 	            minLengthVal: 0,
-	            maxLengthVal: 30,
-	            showfilters: false
+	            maxLengthVal: 30
 	        };
 
 	        _this8.handleSearch = _this8.handleSearch.bind(_this8);
-	        _this8.toggleFilter = _this8.toggleFilter.bind(_this8);
 	        _this8.updateSearchVal = _this8.updateSearchVal.bind(_this8);
 	        _this8.updateCountryVal = _this8.updateCountryVal.bind(_this8);
 	        _this8.handleMinLengthchange = _this8.handleMinLengthchange.bind(_this8);
@@ -21999,82 +22004,73 @@
 	                    'div',
 	                    { id: 'filter', className: 'col-md-4 col-md-offset-3' },
 	                    _react2.default.createElement(
-	                        'span',
-	                        { id: 'showfilters', onClick: this.toggleFilter },
-	                        this.state.showfilters ? _react2.default.createElement(_fonty2.default, { 'class': 'filterbtn', textbefore: 'Stäng filter', icon: 'fa-chevron-up' }) : _react2.default.createElement(_fonty2.default, { 'class': 'filterbtn', textbefore: 'Visa filter', icon: 'fa-chevron-down' })
+	                        'div',
+	                        { className: 'filtergroup' },
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'label before' },
+	                            'Minimum length'
+	                        ),
+	                        _react2.default.createElement('input', {
+	                            id: 'minlength',
+	                            type: 'range',
+	                            min: '0',
+	                            max: '30',
+	                            step: '1',
+	                            'data-name': 'minlength',
+	                            value: this.state.minLengthVal,
+	                            onChange: this.handleMinLengthchange }),
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'label after' },
+	                            this.state.minLengthVal,
+	                            ' km'
+	                        )
 	                    ),
 	                    _react2.default.createElement(
-	                        'span',
-	                        { id: 'filters', className: this.state.showfilters ? '' : 'hidden' },
+	                        'div',
+	                        { className: 'filtergroup' },
 	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'filtergroup' },
-	                            _react2.default.createElement(
-	                                'span',
-	                                { className: 'label before' },
-	                                'Minimum length'
-	                            ),
-	                            _react2.default.createElement('input', {
-	                                id: 'minlength',
-	                                type: 'range',
-	                                min: '0',
-	                                max: '30',
-	                                step: '1',
-	                                'data-name': 'minlength',
-	                                value: this.state.minLengthVal,
-	                                onChange: this.handleMinLengthchange }),
-	                            _react2.default.createElement(
-	                                'span',
-	                                { className: 'label after' },
-	                                this.state.minLengthVal,
-	                                ' km'
-	                            )
+	                            'span',
+	                            { className: 'label before' },
+	                            'Maximum length'
 	                        ),
+	                        _react2.default.createElement('input', {
+	                            id: 'maxlength',
+	                            type: 'range',
+	                            min: '0',
+	                            max: '30',
+	                            step: '1',
+	                            'data-name': 'maxlength',
+	                            value: this.state.maxLengthVal,
+	                            onChange: this.handleMaxLengthchange }),
 	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'filtergroup' },
+	                            'span',
+	                            { className: 'label after' },
+	                            this.state.maxLengthVal,
+	                            ' km'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'filtergroup' },
+	                        _react2.default.createElement(
+	                            'select',
+	                            { multiple: true, onChange: this.updateCountryVal },
 	                            _react2.default.createElement(
-	                                'span',
-	                                { className: 'label before' },
-	                                'Maximum length'
+	                                'option',
+	                                { value: 'sweden' },
+	                                'Sweden'
 	                            ),
-	                            _react2.default.createElement('input', {
-	                                id: 'maxlength',
-	                                type: 'range',
-	                                min: '0',
-	                                max: '30',
-	                                step: '1',
-	                                'data-name': 'maxlength',
-	                                value: this.state.maxLengthVal,
-	                                onChange: this.handleMaxLengthchange }),
 	                            _react2.default.createElement(
-	                                'span',
-	                                { className: 'label after' },
-	                                this.state.maxLengthVal,
-	                                ' km'
-	                            )
-	                        ),
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'filtergroup' },
+	                                'option',
+	                                { value: 'uk' },
+	                                'United Kingdom'
+	                            ),
 	                            _react2.default.createElement(
-	                                'select',
-	                                { multiple: true, onChange: this.updateCountryVal },
-	                                _react2.default.createElement(
-	                                    'option',
-	                                    { value: 'sweden' },
-	                                    'Sweden'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'option',
-	                                    { value: 'uk' },
-	                                    'United Kingdom'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'option',
-	                                    { value: 'spain' },
-	                                    'Spain'
-	                                )
+	                                'option',
+	                                { value: 'spain' },
+	                                'Spain'
 	                            )
 	                        )
 	                    )

@@ -37,12 +37,15 @@ class EventBox extends React.Component {
     }
 
     loadEvent() {
-        console.log(this.props.eventurl);
         $.ajax({
             url: this.props.eventurl,
             dataType: 'json',
             cache: false,
             success: (data) => {
+                data.sort(function(a,b){
+                    return new Date(a.date) - new Date(b.date);
+                });
+                
                 this.setState({ data: data });
             },
             error: function(xhr, status, err) {
@@ -53,6 +56,10 @@ class EventBox extends React.Component {
 
     componentDidMount() {
         this.loadEvent();
+
+        $.get("http://ipinfo.io", function(response) {
+            console.log(response.city, response.country);
+        }, "jsonp");
     }
 
     render() {
@@ -315,11 +322,9 @@ class EventSearch extends React.Component {
             searchVal: '',
             minLengthVal: 0,
             maxLengthVal: 30,
-            showfilters: false,
         };
 
         this.handleSearch = this.handleSearch.bind(this);
-        this.toggleFilter = this.toggleFilter.bind(this);
         this.updateSearchVal = this.updateSearchVal.bind(this);
         this.updateCountryVal = this.updateCountryVal.bind(this);
         this.handleMinLengthchange = this.handleMinLengthchange.bind(this);
@@ -376,9 +381,6 @@ class EventSearch extends React.Component {
                 
 
                 <div id="filter" className="col-md-4 col-md-offset-3">
-                    <span id="showfilters" onClick={this.toggleFilter}>{this.state.showfilters ? <Fonty class="filterbtn" textbefore="Stäng filter" icon="fa-chevron-up" /> : <Fonty class="filterbtn" textbefore="Visa filter" icon="fa-chevron-down" />}</span>
-                    <span id="filters" className={this.state.showfilters ? '' : 'hidden'}>
-
                     <div className="filtergroup">
                         <span className="label before">Minimum length</span>
                         <input
@@ -414,7 +416,6 @@ class EventSearch extends React.Component {
                             <option value="spain">Spain</option>
                         </select>
                     </div>
-                    </span>
                 </div>
             </form>
         )
