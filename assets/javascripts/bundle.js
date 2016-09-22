@@ -78,7 +78,7 @@
 	    _createClass(App, [{
 	        key: 'render',
 	        value: function render() {
-	            return _react2.default.createElement(_eventbox2.default, { eventurl: '/data/events.json' });
+	            return _react2.default.createElement(_eventbox2.default, { eventurl: '/muddest/data/events.json' });
 	        }
 	    }]);
 
@@ -21533,6 +21533,7 @@
 	        value: function loadEvent() {
 	            var _this2 = this;
 
+	            console.log(this.props.eventurl);
 	            $.ajax({
 	                url: this.props.eventurl,
 	                dataType: 'json',
@@ -21541,7 +21542,7 @@
 	                    _this2.setState({ data: data });
 	                },
 	                error: function error(xhr, status, err) {
-	                    console.error(this.props.url, status, err.toString());
+	                    console.error(this.props.eventurl, status, err.toString());
 	                }
 	            });
 	        }
