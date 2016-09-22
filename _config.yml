@@ -42,3 +42,5 @@ sass:
 gems:
  - jekyll-coffeescript
 
+collections:
+  - events
