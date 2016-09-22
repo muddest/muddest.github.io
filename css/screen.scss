@@ -1,0 +1,27 @@
+---
+---
+
+@import "base";
+@import "font_awesome/font-awesome";
+@import 'https://fonts.googleapis.com/css?family=Lato';
+
+html {
+    font-family: verdana;
+    margin: 0;
+    font-size: 62.5%;
+    background: rgb(237, 237, 251);
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin: 0 0 5px 0;
+}
+
+#eventlist {
+    .eventhead {
+        background: rgb(68, 61, 255);
+        border-radius: 3px;
+        color: rgb(255, 255, 255);
+        padding: 3px 5px 3px 5px;
+    }
+}

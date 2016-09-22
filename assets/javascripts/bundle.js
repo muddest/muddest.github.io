@@ -21641,14 +21641,18 @@
 
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'eventlist', key: 'eventkey' },
+	                { id: 'eventlist', className: 'container-fluid', key: 'eventkey' },
 	                _react2.default.createElement(
-	                    _reactAddonsCssTransitionGroup2.default,
-	                    {
-	                        transitionName: 'eventtransition',
-	                        transitionEnterTimeout: 500,
-	                        transitionLeaveTimeout: 300 },
-	                    eventnodes
+	                    'div',
+	                    { className: 'row col-md-12' },
+	                    _react2.default.createElement(
+	                        _reactAddonsCssTransitionGroup2.default,
+	                        {
+	                            transitionName: 'eventtransition',
+	                            transitionEnterTimeout: 500,
+	                            transitionLeaveTimeout: 300 },
+	                        eventnodes
+	                    )
 	                )
 	            );
 	        }
@@ -21713,22 +21717,26 @@
 	            }
 	            return _react2.default.createElement(
 	                'div',
-	                { key: this.props.id, className: 'col-md-3' },
+	                { key: this.props.id, className: 'col-sm-6 col-md-4 col-lg-4' },
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'eventcontainer' },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'eventhead' },
+	                        { className: 'eventhead col-md-12' },
 	                        _react2.default.createElement(
-	                            'h2',
-	                            null,
-	                            this.props.title
-	                        ),
-	                        _react2.default.createElement(
-	                            'span',
-	                            { className: 'date' },
-	                            this.props.date
+	                            'div',
+	                            { className: 'row' },
+	                            _react2.default.createElement(
+	                                'h2',
+	                                { className: 'col-md-8' },
+	                                this.props.title
+	                            ),
+	                            _react2.default.createElement(
+	                                'span',
+	                                { className: 'date col-md-4 text-right' },
+	                                this.props.date
+	                            )
 	                        ),
 	                        _react2.default.createElement(
 	                            'span',
