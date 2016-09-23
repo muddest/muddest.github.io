@@ -10,6 +10,7 @@ $dark-grey: rgb(80, 80, 80);
 $white-text: rgb(245,245,245);
 $small-border-radius: 3px;
 
+$blue-box-background: rgb(232, 233, 253);
 $blue-header: rgb(68, 61, 255);
 $input-blue-border-bottom: inset 7px rgb(160, 160, 160);
 
@@ -30,11 +31,19 @@ h2 {
 }
 
 #eventlist {
+    .eventcontainer {
+        background: $blue-box-background;
+        border-radius: 5px;
+        min-height: 150px;
+        margin: 0 0 30px 0;
+    }
     .eventhead {
         background: $blue-header;
-        border-radius: $small-border-radius;
+        border-top-left-radius: $small-border-radius;
+        border-top-right-radius: $small-border-radius;
         color: $white-text;
-        padding: 3px 5px 3px 5px;
+        margin: 0 0 10px 0;
+        padding: 5px 5px 3px 5px;
     }
 
     .daysleft {
@@ -46,6 +55,9 @@ h2 {
         }
         &.green {
             background: rgb(0, 187, 10);
+        }
+        &.orange {
+            background: rgb(241, 163, 76);
         }
     }
 }

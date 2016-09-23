@@ -21530,9 +21530,35 @@
 	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            //$.get("http://ipinfo.io", function(response) {
-	            //console.log(response.city, response.country);
-	            //}, "jsonp");
+	            if (navigator.geolocation) {
+	                navigator.geolocation.getCurrentPosition(function (position) {
+	                    console.log(position);
+	                    $.getJSON('http://ws.geonames.org/countryCode', {
+	                        lat: position.coords.latitude,
+	                        lng: position.coords.longitude,
+	                        type: 'JSON'
+	                    }, function (result) {
+	                        console.log(result.countryName);
+	                    });
+	                });
+	            }
+
+	            if (navigator.geolocation) {
+	                navigator.geolocation.getCurrentPosition(function () {
+	                    console.log('Position: ', position);
+	                    $.ajax({
+	                        url: 'http://ws.geonames.org/searchJSON',
+	                        data: {
+	                            lat: position.coords.latitude,
+	                            lng: position.coords.longitude
+	                        },
+	                        dataType: 'jsonp',
+	                        success: function success(data) {
+	                            console.log('Success: ', data);
+	                        }
+	                    });
+	                });
+	            }
 	        }
 	    }, {
 	        key: 'render',
@@ -21704,6 +21730,12 @@
 	                    closebox: this.toggleMapBox,
 	                    content: _react2.default.createElement('iframe', { width: 560, height: 315, frameBorder: 0, src: "https://www.google.com/maps/embed/v1/search?q=Stockholm stadion," + this.props.city + "&key=AIzaSyDCO6ot8LXweTO6G_LLOlvWyv8kwF-_Jd8", allowFullScreen: true }) });
 	            }
+	            var daysColor = 'green';
+	            if (this.props.daysleft < 10) {
+	                daysColor = 'red';
+	            } else if (this.props.daysleft > 10 && this.props.daysleft < 30) {
+	                daysColor = 'orange';
+	            }
 	            return _react2.default.createElement(
 	                'div',
 	                { key: this.props.id, className: 'col-sm-6 col-md-4 col-lg-4' },
@@ -21722,16 +21754,20 @@
 	                                this.props.title
 	                            ),
 	                            _react2.default.createElement(
-	                                'span',
+	                                'div',
 	                                { className: 'col-md-4 text-right' },
-	                                this.props.date
+	                                _react2.default.createElement(
+	                                    'span',
+	                                    { className: 'daysleft ' + daysColor },
+	                                    this.props.daysleft,
+	                                    ' days left'
+	                                )
 	                            )
 	                        ),
 	                        _react2.default.createElement(
 	                            'span',
-	                            { className: this.props.daysleft < 10 ? 'daysleft red' : 'daysleft green' },
-	                            this.props.daysleft,
-	                            ' days left'
+	                            null,
+	                            this.props.date
 	                        )
 	                    ),
 	                    _react2.default.createElement(
@@ -21782,22 +21818,14 @@
 	                        'div',
 	                        { className: 'readmore' },
 	                        _react2.default.createElement(
-	                            'span',
-	                            { className: 'maplink' },
-	                            _react2.default.createElement(
-	                                'span',
-	                                { className: 'showmap pointer', 'data-name': 'openbox', onClick: this.toggleMapBox },
-	                                'View map'
-	                            )
+	                            'button',
+	                            { type: 'button', className: 'btn btn-info', 'data-name': 'openbox', onClick: this.toggleMapBox },
+	                            'View map'
 	                        ),
 	                        _react2.default.createElement(
-	                            'span',
-	                            { className: 'readmorelink' },
-	                            _react2.default.createElement(
-	                                'span',
-	                                { className: 'pointer', 'data-name': 'openbox', onClick: this.toggleInfoBox },
-	                                'Read more...'
-	                            )
+	                            'button',
+	                            { type: 'button', className: 'btn btn-info pull-right', 'data-name': 'openbox', onClick: this.toggleInfoBox },
+	                            'Read more...'
 	                        )
 	                    ),
 	                    map,

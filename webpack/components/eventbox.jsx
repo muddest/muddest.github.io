@@ -36,9 +36,35 @@ class EventBox extends React.Component {
     }
 
     componentDidMount() {
-        //$.get("http://ipinfo.io", function(response) {
-            //console.log(response.city, response.country);
-        //}, "jsonp");
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                console.log(position);
+                $.getJSON('http://ws.geonames.org/countryCode', {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                    type: 'JSON'
+                }, function(result) {
+                    console.log(result.countryName);
+                })
+            })
+        }
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function() {
+                console.log('Position: ', position);
+                $.ajax({
+                    url: 'http://ws.geonames.org/searchJSON',
+                    data: {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    },
+                    dataType: 'jsonp',
+                    success: function (data) {
+                        console.log('Success: ', data);
+                    }
+                })
+            })
+        }
     }
 
     render() {
@@ -202,15 +228,24 @@ class Event extends React.Component {
                     content={<iframe width={560} height={315} frameBorder={0} src={"https://www.google.com/maps/embed/v1/search?q=Stockholm stadion,"+this.props.city+"&key=AIzaSyDCO6ot8LXweTO6G_LLOlvWyv8kwF-_Jd8"} allowFullScreen></iframe>}/>
             )
         }
+        let daysColor = 'green';
+        if (this.props.daysleft < 10) {
+            daysColor = 'red';
+        } else if (this.props.daysleft > 10 && this.props.daysleft < 30) {
+            daysColor = 'orange';
+        }
         return (
             <div key={this.props.id} className="col-sm-6 col-md-4 col-lg-4">
                 <div className="eventcontainer">
                     <div className="eventhead col-md-12">
                         <div className="row">
                             <h2 className="col-md-8">{this.props.title}</h2>
-                            <span className="col-md-4 text-right">{this.props.date}</span>
+                            <div className="col-md-4 text-right">
+                                <span className={'daysleft '+daysColor}>{this.props.daysleft} days left</span>
+                            </div>
+                            
                         </div>
-                        <span className={(this.props.daysleft < 10) ? 'daysleft red' : 'daysleft green'}>{this.props.daysleft} days left</span>
+                        <span>{this.props.date}</span>
                     </div>
 
                     <div className="col-md-12">
@@ -228,12 +263,8 @@ class Event extends React.Component {
                     </div>
 
                     <div className="readmore">
-                        <span className="maplink">
-                            <span className="showmap pointer" data-name="openbox" onClick={this.toggleMapBox}>View map</span>
-                        </span>
-                        <span className="readmorelink">
-                            <span className="pointer" data-name="openbox" onClick={this.toggleInfoBox}>Read more...</span>
-                        </span>
+                        <button type="button" className="btn btn-info" data-name="openbox" onClick={this.toggleMapBox}>View map</button>
+                        <button type="button" className="btn btn-info pull-right" data-name="openbox" onClick={this.toggleInfoBox}>Read more...</button>
                     </div>
                     {map}
                     {readMore}
