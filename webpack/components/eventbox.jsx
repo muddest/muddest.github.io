@@ -15,7 +15,6 @@ class EventBox extends React.Component {
             country: [],
         };
 
-        this.loadEvent = this.loadEvent.bind(this);
         this.changeSearchState = this.changeSearchState.bind(this);
     }
 
@@ -36,30 +35,10 @@ class EventBox extends React.Component {
         }
     }
 
-    loadEvent() {
-        $.ajax({
-            url: this.props.eventurl,
-            dataType: 'json',
-            cache: false,
-            success: (data) => {
-                data.sort(function(a,b){
-                    return new Date(a.date) - new Date(b.date);
-                });
-                
-                this.setState({ data: data });
-            },
-            error: function(xhr, status, err) {
-                console.error(this.props.eventurl, status, err.toString());
-            }
-        });
-    }
-
     componentDidMount() {
-        this.loadEvent();
-
-        $.get("http://ipinfo.io", function(response) {
-            console.log(response.city, response.country);
-        }, "jsonp");
+        //$.get("http://ipinfo.io", function(response) {
+            //console.log(response.city, response.country);
+        //}, "jsonp");
     }
 
     render() {
@@ -67,7 +46,7 @@ class EventBox extends React.Component {
             <div>
                 <EventSearch changesearchstate={this.changeSearchState} />
                 <EventList
-                    data={this.state.data}
+                    data={this.props.data}
                     searchword={this.state.searchWord}
                     minlength={this.state.minLength}
                     maxlength={this.state.maxLength}
@@ -85,7 +64,6 @@ class EventBox extends React.Component {
 
 class EventList extends React.Component {
     _getDifferenceInDays(date) {
-
         var oneDay = 24*60*60*1000;
         var eventDate = new Date(date);
         var now = new Date();
@@ -101,19 +79,19 @@ class EventList extends React.Component {
 
     render() {
         var eventnodes = this.props.data.filter((event) => {
-            if ( parseInt(event.length) < parseInt(this.props.minlength)) {
+            if ( parseInt(event.Length) < parseInt(this.props.minlength)) {
                 return false;
             }
 
-            if ( parseInt(event.length) > parseInt(this.props.maxlength)) {
+            if ( parseInt(event.Length) > parseInt(this.props.maxlength)) {
                 return false;
             }
             
-            if (event.title.toLowerCase().indexOf(this.props.searchword) === -1 && 1 < this.props.searchword.length) {
+            if (event.Title.toLowerCase().indexOf(this.props.searchword) === -1 && 1 < this.props.searchword.length) {
                 return false;
             }
 
-            var countryCheck = (this.props.country.indexOf(event.country.toLowerCase()) > -1);
+            var countryCheck = (this.props.country.indexOf(event.Country.toLowerCase()) > -1);
             if (false === countryCheck && 0 < this.props.country.length) {
                 return false;
             }
@@ -122,24 +100,24 @@ class EventList extends React.Component {
             
             return true;
         }).map((event) => {
-            let days = this._getDifferenceInDays(event.date);
+            let days = this._getDifferenceInDays(event.Date);
             return (
                 <Event
                     key={event.id}
-                    title={event.title}
-                    info={event.info} 
+                    title={event.Title}
+                    info={event.content} 
                     id={event.id}
-                    date={event.date}
+                    date={event.Date}
                     daysleft={days}
-                    country={event.country}
-                    city={event.city}
-                    address={event.address}
-                    site={event.site}
-                    obstacles={event.obstacles}
-                    youtube={event.youtube}
-                    length={event.length}
-                    price={event.price}
-                    currency={event.currency} />
+                    country={event.Country}
+                    city={event.City}
+                    address={event.Address}
+                    site={event.Site}
+                    obstacles={event.Obstacles}
+                    youtube={event.Youtube}
+                    length={event.Length}
+                    price={event.Price}
+                    currency={event.Currency} />
                     
 
             );
@@ -280,7 +258,7 @@ class InfoBox extends React.Component {
             <div className="box">
                 <div className="box_background" data-name="closebox" onClick={this.props.closebox}>
                     <div className="eventinfo">
-                        <h3>{this.props.title}</h3>
+                        <h3>{this.props.Title}</h3>
                         <span dangerouslySetInnerHTML={this.rawMarkup()} />
                         <iframe width="560" height="315" src={this.props.youtube} frameBorder="0" allowFullScreen></iframe>
                         <span className="close pointer" data-name="closebox" onClick={this.props.closebox}>Close</span>
@@ -298,7 +276,7 @@ class MapBox extends React.Component {
             <div className="box">
                 <div className="box_background" data-name="closebox" onClick={this.props.closebox}>
                     <div className="eventinfo">
-                        <h3>{this.props.title}</h3>
+                        <h3>{this.props.Title}</h3>
                         {this.props.content}
                         <span className="close pointer" data-name="closebox" onClick={this.props.closebox}>Close</span>
                     </div>

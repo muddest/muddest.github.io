@@ -78,7 +78,7 @@
 	    _createClass(App, [{
 	        key: 'render',
 	        value: function render() {
-	            return _react2.default.createElement(_eventbox2.default, { eventurl: '/data/events.json' });
+	            return _react2.default.createElement(_eventbox2.default, { data: events });
 	        }
 	    }]);
 
@@ -21505,7 +21505,6 @@
 	            country: []
 	        };
 
-	        _this.loadEvent = _this.loadEvent.bind(_this);
 	        _this.changeSearchState = _this.changeSearchState.bind(_this);
 	        return _this;
 	    }
@@ -21529,34 +21528,11 @@
 	            }
 	        }
 	    }, {
-	        key: 'loadEvent',
-	        value: function loadEvent() {
-	            var _this2 = this;
-
-	            $.ajax({
-	                url: this.props.eventurl,
-	                dataType: 'json',
-	                cache: false,
-	                success: function success(data) {
-	                    data.sort(function (a, b) {
-	                        return new Date(a.date) - new Date(b.date);
-	                    });
-
-	                    _this2.setState({ data: data });
-	                },
-	                error: function error(xhr, status, err) {
-	                    console.error(this.props.eventurl, status, err.toString());
-	                }
-	            });
-	        }
-	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            this.loadEvent();
-
-	            $.get("http://ipinfo.io", function (response) {
-	                console.log(response.city, response.country);
-	            }, "jsonp");
+	            //$.get("http://ipinfo.io", function(response) {
+	            //console.log(response.city, response.country);
+	            //}, "jsonp");
 	        }
 	    }, {
 	        key: 'render',
@@ -21566,7 +21542,7 @@
 	                null,
 	                _react2.default.createElement(EventSearch, { changesearchstate: this.changeSearchState }),
 	                _react2.default.createElement(EventList, {
-	                    data: this.state.data,
+	                    data: this.props.data,
 	                    searchword: this.state.searchWord,
 	                    minlength: this.state.minLength,
 	                    maxlength: this.state.maxLength,
@@ -21590,7 +21566,6 @@
 	    _createClass(EventList, [{
 	        key: '_getDifferenceInDays',
 	        value: function _getDifferenceInDays(date) {
-
 	            var oneDay = 24 * 60 * 60 * 1000;
 	            var eventDate = new Date(date);
 	            var now = new Date();
@@ -21606,45 +21581,45 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _this4 = this;
+	            var _this3 = this;
 
 	            var eventnodes = this.props.data.filter(function (event) {
-	                if (parseInt(event.length) < parseInt(_this4.props.minlength)) {
+	                if (parseInt(event.Length) < parseInt(_this3.props.minlength)) {
 	                    return false;
 	                }
 
-	                if (parseInt(event.length) > parseInt(_this4.props.maxlength)) {
+	                if (parseInt(event.Length) > parseInt(_this3.props.maxlength)) {
 	                    return false;
 	                }
 
-	                if (event.title.toLowerCase().indexOf(_this4.props.searchword) === -1 && 1 < _this4.props.searchword.length) {
+	                if (event.Title.toLowerCase().indexOf(_this3.props.searchword) === -1 && 1 < _this3.props.searchword.length) {
 	                    return false;
 	                }
 
-	                var countryCheck = _this4.props.country.indexOf(event.country.toLowerCase()) > -1;
-	                if (false === countryCheck && 0 < _this4.props.country.length) {
+	                var countryCheck = _this3.props.country.indexOf(event.Country.toLowerCase()) > -1;
+	                if (false === countryCheck && 0 < _this3.props.country.length) {
 	                    return false;
 	                }
 
 	                return true;
 	            }).map(function (event) {
-	                var days = _this4._getDifferenceInDays(event.date);
+	                var days = _this3._getDifferenceInDays(event.Date);
 	                return _react2.default.createElement(Event, {
 	                    key: event.id,
-	                    title: event.title,
-	                    info: event.info,
+	                    title: event.Title,
+	                    info: event.content,
 	                    id: event.id,
-	                    date: event.date,
+	                    date: event.Date,
 	                    daysleft: days,
-	                    country: event.country,
-	                    city: event.city,
-	                    address: event.address,
-	                    site: event.site,
-	                    obstacles: event.obstacles,
-	                    youtube: event.youtube,
-	                    length: event.length,
-	                    price: event.price,
-	                    currency: event.currency });
+	                    country: event.Country,
+	                    city: event.City,
+	                    address: event.Address,
+	                    site: event.Site,
+	                    obstacles: event.Obstacles,
+	                    youtube: event.Youtube,
+	                    length: event.Length,
+	                    price: event.Price,
+	                    currency: event.Currency });
 	            });
 
 	            return _react2.default.createElement(
@@ -21675,17 +21650,17 @@
 	    function Event(props) {
 	        _classCallCheck(this, Event);
 
-	        var _this5 = _possibleConstructorReturn(this, (Event.__proto__ || Object.getPrototypeOf(Event)).call(this, props));
+	        var _this4 = _possibleConstructorReturn(this, (Event.__proto__ || Object.getPrototypeOf(Event)).call(this, props));
 
-	        _this5.state = {
+	        _this4.state = {
 	            hidden: true,
 	            showMap: false
 	        };
 
 	        // Bind "this" for functions within component
-	        _this5.toggleInfoBox = _this5.toggleInfoBox.bind(_this5);
-	        _this5.toggleMapBox = _this5.toggleMapBox.bind(_this5);
-	        return _this5;
+	        _this4.toggleInfoBox = _this4.toggleInfoBox.bind(_this4);
+	        _this4.toggleMapBox = _this4.toggleMapBox.bind(_this4);
+	        return _this4;
 	    }
 
 	    _createClass(Event, [{
@@ -21835,11 +21810,11 @@
 	    function InfoBox(props) {
 	        _classCallCheck(this, InfoBox);
 
-	        var _this6 = _possibleConstructorReturn(this, (InfoBox.__proto__ || Object.getPrototypeOf(InfoBox)).call(this, props));
+	        var _this5 = _possibleConstructorReturn(this, (InfoBox.__proto__ || Object.getPrototypeOf(InfoBox)).call(this, props));
 
-	        _this6.state = {};
-	        _this6.rawMarkup = _this6.rawMarkup.bind(_this6);
-	        return _this6;
+	        _this5.state = {};
+	        _this5.rawMarkup = _this5.rawMarkup.bind(_this5);
+	        return _this5;
 	    }
 
 	    _createClass(InfoBox, [{
@@ -21864,7 +21839,7 @@
 	                        _react2.default.createElement(
 	                            'h3',
 	                            null,
-	                            this.props.title
+	                            this.props.Title
 	                        ),
 	                        _react2.default.createElement('span', { dangerouslySetInnerHTML: this.rawMarkup() }),
 	                        _react2.default.createElement('iframe', { width: '560', height: '315', src: this.props.youtube, frameBorder: '0', allowFullScreen: true }),
@@ -21906,7 +21881,7 @@
 	                        _react2.default.createElement(
 	                            'h3',
 	                            null,
-	                            this.props.title
+	                            this.props.Title
 	                        ),
 	                        this.props.content,
 	                        _react2.default.createElement(
@@ -21929,20 +21904,20 @@
 	    function EventSearch(props) {
 	        _classCallCheck(this, EventSearch);
 
-	        var _this8 = _possibleConstructorReturn(this, (EventSearch.__proto__ || Object.getPrototypeOf(EventSearch)).call(this, props));
+	        var _this7 = _possibleConstructorReturn(this, (EventSearch.__proto__ || Object.getPrototypeOf(EventSearch)).call(this, props));
 
-	        _this8.state = {
+	        _this7.state = {
 	            searchVal: '',
 	            minLengthVal: 0,
 	            maxLengthVal: 30
 	        };
 
-	        _this8.handleSearch = _this8.handleSearch.bind(_this8);
-	        _this8.updateSearchVal = _this8.updateSearchVal.bind(_this8);
-	        _this8.updateCountryVal = _this8.updateCountryVal.bind(_this8);
-	        _this8.handleMinLengthchange = _this8.handleMinLengthchange.bind(_this8);
-	        _this8.handleMaxLengthchange = _this8.handleMaxLengthchange.bind(_this8);
-	        return _this8;
+	        _this7.handleSearch = _this7.handleSearch.bind(_this7);
+	        _this7.updateSearchVal = _this7.updateSearchVal.bind(_this7);
+	        _this7.updateCountryVal = _this7.updateCountryVal.bind(_this7);
+	        _this7.handleMinLengthchange = _this7.handleMinLengthchange.bind(_this7);
+	        _this7.handleMaxLengthchange = _this7.handleMaxLengthchange.bind(_this7);
+	        return _this7;
 	    }
 
 	    _createClass(EventSearch, [{
