@@ -39,6 +39,7 @@ h2 {
 
 #eventlist {
     .eventcontainer {
+        position: relative;
         background: $blue-box-background;
         border-radius: 5px;
         min-height: 150px;
@@ -53,23 +54,43 @@ h2 {
         padding: 5px 5px 3px 5px;
     }
 
+    .readmore {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+
+        & .eventreadmore {
+            text-align: right;
+        }
+        & .eventmap, & .eventreadmore {
+            width: 50%;
+            display: inline-block;
+        }
+    }
+
     .daysleft {
         padding: 2px 4px 2px 4px;
         border-radius: 3px;
         
         &.red {
-            background: rgb(255, 50, 50);
+            background: rgb(115, 35, 35);
             border: solid 1px rgb(132, 11, 11);
         }
         &.green {
-            background: rgb(0, 187, 10);
+            background: rgb(6, 90, 3);
             border: solid 1px rgb(0, 115, 10);
         }
         &.orange {
-            background: rgb(241, 163, 76);
+            background: rgb(85, 109, 0);
             border: solid 1px rgb(136, 81, 20);
         }
     }
+}
+
+.button.red {
+    background: rgb(175, 175, 175);
+    padding: 2px 3px 2px 3px;
+    border-radius: 3px;
 }
 
 

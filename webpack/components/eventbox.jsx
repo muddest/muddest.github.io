@@ -237,8 +237,8 @@ class Event extends React.Component {
                 <div className="eventcontainer">
                     <div className="eventhead col-md-12">
                         <div className="row">
-                            <h2 className="col-md-8">{this.props.title}</h2>
-                            <div className="col-md-4 text-right">
+                            <h2 className="col-xs-9">{this.props.title}</h2>
+                            <div className="col-xs-3 text-right">
                                 <span className={'daysleft '+daysColor}>{this.props.daysleft} days left</span>
                             </div>
                             
@@ -261,8 +261,12 @@ class Event extends React.Component {
                     </div>
 
                     <div className="readmore">
-                        <button type="button" className="btn btn-danger" data-name="openbox" onClick={this.toggleMapBox}>View map</button>
-                        <button type="button" className="btn btn-danger pull-right" data-name="openbox" onClick={this.toggleInfoBox}>Read more...</button>
+                        <span className="eventmap">
+                            <span className="button red" data-name="openbox" onClick={this.toggleMapBox}>View map</span>
+                        </span>
+                        <span className="eventreadmore">
+                            <span className="button red" data-name="openbox" onClick={this.toggleInfoBox}>Read more...</span>
+                        </span>
                     </div>
                     {map}
                     {readMore}

@@ -21746,12 +21746,12 @@
 	                            { className: 'row' },
 	                            _react2.default.createElement(
 	                                'h2',
-	                                { className: 'col-md-8' },
+	                                { className: 'col-xs-9' },
 	                                this.props.title
 	                            ),
 	                            _react2.default.createElement(
 	                                'div',
-	                                { className: 'col-md-4 text-right' },
+	                                { className: 'col-xs-3 text-right' },
 	                                _react2.default.createElement(
 	                                    'span',
 	                                    { className: 'daysleft ' + daysColor },
@@ -21814,14 +21814,22 @@
 	                        'div',
 	                        { className: 'readmore' },
 	                        _react2.default.createElement(
-	                            'button',
-	                            { type: 'button', className: 'btn btn-danger', 'data-name': 'openbox', onClick: this.toggleMapBox },
-	                            'View map'
+	                            'span',
+	                            { className: 'eventmap' },
+	                            _react2.default.createElement(
+	                                'span',
+	                                { className: 'button red', 'data-name': 'openbox', onClick: this.toggleMapBox },
+	                                'View map'
+	                            )
 	                        ),
 	                        _react2.default.createElement(
-	                            'button',
-	                            { type: 'button', className: 'btn btn-danger pull-right', 'data-name': 'openbox', onClick: this.toggleInfoBox },
-	                            'Read more...'
+	                            'span',
+	                            { className: 'eventreadmore' },
+	                            _react2.default.createElement(
+	                                'span',
+	                                { className: 'button red', 'data-name': 'openbox', onClick: this.toggleInfoBox },
+	                                'Read more...'
+	                            )
 	                        )
 	                    ),
 	                    map,
