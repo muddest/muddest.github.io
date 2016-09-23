@@ -22,6 +22,7 @@ html {
 }
 
 body {
+    overflow-x: hidden;
     background: rgb(10, 10, 10);
     padding: 0 5px 0 5px;
 }
@@ -38,7 +39,7 @@ h2 {
 }
 
 #eventlist {
-    width: 100%;
+
     .eventcontainer {
         position: relative;
         background: $blue-box-background;

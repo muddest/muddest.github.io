@@ -105,7 +105,7 @@ class EventList extends React.Component {
 
     sortByDate (a, b) {
         console.log('Should sort');
-        return new Date(a.Date).getTime() - new Date(b.Date).getTime();
+        return new Date(a.lastUpdated).getTime() - new Date(b.lastUpdated).getTime();
     }
 
     render() {
@@ -157,7 +157,7 @@ class EventList extends React.Component {
         });
 
         return (
-                <div key="eventkey" id="eventlist" className="row container-fluid">
+                <div key="eventkey" id="eventlist" className="row show-grid">
                     <ReactCSSTransitionGroup 
                     transitionName="eventtransition" 
                     transitionEnterTimeout={500} 

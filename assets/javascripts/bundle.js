@@ -21608,7 +21608,7 @@
 	        key: 'sortByDate',
 	        value: function sortByDate(a, b) {
 	            console.log('Should sort');
-	            return new Date(a.Date).getTime() - new Date(b.Date).getTime();
+	            return new Date(a.lastUpdated).getTime() - new Date(b.lastUpdated).getTime();
 	        }
 	    }, {
 	        key: 'render',
@@ -21658,7 +21658,7 @@
 
 	            return _react2.default.createElement(
 	                'div',
-	                { key: 'eventkey', id: 'eventlist', className: 'row container-fluid' },
+	                { key: 'eventkey', id: 'eventlist', className: 'row show-grid' },
 	                _react2.default.createElement(
 	                    _reactAddonsCssTransitionGroup2.default,
 	                    {
