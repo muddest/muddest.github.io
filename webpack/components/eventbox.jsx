@@ -156,8 +156,7 @@ class EventList extends React.Component {
         });
 
         return (
-            <div id="eventlist" className="container-fluid" key="eventkey">
-                <div className="row col-md-12">
+                <div key="eventkey" id="eventlist" className="row show-grid">
                     <ReactCSSTransitionGroup 
                     transitionName="eventtransition" 
                     transitionEnterTimeout={500} 
@@ -165,7 +164,6 @@ class EventList extends React.Component {
                         {eventnodes}
                     </ReactCSSTransitionGroup>
                 </div>
-            </div>
         )
     }
 }
@@ -235,7 +233,7 @@ class Event extends React.Component {
             daysColor = 'orange';
         }
         return (
-            <div key={this.props.id} className="col-sm-6 col-md-4 col-lg-4">
+            <div key={this.props.id} className="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-centered">
                 <div className="eventcontainer">
                     <div className="eventhead col-md-12">
                         <div className="row">

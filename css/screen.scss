@@ -22,7 +22,8 @@ html {
 }
 
 body {
-    background: $dark-grey;
+    background: rgb(10, 10, 10);
+    padding: 0 5px 0 5px;
 }
 
 h2 {
@@ -38,7 +39,7 @@ h2 {
         margin: 0 0 30px 0;
     }
     .eventhead {
-        background: $blue-header;
+        background: rgb(47, 47, 47);
         border-top-left-radius: $small-border-radius;
         border-top-right-radius: $small-border-radius;
         color: $white-text;
@@ -51,13 +52,16 @@ h2 {
         border-radius: 3px;
         
         &.red {
-            background: rgb(255, 50, 50);    
+            background: rgb(255, 50, 50);
+            border: solid 1px rgb(132, 11, 11);
         }
         &.green {
             background: rgb(0, 187, 10);
+            border: solid 1px rgb(0, 115, 10);
         }
         &.orange {
             background: rgb(241, 163, 76);
+            border: solid 1px rgb(136, 81, 20);
         }
     }
 }

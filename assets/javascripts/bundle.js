@@ -21657,18 +21657,14 @@
 
 	            return _react2.default.createElement(
 	                'div',
-	                { id: 'eventlist', className: 'container-fluid', key: 'eventkey' },
+	                { key: 'eventkey', id: 'eventlist', className: 'row show-grid' },
 	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'row col-md-12' },
-	                    _react2.default.createElement(
-	                        _reactAddonsCssTransitionGroup2.default,
-	                        {
-	                            transitionName: 'eventtransition',
-	                            transitionEnterTimeout: 500,
-	                            transitionLeaveTimeout: 300 },
-	                        eventnodes
-	                    )
+	                    _reactAddonsCssTransitionGroup2.default,
+	                    {
+	                        transitionName: 'eventtransition',
+	                        transitionEnterTimeout: 500,
+	                        transitionLeaveTimeout: 300 },
+	                    eventnodes
 	                )
 	            );
 	        }
@@ -21738,7 +21734,7 @@
 	            }
 	            return _react2.default.createElement(
 	                'div',
-	                { key: this.props.id, className: 'col-sm-6 col-md-4 col-lg-4' },
+	                { key: this.props.id, className: 'col-xs-12 col-sm-6 col-md-4 col-lg-4 col-centered' },
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'eventcontainer' },
