@@ -104,6 +104,7 @@ class EventList extends React.Component {
     }
 
     sortByDate (a, b) {
+        console.log('Should sort');
         return new Date(a.Date).getTime() - new Date(b.Date).getTime();
     }
 
