@@ -31,6 +31,12 @@ h2 {
     margin: 0 0 5px 0;
 }
 
+#filter {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
 #eventlist {
     .eventcontainer {
         background: $blue-box-background;

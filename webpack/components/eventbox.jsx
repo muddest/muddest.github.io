@@ -261,8 +261,8 @@ class Event extends React.Component {
                     </div>
 
                     <div className="readmore">
-                        <button type="button" className="btn btn-info" data-name="openbox" onClick={this.toggleMapBox}>View map</button>
-                        <button type="button" className="btn btn-info pull-right" data-name="openbox" onClick={this.toggleInfoBox}>Read more...</button>
+                        <button type="button" className="btn btn-danger" data-name="openbox" onClick={this.toggleMapBox}>View map</button>
+                        <button type="button" className="btn btn-danger pull-right" data-name="openbox" onClick={this.toggleInfoBox}>Read more...</button>
                     </div>
                     {map}
                     {readMore}
@@ -392,7 +392,7 @@ class EventSearch extends React.Component {
                     onKeyUp={this.handleSearch} />
                 
 
-                <div id="filter" className="col-md-4 col-md-offset-3">
+                <div id="filter">
                     <div className="filtergroup">
                         <span className="label before">Minimum length</span>
                         <input

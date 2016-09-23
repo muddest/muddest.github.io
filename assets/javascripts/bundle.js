@@ -21815,12 +21815,12 @@
 	                        { className: 'readmore' },
 	                        _react2.default.createElement(
 	                            'button',
-	                            { type: 'button', className: 'btn btn-info', 'data-name': 'openbox', onClick: this.toggleMapBox },
+	                            { type: 'button', className: 'btn btn-danger', 'data-name': 'openbox', onClick: this.toggleMapBox },
 	                            'View map'
 	                        ),
 	                        _react2.default.createElement(
 	                            'button',
-	                            { type: 'button', className: 'btn btn-info pull-right', 'data-name': 'openbox', onClick: this.toggleInfoBox },
+	                            { type: 'button', className: 'btn btn-danger pull-right', 'data-name': 'openbox', onClick: this.toggleInfoBox },
 	                            'Read more...'
 	                        )
 	                    ),
@@ -22007,7 +22007,7 @@
 	                    onKeyUp: this.handleSearch }),
 	                _react2.default.createElement(
 	                    'div',
-	                    { id: 'filter', className: 'col-md-4 col-md-offset-3' },
+	                    { id: 'filter' },
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'filtergroup' },
