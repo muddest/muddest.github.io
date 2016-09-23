@@ -21614,9 +21614,9 @@
 	        value: function render() {
 	            var _this3 = this;
 
-	            var date = this.props.data;
-	            date.sort(this.eventDate);
-	            var eventnodes = this.props.data.filter(function (event) {
+	            var data = this.props.data;
+	            data.sort(this.eventDate);
+	            var eventnodes = data.filter(function (event) {
 	                if (parseInt(event.Length) < parseInt(_this3.props.minlength)) {
 	                    return false;
 	                }
@@ -21657,7 +21657,7 @@
 
 	            return _react2.default.createElement(
 	                'div',
-	                { key: 'eventkey', id: 'eventlist', className: 'row show-grid' },
+	                { key: 'eventkey', id: 'eventlist', className: 'row col-centered' },
 	                _react2.default.createElement(
 	                    _reactAddonsCssTransitionGroup2.default,
 	                    {
@@ -21746,12 +21746,12 @@
 	                            { className: 'row' },
 	                            _react2.default.createElement(
 	                                'h2',
-	                                { className: 'col-xs-9' },
+	                                { className: 'col-xs-8' },
 	                                this.props.title
 	                            ),
 	                            _react2.default.createElement(
 	                                'div',
-	                                { className: 'col-xs-3 text-right' },
+	                                { className: 'col-xs-4 text-right' },
 	                                _react2.default.createElement(
 	                                    'span',
 	                                    { className: 'daysleft ' + daysColor },
@@ -21818,7 +21818,7 @@
 	                            { className: 'eventmap' },
 	                            _react2.default.createElement(
 	                                'span',
-	                                { className: 'button red', 'data-name': 'openbox', onClick: this.toggleMapBox },
+	                                { className: 'button darkgreen', 'data-name': 'openbox', onClick: this.toggleMapBox },
 	                                'View map'
 	                            )
 	                        ),
@@ -21827,7 +21827,7 @@
 	                            { className: 'eventreadmore' },
 	                            _react2.default.createElement(
 	                                'span',
-	                                { className: 'button red', 'data-name': 'openbox', onClick: this.toggleInfoBox },
+	                                { className: 'button darkgreen', 'data-name': 'openbox', onClick: this.toggleInfoBox },
 	                                'Read more...'
 	                            )
 	                        )

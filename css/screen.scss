@@ -38,6 +38,7 @@ h2 {
 }
 
 #eventlist {
+    width: 100%;
     .eventcontainer {
         position: relative;
         background: $blue-box-background;
@@ -46,12 +47,15 @@ h2 {
         margin: 0 0 30px 0;
     }
     .eventhead {
-        background: rgb(47, 47, 47);
+        background: rgb(29, 39, 28);
         border-top-left-radius: $small-border-radius;
         border-top-right-radius: $small-border-radius;
         color: $white-text;
         margin: 0 0 10px 0;
         padding: 5px 5px 3px 5px;
+        border-left: solid 1px rgb(232, 233, 253);
+        border-top: solid 1px rgb(232, 233, 253);
+        border-right: solid 1px rgb(232, 233, 253);
     }
 
     .readmore {
@@ -87,10 +91,12 @@ h2 {
     }
 }
 
-.button.red {
-    background: rgb(175, 175, 175);
+.button.darkgreen {
+    cursor: pointer;
+    background: rgb(29, 39, 28);
     padding: 2px 3px 2px 3px;
     border-radius: 3px;
+    color: rgb(195, 195, 195);
 }
 
 
@@ -112,6 +118,6 @@ input[type="search"] {
     @include box-shadow-direction(inset, 0, 1px, 1px, 1px, rgb(138, 137, 255));
 
     &:focus, &:hover {
-        border-bottom: inset 7px rgb(24, 25, 169);
+        border-bottom: inset 7px rgb(6, 90, 3);
     }
 }
