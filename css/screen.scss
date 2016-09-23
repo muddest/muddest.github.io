@@ -2,14 +2,26 @@
 ---
 
 @import "base";
+@import "colors";
 @import "font_awesome/font-awesome";
 @import 'https://fonts.googleapis.com/css?family=Lato';
+
+$dark-grey: rgb(80, 80, 80);
+$white-text: rgb(245,245,245);
+$small-border-radius: 3px;
+
+$blue-header: rgb(68, 61, 255);
+$input-blue-border-bottom: inset 7px rgb(160, 160, 160);
 
 html {
     font-family: verdana;
     margin: 0;
+    padding: 0;
     font-size: 62.5%;
-    background: rgb(237, 237, 251);
+}
+
+body {
+    background: $dark-grey;
 }
 
 h2 {
@@ -19,9 +31,44 @@ h2 {
 
 #eventlist {
     .eventhead {
-        background: rgb(68, 61, 255);
-        border-radius: 3px;
-        color: rgb(255, 255, 255);
+        background: $blue-header;
+        border-radius: $small-border-radius;
+        color: $white-text;
         padding: 3px 5px 3px 5px;
+    }
+
+    .daysleft {
+        padding: 2px 4px 2px 4px;
+        border-radius: 3px;
+        
+        &.red {
+            background: rgb(255, 50, 50);    
+        }
+        &.green {
+            background: rgb(0, 187, 10);
+        }
+    }
+}
+
+
+input[type="search"] {
+    display: block;
+    margin: 0 auto 20px auto;
+    width: 100%;
+    border: none;
+    opacity: 0.9;
+    height: 45px;
+    outline: none;
+    font-size: 2rem;
+    max-width: 400px;
+    border-radius: 3px;
+    padding: 0 8px 0 8px;
+    color: rgb(55, 51, 171);
+    border-bottom: $input-blue-border-bottom;
+    @include transition(border-bottom, 0.3s, ease-in-out);
+    @include box-shadow-direction(inset, 0, 1px, 1px, 1px, rgb(138, 137, 255));
+
+    &:focus, &:hover {
+        border-bottom: inset 7px rgb(24, 25, 169);
     }
 }

@@ -77,7 +77,13 @@ class EventList extends React.Component {
         }
     }
 
+    sortByDate (a, b) {
+        return new Date(a.lastUpdated).getTime() - new Date(b.lastUpdated).getTime();
+    }
+
     render() {
+        var date = this.props.data;
+        date.sort(this.eventDate);
         var eventnodes = this.props.data.filter((event) => {
             if ( parseInt(event.Length) < parseInt(this.props.minlength)) {
                 return false;
@@ -155,7 +161,6 @@ class Event extends React.Component {
             showMap: false,
         };
 
-      // Bind "this" for functions within component
       this.toggleInfoBox = this.toggleInfoBox.bind(this);
       this.toggleMapBox = this.toggleMapBox.bind(this);
     }
@@ -203,19 +208,19 @@ class Event extends React.Component {
                     <div className="eventhead col-md-12">
                         <div className="row">
                             <h2 className="col-md-8">{this.props.title}</h2>
-                            <span className="date col-md-4 text-right">{this.props.date}</span>
+                            <span className="col-md-4 text-right">{this.props.date}</span>
                         </div>
-                        <span className="eventdetail daysleft">{this.props.daysleft} days left</span>
+                        <span className={(this.props.daysleft < 10) ? 'daysleft red' : 'daysleft green'}>{this.props.daysleft} days left</span>
                     </div>
 
-                    <div className="infocontainer">
-                        <div className="infogrp">
+                    <div className="col-md-12">
+                        <div className="col-md-6">
                             <span>{this.props.length} km</span>
                             <span>{this.props.obstacles} obstacles</span>
                             <span>Challenge 4.5</span>
                         </div>
 
-                        <address className="infogrp">
+                        <address className="col-md-6">
                             <span>{this.props.address}</span>
                             <span>{this.props.city}</span>
                             <span>{this.props.country}</span>

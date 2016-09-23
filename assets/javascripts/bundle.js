@@ -21579,10 +21579,17 @@
 	            }
 	        }
 	    }, {
+	        key: 'sortByDate',
+	        value: function sortByDate(a, b) {
+	            return new Date(a.lastUpdated).getTime() - new Date(b.lastUpdated).getTime();
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _this3 = this;
 
+	            var date = this.props.data;
+	            date.sort(this.eventDate);
 	            var eventnodes = this.props.data.filter(function (event) {
 	                if (parseInt(event.Length) < parseInt(_this3.props.minlength)) {
 	                    return false;
@@ -21657,7 +21664,6 @@
 	            showMap: false
 	        };
 
-	        // Bind "this" for functions within component
 	        _this4.toggleInfoBox = _this4.toggleInfoBox.bind(_this4);
 	        _this4.toggleMapBox = _this4.toggleMapBox.bind(_this4);
 	        return _this4;
@@ -21717,23 +21723,23 @@
 	                            ),
 	                            _react2.default.createElement(
 	                                'span',
-	                                { className: 'date col-md-4 text-right' },
+	                                { className: 'col-md-4 text-right' },
 	                                this.props.date
 	                            )
 	                        ),
 	                        _react2.default.createElement(
 	                            'span',
-	                            { className: 'eventdetail daysleft' },
+	                            { className: this.props.daysleft < 10 ? 'daysleft red' : 'daysleft green' },
 	                            this.props.daysleft,
 	                            ' days left'
 	                        )
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'infocontainer' },
+	                        { className: 'col-md-12' },
 	                        _react2.default.createElement(
 	                            'div',
-	                            { className: 'infogrp' },
+	                            { className: 'col-md-6' },
 	                            _react2.default.createElement(
 	                                'span',
 	                                null,
@@ -21754,7 +21760,7 @@
 	                        ),
 	                        _react2.default.createElement(
 	                            'address',
-	                            { className: 'infogrp' },
+	                            { className: 'col-md-6' },
 	                            _react2.default.createElement(
 	                                'span',
 	                                null,
