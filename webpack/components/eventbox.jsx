@@ -104,12 +104,12 @@ class EventList extends React.Component {
     }
 
     sortByDate (a, b) {
-        return new Date(a.lastUpdated).getTime() - new Date(b.lastUpdated).getTime();
+        return new Date(a.Date).getTime() - new Date(b.Date).getTime();
     }
 
     render() {
         var data = this.props.data;
-        data.sort(this.eventDate);
+        data.sort(this.sortByDate);
         var eventnodes = data.filter((event) => {
             if ( parseInt(event.Length) < parseInt(this.props.minlength)) {
                 return false;
@@ -156,7 +156,7 @@ class EventList extends React.Component {
         });
 
         return (
-                <div key="eventkey" id="eventlist" className="row col-centered">
+                <div key="eventkey" id="eventlist" className="row container-fluid">
                     <ReactCSSTransitionGroup 
                     transitionName="eventtransition" 
                     transitionEnterTimeout={500} 

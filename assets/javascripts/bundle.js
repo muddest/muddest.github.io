@@ -21607,7 +21607,7 @@
 	    }, {
 	        key: 'sortByDate',
 	        value: function sortByDate(a, b) {
-	            return new Date(a.lastUpdated).getTime() - new Date(b.lastUpdated).getTime();
+	            return new Date(a.Date).getTime() - new Date(b.Date).getTime();
 	        }
 	    }, {
 	        key: 'render',
@@ -21615,7 +21615,7 @@
 	            var _this3 = this;
 
 	            var data = this.props.data;
-	            data.sort(this.eventDate);
+	            data.sort(this.sortByDate);
 	            var eventnodes = data.filter(function (event) {
 	                if (parseInt(event.Length) < parseInt(_this3.props.minlength)) {
 	                    return false;
@@ -21657,7 +21657,7 @@
 
 	            return _react2.default.createElement(
 	                'div',
-	                { key: 'eventkey', id: 'eventlist', className: 'row col-centered' },
+	                { key: 'eventkey', id: 'eventlist', className: 'row container-fluid' },
 	                _react2.default.createElement(
 	                    _reactAddonsCssTransitionGroup2.default,
 	                    {
