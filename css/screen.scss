@@ -18,20 +18,31 @@ html {
     font-family: verdana;
     margin: 0;
     padding: 0;
+    height: 100%;
     font-size: 62.5%;
+    //background: black;
 }
 
 body {
+    height: 100%;
+    background: rgb(99, 99, 99);
+    //background: url('/assets/images/globe.png') no-repeat fixed 50% 20%;
     overflow-x: hidden;
-    background: rgb(10, 10, 10);
     padding: 0 5px 0 5px;
 }
 
+h1 {
+    margin: 0;
+    font-size: 4.4rem;
+}
 h2 {
     font-size: 1.8rem;
     margin: 0 0 5px 0;
 }
 
+.searchevents {
+
+}
 #filter {
     width: 100%;
     max-width: 300px;

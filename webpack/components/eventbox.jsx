@@ -2,6 +2,8 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import React from 'react';
 import Remarkable from 'remarkable';
 import Fonty from './assets/fonty.jsx';
+import Select from 'react-select';
+
 
 class EventBox extends React.Component {
     constructor(props) {
@@ -47,9 +49,24 @@ class EventBox extends React.Component {
         var data = this.props.data;
         data.sort(this.sortByDate);
 
+        var lookup = {};
+        var items = data;
+        var countries = [];
+
+        for (var item, i = 0; item = items[i++];) {
+            var country = item.Country;
+
+            if (!(country in lookup)) {
+                lookup[country] = 1;
+                countries.push({value: country, label: country});
+            }
+        }
+
         return (
             <div>
-                <EventSearch changesearchstate={this.changeSearchState} />
+                <EventSearch 
+                    changesearchstate={this.changeSearchState}
+                    countries={countries} />
                 <EventList
                     data={data}
                     searchword={this.state.searchWord}
@@ -85,7 +102,8 @@ class EventList extends React.Component {
 
 
     render() {
-        
+        let searchWord = this.props.searchword.toLowerCase();
+
         var eventnodes = this.props.data.filter((event) => {
             if ( parseInt(event.Length) < parseInt(this.props.minlength)) {
                 return false;
@@ -94,17 +112,22 @@ class EventList extends React.Component {
             if ( parseInt(event.Length) > parseInt(this.props.maxlength)) {
                 return false;
             }
-            
-            if (event.Title.toLowerCase().indexOf(this.props.searchword.toLowerCase()) === -1 && 1 < this.props.searchword.length) {
-                return false;
-            }
 
             var countryCheck = (this.props.country.indexOf(event.Country.toLowerCase()) > -1);
             if (false === countryCheck && 0 < this.props.country.length) {
                 return false;
             }
 
+            
 
+            console.log(event.Title.toLowerCase().indexOf(searchWord));
+            if (event.Title.toLowerCase().indexOf(searchWord) > -1) {
+                console.log('YAY');
+                return true;
+            } else {
+                console.log('NOOOO');
+                return false;
+            }
             
             return true;
         }).map((event) => {
@@ -202,11 +225,11 @@ class Event extends React.Component {
                     content={<iframe width={560} height={315} frameBorder={0} src={"https://www.google.com/maps/embed/v1/search?q=Stockholm stadion,"+this.props.city+"&key=AIzaSyDCO6ot8LXweTO6G_LLOlvWyv8kwF-_Jd8"} allowFullScreen></iframe>}/>
             )
         }
-        let daysColor = 'green';
-        if (this.props.daysleft < 10) {
+        let daysColor = 'regular';
+        if (this.props.daysleft <= 20) {
             daysColor = 'red';
-        } else if (this.props.daysleft > 10 && this.props.daysleft < 30) {
-            daysColor = 'orange';
+        } else if (this.props.daysleft > 20 && this.props.daysleft <= 60) {
+            daysColor = 'green';
         }
         return (
             <div key={this.props.id} className="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-centered">
@@ -314,10 +337,12 @@ class EventSearch extends React.Component {
             searchVal: '',
             minLengthVal: 0,
             maxLengthVal: 30,
+            selectedCountries: [],
         };
 
         this.handleSearch = this.handleSearch.bind(this);
         this.updateSearchVal = this.updateSearchVal.bind(this);
+        this.handleSelectedCountries = this.handleSelectedCountries.bind(this);
         this.updateCountryVal = this.updateCountryVal.bind(this);
         this.handleMinLengthchange = this.handleMinLengthchange.bind(this);
         this.handleMaxLengthchange = this.handleMaxLengthchange.bind(this);
@@ -342,9 +367,13 @@ class EventSearch extends React.Component {
         this.setState({ maxLengthVal: e.target.value });
     }
 
-    toggleFilter(e) {
-        e.preventDefault();
-        this.setState({showfilters: !this.state.showfilters});
+    handleSelectedCountries(selectedCountries) {
+        this.setState({selectedCountries});
+        let countries = [];
+        for (let i = 0; i < selectedCountries.length; i++) {
+            countries.push(selectedCountries[i].label.toLowerCase());
+        }
+        this.handleSearch('country', countries);
     }
 
     updateCountryVal(e) {
@@ -355,7 +384,6 @@ class EventSearch extends React.Component {
                 countryOptions.push(options[i].value.toLowerCase());
             }
         }
-
         this.handleSearch('country', countryOptions);
     }
 
@@ -367,7 +395,6 @@ class EventSearch extends React.Component {
                     autoComplete="off"
                     type="search"
                     placeholder="Find events"
-                    value={this.state.searchVal}
                     onChange={this.updateSearchVal} />
                 
 
@@ -402,13 +429,13 @@ class EventSearch extends React.Component {
                         <span className="label after col-xs-2">{this.state.maxLengthVal} km</span>
                     </div>
 
-                    <div>
-                        <select multiple onChange={this.updateCountryVal}>
-                            <option value="sweden">Sweden</option>
-                            <option value="uk">United Kingdom</option>
-                            <option value="spain">Spain</option>
-                        </select>
-                    </div>
+                        <Select
+                            name="select-country"
+                            multi={true}
+                            value={this.state.selectedCountries}
+                            placeholder="Select one or more countries"
+                            options={this.props.countries}
+                            onChange={this.handleSelectedCountries} />
                 </div>
             </form>
         )

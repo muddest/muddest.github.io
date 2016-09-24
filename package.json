@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "react-select": "^1.0.0-rc.2",
     "remarkable": "^1.6.2"
   }
 }
