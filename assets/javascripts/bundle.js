@@ -21529,37 +21529,7 @@
 	        }
 	    }, {
 	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            if (navigator.geolocation) {
-	                navigator.geolocation.getCurrentPosition(function (position) {
-	                    console.log(position);
-	                    $.getJSON('http://ws.geonames.org/countryCode', {
-	                        lat: position.coords.latitude,
-	                        lng: position.coords.longitude,
-	                        type: 'JSON'
-	                    }, function (result) {
-	                        console.log(result.countryName);
-	                    });
-	                });
-	            }
-
-	            if (navigator.geolocation) {
-	                navigator.geolocation.getCurrentPosition(function () {
-	                    console.log('Position: ', position);
-	                    $.ajax({
-	                        url: 'http://ws.geonames.org/searchJSON',
-	                        data: {
-	                            lat: position.coords.latitude,
-	                            lng: position.coords.longitude
-	                        },
-	                        dataType: 'jsonp',
-	                        success: function success(data) {
-	                            console.log('Success: ', data);
-	                        }
-	                    });
-	                });
-	            }
-	        }
+	        value: function componentDidMount() {}
 	    }, {
 	        key: 'render',
 	        value: function render() {
