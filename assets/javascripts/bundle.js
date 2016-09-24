@@ -21988,13 +21988,14 @@
 	                    { id: 'filter' },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'filtergroup' },
+	                        { className: 'row' },
 	                        _react2.default.createElement(
 	                            'span',
-	                            { className: 'label before' },
-	                            'Minimum length'
+	                            { className: 'label before col-xs-3' },
+	                            'Min. length'
 	                        ),
 	                        _react2.default.createElement('input', {
+	                            className: 'col-xs-7',
 	                            id: 'minlength',
 	                            type: 'range',
 	                            min: '0',
@@ -22005,20 +22006,21 @@
 	                            onChange: this.handleMinLengthchange }),
 	                        _react2.default.createElement(
 	                            'span',
-	                            { className: 'label after' },
+	                            { className: 'label after col-xs-2' },
 	                            this.state.minLengthVal,
 	                            ' km'
 	                        )
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'filtergroup' },
+	                        { className: 'row' },
 	                        _react2.default.createElement(
 	                            'span',
-	                            { className: 'label before' },
-	                            'Maximum length'
+	                            { className: 'label before col-xs-3' },
+	                            'Max. length'
 	                        ),
 	                        _react2.default.createElement('input', {
+	                            className: 'col-xs-7',
 	                            id: 'maxlength',
 	                            type: 'range',
 	                            min: '0',
@@ -22029,14 +22031,14 @@
 	                            onChange: this.handleMaxLengthchange }),
 	                        _react2.default.createElement(
 	                            'span',
-	                            { className: 'label after' },
+	                            { className: 'label after col-xs-2' },
 	                            this.state.maxLengthVal,
 	                            ' km'
 	                        )
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'filtergroup' },
+	                        null,
 	                        _react2.default.createElement(
 	                            'select',
 	                            { multiple: true, onChange: this.updateCountryVal },

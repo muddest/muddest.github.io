@@ -36,6 +36,12 @@ h2 {
     width: 100%;
     max-width: 300px;
     margin: 0 auto;
+
+    input[type="range"] {
+        width: auto;
+        padding: 0;
+        margin: 0 15px;
+    }
 }
 
 #eventlist {

@@ -372,9 +372,10 @@ class EventSearch extends React.Component {
                 
 
                 <div id="filter">
-                    <div className="filtergroup">
-                        <span className="label before">Minimum length</span>
+                    <div className="row">
+                        <span className="label before col-xs-3">Min. length</span>
                         <input
+                            className="col-xs-7"
                             id="minlength"
                             type="range"
                             min="0"
@@ -383,12 +384,13 @@ class EventSearch extends React.Component {
                             data-name="minlength"
                             value={this.state.minLengthVal}
                             onChange={this.handleMinLengthchange} />
-                        <span className="label after">{this.state.minLengthVal} km</span>
+                        <span className="label after col-xs-2">{this.state.minLengthVal} km</span>
                     </div>
 
-                    <div className="filtergroup">
-                        <span className="label before">Maximum length</span>
+                    <div className="row">
+                        <span className="label before col-xs-3">Max. length</span>
                         <input
+                            className="col-xs-7"
                             id="maxlength"
                             type="range"
                             min="0"
@@ -397,10 +399,10 @@ class EventSearch extends React.Component {
                             data-name="maxlength"
                             value={this.state.maxLengthVal}
                             onChange={this.handleMaxLengthchange} />
-                        <span className="label after">{this.state.maxLengthVal} km</span>
+                        <span className="label after col-xs-2">{this.state.maxLengthVal} km</span>
                     </div>
 
-                    <div className="filtergroup">
+                    <div>
                         <select multiple onChange={this.updateCountryVal}>
                             <option value="sweden">Sweden</option>
                             <option value="uk">United Kingdom</option>
