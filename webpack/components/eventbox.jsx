@@ -39,12 +39,19 @@ class EventBox extends React.Component {
         
     }
 
+    sortByDate (a, b) {
+        return new Date(a.date).getTime() - new Date(b.date).getTime();
+    }
+
     render() {
+        var data = this.props.data;
+        data.sort(this.sortByDate);
+
         return (
             <div>
                 <EventSearch changesearchstate={this.changeSearchState} />
                 <EventList
-                    data={this.props.data}
+                    data={data}
                     searchword={this.state.searchWord}
                     minlength={this.state.minLength}
                     maxlength={this.state.maxLength}
@@ -75,15 +82,11 @@ class EventList extends React.Component {
         }
     }
 
-    sortByDate (a, b) {
-        console.log('Should sort');
-        return new Date(a.lastUpdated).getTime() - new Date(b.lastUpdated).getTime();
-    }
+
 
     render() {
-        var data = this.props.data;
-        data.sort(this.sortByDate);
-        var eventnodes = data.filter((event) => {
+        
+        var eventnodes = this.props.data.filter((event) => {
             if ( parseInt(event.Length) < parseInt(this.props.minlength)) {
                 return false;
             }
@@ -92,7 +95,7 @@ class EventList extends React.Component {
                 return false;
             }
             
-            if (event.Title.toLowerCase().indexOf(this.props.searchword) === -1 && 1 < this.props.searchword.length) {
+            if (event.Title.toLowerCase().indexOf(this.props.searchword.toLowerCase()) === -1 && 1 < this.props.searchword.length) {
                 return false;
             }
 
@@ -346,14 +349,14 @@ class EventSearch extends React.Component {
 
     updateCountryVal(e) {
         let options = e.target.options;
-        let opt = [];
+        let countryOptions = [];
         for (let i = 0; i < options.length; i++) {
             if (options[i].selected) {
-                opt.push(options[i].value.toLowerCase());
+                countryOptions.push(options[i].value.toLowerCase());
             }
         }
 
-        this.handleSearch('country', opt);
+        this.handleSearch('country', countryOptions);
     }
 
 
@@ -365,8 +368,7 @@ class EventSearch extends React.Component {
                     type="search"
                     placeholder="Find events"
                     value={this.state.searchVal}
-                    onChange={this.updateSearchVal}
-                    onKeyUp={this.handleSearch} />
+                    onChange={this.updateSearchVal} />
                 
 
                 <div id="filter">

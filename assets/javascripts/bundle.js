@@ -21531,14 +21531,22 @@
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {}
 	    }, {
+	        key: 'sortByDate',
+	        value: function sortByDate(a, b) {
+	            return new Date(a.date).getTime() - new Date(b.date).getTime();
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var data = this.props.data;
+	            data.sort(this.sortByDate);
+
 	            return _react2.default.createElement(
 	                'div',
 	                null,
 	                _react2.default.createElement(EventSearch, { changesearchstate: this.changeSearchState }),
 	                _react2.default.createElement(EventList, {
-	                    data: this.props.data,
+	                    data: data,
 	                    searchword: this.state.searchWord,
 	                    minlength: this.state.minLength,
 	                    maxlength: this.state.maxLength,
@@ -21575,19 +21583,11 @@
 	            }
 	        }
 	    }, {
-	        key: 'sortByDate',
-	        value: function sortByDate(a, b) {
-	            console.log('Should sort');
-	            return new Date(a.lastUpdated).getTime() - new Date(b.lastUpdated).getTime();
-	        }
-	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _this3 = this;
 
-	            var data = this.props.data;
-	            data.sort(this.sortByDate);
-	            var eventnodes = data.filter(function (event) {
+	            var eventnodes = this.props.data.filter(function (event) {
 	                if (parseInt(event.Length) < parseInt(_this3.props.minlength)) {
 	                    return false;
 	                }
@@ -21596,7 +21596,7 @@
 	                    return false;
 	                }
 
-	                if (event.Title.toLowerCase().indexOf(_this3.props.searchword) === -1 && 1 < _this3.props.searchword.length) {
+	                if (event.Title.toLowerCase().indexOf(_this3.props.searchword.toLowerCase()) === -1 && 1 < _this3.props.searchword.length) {
 	                    return false;
 	                }
 
@@ -21962,14 +21962,14 @@
 	        key: 'updateCountryVal',
 	        value: function updateCountryVal(e) {
 	            var options = e.target.options;
-	            var opt = [];
+	            var countryOptions = [];
 	            for (var i = 0; i < options.length; i++) {
 	                if (options[i].selected) {
-	                    opt.push(options[i].value.toLowerCase());
+	                    countryOptions.push(options[i].value.toLowerCase());
 	                }
 	            }
 
-	            this.handleSearch('country', opt);
+	            this.handleSearch('country', countryOptions);
 	        }
 	    }, {
 	        key: 'render',
@@ -21982,8 +21982,7 @@
 	                    type: 'search',
 	                    placeholder: 'Find events',
 	                    value: this.state.searchVal,
-	                    onChange: this.updateSearchVal,
-	                    onKeyUp: this.handleSearch }),
+	                    onChange: this.updateSearchVal }),
 	                _react2.default.createElement(
 	                    'div',
 	                    { id: 'filter' },
