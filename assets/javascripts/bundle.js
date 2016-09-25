@@ -21753,6 +21753,11 @@
 	                            'span',
 	                            { className: 'date' },
 	                            _react2.default.createElement(_fonty2.default, { text: this.props.date, icon: 'fa-calendar' })
+	                        ),
+	                        _react2.default.createElement(
+	                            'span',
+	                            null,
+	                            _react2.default.createElement(_fonty2.default, { text: this.props.country, icon: 'fa-globe' })
 	                        )
 	                    ),
 	                    _react2.default.createElement(
@@ -21776,7 +21781,7 @@
 	                        _react2.default.createElement(
 	                            'span',
 	                            null,
-	                            _react2.default.createElement(_fonty2.default, { text: this.props.country, icon: 'fa-globe' })
+	                            _react2.default.createElement(_fonty2.default, { text: this.props.site, icon: 'fa-globe' })
 	                        )
 	                    ),
 	                    _react2.default.createElement(
@@ -22046,6 +22051,8 @@
 	                        _react2.default.createElement(_reactSelect2.default, {
 	                            name: 'select-country',
 	                            multi: true,
+	                            clearable: true,
+	                            searchable: false,
 	                            value: this.state.selectedCountries,
 	                            placeholder: 'Select one or more countries',
 	                            options: this.props.countries,

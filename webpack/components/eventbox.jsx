@@ -235,13 +235,14 @@ class Event extends React.Component {
                             <span className={'daysleft '+daysColor}>{this.props.daysleft} days left</span>
                         </div>
                         <span className="date"><Fonty text={this.props.date} icon="fa-calendar" /></span>
+                        <span><Fonty text={this.props.country} icon="fa-globe" /></span>
                     </div>
 
                     <div className="eventshortinfo">
                         <span><Fonty text={this.props.length+" km"} icon="fa-map-marker" /></span>
                         <span><Fonty text={this.props.obstacles+" obstacles"} icon="fa-fire" /></span>
                         <span><Fonty text="Challenge 4.5" icon="fa-heartbeat" /></span>
-                        <span><Fonty text={this.props.country} icon="fa-globe" /></span>
+                        <span><Fonty text={this.props.site} icon="fa-globe" /></span>
                     </div>
 
                     <div className="readmore">
@@ -418,6 +419,8 @@ class EventSearch extends React.Component {
                             <Select
                                 name="select-country"
                                 multi={true}
+                                clearable={true}
+                                searchable={false}
                                 value={this.state.selectedCountries}
                                 placeholder="Select one or more countries"
                                 options={this.props.countries}
