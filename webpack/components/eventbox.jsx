@@ -72,7 +72,8 @@ class EventBox extends React.Component {
                     searchword={this.state.searchWord}
                     minlength={this.state.minLength}
                     maxlength={this.state.maxLength}
-                    country={this.state.country} />
+                    country={this.state.country}
+                    possiblecountries={countries} />
             </div>
         )
     }
@@ -118,16 +119,10 @@ class EventList extends React.Component {
                 return false;
             }
 
-            
-
-            console.log(event.Title.toLowerCase().indexOf(searchWord));
-            if (event.Title.toLowerCase().indexOf(searchWord) > -1) {
-                console.log('YAY');
-                return true;
-            } else {
-                console.log('NOOOO');
+            if (event.Title.toLowerCase().indexOf(searchWord) === -1 && 1 < this.props.searchword.length) {
                 return false;
             }
+
             
             return true;
         }).map((event) => {
@@ -155,7 +150,7 @@ class EventList extends React.Component {
         });
 
         return (
-                <div key="eventkey" id="eventlist" className="row show-grid">
+                <div id="eventlist" key="eventkey">
                     <ReactCSSTransitionGroup 
                     transitionName="eventtransition" 
                     transitionEnterTimeout={500} 
@@ -232,31 +227,21 @@ class Event extends React.Component {
             daysColor = 'green';
         }
         return (
-            <div key={this.props.id} className="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-centered">
+            <div key={this.props.id} className="event">
                 <div className="eventcontainer">
-                    <div className="eventhead col-md-12">
-                        <div className="row">
-                            <h2 className="col-xs-8">{this.props.title}</h2>
-                            <div className="col-xs-4 text-right">
-                                <span className={'daysleft '+daysColor}>{this.props.daysleft} days left</span>
-                            </div>
-                            
+                    <div className="eventhead">
+                        <h2>{this.props.title}</h2>
+                        <div className="daysleftcontainer">
+                            <span className={'daysleft '+daysColor}>{this.props.daysleft} days left</span>
                         </div>
-                        <span>{this.props.date}</span>
+                        <span className="date">{this.props.date}</span>
                     </div>
 
-                    <div className="col-md-12">
-                        <div className="col-md-6">
-                            <span>{this.props.length} km</span>
-                            <span>{this.props.obstacles} obstacles</span>
-                            <span>Challenge 4.5</span>
-                        </div>
-
-                        <address className="col-md-6">
-                            <span>{this.props.address}</span>
-                            <span>{this.props.city}</span>
-                            <span>{this.props.country}</span>
-                        </address>
+                    <div className="evenshortinfo">
+                        <span>{this.props.length} km</span>
+                        <span>{this.props.obstacles} obstacles</span>
+                        <span>Challenge 4.5</span>
+                        <span>{this.props.country}</span>
                     </div>
 
                     <div className="readmore">
@@ -390,54 +375,54 @@ class EventSearch extends React.Component {
 
     render () {
         return (
-            <form className="searchevents" autoComplete="off">
-                <input
-                    autoComplete="off"
-                    type="search"
-                    placeholder="Find events"
-                    onChange={this.updateSearchVal} />
-                
+            <div id="leftbar">
+                <form className="searchevents" autoComplete="off">
+                    <input
+                        autoComplete="off"
+                        type="search"
+                        placeholder="Find events"
+                        onChange={this.updateSearchVal} />
+                    
 
-                <div id="filter">
-                    <div className="row">
-                        <span className="label before col-xs-3">Min. length</span>
-                        <input
-                            className="col-xs-7"
-                            id="minlength"
-                            type="range"
-                            min="0"
-                            max="30"
-                            step="1"
-                            data-name="minlength"
-                            value={this.state.minLengthVal}
-                            onChange={this.handleMinLengthchange} />
-                        <span className="label after col-xs-2">{this.state.minLengthVal} km</span>
+                    <div id="filter" className="container">
+                        <div className="row lengthinput">
+                            <span className="label before col-xs-6">Min. length</span>
+                            <span className="label after col-xs-6 pull-right">{this.state.minLengthVal} km</span>
+                            <input
+                                id="minlength"
+                                type="range"
+                                min="0"
+                                max="30"
+                                step="1"
+                                data-name="minlength"
+                                value={this.state.minLengthVal}
+                                onChange={this.handleMinLengthchange} />
+                        </div>
+
+                        <div className="row lengthinput">
+                            <span className="label before col-xs-6">Max. length</span>
+                            <span className="label after col-xs-6 pull-right">{this.state.maxLengthVal} km</span>
+                            <input
+                                id="maxlength"
+                                type="range"
+                                min="0"
+                                max="30"
+                                step="1"
+                                data-name="maxlength"
+                                value={this.state.maxLengthVal}
+                                onChange={this.handleMaxLengthchange} />
+                        </div>
+
+                            <Select
+                                name="select-country"
+                                multi={true}
+                                value={this.state.selectedCountries}
+                                placeholder="Select one or more countries"
+                                options={this.props.countries}
+                                onChange={this.handleSelectedCountries} />
                     </div>
-
-                    <div className="row">
-                        <span className="label before col-xs-3">Max. length</span>
-                        <input
-                            className="col-xs-7"
-                            id="maxlength"
-                            type="range"
-                            min="0"
-                            max="30"
-                            step="1"
-                            data-name="maxlength"
-                            value={this.state.maxLengthVal}
-                            onChange={this.handleMaxLengthchange} />
-                        <span className="label after col-xs-2">{this.state.maxLengthVal} km</span>
-                    </div>
-
-                        <Select
-                            name="select-country"
-                            multi={true}
-                            value={this.state.selectedCountries}
-                            placeholder="Select one or more countries"
-                            options={this.props.countries}
-                            onChange={this.handleSelectedCountries} />
-                </div>
-            </form>
+                </form>
+            </div>
         )
     }
 }

@@ -25,55 +25,105 @@ html {
 
 body {
     height: 100%;
-    background: rgb(99, 99, 99);
+    background: rgb(25, 25, 25);
     //background: url('/assets/images/globe.png') no-repeat fixed 50% 20%;
     overflow-x: hidden;
-    padding: 0 5px 0 5px;
 }
 
-h1 {
-    margin: 0;
-    font-size: 4.4rem;
+main {
+    padding: 0 5px 0 0;
 }
+
+header {
+    height: 50px;
+    background: rgb(199, 0, 0);
+    text-align: center;
+    color: rgb(218, 218, 218);
+    @include box-shadow(0, 0, 5px, 2px, rgb(84, 18, 18));
+    @include text-shadow-multiple(-1px, -1px, 1px, rgb(97, 9, 9), 1px, 1px, 1px, rgb(160, 82, 82));
+    h1 {
+        margin: 0;
+        font-size: 4.4rem;
+    }
+}
+
 h2 {
     font-size: 1.8rem;
     margin: 0 0 5px 0;
 }
 
-.searchevents {
+#leftbar {
+    position: relative;
+    width: 25%;
+    display: inline-block;
+    vertical-align: top;
+    height: 100%;
+    min-width: 358.75px;
 
+    form {
+        position: fixed;
+        width: inherit;
+        padding: 25px 5px 15px 5px;
+        border-right: solid 1px rgb(64, 64, 64);
+    }
 }
+
+
 #filter {
     width: 100%;
     max-width: 300px;
     margin: 0 auto;
 
+    .lengthinput {
+        font-size: 2.2rem;
+        background: rgb(68, 77, 158);
+        border-radius: 3px;
+        margin: 10px 0 10px 0;
+    }
+
     input[type="range"] {
         width: auto;
         padding: 0;
-        margin: 0 15px;
+        margin: 0 auto;
     }
 }
 
 #eventlist {
+    vertical-align: top;
+    display: inline-block;
+    margin: 25px 0 0 0;
+    width: 60%;
+    padding-left: 25px;
+
+    h2 {
+        width: 80%;
+        display: inline-block;
+    }
+
+    .event {
+        max-width: 500px;
+    }
 
     .eventcontainer {
         position: relative;
         background: $blue-box-background;
-        border-radius: 5px;
+        border-radius: 3px;
         min-height: 150px;
         margin: 0 0 30px 0;
+        border: solid 1px rgb(195, 195, 195);
+
+        & .infocontainer {
+            padding: 0 15px 0 15px;
+            font-size: 1.6rem;
+        }
     }
     .eventhead {
-        background: rgb(29, 39, 28);
+        background: rgb(68, 77, 158);
         border-top-left-radius: $small-border-radius;
         border-top-right-radius: $small-border-radius;
-        color: $white-text;
+        color: rgb(232, 232, 232);
         margin: 0 0 10px 0;
         padding: 5px 5px 3px 5px;
-        border-left: solid 1px rgb(232, 233, 253);
-        border-top: solid 1px rgb(232, 233, 253);
-        border-right: solid 1px rgb(232, 233, 253);
     }
 
     .readmore {
@@ -90,12 +140,17 @@ h2 {
         }
     }
 
+    .daysleftcontainer {
+        width: 20%;
+        display: inline-block;
+        text-align: right;
+    }
     .daysleft {
         padding: 2px 4px 2px 4px;
         border-radius: 3px;
         
         &.red {
-            background: rgb(115, 35, 35);
+            background: rgb(136, 51, 51);
             border: solid 1px rgb(132, 11, 11);
         }
         &.green {
@@ -111,16 +166,15 @@ h2 {
 
 .button.darkgreen {
     cursor: pointer;
-    background: rgb(29, 39, 28);
-    padding: 2px 3px 2px 3px;
     border-radius: 3px;
-    color: rgb(195, 195, 195);
+    padding: 2px 3px 2px 3px;
+    color: rgb(105, 105, 105);
+    background: rgb(201, 204, 228);
 }
 
 
 input[type="search"] {
     display: block;
-    margin: 0 auto 20px auto;
     width: 100%;
     border: none;
     opacity: 0.9;
@@ -131,11 +185,66 @@ input[type="search"] {
     border-radius: 3px;
     padding: 0 8px 0 8px;
     color: rgb(55, 51, 171);
+    margin: 0 auto 20px auto;
     border-bottom: $input-blue-border-bottom;
     @include transition(border-bottom, 0.3s, ease-in-out);
-    @include box-shadow-direction(inset, 0, 1px, 1px, 1px, rgb(138, 137, 255));
+    @include box-shadow-direction(inset, 0, 1px, 1px, 1px, rgb(156, 32, 32));
 
     &:focus, &:hover {
-        border-bottom: inset 7px rgb(6, 90, 3);
+        border-bottom: inset 7px rgb(68, 77, 158);
+    }
+}
+
+.box {
+    position: fixed;
+    top: 0;
+    z-index: 20;
+
+    .box_background {
+        z-index: 21;
+        position: fixed;
+        background: rgba(0,0,0,0.5);
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+    }
+
+    .eventinfo {
+        z-index: 22;
+        background: rgb(240,240,240);
+        margin: 0 auto;
+        display: block;
+        max-width: 700px;
+        width: 90%;
+        height: 100%;
+        overflow-y: scroll;
+    }
+}
+
+@media screen and (max-width: 995px) {
+    #leftbar {
+    position: relative;
+    width: 100%;
+    display: block;
+    vertical-align: top;
+    height: auto;
+    min-width: 200px;
+
+        & form {
+            position: inherit;
+            width: inherit;
+            height: inherit;
+            border-right: solid 1px rgb(53, 53, 53);
+        }
+    }
+
+    #eventlist {
+        width: 100%;
+        padding: 0 5px 0 5px;
+
+        & .event {
+            margin: 0 auto;
+        }
     }
 }

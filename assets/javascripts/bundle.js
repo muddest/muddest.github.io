@@ -21569,7 +21569,8 @@
 	                    searchword: this.state.searchWord,
 	                    minlength: this.state.minLength,
 	                    maxlength: this.state.maxLength,
-	                    country: this.state.country })
+	                    country: this.state.country,
+	                    possiblecountries: countries })
 	            );
 	        }
 	    }]);
@@ -21622,12 +21623,7 @@
 	                    return false;
 	                }
 
-	                console.log(event.Title.toLowerCase().indexOf(searchWord));
-	                if (event.Title.toLowerCase().indexOf(searchWord) > -1) {
-	                    console.log('YAY');
-	                    return true;
-	                } else {
-	                    console.log('NOOOO');
+	                if (event.Title.toLowerCase().indexOf(searchWord) === -1 && 1 < _this3.props.searchword.length) {
 	                    return false;
 	                }
 
@@ -21654,7 +21650,7 @@
 
 	            return _react2.default.createElement(
 	                'div',
-	                { key: 'eventkey', id: 'eventlist', className: 'row show-grid' },
+	                { id: 'eventlist', key: 'eventkey' },
 	                _react2.default.createElement(
 	                    _reactAddonsCssTransitionGroup2.default,
 	                    {
@@ -21731,80 +21727,58 @@
 	            }
 	            return _react2.default.createElement(
 	                'div',
-	                { key: this.props.id, className: 'col-xs-12 col-sm-6 col-md-4 col-lg-4 col-centered' },
+	                { key: this.props.id, className: 'event' },
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'eventcontainer' },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'eventhead col-md-12' },
+	                        { className: 'eventhead' },
+	                        _react2.default.createElement(
+	                            'h2',
+	                            null,
+	                            this.props.title
+	                        ),
 	                        _react2.default.createElement(
 	                            'div',
-	                            { className: 'row' },
+	                            { className: 'daysleftcontainer' },
 	                            _react2.default.createElement(
-	                                'h2',
-	                                { className: 'col-xs-8' },
-	                                this.props.title
-	                            ),
-	                            _react2.default.createElement(
-	                                'div',
-	                                { className: 'col-xs-4 text-right' },
-	                                _react2.default.createElement(
-	                                    'span',
-	                                    { className: 'daysleft ' + daysColor },
-	                                    this.props.daysleft,
-	                                    ' days left'
-	                                )
+	                                'span',
+	                                { className: 'daysleft ' + daysColor },
+	                                this.props.daysleft,
+	                                ' days left'
 	                            )
 	                        ),
 	                        _react2.default.createElement(
 	                            'span',
-	                            null,
+	                            { className: 'date' },
 	                            this.props.date
 	                        )
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'col-md-12' },
+	                        { className: 'evenshortinfo' },
 	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'col-md-6' },
-	                            _react2.default.createElement(
-	                                'span',
-	                                null,
-	                                this.props.length,
-	                                ' km'
-	                            ),
-	                            _react2.default.createElement(
-	                                'span',
-	                                null,
-	                                this.props.obstacles,
-	                                ' obstacles'
-	                            ),
-	                            _react2.default.createElement(
-	                                'span',
-	                                null,
-	                                'Challenge 4.5'
-	                            )
+	                            'span',
+	                            null,
+	                            this.props.length,
+	                            ' km'
 	                        ),
 	                        _react2.default.createElement(
-	                            'address',
-	                            { className: 'col-md-6' },
-	                            _react2.default.createElement(
-	                                'span',
-	                                null,
-	                                this.props.address
-	                            ),
-	                            _react2.default.createElement(
-	                                'span',
-	                                null,
-	                                this.props.city
-	                            ),
-	                            _react2.default.createElement(
-	                                'span',
-	                                null,
-	                                this.props.country
-	                            )
+	                            'span',
+	                            null,
+	                            this.props.obstacles,
+	                            ' obstacles'
+	                        ),
+	                        _react2.default.createElement(
+	                            'span',
+	                            null,
+	                            'Challenge 4.5'
+	                        ),
+	                        _react2.default.createElement(
+	                            'span',
+	                            null,
+	                            this.props.country
 	                        )
 	                    ),
 	                    _react2.default.createElement(
@@ -22006,73 +21980,75 @@
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
-	                'form',
-	                { className: 'searchevents', autoComplete: 'off' },
-	                _react2.default.createElement('input', {
-	                    autoComplete: 'off',
-	                    type: 'search',
-	                    placeholder: 'Find events',
-	                    onChange: this.updateSearchVal }),
+	                'div',
+	                { id: 'leftbar' },
 	                _react2.default.createElement(
-	                    'div',
-	                    { id: 'filter' },
+	                    'form',
+	                    { className: 'searchevents', autoComplete: 'off' },
+	                    _react2.default.createElement('input', {
+	                        autoComplete: 'off',
+	                        type: 'search',
+	                        placeholder: 'Find events',
+	                        onChange: this.updateSearchVal }),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'row' },
+	                        { id: 'filter', className: 'container' },
 	                        _react2.default.createElement(
-	                            'span',
-	                            { className: 'label before col-xs-3' },
-	                            'Min. length'
+	                            'div',
+	                            { className: 'row lengthinput' },
+	                            _react2.default.createElement(
+	                                'span',
+	                                { className: 'label before col-xs-6' },
+	                                'Min. length'
+	                            ),
+	                            _react2.default.createElement(
+	                                'span',
+	                                { className: 'label after col-xs-6 pull-right' },
+	                                this.state.minLengthVal,
+	                                ' km'
+	                            ),
+	                            _react2.default.createElement('input', {
+	                                id: 'minlength',
+	                                type: 'range',
+	                                min: '0',
+	                                max: '30',
+	                                step: '1',
+	                                'data-name': 'minlength',
+	                                value: this.state.minLengthVal,
+	                                onChange: this.handleMinLengthchange })
 	                        ),
-	                        _react2.default.createElement('input', {
-	                            className: 'col-xs-7',
-	                            id: 'minlength',
-	                            type: 'range',
-	                            min: '0',
-	                            max: '30',
-	                            step: '1',
-	                            'data-name': 'minlength',
-	                            value: this.state.minLengthVal,
-	                            onChange: this.handleMinLengthchange }),
 	                        _react2.default.createElement(
-	                            'span',
-	                            { className: 'label after col-xs-2' },
-	                            this.state.minLengthVal,
-	                            ' km'
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'row' },
-	                        _react2.default.createElement(
-	                            'span',
-	                            { className: 'label before col-xs-3' },
-	                            'Max. length'
+	                            'div',
+	                            { className: 'row lengthinput' },
+	                            _react2.default.createElement(
+	                                'span',
+	                                { className: 'label before col-xs-6' },
+	                                'Max. length'
+	                            ),
+	                            _react2.default.createElement(
+	                                'span',
+	                                { className: 'label after col-xs-6 pull-right' },
+	                                this.state.maxLengthVal,
+	                                ' km'
+	                            ),
+	                            _react2.default.createElement('input', {
+	                                id: 'maxlength',
+	                                type: 'range',
+	                                min: '0',
+	                                max: '30',
+	                                step: '1',
+	                                'data-name': 'maxlength',
+	                                value: this.state.maxLengthVal,
+	                                onChange: this.handleMaxLengthchange })
 	                        ),
-	                        _react2.default.createElement('input', {
-	                            className: 'col-xs-7',
-	                            id: 'maxlength',
-	                            type: 'range',
-	                            min: '0',
-	                            max: '30',
-	                            step: '1',
-	                            'data-name': 'maxlength',
-	                            value: this.state.maxLengthVal,
-	                            onChange: this.handleMaxLengthchange }),
-	                        _react2.default.createElement(
-	                            'span',
-	                            { className: 'label after col-xs-2' },
-	                            this.state.maxLengthVal,
-	                            ' km'
-	                        )
-	                    ),
-	                    _react2.default.createElement(_reactSelect2.default, {
-	                        name: 'select-country',
-	                        multi: true,
-	                        value: this.state.selectedCountries,
-	                        placeholder: 'Select one or more countries',
-	                        options: this.props.countries,
-	                        onChange: this.handleSelectedCountries })
+	                        _react2.default.createElement(_reactSelect2.default, {
+	                            name: 'select-country',
+	                            multi: true,
+	                            value: this.state.selectedCountries,
+	                            placeholder: 'Select one or more countries',
+	                            options: this.props.countries,
+	                            onChange: this.handleSelectedCountries })
+	                    )
 	                )
 	            );
 	        }
