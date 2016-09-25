@@ -234,14 +234,14 @@ class Event extends React.Component {
                         <div className="daysleftcontainer">
                             <span className={'daysleft '+daysColor}>{this.props.daysleft} days left</span>
                         </div>
-                        <span className="date">{this.props.date}</span>
+                        <span className="date"><Fonty text={this.props.date} icon="fa-calendar" /></span>
                     </div>
 
-                    <div className="evenshortinfo">
-                        <span>{this.props.length} km</span>
-                        <span>{this.props.obstacles} obstacles</span>
-                        <span>Challenge 4.5</span>
-                        <span>{this.props.country}</span>
+                    <div className="eventshortinfo">
+                        <span><Fonty text={this.props.length+" km"} icon="fa-map-marker" /></span>
+                        <span><Fonty text={this.props.obstacles+" obstacles"} icon="fa-fire" /></span>
+                        <span><Fonty text="Challenge 4.5" icon="fa-heartbeat" /></span>
+                        <span><Fonty text={this.props.country} icon="fa-globe" /></span>
                     </div>
 
                     <div className="readmore">
@@ -280,9 +280,11 @@ class InfoBox extends React.Component {
             <div className="box">
                 <div className="box_background" data-name="closebox" onClick={this.props.closebox}>
                     <div className="eventinfo">
-                        <h3>{this.props.Title}</h3>
+                        <h3>{this.props.title}</h3>
                         <span dangerouslySetInnerHTML={this.rawMarkup()} />
-                        <iframe width="560" height="315" src={this.props.youtube} frameBorder="0" allowFullScreen></iframe>
+                        <div className="video-container">
+                            <iframe width="560" height="315" src={this.props.youtube} frameBorder="0" allowFullScreen></iframe>
+                        </div>
                         <span className="close pointer" data-name="closebox" onClick={this.props.closebox}>Close</span>
                     </div>
                 </div>

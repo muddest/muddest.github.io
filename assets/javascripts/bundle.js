@@ -21752,33 +21752,31 @@
 	                        _react2.default.createElement(
 	                            'span',
 	                            { className: 'date' },
-	                            this.props.date
+	                            _react2.default.createElement(_fonty2.default, { text: this.props.date, icon: 'fa-calendar' })
 	                        )
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'evenshortinfo' },
+	                        { className: 'eventshortinfo' },
 	                        _react2.default.createElement(
 	                            'span',
 	                            null,
-	                            this.props.length,
-	                            ' km'
+	                            _react2.default.createElement(_fonty2.default, { text: this.props.length + " km", icon: 'fa-map-marker' })
 	                        ),
 	                        _react2.default.createElement(
 	                            'span',
 	                            null,
-	                            this.props.obstacles,
-	                            ' obstacles'
+	                            _react2.default.createElement(_fonty2.default, { text: this.props.obstacles + " obstacles", icon: 'fa-fire' })
 	                        ),
 	                        _react2.default.createElement(
 	                            'span',
 	                            null,
-	                            'Challenge 4.5'
+	                            _react2.default.createElement(_fonty2.default, { text: 'Challenge 4.5', icon: 'fa-heartbeat' })
 	                        ),
 	                        _react2.default.createElement(
 	                            'span',
 	                            null,
-	                            this.props.country
+	                            _react2.default.createElement(_fonty2.default, { text: this.props.country, icon: 'fa-globe' })
 	                        )
 	                    ),
 	                    _react2.default.createElement(
@@ -21848,10 +21846,14 @@
 	                        _react2.default.createElement(
 	                            'h3',
 	                            null,
-	                            this.props.Title
+	                            this.props.title
 	                        ),
 	                        _react2.default.createElement('span', { dangerouslySetInnerHTML: this.rawMarkup() }),
-	                        _react2.default.createElement('iframe', { width: '560', height: '315', src: this.props.youtube, frameBorder: '0', allowFullScreen: true }),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'video-container' },
+	                            _react2.default.createElement('iframe', { width: '560', height: '315', src: this.props.youtube, frameBorder: '0', allowFullScreen: true })
+	                        ),
 	                        _react2.default.createElement(
 	                            'span',
 	                            { className: 'close pointer', 'data-name': 'closebox', onClick: this.props.closebox },
@@ -33292,17 +33294,12 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                "div",
-	                { className: this.props.class },
+	                null,
 	                _react2.default.createElement(
 	                    "div",
 	                    { className: "filter-text-before" },
-	                    this.props.textbefore
-	                ),
-	                _react2.default.createElement("i", { className: "fa " + this.props.icon, "aria-hidden": "true" }),
-	                _react2.default.createElement(
-	                    "div",
-	                    { className: "filter-text-after" },
-	                    this.props.textafter
+	                    _react2.default.createElement("i", { className: "fa " + this.props.icon, "aria-hidden": "true" }),
+	                    this.props.text
 	                )
 	            );
 	        }
