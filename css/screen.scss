@@ -38,7 +38,6 @@ main {
 }
 
 header {
-    height: 50px;
     background: rgb(199, 0, 0);
     text-align: center;
     color: rgb(218, 218, 218);
@@ -57,7 +56,6 @@ h2 {
 }
 
 #leftbar {
-    position: relative;
     width: 25%;
     display: inline-block;
     vertical-align: top;
@@ -65,10 +63,16 @@ h2 {
     min-width: 358.75px;
 
     form {
-        position: fixed;
+        position: absolute;
         width: inherit;
         padding: 25px 5px 15px 5px;
         border-right: solid 1px rgb(64, 64, 64);
+    }
+
+    form.fixed {
+        position: fixed;
+        top: 0px;
+        left: 0px;
     }
 }
 

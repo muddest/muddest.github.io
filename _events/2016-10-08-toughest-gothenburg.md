@@ -1,19 +1,21 @@
 ---
-Title: Toughest Copenhagen
-Country: Denmark
-City: Copenhagen
-Address: Amager Strandpark
-Date: 2016-10-01
-Site:  http://www.toughest.se/events/kopenhamn/
+
+Title: Toughest Gothenburg
+Country: Sweden
+City: Gothenburg
+Address: Kviberg
+Date: 2016-10-08
+Site: http://www.toughest.se/events/goteborg/
 Obstacles: 40
 Length: 8 km
-Price: 495-695
-Currency: DKK
-Youtube: https://www.youtube.com/embed/tBJYdD2ZDNY
+Price: 595-895
+Currency: SEK
+Youtube: https://www.youtube.com/embed/5R3mOX5jn30
 Challenge: 4
 ---
 
-Amager Strandpark, probably Denmarks best spot for a Obstacle course! The park is stretching out just by the coast with both grass and sand underneath your feets.  The race in 2014 and 2015 was a huge success with a high amount of different obstacles and a spectacular finish.
+
+The Kviberg area in Gothenburg is an ideal area for a Toughest race. It’s a high intensity course. Perfect for anyone who like to get their heart pumping.
 
 Starting number:
 
@@ -30,6 +32,10 @@ This will be available for pick up at the event area. Pick up your envelop maxim
 Starting time:
 
 The starts will be between 10:00 – 16:00.
+
+Changing-room:
+
+This will be available approximately 300m from the event area.
 
 Toilets:
 

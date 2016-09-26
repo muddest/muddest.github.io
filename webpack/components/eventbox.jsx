@@ -4,7 +4,6 @@ import Remarkable from 'remarkable';
 import Fonty from './assets/fonty.jsx';
 import Select from 'react-select';
 
-var tipUsLinkName = "Can't find your event? Click this link and let us know";
 
 class EventBox extends React.Component {
     constructor(props) {
@@ -388,7 +387,6 @@ class EventSearch extends React.Component {
     render () {
         return (
             <div id="leftbar">
-                <a href="https://goo.gl/forms/tYewWTC3GNKI2GDs1" target="_blank">{tipUsLinkName}</a>
                 <form className="searchevents" autoComplete="off">
                     <input
                         autoComplete="off"
