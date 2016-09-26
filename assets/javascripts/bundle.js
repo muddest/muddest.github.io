@@ -21537,7 +21537,7 @@
 	    }, {
 	        key: 'sortByDate',
 	        value: function sortByDate(a, b) {
-	            return new Date(a.date).getTime() - new Date(b.date).getTime();
+	            return new Date(a.Date).getTime() - new Date(b.Date).getTime();
 	        }
 	    }, {
 	        key: 'render',
