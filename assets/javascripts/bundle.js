@@ -21755,9 +21755,13 @@
 	                            _react2.default.createElement(_fonty2.default, { text: this.props.date, icon: 'fa-calendar' })
 	                        ),
 	                        _react2.default.createElement(
-	                            'span',
-	                            null,
-	                            _react2.default.createElement(_fonty2.default, { text: this.props.country, icon: 'fa-globe' })
+	                            'div',
+	                            { className: 'countrycontainer' },
+	                            _react2.default.createElement(
+	                                'span',
+	                                null,
+	                                _react2.default.createElement(_fonty2.default, { text: this.props.country, icon: 'fa-globe' })
+	                            )
 	                        )
 	                    ),
 	                    _react2.default.createElement(
@@ -21989,6 +21993,11 @@
 	            return _react2.default.createElement(
 	                'div',
 	                { id: 'leftbar' },
+	                _react2.default.createElement(
+	                    'a',
+	                    { href: 'https://goo.gl/forms/tYewWTC3GNKI2GDs1', target: '_blank' },
+	                    'Cant find your event? Click this link and let us know'
+	                ),
 	                _react2.default.createElement(
 	                    'form',
 	                    { className: 'searchevents', autoComplete: 'off' },

@@ -235,7 +235,9 @@ class Event extends React.Component {
                             <span className={'daysleft '+daysColor}>{this.props.daysleft} days left</span>
                         </div>
                         <span className="date"><Fonty text={this.props.date} icon="fa-calendar" /></span>
-                        <span><Fonty text={this.props.country} icon="fa-globe" /></span>
+                        <div className="countrycontainer">
+                            <span><Fonty text={this.props.country} icon="fa-globe" /></span>
+                        </div>
                     </div>
 
                     <div className="eventshortinfo">
@@ -379,6 +381,7 @@ class EventSearch extends React.Component {
     render () {
         return (
             <div id="leftbar">
+                <a href="https://goo.gl/forms/tYewWTC3GNKI2GDs1" target="_blank">Cant find your event? Click this link and let us know</a>
                 <form className="searchevents" autoComplete="off">
                     <input
                         autoComplete="off"

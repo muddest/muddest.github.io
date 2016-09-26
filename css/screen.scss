@@ -29,6 +29,7 @@ body {
 
     i {
         width: 20px;
+        text-align: left;
     }
 }
 
@@ -127,6 +128,17 @@ h2 {
         color: rgb(232, 232, 232);
         margin: 0 0 10px 0;
         padding: 5px 5px 3px 5px;
+
+        & .countrycontainer {
+            display: inline-block;
+            width: 50%;
+            text-align: right;
+        }
+
+        & .date {
+            display: inline-block;
+            width: 50%;
+        }
     }
 
     .eventshortinfo {
@@ -154,6 +166,7 @@ h2 {
 
     .daysleftcontainer {
         width: 20%;
+        min-width: 100px;
         display: inline-block;
         text-align: right;
     }
@@ -283,4 +296,13 @@ input[type="search"] {
             margin: 0 auto;
         }
     }
+}
+
+@media screen and (max-width: 400px) {
+    #eventlist {
+        & h2 {
+            max-width: 248px;
+        }
+    }
+
 }
