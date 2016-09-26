@@ -21493,6 +21493,8 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	var tipUsLinkName = "Can't find your event? Click this link and let us know";
+
 	var EventBox = function (_React$Component) {
 	    _inherits(EventBox, _React$Component);
 
@@ -21785,7 +21787,11 @@
 	                        _react2.default.createElement(
 	                            'span',
 	                            null,
-	                            _react2.default.createElement(_fonty2.default, { text: this.props.site, icon: 'fa-globe' })
+	                            _react2.default.createElement(
+	                                'a',
+	                                { href: this.props.site, target: '_blank' },
+	                                this.props.title
+	                            )
 	                        )
 	                    ),
 	                    _react2.default.createElement(
@@ -22003,7 +22009,7 @@
 	                _react2.default.createElement(
 	                    'a',
 	                    { href: 'https://goo.gl/forms/tYewWTC3GNKI2GDs1', target: '_blank' },
-	                    'Cant find your event? Click this link and let us know'
+	                    tipUsLinkName
 	                ),
 	                _react2.default.createElement(
 	                    'form',

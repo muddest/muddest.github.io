@@ -4,6 +4,7 @@ import Remarkable from 'remarkable';
 import Fonty from './assets/fonty.jsx';
 import Select from 'react-select';
 
+var tipUsLinkName = "Can't find your event? Click this link and let us know";
 
 class EventBox extends React.Component {
     constructor(props) {
@@ -244,7 +245,7 @@ class Event extends React.Component {
                         <span><Fonty text={this.props.length+" km"} icon="fa-map-marker" /></span>
                         <span><Fonty text={this.props.obstacles+" obstacles"} icon="fa-fire" /></span>
                         <span><Fonty text="Challenge 4.5" icon="fa-heartbeat" /></span>
-                        <span><Fonty text={this.props.site} icon="fa-globe" /></span>
+                        <span><a href={this.props.site} target="_blank">{this.props.title}</a></span>
                     </div>
 
                     <div className="readmore">
@@ -387,7 +388,7 @@ class EventSearch extends React.Component {
     render () {
         return (
             <div id="leftbar">
-                <a href="https://goo.gl/forms/tYewWTC3GNKI2GDs1" target="_blank">Cant find your event? Click this link and let us know</a>
+                <a href="https://goo.gl/forms/tYewWTC3GNKI2GDs1" target="_blank">{tipUsLinkName}</a>
                 <form className="searchevents" autoComplete="off">
                     <input
                         autoComplete="off"
