@@ -330,6 +330,7 @@ class EventSearch extends React.Component {
             selectedCountries: [],
         };
 
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.updateSearchVal = this.updateSearchVal.bind(this);
         this.handleSelectedCountries = this.handleSelectedCountries.bind(this);
@@ -366,6 +367,11 @@ class EventSearch extends React.Component {
         this.handleSearch('country', countries);
     }
 
+    handleSubmit (e) {
+        e.preventDefault();
+        console.log('Prevented');
+    }
+
     updateCountryVal(e) {
         let options = e.target.options;
         let countryOptions = [];
@@ -387,7 +393,8 @@ class EventSearch extends React.Component {
                         autoComplete="off"
                         type="search"
                         placeholder="Find events"
-                        onChange={this.updateSearchVal} />
+                        onChange={this.updateSearchVal}
+                        onSubmit={this.handleSubmit} />
                     
 
                     <div id="filter" className="container">

@@ -79,6 +79,7 @@ h2 {
     margin: 0 auto;
 
     .lengthinput {
+        padding: 5px 0 5px 0;
         font-size: 2.2rem;
         background: rgb(68, 77, 158);
         border-radius: 3px;
@@ -133,6 +134,7 @@ h2 {
             display: inline-block;
             width: 50%;
             text-align: right;
+            padding: 0 5px 0 0;
         }
 
         & .date {
@@ -300,7 +302,7 @@ input[type="search"] {
 @media screen and (max-width: 400px) {
     #eventlist {
         & h2 {
-            max-width: 248px;
+            max-width: 233px;
         }
 
         & .daysleftcontainer {

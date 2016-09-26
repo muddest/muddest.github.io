@@ -21933,6 +21933,7 @@
 	            selectedCountries: []
 	        };
 
+	        _this7.handleSubmit = _this7.handleSubmit.bind(_this7);
 	        _this7.handleSearch = _this7.handleSearch.bind(_this7);
 	        _this7.updateSearchVal = _this7.updateSearchVal.bind(_this7);
 	        _this7.handleSelectedCountries = _this7.handleSelectedCountries.bind(_this7);
@@ -21976,6 +21977,12 @@
 	            this.handleSearch('country', countries);
 	        }
 	    }, {
+	        key: 'handleSubmit',
+	        value: function handleSubmit(e) {
+	            e.preventDefault();
+	            console.log('Prevented');
+	        }
+	    }, {
 	        key: 'updateCountryVal',
 	        value: function updateCountryVal(e) {
 	            var options = e.target.options;
@@ -22005,7 +22012,8 @@
 	                        autoComplete: 'off',
 	                        type: 'search',
 	                        placeholder: 'Find events',
-	                        onChange: this.updateSearchVal }),
+	                        onChange: this.updateSearchVal,
+	                        onSubmit: this.handleSubmit }),
 	                    _react2.default.createElement(
 	                        'div',
 	                        { id: 'filter', className: 'container' },
