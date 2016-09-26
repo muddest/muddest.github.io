@@ -166,7 +166,6 @@ h2 {
 
     .daysleftcontainer {
         width: 20%;
-        min-width: 100px;
         display: inline-block;
         text-align: right;
     }
@@ -302,6 +301,10 @@ input[type="search"] {
     #eventlist {
         & h2 {
             max-width: 248px;
+        }
+
+        & .daysleftcontainer {
+            min-width: 100px;
         }
     }
 
