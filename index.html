@@ -3,6 +3,8 @@ layout: default
 title: muddest.com
 slogan: helps finding Obstacle Race
 ---
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAlzJIUURdkWJepcm0bSaKfT0rbXS5fdfc"></script>
+
 <article id="about">
     <h2>Muddest is the best</h2>
     <p>There's no question about it, muddest.com is the best, beleive it!</p>
@@ -10,12 +12,10 @@ slogan: helps finding Obstacle Race
     <p>Contact us on the following address: <a href="mailto: mikael">Mickes privata mail</a>
 </article>
 
-
-<img src="/assets/images/background_splash.jpg" alt="Background splash">
-
 <div id="app"></div>
 
 
-  <script>
-    events = {{ site.events | jsonify }};
-  </script>
+
+
+
+<script> events = {{ site.events | jsonify }}; </script>

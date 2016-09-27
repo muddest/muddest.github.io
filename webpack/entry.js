@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import {render} from 'react-dom';
-import EventBox from './components/eventbox.jsx';
+import EventContainer from './components/eventcontainer.jsx';
 
 
 class App extends Component {
     render() {
         return (
-            <EventBox data={events} />
+            <EventContainer data={events} />
         )
     }
 }
