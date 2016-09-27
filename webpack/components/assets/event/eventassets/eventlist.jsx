@@ -21,26 +21,7 @@ class EventList extends React.Component {
 
 
     render() {
-        let searchWord = this.props.searchword.toLowerCase();
-
-        var eventnodes = this.props.data.filter((event) => {
-
-            var countryCheck = (this.props.country.indexOf(event.Country.toLowerCase()) > -1);
-            if (false === countryCheck && 0 < this.props.country.length) {
-                return false;
-            }
-
-            if (event.Title.toLowerCase().indexOf(searchWord) === -1 && 1 < this.props.searchword.length) {
-                return false;
-            }
-
-            if (this.props.length.min > parseInt(event.Length) || this.props.length.max < parseInt(event.Length)) {
-                return false;
-            }
-
-            
-            return true;
-        }).map((event) => {
+        var eventnodes = this.props.data.map((event) => {
             let days = this._getDifferenceInDays(event.Date);
             return (
                 <Event

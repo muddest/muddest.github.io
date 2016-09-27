@@ -12,7 +12,8 @@ Price: 59-89
 Currency: GBP
 Youtube: https://www.youtube.com/embed/fYeGTKuy4_E
 Challenge: 3
-
+lng: 51.516596
+lat: -0.127698
 ---
 
 Toughest is ready for a second time in London!

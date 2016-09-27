@@ -11,6 +11,8 @@ Price: 55-89
 Currency: EUR
 Youtube: https://www.youtube.com/watch?v=MhFeimHOEVU
 Challenge: 
+lng: 48.857448
+lat: 2.349636
 ---
 
 TEXTEN INFO OM TÄVLING

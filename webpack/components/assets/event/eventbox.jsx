@@ -9,6 +9,7 @@ class EventBox extends React.Component {
 
         this.state = {
             data: [],
+            filteredData: [],
             searchWord: '',
             length: {
                 min: 0,
@@ -17,6 +18,7 @@ class EventBox extends React.Component {
             country: [],
         };
 
+        this.filterData = this.filterData.bind(this);
         this.changeSearchState = this.changeSearchState.bind(this);
     }
 
@@ -38,6 +40,10 @@ class EventBox extends React.Component {
         return new Date(a.Date).getTime() - new Date(b.Date).getTime();
     }
 
+    filterData (data) {
+        this.setState({ filteredData: data })
+    }
+
     render() {
         var data = this.props.data;
         data.sort(this.sortByDate);
@@ -55,22 +61,43 @@ class EventBox extends React.Component {
             }
         }
 
+        let searchWord = this.state.searchWord.toLowerCase();
+        let filteredData = [];
+
+        var eventnodes = data.filter((event) => {
+
+            var countryCheck = (this.state.country.indexOf(event.Country.toLowerCase()) > -1);
+            if (false === countryCheck && 0 < this.state.country.length) {
+                return false;
+            }
+
+            if (event.Title.toLowerCase().indexOf(searchWord) === -1 && 1 < this.state.searchWord.length) {
+                return false;
+            }
+
+            if (this.state.length.min > parseInt(event.Length) || this.state.length.max < parseInt(event.Length)) {
+                return false;
+            }
+
+            filteredData.push(event);
+            return true;
+        });
+
         return (
             <div id="eventbox">
                 <EventSearch 
                     changesearchstate={this.changeSearchState}
                     countries={countries} />
                 <EventList
-                    data={data}
-                    searchword={this.state.searchWord}
-                    country={this.state.country}
-                    possiblecountries={countries}
-                    length={this.state.length} />
-                <EventMap />
+                    data={filteredData} />
+                <EventMap
+                    data={filteredData} />
+                
             </div>
         )
     }
 }
+
 
 
 export default EventBox;

@@ -11,6 +11,8 @@ Price: 595-895
 Currency: SEK
 Youtube: 
 Challenge: 
+lng: 59.163676
+lat: 17.880112
 ---
 
 TEXTEN INFO OM TÄVLING

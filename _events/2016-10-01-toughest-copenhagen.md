@@ -11,6 +11,8 @@ Price: 495-695
 Currency: DKK
 Youtube: https://www.youtube.com/embed/tBJYdD2ZDNY
 Challenge: 4
+lng: 55.675797
+lat: 12.569764
 ---
 
 Amager Strandpark, probably Denmarks best spot for a Obstacle course! The park is stretching out just by the coast with both grass and sand underneath your feets.  The race in 2014 and 2015 was a huge success with a high amount of different obstacles and a spectacular finish.

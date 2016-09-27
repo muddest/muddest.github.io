@@ -36964,6 +36964,7 @@
 
 	        _this.state = {
 	            data: [],
+	            filteredData: [],
 	            searchWord: '',
 	            length: {
 	                min: 0,
@@ -36972,6 +36973,7 @@
 	            country: []
 	        };
 
+	        _this.filterData = _this.filterData.bind(_this);
 	        _this.changeSearchState = _this.changeSearchState.bind(_this);
 	        return _this;
 	    }
@@ -36997,8 +36999,15 @@
 	            return new Date(a.Date).getTime() - new Date(b.Date).getTime();
 	        }
 	    }, {
+	        key: 'filterData',
+	        value: function filterData(data) {
+	            this.setState({ filteredData: data });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _this2 = this;
+
 	            var data = this.props.data;
 	            data.sort(this.sortByDate);
 
@@ -37015,6 +37024,28 @@
 	                }
 	            }
 
+	            var searchWord = this.state.searchWord.toLowerCase();
+	            var filteredData = [];
+
+	            var eventnodes = data.filter(function (event) {
+
+	                var countryCheck = _this2.state.country.indexOf(event.Country.toLowerCase()) > -1;
+	                if (false === countryCheck && 0 < _this2.state.country.length) {
+	                    return false;
+	                }
+
+	                if (event.Title.toLowerCase().indexOf(searchWord) === -1 && 1 < _this2.state.searchWord.length) {
+	                    return false;
+	                }
+
+	                if (_this2.state.length.min > parseInt(event.Length) || _this2.state.length.max < parseInt(event.Length)) {
+	                    return false;
+	                }
+
+	                filteredData.push(event);
+	                return true;
+	            });
+
 	            return _react2.default.createElement(
 	                'div',
 	                { id: 'eventbox' },
@@ -37022,12 +37053,9 @@
 	                    changesearchstate: this.changeSearchState,
 	                    countries: countries }),
 	                _react2.default.createElement(_eventlist2.default, {
-	                    data: data,
-	                    searchword: this.state.searchWord,
-	                    country: this.state.country,
-	                    possiblecountries: countries,
-	                    length: this.state.length }),
-	                _react2.default.createElement(_eventmap2.default, null)
+	                    data: filteredData }),
+	                _react2.default.createElement(_eventmap2.default, {
+	                    data: filteredData })
 	            );
 	        }
 	    }]);
@@ -37065,6 +37093,9 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	var map = '';
+	var markers = [];
+
 	var EventMap = function (_React$Component) {
 	    _inherits(EventMap, _React$Component);
 
@@ -37074,8 +37105,10 @@
 	        var _this = _possibleConstructorReturn(this, (EventMap.__proto__ || Object.getPrototypeOf(EventMap)).call(this, props));
 
 	        _this.state = {};
+
 	        _this.initMap = _this.initMap.bind(_this);
-	        _this.scream = _this.scream.bind(_this);
+	        _this.addMarkers = _this.addMarkers.bind(_this);
+	        _this.removeMarkers = _this.removeMarkers.bind(_this);
 	        return _this;
 	    }
 
@@ -37087,17 +37120,18 @@
 	            var mapRef = this.refs.map;
 	            var node = _reactDom2.default.findDOMNode(mapRef);
 	            var mapOptions = {
-	                center: new window.google.maps.LatLng(59.334823, 18.069937),
+	                center: new google.maps.LatLng(59.334823, 18.069937),
 	                zoom: 5,
 	                disableDefaultUI: true,
 	                zoomControl: true
 	            };
 
-	            var map = new window.google.maps.Map(node, mapOptions);
+	            map = new google.maps.Map(node, mapOptions);
 
 	            map.addListener('click', function (e) {
 	                return _this2.scream(e.latLng, map);
 	            });
+	            this.addMarkers(this.props.data);
 	        }
 	    }, {
 	        key: 'componentDidMount',
@@ -37105,31 +37139,56 @@
 	            this.initMap();
 	        }
 	    }, {
-	        key: 'scream',
-	        value: function scream(latLng, map) {
-	            console.log('ROAR');
-	            var marker = new google.maps.Marker({
-	                position: latLng,
-	                map: map
-	            });
-	            map.panTo(latLng);
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            this.removeMarkers();
+	            //console.log(nextProps);
+	            this.addMarkers(nextProps.data);
+	        }
+	    }, {
+	        key: 'addMarkers',
+	        value: function addMarkers(data) {
+	            var _loop = function _loop(i) {
+	                var infowindow = new google.maps.InfoWindow({
+	                    content: 'Tough vikiing är riktigt häftigt!!'
+	                });
+
+	                var marker = new google.maps.Marker({
+	                    position: { lat: data[i].lng, lng: data[i].lat },
+	                    map: map,
+	                    title: data[i].Title
+	                });
+	                marker.addListener('mouseover', function () {
+	                    infowindow.open(map, marker);
+	                    //map.setCenter(marker.getPosition()); Used to position to that place
+	                });
+	                marker.addListener('mouseout', function () {
+	                    infowindow.close();
+	                });
+
+	                markers.push(marker);
+	            };
+
+	            for (var i = 0; i < data.length; i++) {
+	                _loop(i);
+	            }
+	        }
+	    }, {
+	        key: 'removeMarkers',
+	        value: function removeMarkers() {
+	            for (var i = 0; i < markers.length; i++) {
+	                console.log('djskldjs', markers[i]);
+	                markers[i].setMap(null);
+	            }
+	            markers = [];
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var style = {
-	                width: '100vw',
-	                height: '100vh'
-	            };
 
 	            return _react2.default.createElement(
 	                'div',
 	                { id: 'eventmap' },
-	                _react2.default.createElement(
-	                    'h2',
-	                    { onClick: this.scream },
-	                    'Mappern WOHO!!!'
-	                ),
 	                _react2.default.createElement('div', { id: 'map', ref: 'map' })
 	            );
 	        }
@@ -37332,25 +37391,7 @@
 	        value: function render() {
 	            var _this2 = this;
 
-	            var searchWord = this.props.searchword.toLowerCase();
-
-	            var eventnodes = this.props.data.filter(function (event) {
-
-	                var countryCheck = _this2.props.country.indexOf(event.Country.toLowerCase()) > -1;
-	                if (false === countryCheck && 0 < _this2.props.country.length) {
-	                    return false;
-	                }
-
-	                if (event.Title.toLowerCase().indexOf(searchWord) === -1 && 1 < _this2.props.searchword.length) {
-	                    return false;
-	                }
-
-	                if (_this2.props.length.min > parseInt(event.Length) || _this2.props.length.max < parseInt(event.Length)) {
-	                    return false;
-	                }
-
-	                return true;
-	            }).map(function (event) {
+	            var eventnodes = this.props.data.map(function (event) {
 	                var days = _this2._getDifferenceInDays(event.Date);
 	                return _react2.default.createElement(_event2.default, {
 	                    key: event.id,
