@@ -21,12 +21,11 @@ class InfoBox extends React.Component {
             <div className="box">
                 <div className="box_background" data-name="closebox" onClick={this.props.closebox}>
                     <div className="eventinfo">
+                        <span className="close pointer" data-name="closebox" onClick={this.props.closebox}>Close</span>
                         <h3>{this.props.title}</h3>
-                        <span dangerouslySetInnerHTML={this.rawMarkup()} />
                         <div className="video-container">
                             <iframe width="560" height="315" src={this.props.youtube} frameBorder="0" allowFullScreen></iframe>
                         </div>
-                        <span className="close pointer" data-name="closebox" onClick={this.props.closebox}>Close</span>
                     </div>
                 </div>
             </div>

@@ -28,7 +28,6 @@ class EventMap extends React.Component {
 
         map = new google.maps.Map(node, mapOptions);
 
-        map.addListener('click', (e) => this.scream(e.latLng, map));
         this.addMarkers(this.props.data);
     }
 
@@ -37,6 +36,19 @@ class EventMap extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        console.log('Next: ', nextProps.hoveringid);
+        console.log('Current: ', this.props.hoveringid);
+        let currentMarkId = this.props.hoveringid;
+        let newMarkId = nextProps.hoveringid;
+
+        if (currentMarkId !== '' || newMarkId === '') {
+            let prevMark = this.state.markers.filter(function(prevMark) { return prevMark.id == currentMarkId });
+            google.maps.event.trigger(prevMark[0], 'mouseout');
+        }
+        if (newMarkId !== currentMarkId && newMarkId !== '') {
+            let mark = this.state.markers.filter(function(mark) { return mark.id == newMarkId });
+            google.maps.event.trigger(mark[0], 'mouseover');
+        }
         this.updateMarkers(nextProps.data);
     }
 

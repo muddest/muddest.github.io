@@ -36970,9 +36970,11 @@
 	                min: 0,
 	                max: 20
 	            },
+	            hoveringId: '',
 	            country: []
 	        };
 
+	        _this.setHoverId = _this.setHoverId.bind(_this);
 	        _this.filterData = _this.filterData.bind(_this);
 	        _this.changeSearchState = _this.changeSearchState.bind(_this);
 	        return _this;
@@ -37002,6 +37004,11 @@
 	        key: 'filterData',
 	        value: function filterData(data) {
 	            this.setState({ filteredData: data });
+	        }
+	    }, {
+	        key: 'setHoverId',
+	        value: function setHoverId(id) {
+	            this.setState({ hoveringId: id });
 	        }
 	    }, {
 	        key: 'render',
@@ -37057,9 +37064,11 @@
 	                    changesearchstate: this.changeSearchState,
 	                    countries: countries }),
 	                _react2.default.createElement(_eventlist2.default, {
+	                    sethoverid: this.setHoverId,
 	                    data: filteredData }),
 	                _react2.default.createElement(_eventmap2.default, {
-	                    data: filteredData })
+	                    data: filteredData,
+	                    hoveringid: this.state.hoveringId })
 	            );
 	        }
 	    }]);
@@ -37120,8 +37129,6 @@
 	    _createClass(EventMap, [{
 	        key: 'initMap',
 	        value: function initMap() {
-	            var _this2 = this;
-
 	            var mapRef = this.refs.map;
 	            var node = _reactDom2.default.findDOMNode(mapRef);
 	            var mapOptions = {
@@ -37133,9 +37140,6 @@
 
 	            map = new google.maps.Map(node, mapOptions);
 
-	            map.addListener('click', function (e) {
-	                return _this2.scream(e.latLng, map);
-	            });
 	            this.addMarkers(this.props.data);
 	        }
 	    }, {
@@ -37146,6 +37150,23 @@
 	    }, {
 	        key: 'componentWillReceiveProps',
 	        value: function componentWillReceiveProps(nextProps) {
+	            console.log('Next: ', nextProps.hoveringid);
+	            console.log('Current: ', this.props.hoveringid);
+	            var currentMarkId = this.props.hoveringid;
+	            var newMarkId = nextProps.hoveringid;
+
+	            if (currentMarkId !== '' || newMarkId === '') {
+	                var prevMark = this.state.markers.filter(function (prevMark) {
+	                    return prevMark.id == currentMarkId;
+	                });
+	                google.maps.event.trigger(prevMark[0], 'mouseout');
+	            }
+	            if (newMarkId !== currentMarkId && newMarkId !== '') {
+	                var mark = this.state.markers.filter(function (mark) {
+	                    return mark.id == newMarkId;
+	                });
+	                google.maps.event.trigger(mark[0], 'mouseover');
+	            }
 	            this.updateMarkers(nextProps.data);
 	        }
 	    }, {
@@ -37308,35 +37329,27 @@
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
-	                'div',
-	                { id: 'leftbar' },
-	                _react2.default.createElement(
-	                    'form',
-	                    { className: 'searchevents', autoComplete: 'off', onSubmit: this.handleSubmit },
-	                    _react2.default.createElement('input', {
-	                        autoComplete: 'off',
-	                        type: 'search',
-	                        placeholder: 'Search for events',
-	                        onChange: this.updateSearchVal }),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { id: 'filter', className: 'container' },
-	                        _react2.default.createElement(_reactInputRange2.default, {
-	                            maxValue: 20,
-	                            minValue: 0,
-	                            value: this.state.values,
-	                            onChange: this.handleValuesChange.bind(this) }),
-	                        _react2.default.createElement(_reactSelect2.default, {
-	                            name: 'select-country',
-	                            multi: true,
-	                            clearable: true,
-	                            searchable: false,
-	                            value: this.state.selectedCountries,
-	                            placeholder: 'Select one or more countries',
-	                            options: this.props.countries,
-	                            onChange: this.handleSelectedCountries })
-	                    )
-	                )
+	                'form',
+	                { id: 'filter', autoComplete: 'off', onSubmit: this.handleSubmit },
+	                _react2.default.createElement('input', {
+	                    autoComplete: 'off',
+	                    type: 'search',
+	                    placeholder: 'Search for events',
+	                    onChange: this.updateSearchVal }),
+	                _react2.default.createElement(_reactInputRange2.default, {
+	                    maxValue: 20,
+	                    minValue: 0,
+	                    value: this.state.values,
+	                    onChange: this.handleValuesChange.bind(this) }),
+	                _react2.default.createElement(_reactSelect2.default, {
+	                    name: 'select-country',
+	                    multi: true,
+	                    clearable: true,
+	                    searchable: false,
+	                    value: this.state.selectedCountries,
+	                    placeholder: 'Select one or more countries',
+	                    options: this.props.countries,
+	                    onChange: this.handleSelectedCountries })
 	            );
 	        }
 	    }]);
@@ -37410,6 +37423,7 @@
 	            var eventnodes = this.props.data.map(function (event) {
 	                var days = _this2._getDifferenceInDays(event.Date);
 	                return _react2.default.createElement(_event2.default, {
+	                    sethoverid: _this2.props.sethoverid,
 	                    key: event.id,
 	                    title: event.Title,
 	                    info: event.content,
@@ -37520,11 +37534,12 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _this2 = this;
+
 	            var readMore = '';
 	            if (!this.state.hidden) {
 	                readMore = _react2.default.createElement(_infobox2.default, {
 	                    title: this.props.title,
-	                    info: this.props.info,
 	                    youtube: this.props.youtube,
 	                    closebox: this.toggleInfoBox });
 	            }
@@ -37544,39 +37559,35 @@
 	            }
 	            return _react2.default.createElement(
 	                'div',
-	                { key: this.props.id, className: 'event' },
+	                {
+	                    key: this.props.id,
+	                    onMouseEnter: function onMouseEnter() {
+	                        return _this2.props.sethoverid(_this2.props.id);
+	                    },
+	                    onMouseLeave: function onMouseLeave() {
+	                        return _this2.props.sethoverid('');
+	                    },
+	                    className: 'event' },
 	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'eventhead' },
-	                    _react2.default.createElement(
-	                        'h2',
-	                        null,
-	                        this.props.title
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'daysleftcontainer' },
-	                        _react2.default.createElement(
-	                            'span',
-	                            { className: 'daysleft ' + daysColor },
-	                            this.props.daysleft,
-	                            ' days left'
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'span',
-	                        { className: 'date' },
-	                        _react2.default.createElement(_fonty2.default, { text: this.props.date, icon: 'fa-calendar' })
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'countrycontainer' },
-	                        _react2.default.createElement(
-	                            'span',
-	                            null,
-	                            _react2.default.createElement(_fonty2.default, { text: this.props.country, icon: 'fa-globe' })
-	                        )
-	                    )
+	                    'h2',
+	                    null,
+	                    this.props.title
+	                ),
+	                _react2.default.createElement(
+	                    'span',
+	                    { className: 'daysleft ' + daysColor },
+	                    this.props.daysleft,
+	                    ' days left'
+	                ),
+	                _react2.default.createElement(
+	                    'span',
+	                    { className: 'date' },
+	                    _react2.default.createElement(_fonty2.default, { text: this.props.date, icon: 'fa-calendar' })
+	                ),
+	                _react2.default.createElement(
+	                    'span',
+	                    { className: 'country' },
+	                    _react2.default.createElement(_fonty2.default, { text: this.props.country, icon: 'fa-globe' })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
@@ -37607,28 +37618,10 @@
 	                    )
 	                ),
 	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'eventfooter' },
-	                    _react2.default.createElement(
-	                        'span',
-	                        { className: 'eventmap' },
-	                        _react2.default.createElement(
-	                            'span',
-	                            { 'data-name': 'openbox', onClick: this.toggleMapBox },
-	                            'View map'
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'span',
-	                        { className: 'eventreadmore' },
-	                        _react2.default.createElement(
-	                            'span',
-	                            { 'data-name': 'openbox', onClick: this.toggleInfoBox },
-	                            'Read more...'
-	                        )
-	                    )
+	                    'span',
+	                    { 'class': 'readmore', 'data-name': 'openbox', onClick: this.toggleInfoBox },
+	                    'Watch trailer...'
 	                ),
-	                map,
 	                readMore
 	            );
 	        }
@@ -37767,20 +37760,19 @@
 	                        'div',
 	                        { className: 'eventinfo' },
 	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'close pointer', 'data-name': 'closebox', onClick: this.props.closebox },
+	                            'Close'
+	                        ),
+	                        _react2.default.createElement(
 	                            'h3',
 	                            null,
 	                            this.props.title
 	                        ),
-	                        _react2.default.createElement('span', { dangerouslySetInnerHTML: this.rawMarkup() }),
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'video-container' },
 	                            _react2.default.createElement('iframe', { width: '560', height: '315', src: this.props.youtube, frameBorder: '0', allowFullScreen: true })
-	                        ),
-	                        _react2.default.createElement(
-	                            'span',
-	                            { className: 'close pointer', 'data-name': 'closebox', onClick: this.props.closebox },
-	                            'Close'
 	                        )
 	                    )
 	                )

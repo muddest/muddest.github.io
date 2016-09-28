@@ -25,6 +25,7 @@ class EventList extends React.Component {
             let days = this._getDifferenceInDays(event.Date);
             return (
                 <Event
+                    sethoverid={this.props.sethoverid}
                     key={event.id}
                     title={event.Title}
                     info={event.content} 

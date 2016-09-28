@@ -40,11 +40,26 @@ h1 {
 
 h2 {
     font-size: 1.8rem;
-    margin: 0 0 5px 0;
+    margin: 0 0 10px 0;
 }
 
 header {
+    background: rgb(0,0,0);
+    color: rgb(230, 230, 230);
+    padding: 10px;
 
+    h1, #slogan {
+        display: inline-block;
+    }
+
+    #slogan {
+        margin: 0 0 0 0;
+        min-width: 185px;
+    }
+}
+
+#about {
+    background: rgb(0,0,0);
 }
 
 #eventlist {
@@ -52,6 +67,21 @@ header {
     vertical-align: top;
     width: 25%;
     min-width: 360px;
+
+    .event {
+        color: rgb(230,230,230);
+        padding: 3px 5px 3px 5px;
+        border-bottom: dashed 1px rgb(110,110,110);
+
+        & span {
+            display: inline-block;
+            width: 50%;
+        }
+
+        & .eventstats {
+            margin: 15px 0 10px 0;
+        }
+    }
 }
 
 #eventmap {
@@ -66,19 +96,44 @@ header {
     }
 }
 
+#filter {
+    text-align: center;
+    padding: 20px 0 15px 0;
+    background: rgb(0,0,0);
+
+    input[type="search"] {
+        text-align: left;
+        display: inline-block;
+        width: 33%;
+        vertical-align: top;
+        max-width: 300px;
+    }
+
+    .InputRange {
+        text-align: left;
+        display: inline-block;
+        width: 33%;
+        margin: 15px 30px 15px 30px;
+        vertical-align: top;
+        padding: 0 0 15px 0;
+    }
+
+    .Select {
+        text-align: left;
+        display: inline-block;
+        width: 33%;
+        max-width: 400px;
+    }
+}
+
 input[type="search"] {
-    display: block;
-    width: 100%;
     border: none;
-    opacity: 0.9;
     height: 45px;
     outline: none;
     font-size: 2rem;
-    max-width: 400px;
     border-radius: 3px;
     padding: 0 8px 0 8px;
     color: rgb(55, 51, 171);
-    margin: 0 auto 20px auto;
     border-bottom: $input-blue-border-bottom;
     @include transition(border-bottom, 0.3s, ease-in-out);
     @include box-shadow-direction(inset, 0, 1px, 1px, 1px, rgb(156, 32, 32));

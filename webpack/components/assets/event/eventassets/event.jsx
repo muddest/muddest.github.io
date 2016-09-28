@@ -38,7 +38,6 @@ class Event extends React.Component {
             readMore = (
                 <InfoBox
                     title={this.props.title}
-                    info={this.props.info}
                     youtube={this.props.youtube}
                     closebox={this.toggleInfoBox} />
             )
@@ -60,20 +59,17 @@ class Event extends React.Component {
             daysColor = 'yellow';
         }
         return (
-            <div key={this.props.id} className="event">
-                <div className="eventhead">
-                    <h2>{this.props.title}</h2>
-                    
-                    <div className="daysleftcontainer">
-                        <span className={'daysleft '+daysColor}>{this.props.daysleft} days left</span>
-                    </div>
+            <div 
+                key={this.props.id}
+                onMouseEnter={() => this.props.sethoverid(this.props.id)}
+                onMouseLeave={() => this.props.sethoverid('')}
+                className="event">
 
+                <h2>{this.props.title}</h2>
+
+                    <span className={'daysleft '+daysColor}>{this.props.daysleft} days left</span>
                     <span className="date"><Fonty text={this.props.date} icon="fa-calendar" /></span>
-
-                    <div className="countrycontainer">
-                        <span><Fonty text={this.props.country} icon="fa-globe" /></span>
-                    </div>
-                </div>
+                    <span className="country"><Fonty text={this.props.country} icon="fa-globe" /></span>
 
                 <div className="eventstats">
                     <span><Fonty text={this.props.length+" km"} icon="fa-map-marker" /></span>
@@ -82,15 +78,7 @@ class Event extends React.Component {
                     <span><a href={this.props.site} target="_blank">{this.props.title}</a></span>
                 </div>
 
-                <div className="eventfooter">
-                    <span className="eventmap">
-                        <span data-name="openbox" onClick={this.toggleMapBox}>View map</span>
-                    </span>
-                    <span className="eventreadmore">
-                        <span data-name="openbox" onClick={this.toggleInfoBox}>Read more...</span>
-                    </span>
-                </div>
-                {map}
+                <span class="readmore" data-name="openbox" onClick={this.toggleInfoBox}>Watch trailer...</span>
                 {readMore}
             </div>
         )

@@ -53,34 +53,29 @@ class EventSearch extends React.Component {
 
     render () {
         return (
-            <div id="leftbar">
-                <form className="searchevents" autoComplete="off" onSubmit={this.handleSubmit}>
-                    <input
-                        autoComplete="off"
-                        type="search"
-                        placeholder="Search for events"
-                        onChange={this.updateSearchVal} />
-                    
+            <form id="filter" autoComplete="off" onSubmit={this.handleSubmit}>
+                <input
+                    autoComplete="off"
+                    type="search"
+                    placeholder="Search for events"
+                    onChange={this.updateSearchVal} />
+                
+                <InputRange
+                        maxValue={20}
+                        minValue={0}
+                        value={this.state.values}
+                        onChange={this.handleValuesChange.bind(this)} />
 
-                    <div id="filter" className="container">
-                        <InputRange
-                            maxValue={20}
-                            minValue={0}
-                            value={this.state.values}
-                            onChange={this.handleValuesChange.bind(this)} />
-
-                            <Select
-                                name="select-country"
-                                multi={true}
-                                clearable={true}
-                                searchable={false}
-                                value={this.state.selectedCountries}
-                                placeholder="Select one or more countries"
-                                options={this.props.countries}
-                                onChange={this.handleSelectedCountries} />
-                    </div>
-                </form>
-            </div>
+                <Select
+                    name="select-country"
+                    multi={true}
+                    clearable={true}
+                    searchable={false}
+                    value={this.state.selectedCountries}
+                    placeholder="Select one or more countries"
+                    options={this.props.countries}
+                    onChange={this.handleSelectedCountries} />
+            </form>
         )
     }
 }
