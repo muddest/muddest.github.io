@@ -50,6 +50,10 @@ class EventBox extends React.Component {
         this.setState({ hoveringId: id });
     }
 
+    hovering (id) {
+        
+    }
+
     render() {
         var data = this.props.data;
         data.sort(this.sortByDate);

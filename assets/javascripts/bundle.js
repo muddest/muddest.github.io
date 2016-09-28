@@ -37011,6 +37011,9 @@
 	            this.setState({ hoveringId: id });
 	        }
 	    }, {
+	        key: 'hovering',
+	        value: function hovering(id) {}
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _this2 = this;
@@ -37136,8 +37139,9 @@
 	            var mapRef = this.refs.map;
 	            var node = _reactDom2.default.findDOMNode(mapRef);
 	            var mapOptions = {
-	                center: new google.maps.LatLng(59.334823, 18.069937),
-	                zoom: 5,
+
+	                center: new google.maps.LatLng(31.955309, -11.264143),
+	                zoom: 3,
 	                disableDefaultUI: true,
 	                zoomControl: true
 	            };
