@@ -98,12 +98,14 @@ class EventBox extends React.Component {
                 <EventSearch 
                     changesearchstate={this.changeSearchState}
                     countries={countries} />
-                <EventList
-                    sethoverid={this.setHoverId}
-                    data={filteredData} />
-                <EventMap
-                    data={filteredData}
-                    hoveringid={this.state.hoveringId} />
+                <div id="eventcontainer">
+                    <EventList
+                        sethoverid={this.setHoverId}
+                        data={filteredData} />
+                    <EventMap
+                        data={filteredData}
+                        hoveringid={this.state.hoveringId} />
+                </div>
                 
             </div>
         )

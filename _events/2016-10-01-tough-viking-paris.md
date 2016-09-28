@@ -11,7 +11,7 @@ Obstacles:
 Length: 8 km
 Price: 55-89
 Currency: EUR
-Youtube: https://www.youtube.com/watch?v=MhFeimHOEVU
+Youtube: https://www.youtube.com/embed/MhFeimHOEVU
 Challenge: 
 ---
 

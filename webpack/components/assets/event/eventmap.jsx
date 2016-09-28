@@ -36,8 +36,6 @@ class EventMap extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log('Next: ', nextProps.hoveringid);
-        console.log('Current: ', this.props.hoveringid);
         let currentMarkId = this.props.hoveringid;
         let newMarkId = nextProps.hoveringid;
 

@@ -37063,12 +37063,16 @@
 	                _react2.default.createElement(_eventsearch2.default, {
 	                    changesearchstate: this.changeSearchState,
 	                    countries: countries }),
-	                _react2.default.createElement(_eventlist2.default, {
-	                    sethoverid: this.setHoverId,
-	                    data: filteredData }),
-	                _react2.default.createElement(_eventmap2.default, {
-	                    data: filteredData,
-	                    hoveringid: this.state.hoveringId })
+	                _react2.default.createElement(
+	                    'div',
+	                    { id: 'eventcontainer' },
+	                    _react2.default.createElement(_eventlist2.default, {
+	                        sethoverid: this.setHoverId,
+	                        data: filteredData }),
+	                    _react2.default.createElement(_eventmap2.default, {
+	                        data: filteredData,
+	                        hoveringid: this.state.hoveringId })
+	                )
 	            );
 	        }
 	    }]);
@@ -37150,8 +37154,6 @@
 	    }, {
 	        key: 'componentWillReceiveProps',
 	        value: function componentWillReceiveProps(nextProps) {
-	            console.log('Next: ', nextProps.hoveringid);
-	            console.log('Current: ', this.props.hoveringid);
 	            var currentMarkId = this.props.hoveringid;
 	            var newMarkId = nextProps.hoveringid;
 
@@ -37506,12 +37508,10 @@
 	        var _this = _possibleConstructorReturn(this, (Event.__proto__ || Object.getPrototypeOf(Event)).call(this, props));
 
 	        _this.state = {
-	            hidden: true,
-	            showMap: false
+	            hidden: true
 	        };
 
 	        _this.toggleInfoBox = _this.toggleInfoBox.bind(_this);
-	        _this.toggleMapBox = _this.toggleMapBox.bind(_this);
 	        return _this;
 	    }
 
@@ -37544,19 +37544,14 @@
 	                    closebox: this.toggleInfoBox });
 	            }
 
-	            var map = '';
-	            if (this.state.showMap) {
-	                map = _react2.default.createElement(_mapbox2.default, {
-	                    title: this.props.title,
-	                    closebox: this.toggleMapBox,
-	                    content: _react2.default.createElement('iframe', { width: 560, height: 315, frameBorder: 0, src: "https://www.google.com/maps/embed/v1/search?q=Stockholm stadion," + this.props.city + "&key=AIzaSyDCO6ot8LXweTO6G_LLOlvWyv8kwF-_Jd8", allowFullScreen: true }) });
-	            }
 	            var daysColor = 'regular';
 	            if (this.props.daysleft <= 20) {
 	                daysColor = 'red';
 	            } else if (this.props.daysleft > 20 && this.props.daysleft <= 60) {
 	                daysColor = 'yellow';
 	            }
+
+	            var obstacles = this.props.obstacles === '' || this.props.obstacles === null ? 'Unknown' : this.props.obstacles;
 	            return _react2.default.createElement(
 	                'div',
 	                {
@@ -37576,8 +37571,12 @@
 	                _react2.default.createElement(
 	                    'span',
 	                    { className: 'daysleft ' + daysColor },
-	                    this.props.daysleft,
-	                    ' days left'
+	                    _react2.default.createElement(
+	                        'div',
+	                        null,
+	                        this.props.daysleft,
+	                        ' days left'
+	                    )
 	                ),
 	                _react2.default.createElement(
 	                    'span',
@@ -37595,12 +37594,12 @@
 	                    _react2.default.createElement(
 	                        'span',
 	                        null,
-	                        _react2.default.createElement(_fonty2.default, { text: this.props.length + " km", icon: 'fa-map-marker' })
+	                        _react2.default.createElement(_fonty2.default, { text: this.props.length, icon: 'fa-map-marker' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'span',
 	                        null,
-	                        _react2.default.createElement(_fonty2.default, { text: this.props.obstacles + " obstacles", icon: 'fa-fire' })
+	                        _react2.default.createElement(_fonty2.default, { text: obstacles + " obstacles", icon: 'fa-fire' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'span',
@@ -37619,7 +37618,7 @@
 	                ),
 	                _react2.default.createElement(
 	                    'span',
-	                    { 'class': 'readmore', 'data-name': 'openbox', onClick: this.toggleInfoBox },
+	                    { className: 'readmore', 'data-name': 'openbox', onClick: this.toggleInfoBox },
 	                    'Watch trailer...'
 	                ),
 	                readMore
@@ -37772,7 +37771,7 @@
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'video-container' },
-	                            _react2.default.createElement('iframe', { width: '560', height: '315', src: this.props.youtube, frameBorder: '0', allowFullScreen: true })
+	                            _react2.default.createElement('iframe', { src: this.props.youtube, frameBorder: '0', allowFullScreen: true })
 	                        )
 	                    )
 	                )

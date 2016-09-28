@@ -11,7 +11,7 @@ Obstacles: 40
 Length: 8 km
 Price: 595-895
 Currency: SEK
-Youtube: 
+Youtube: https://www.youtube.com/embed/Jg2eJUX-QtM
 Challenge: 
 ---
 

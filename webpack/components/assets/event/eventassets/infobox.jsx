@@ -24,7 +24,7 @@ class InfoBox extends React.Component {
                         <span className="close pointer" data-name="closebox" onClick={this.props.closebox}>Close</span>
                         <h3>{this.props.title}</h3>
                         <div className="video-container">
-                            <iframe width="560" height="315" src={this.props.youtube} frameBorder="0" allowFullScreen></iframe>
+                            <iframe src={this.props.youtube} frameBorder="0" allowFullScreen></iframe>
                         </div>
                     </div>
                 </div>
