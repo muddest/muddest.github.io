@@ -37094,7 +37094,6 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var map = '';
-	var markers = [];
 
 	var EventMap = function (_React$Component) {
 	    _inherits(EventMap, _React$Component);
@@ -37104,7 +37103,9 @@
 
 	        var _this = _possibleConstructorReturn(this, (EventMap.__proto__ || Object.getPrototypeOf(EventMap)).call(this, props));
 
-	        _this.state = {};
+	        _this.state = {
+	            markers: []
+	        };
 
 	        _this.initMap = _this.initMap.bind(_this);
 	        _this.addMarkers = _this.addMarkers.bind(_this);
@@ -37148,13 +37149,15 @@
 	    }, {
 	        key: 'addMarkers',
 	        value: function addMarkers(data) {
+	            var markers = [];
+
 	            var _loop = function _loop(i) {
 	                var infowindow = new google.maps.InfoWindow({
-	                    content: 'Tough vikiing är riktigt häftigt!!'
+	                    content: data[i].Title
 	                });
-
+	                console.log(data[i].Title + data[i].lat);
 	                var marker = new google.maps.Marker({
-	                    position: { lat: data[i].lng, lng: data[i].lat },
+	                    position: { lat: data[i].lat, lng: data[i].lng },
 	                    map: map,
 	                    title: data[i].Title
 	                });
@@ -37167,11 +37170,14 @@
 	                });
 
 	                markers.push(marker);
+	                console.log(marker);
 	            };
 
 	            for (var i = 0; i < data.length; i++) {
 	                _loop(i);
 	            }
+
+	            this.setState({ markers: markers });
 	        }
 	    }, {
 	        key: 'removeMarkers',

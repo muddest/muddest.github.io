@@ -1,9 +1,10 @@
 ---
-
+lat: 51.5073509
+lng: -0.1277583
 Title: Toughest London
-Country: England
+Country: United kingdom
 City: London
-Address: Pippingford Park
+Address: Pippingford
 Date: 2017-06-17
 Site: http://www.toughest.se/en/events/london/
 Obstacles: 40
@@ -12,8 +13,6 @@ Price: 59-89
 Currency: GBP
 Youtube: https://www.youtube.com/embed/fYeGTKuy4_E
 Challenge: 3
-lng: 51.516596
-lat: -0.127698
 ---
 
 Toughest is ready for a second time in London!

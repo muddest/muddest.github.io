@@ -1,5 +1,6 @@
 ---
-
+lat: 57.7339643
+lng: 12.0297358
 Title: Toughest Gothenburg
 Country: Sweden
 City: Gothenburg
@@ -12,8 +13,6 @@ Price: 595-895
 Currency: SEK
 Youtube: https://www.youtube.com/embed/5R3mOX5jn30
 Challenge: 4
-lng: 57.727319
-lat: 11.971938
 ---
 
 

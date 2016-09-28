@@ -1,8 +1,10 @@
 ---
+lat: 59.3439479
+lng: 18.077459
 Title: Tough viking Stadion
 Country: Sweden
 City: Stockholm
-Address:
+Address: Stockholms stadion
 Date: 13 maj 2017
 Site:  https://signup.eqtiming.no/Stockholms-Stadion-13-maj-2017/i826214?Event=TV_Sverige
 Obstacles: 
@@ -11,8 +13,6 @@ Price: 595-895
 Currency: SEK
 Youtube: https://www.youtube.com/watch?v=o39jJH7_knA
 Challenge: 
-lng: 59.345484
-lat: 18.079018
 ---
 
 TEXTEN INFO OM TÄVLING

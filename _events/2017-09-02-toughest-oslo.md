@@ -1,4 +1,6 @@
 ---
+lat: 59.9628446
+lng: 10.6645917
 Title: Toughest Oslo
 Country: Norway
 City: Oslo
@@ -11,8 +13,6 @@ Price: 695-895
 Currency: NOK
 Youtube: https://www.youtube.com/embed/hjdFCu7snpo
 Challenge: 
-lng: 59.924076
-lat: 10.754212
 ---
 
 Holmenkollen is one of the most spectacular places to run Toughest at! This race will be tougher than ever before. Join us for this legendary race and accept the toughest challenge of your life.

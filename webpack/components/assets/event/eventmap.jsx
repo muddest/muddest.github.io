@@ -2,13 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 var map = '';
-var markers = [];
 
 class EventMap extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {};
+        this.state = {
+            markers: [],
+        };
 
         this.initMap = this.initMap.bind(this);
         this.addMarkers = this.addMarkers.bind(this);
@@ -42,13 +43,14 @@ class EventMap extends React.Component {
     }
 
     addMarkers(data) {
-        for (let i=0; i < data.length; i++) {
+        let markers = [];
+        for (let i=0; i < data.length; i++) {            
             let infowindow = new google.maps.InfoWindow({
-                content: 'Tough vikiing är riktigt häftigt!!'
+                content: data[i].Title,
             });
-
+            console.log(data[i].Title+data[i].lat);
             let marker = new google.maps.Marker({
-                position: {lat: data[i].lng, lng: data[i].lat},
+                position: {lat: data[i].lat, lng: data[i].lng},
                 map: map,
                 title: data[i].Title
             });
@@ -61,7 +63,10 @@ class EventMap extends React.Component {
             });
 
             markers.push(marker);
+            console.log(marker);
         }
+
+        this.setState({ markers: markers });
     }
 
     removeMarkers() {

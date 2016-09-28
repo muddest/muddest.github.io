@@ -1,5 +1,6 @@
 ---
-
+lat: 55.6001535
+lng: 12.9591121
 Title: Toughest Malmo
 Country: Sweden
 City: Malmo
@@ -12,8 +13,6 @@ Price: 595-895
 Currency: SEK
 Youtube: https://www.youtube.com/embed/_i0EFNbqJmM
 Challenge: 
-lng: 55.601532
-lat: 13.005848
 ---
 
 Toughest Malmo is this year’s OCR highlight. The race runs along beautiful Ribersborgsstranden and is always a festival with huge crowds.

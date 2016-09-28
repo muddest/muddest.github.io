@@ -1,6 +1,8 @@
 ---
+lat: 48.856614
+lng: 2.3522219
 Title: Tough Viking Paris
-Country: Frankrike
+Country: France
 City: Paris
 Address: 
 Date: 2016-10-01
@@ -11,8 +13,6 @@ Price: 55-89
 Currency: EUR
 Youtube: https://www.youtube.com/watch?v=MhFeimHOEVU
 Challenge: 
-lng: 48.857448
-lat: 2.349636
 ---
 
 TEXTEN INFO OM TÄVLING
