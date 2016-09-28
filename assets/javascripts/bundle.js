@@ -37024,6 +37024,10 @@
 	                }
 	            }
 
+	            for (var i = 0; i < data.length; i++) {
+	                data[i].id = i;
+	            }
+
 	            var searchWord = this.state.searchWord.toLowerCase();
 	            var filteredData = [];
 
@@ -37109,7 +37113,7 @@
 
 	        _this.initMap = _this.initMap.bind(_this);
 	        _this.addMarkers = _this.addMarkers.bind(_this);
-	        _this.removeMarkers = _this.removeMarkers.bind(_this);
+	        _this.updateMarkers = _this.updateMarkers.bind(_this);
 	        return _this;
 	    }
 
@@ -37142,9 +37146,7 @@
 	    }, {
 	        key: 'componentWillReceiveProps',
 	        value: function componentWillReceiveProps(nextProps) {
-	            this.removeMarkers();
-	            //console.log(nextProps);
-	            this.addMarkers(nextProps.data);
+	            this.updateMarkers(nextProps.data);
 	        }
 	    }, {
 	        key: 'addMarkers',
@@ -37155,7 +37157,6 @@
 	                var infowindow = new google.maps.InfoWindow({
 	                    content: data[i].Title
 	                });
-	                console.log(data[i].Title + data[i].lat);
 	                var marker = new google.maps.Marker({
 	                    position: { lat: data[i].lat, lng: data[i].lng },
 	                    map: map,
@@ -37163,14 +37164,13 @@
 	                });
 	                marker.addListener('mouseover', function () {
 	                    infowindow.open(map, marker);
-	                    //map.setCenter(marker.getPosition()); Used to position to that place
 	                });
 	                marker.addListener('mouseout', function () {
 	                    infowindow.close();
 	                });
 
+	                marker.id = data[i].id;
 	                markers.push(marker);
-	                console.log(marker);
 	            };
 
 	            for (var i = 0; i < data.length; i++) {
@@ -37180,13 +37180,23 @@
 	            this.setState({ markers: markers });
 	        }
 	    }, {
-	        key: 'removeMarkers',
-	        value: function removeMarkers() {
-	            for (var i = 0; i < markers.length; i++) {
-	                console.log('djskldjs', markers[i]);
-	                markers[i].setMap(null);
+	        key: 'updateMarkers',
+	        value: function updateMarkers(data) {
+	            for (var i = 0; i < this.state.markers.length; i++) {
+	                var curMarker = this.state.markers[i];
+	                var foundMarker = false;
+	                for (var k = 0; k < data.length; k++) {
+	                    if (data[k].id === curMarker.id) {
+	                        curMarker.setVisible(true);
+	                        foundMarker = true;
+	                        break;
+	                    }
+	                }
+
+	                if (!foundMarker) {
+	                    curMarker.setVisible(false);
+	                }
 	            }
-	            markers = [];
 	        }
 	    }, {
 	        key: 'render',

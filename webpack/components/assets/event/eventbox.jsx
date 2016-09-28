@@ -61,6 +61,10 @@ class EventBox extends React.Component {
             }
         }
 
+        for (var i=0; i < data.length; i++) {
+            data[i].id = i;
+        }
+
         let searchWord = this.state.searchWord.toLowerCase();
         let filteredData = [];
 

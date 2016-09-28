@@ -13,7 +13,7 @@ class EventMap extends React.Component {
 
         this.initMap = this.initMap.bind(this);
         this.addMarkers = this.addMarkers.bind(this);
-        this.removeMarkers = this.removeMarkers.bind(this);
+        this.updateMarkers = this.updateMarkers.bind(this);
     }
 
     initMap () {
@@ -37,9 +37,7 @@ class EventMap extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.removeMarkers();
-        //console.log(nextProps);
-        this.addMarkers(nextProps.data);
+        this.updateMarkers(nextProps.data);
     }
 
     addMarkers(data) {
@@ -48,7 +46,6 @@ class EventMap extends React.Component {
             let infowindow = new google.maps.InfoWindow({
                 content: data[i].Title,
             });
-            console.log(data[i].Title+data[i].lat);
             let marker = new google.maps.Marker({
                 position: {lat: data[i].lat, lng: data[i].lng},
                 map: map,
@@ -56,27 +53,35 @@ class EventMap extends React.Component {
             });
             marker.addListener('mouseover', function() {
                 infowindow.open(map, marker);
-                //map.setCenter(marker.getPosition()); Used to position to that place
             });
                 marker.addListener('mouseout', function() {
                 infowindow.close();
             });
 
+            marker.id = data[i].id;
             markers.push(marker);
-            console.log(marker);
         }
 
         this.setState({ markers: markers });
     }
 
-    removeMarkers() {
-        for (var i = 0; i < markers.length; i++) {
-            console.log('djskldjs', markers[i]);
-          markers[i].setMap(null);
-        }
-        markers = [];
-    }
+    updateMarkers(data) {
+        for (let i=0; i < this.state.markers.length; i++) {
+            let curMarker = this.state.markers[i];
+            let foundMarker = false;
+            for (let k=0; k < data.length; k++) {
+                if (data[k].id === curMarker.id) {
+                    curMarker.setVisible(true);
+                    foundMarker = true;
+                    break;
+                }
+            }
 
+            if (!foundMarker) {
+                curMarker.setVisible(false);
+            }
+        }
+    }
 
     render () {
         
