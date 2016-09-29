@@ -21657,15 +21657,19 @@
 	            return _react2.default.createElement(
 	                'div',
 	                { id: 'eventbox' },
-	                _react2.default.createElement(_eventsearch2.default, {
-	                    changesearchstate: this.changeSearchState,
-	                    countries: countries }),
 	                _react2.default.createElement(
 	                    'div',
 	                    { id: 'eventcontainer' },
-	                    _react2.default.createElement(_eventlist2.default, {
-	                        sethoverid: this.setHoverId,
-	                        data: filteredData }),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { id: 'leftbar' },
+	                        _react2.default.createElement(_eventsearch2.default, {
+	                            changesearchstate: this.changeSearchState,
+	                            countries: countries }),
+	                        _react2.default.createElement(_eventlist2.default, {
+	                            sethoverid: this.setHoverId,
+	                            data: filteredData })
+	                    ),
 	                    _react2.default.createElement(_eventmap2.default, {
 	                        data: filteredData,
 	                        hoveringid: this.state.hoveringId })

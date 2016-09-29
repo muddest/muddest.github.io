@@ -34,6 +34,7 @@ body {
 
 h1 {
     margin: 0;
+    display: inline;
     font-size: 2.4rem;
 }
 
@@ -43,31 +44,29 @@ h2 {
 }
 
 header {
-    position: absolute;
     z-index: 10;
     margin-left: 50%;
-    transform: translateX(-50%);
+    position: absolute;
     color: rgb(230, 230, 230);
-    padding: 0 0 0 5px;
-    text-align: center;
-
-    h1, #slogan {
-        display: inline-block;
-    }
+    padding: 3px 10px 5px 10px;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.8);
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
 
     #slogan {
-        text-align: left;
+        text-align: right;
         margin: 0 0 0 0;
         min-width: 185px;
     }
 }
 
 #app {
-    height: 100vh;
+    height: 95vh;
 }
 
 .articlecontainer {
-    background: url('/muddest/assets/images/background_1800.jpg') no-repeat center center;
+    background: url('/assets/images/background_1800.jpg') no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -90,7 +89,7 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 95%;
 
     #map {
         width: 100%;
@@ -123,10 +122,16 @@ header {
     }
 }
 
+#leftbar {
+    width: 25%;
+    position: absolute;
+    height: 95%;
+}
+
 #eventlist {
     background: rgba(0,0,0,0.8);
-    position: absolute;
-    height: calc(100% - 70px);
+    position: relative;
+    height: calc(100% - 160px);
     z-index: 2;
     width: 25%;
     min-width: 360px;
@@ -171,35 +176,22 @@ header {
 }
 
 #filter {
-    height: 70px;
-    padding: 15px 0 5px 0;
+    height: 140px;
+    margin-bottom: 20px;
+    padding: 10px 0 15px 0;
     position: relative;
     z-index: 2;
     text-align: center;
     background: rgba(0,0,0,0.8);
 
-    input[type="search"] {
-        text-align: left;
-        display: inline-block;
-        width: 33%;
-        vertical-align: top;
-        max-width: 300px;
-    }
-
     .InputRange {
-        text-align: left;
-        display: inline-block;
-        width: 33%;
-        margin: 15px 30px 15px 30px;
-        vertical-align: top;
-        padding: 0 0 15px 0;
+        width: 85%;
+        margin: 15px auto 15px auto;
     }
 
     .Select {
-        text-align: left;
-        display: inline-block;
-        width: 33%;
-        max-width: 400px;
+        margin: 0 auto 0 auto;
+        width: 90%;
     }
 }
 
