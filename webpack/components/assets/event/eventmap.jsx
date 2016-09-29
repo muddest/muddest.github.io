@@ -21,7 +21,7 @@ class EventMap extends React.Component {
         const node = ReactDOM.findDOMNode(mapRef);
         var mapOptions = {
 
-            center: new google.maps.LatLng(31.955309, -11.264143),
+            center: new google.maps.LatLng(64.262903, -10.809107),
             zoom: 3,
             disableDefaultUI: true,
             zoomControl: true,
