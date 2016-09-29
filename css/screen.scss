@@ -62,7 +62,22 @@ header {
     }
 }
 
+#app {
+    height: 100vh;
+}
 
+.articlecontainer {
+    padding: 30px 0 30px 0;
+    background: rgb(183, 183, 183);
+    
+    article {
+        padding: 10px;
+        max-width: 560px;
+        margin: 0 auto 0 auto;
+        background: rgb(248,248,248);
+        @include box-shadow(0, 0, 16px, 2px, rgb(58, 58, 58));
+    }
+}
 
 
 #eventmap {
