@@ -21722,6 +21722,8 @@
 	        };
 
 	        _this.initMap = _this.initMap.bind(_this);
+	        _this.zoomInMap = _this.zoomInMap.bind(_this);
+	        _this.zoomOutMap = _this.zoomOutMap.bind(_this);
 	        _this.addMarkers = _this.addMarkers.bind(_this);
 	        _this.updateMarkers = _this.updateMarkers.bind(_this);
 	        return _this;
@@ -21737,7 +21739,7 @@
 	                center: new google.maps.LatLng(64.262903, -10.809107),
 	                zoom: 3,
 	                disableDefaultUI: true,
-	                zoomControl: true
+	                scrollwheel: false
 	            };
 
 	            map = new google.maps.Map(node, mapOptions);
@@ -21820,12 +21822,36 @@
 	            }
 	        }
 	    }, {
+	        key: 'zoomInMap',
+	        value: function zoomInMap() {
+	            map.setZoom(map.getZoom() + 1);
+	        }
+	    }, {
+	        key: 'zoomOutMap',
+	        value: function zoomOutMap() {
+	            map.setZoom(map.getZoom() - 1);
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 
 	            return _react2.default.createElement(
 	                'div',
 	                { id: 'eventmap' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { id: 'zoomcontrol' },
+	                    _react2.default.createElement(
+	                        'span',
+	                        { id: 'plus', onClick: this.zoomInMap },
+	                        '+'
+	                    ),
+	                    _react2.default.createElement(
+	                        'span',
+	                        { id: 'minus', onClick: this.zoomOutMap },
+	                        '-'
+	                    )
+	                ),
 	                _react2.default.createElement('div', { id: 'map', ref: 'map' })
 	            );
 	        }

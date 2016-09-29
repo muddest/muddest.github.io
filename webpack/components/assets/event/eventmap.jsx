@@ -12,6 +12,8 @@ class EventMap extends React.Component {
         };
 
         this.initMap = this.initMap.bind(this);
+        this.zoomInMap = this.zoomInMap.bind(this);
+        this.zoomOutMap = this.zoomOutMap.bind(this);
         this.addMarkers = this.addMarkers.bind(this);
         this.updateMarkers = this.updateMarkers.bind(this);
     }
@@ -24,7 +26,7 @@ class EventMap extends React.Component {
             center: new google.maps.LatLng(64.262903, -10.809107),
             zoom: 3,
             disableDefaultUI: true,
-            zoomControl: true,
+            scrollwheel: false,
         };
 
         map = new google.maps.Map(node, mapOptions);
@@ -94,10 +96,22 @@ class EventMap extends React.Component {
         }
     }
 
+    zoomInMap () {
+        map.setZoom(map.getZoom() + 1);
+    }
+
+    zoomOutMap () {
+        map.setZoom(map.getZoom() - 1);
+    }
+
     render () {
         
         return (
             <div id="eventmap">
+                <div id="zoomcontrol">
+                    <span id="plus" onClick={this.zoomInMap}>+</span>
+                    <span id="minus" onClick={this.zoomOutMap}>-</span>
+                </div>
                 <div id="map" ref="map"></div>
             </div>
         )
