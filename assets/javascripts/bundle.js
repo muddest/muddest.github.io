@@ -21945,7 +21945,8 @@
 	                    youtube: event.Youtube,
 	                    length: event.Length,
 	                    price: event.Price,
-	                    currency: event.Currency });
+	                    currency: event.Currency,
+	                    slug: event.slug });
 	            });
 
 	            return _react2.default.createElement(
@@ -22861,15 +22862,8 @@
 	        value: function toggleInfoBox(e) {
 	            var clicked = e.target.getAttribute('data-name');
 	            if ('closebox' === clicked || 'openbox' === clicked) {
+	                this.state.hidden ? window.history.pushState("", "", this.props.slug) : window.history.pushState("", "", '/');
 	                this.setState({ hidden: !this.state.hidden });
-	            }
-	        }
-	    }, {
-	        key: 'toggleMapBox',
-	        value: function toggleMapBox(e) {
-	            var clicked = e.target.getAttribute('data-name');
-	            if ('closebox' === clicked || 'openbox' === clicked) {
-	                this.setState({ showMap: !this.state.showMap });
 	            }
 	        }
 	    }, {

@@ -19,14 +19,8 @@ class Event extends React.Component {
     toggleInfoBox(e) {
         let clicked = e.target.getAttribute('data-name');
         if ('closebox' === clicked || 'openbox' === clicked) {
+            this.state.hidden ?  window.history.pushState("", "", this.props.slug) : window.history.pushState("", "", '/');
             this.setState({ hidden: !this.state.hidden });
-        }
-    }
-
-    toggleMapBox(e) {
-        let clicked = e.target.getAttribute('data-name');
-        if ('closebox' === clicked || 'openbox' === clicked) {
-            this.setState({ showMap: !this.state.showMap});
         }
     }
 

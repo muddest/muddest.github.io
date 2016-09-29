@@ -40,7 +40,8 @@ class EventList extends React.Component {
                     youtube={event.Youtube}
                     length={event.Length}
                     price={event.Price}
-                    currency={event.Currency} />
+                    currency={event.Currency}
+                    slug={event.slug} />
             );
         });
 
