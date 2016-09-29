@@ -44,10 +44,9 @@ h2 {
 }
 
 header {
-    opacity: 0.8;
     position: relative;
     z-index: 2;
-    background: rgb(0,0,0);
+    background: rgba(0,0,0,0.8);
     color: rgb(230, 230, 230);
     padding: 10px;
 
@@ -88,14 +87,13 @@ header {
 }
 
 #eventlist {
-    opacity: 0.8;
+    background: rgba(0,0,0,0.8);
     position: absolute;
     z-index: 2;
     width: 25%;
     min-width: 360px;
     height: 65%;
     overflow-y: scroll;
-    background: black;
 
     .event {
         color: rgb(230,230,230);
@@ -135,12 +133,11 @@ header {
 }
 
 #filter {
-    opacity: 0.8;
     position: relative;
     z-index: 2;
     text-align: center;
     padding: 20px 0 15px 0;
-    background: rgb(0,0,0);
+    background: rgba(0,0,0,0.8);
 
     input[type="search"] {
         text-align: left;
@@ -200,6 +197,7 @@ input[type="search"] {
     }
 
     .eventinfo {
+        background: rgba(0,0,0,1);
         position: fixed;
         left: 50%;
         top: 50%;
