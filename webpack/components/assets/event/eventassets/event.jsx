@@ -49,7 +49,7 @@ class Event extends React.Component {
                 key={this.props.id}
                 onMouseEnter={() => this.props.sethoverid(this.props.id)}
                 onMouseLeave={() => this.props.sethoverid('')}
-                className="event">
+                className={"event "+this.props.classname}>
 
                 <h2>{this.props.title}</h2>
 

@@ -146,7 +146,7 @@ header {
         padding: 3px 5px 3px 5px;
         border-bottom: dashed 1px rgb(110,110,110);
 
-        &:hover {
+        &:hover, &.highlight {
             background: rgb(8, 6, 49);
         }
 

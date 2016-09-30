@@ -21612,7 +21612,6 @@
 	    }, {
 	        key: 'setHooveringPinId',
 	        value: function setHooveringPinId(id) {
-	            console.log('Hoveredpin: ', id);
 	            this.setState({ hooveredPinId: id });
 	        }
 	    }, {
@@ -21736,7 +21735,11 @@
 	        };
 
 	        _this.initMap = _this.initMap.bind(_this);
+
 	        _this.zoomInMap = _this.zoomInMap.bind(_this);
+	        _this.handleMousePinMouseout = _this.handleMousePinMouseout.bind(_this);
+	        _this.handleMousePinMouseover = _this.handleMousePinMouseover.bind(_this);
+
 	        _this.zoomOutMap = _this.zoomOutMap.bind(_this);
 	        _this.addMarkers = _this.addMarkers.bind(_this);
 	        _this.updateMarkers = _this.updateMarkers.bind(_this);
@@ -21775,19 +21778,21 @@
 	                var prevMark = this.state.markers.filter(function (prevMark) {
 	                    return prevMark.id == currentMarkId;
 	                });
-	                google.maps.event.trigger(prevMark[0], 'mouseout');
+	                google.maps.event.trigger(prevMark[0], 'mouseup');
 	            }
 	            if (newMarkId !== currentMarkId && newMarkId !== '') {
 	                var mark = this.state.markers.filter(function (mark) {
 	                    return mark.id == newMarkId;
 	                });
-	                google.maps.event.trigger(mark[0], 'mouseover');
+	                google.maps.event.trigger(mark[0], 'mousedown');
 	            }
 	            this.updateMarkers(nextProps.data);
 	        }
 	    }, {
 	        key: 'addMarkers',
 	        value: function addMarkers(data) {
+	            var _this2 = this;
+
 	            var markers = [];
 
 	            var _loop = function _loop(i) {
@@ -21799,16 +21804,26 @@
 	                    map: map,
 	                    title: data[i].Title
 	                });
+	                marker.id = data[i].id;
+
+	                //marker.addListener('mouseover', function() { infowindow.open(map, marker); });
 	                marker.addListener('mouseover', function () {
-	                    infowindow.open(map, marker);
-	                    this.props.sethooveredpinid(marker.id);
+	                    return _this2.handleMousePinMouseover(marker, infowindow);
 	                });
 	                marker.addListener('mouseout', function () {
+	                    return _this2.handleMousePinMouseout(marker, infowindow);
+	                });
+	                //marker.addListener('mouseout', function() { infowindow.close(); });
+	                marker.addListener('mousedown', function () {
+	                    infowindow.open(map, marker);
+	                });
+	                marker.addListener('mouseup', function () {
 	                    infowindow.close();
-	                    this.props.sethooveredpinid('');
 	                });
 
-	                marker.id = data[i].id;
+	                //marker.addListener('mouseover', () => this.props.sethooveredpinid(44));
+	                //marker.addListener('mouseout', () => this.props.sethooveredpinid(0));
+
 	                markers.push(marker);
 	            };
 
@@ -21817,6 +21832,18 @@
 	            }
 
 	            this.setState({ markers: markers });
+	        }
+	    }, {
+	        key: 'handleMousePinMouseover',
+	        value: function handleMousePinMouseover(marker, infowindow) {
+	            infowindow.open(map, marker);
+	            this.props.sethooveredpinid(marker.id);
+	        }
+	    }, {
+	        key: 'handleMousePinMouseout',
+	        value: function handleMousePinMouseout(marker, infowindow) {
+	            infowindow.close();
+	            this.props.sethooveredpinid('');
 	        }
 	    }, {
 	        key: 'updateMarkers',
@@ -21937,13 +21964,15 @@
 	    }, {
 	        key: 'componentWillReceiveProps',
 	        value: function componentWillReceiveProps(nextProps) {
-	            var curHooveredPinId = this.props.hooveredpinid;
 	            var newHooveredPinId = nextProps.hooveredpinid;
-	            if (curHooveredPinId !== '') {}
-	            var topPos = document.getElementById(8).offsetTop;
-	            console.log(topPos);
-	            document.getElementById('eventlist').scrollTop = topPos - 10;
-	            console.log(document.getElementById(8));
+	            if (newHooveredPinId !== '') {
+	                var topPos = document.getElementById(newHooveredPinId).offsetTop;
+	                $("#eventlist").animate({ scrollTop: topPos - 10 });
+
+	                //document.getElementById('eventlist').scrollTop = topPos-10;
+	            }
+
+	            //console.log(document.getElementById(8));
 	        }
 	    }, {
 	        key: 'render',
@@ -21952,8 +21981,9 @@
 
 	            var eventnodes = this.props.data.map(function (event) {
 	                var days = _this2._getDifferenceInDays(event.Date);
+	                var classname = _this2.props.hooveredpinid === event.id ? 'highlight' : '';
 	                return _react2.default.createElement(_event2.default, {
-	                    hooveredpinid: _this2.props.hooveredpinid,
+	                    classname: classname,
 	                    sethoverid: _this2.props.sethoverid,
 	                    key: event.id,
 	                    title: event.Title,
@@ -22922,7 +22952,7 @@
 	                    onMouseLeave: function onMouseLeave() {
 	                        return _this2.props.sethoverid('');
 	                    },
-	                    className: 'event' },
+	                    className: "event " + this.props.classname },
 	                _react2.default.createElement(
 	                    'h2',
 	                    null,

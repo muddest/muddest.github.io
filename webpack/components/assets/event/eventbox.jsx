@@ -57,7 +57,6 @@ class EventBox extends React.Component {
     }
 
     setHooveringPinId (id) {
-        console.log('Hoveredpin: ', id);
         this.setState({ hooveredPinId: id });
     }
 

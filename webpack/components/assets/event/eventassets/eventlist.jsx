@@ -19,15 +19,19 @@ class EventList extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        let curHooveredPinId = this.props.hooveredpinid;
         let newHooveredPinId = nextProps.hooveredpinid;
-        if (curHooveredPinId !== '') {
-
+        if (newHooveredPinId !== '') {
+            let topPos = document.getElementById(newHooveredPinId).offsetTop;
+            $("#eventlist").animate({ scrollTop: topPos-10 });
+            
+            //document.getElementById('eventlist').scrollTop = topPos-10;
         }
-        var topPos = document.getElementById(8).offsetTop;
-        console.log(topPos);
-        document.getElementById('eventlist').scrollTop = topPos-10;
-        console.log(document.getElementById(8));
+        
+
+
+        
+        
+        //console.log(document.getElementById(8));
     }
 
 
@@ -35,9 +39,10 @@ class EventList extends React.Component {
     render() {
         var eventnodes = this.props.data.map((event) => {
             let days = this._getDifferenceInDays(event.Date);
+            let classname = (this.props.hooveredpinid === event.id) ? 'highlight' : '';
             return (
                 <Event
-                    hooveredpinid={this.props.hooveredpinid}
+                    classname={classname}
                     sethoverid={this.props.sethoverid}
                     key={event.id}
                     title={event.Title}

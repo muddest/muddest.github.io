@@ -12,7 +12,12 @@ class EventMap extends React.Component {
         };
 
         this.initMap = this.initMap.bind(this);
+        
         this.zoomInMap = this.zoomInMap.bind(this);
+        this.handleMousePinMouseout = this.handleMousePinMouseout.bind(this);
+        this.handleMousePinMouseover = this.handleMousePinMouseover.bind(this);
+        
+
         this.zoomOutMap = this.zoomOutMap.bind(this);
         this.addMarkers = this.addMarkers.bind(this);
         this.updateMarkers = this.updateMarkers.bind(this);
@@ -44,11 +49,11 @@ class EventMap extends React.Component {
 
         if (currentMarkId !== '' || newMarkId === '') {
             let prevMark = this.state.markers.filter(function(prevMark) { return prevMark.id == currentMarkId });
-            google.maps.event.trigger(prevMark[0], 'mouseout');
+            google.maps.event.trigger(prevMark[0], 'mouseup');
         }
         if (newMarkId !== currentMarkId && newMarkId !== '') {
             let mark = this.state.markers.filter(function(mark) { return mark.id == newMarkId });
-            google.maps.event.trigger(mark[0], 'mouseover');
+            google.maps.event.trigger(mark[0], 'mousedown');
         }
         this.updateMarkers(nextProps.data);
     }
@@ -64,20 +69,32 @@ class EventMap extends React.Component {
                 map: map,
                 title: data[i].Title
             });
-            marker.addListener('mouseover', function() {
-                infowindow.open(map, marker);
-                this.props.sethooveredpinid(marker.id);
-            });
-                marker.addListener('mouseout', function() {
-                infowindow.close();
-                this.props.sethooveredpinid('');
-            });
-
             marker.id = data[i].id;
+
+            //marker.addListener('mouseover', function() { infowindow.open(map, marker); });
+            marker.addListener('mouseover', () => this.handleMousePinMouseover(marker, infowindow));
+            marker.addListener('mouseout', () => this.handleMousePinMouseout(marker, infowindow));
+            //marker.addListener('mouseout', function() { infowindow.close(); });
+            marker.addListener('mousedown', function() { infowindow.open(map, marker); });
+            marker.addListener('mouseup', function() { infowindow.close(); });
+
+            //marker.addListener('mouseover', () => this.props.sethooveredpinid(44));
+            //marker.addListener('mouseout', () => this.props.sethooveredpinid(0));
+
             markers.push(marker);
         }
 
         this.setState({ markers: markers });
+    }
+
+    handleMousePinMouseover(marker, infowindow) {
+        infowindow.open(map, marker);
+        this.props.sethooveredpinid(marker.id);
+    }
+
+    handleMousePinMouseout(marker, infowindow) {
+        infowindow.close();
+        this.props.sethooveredpinid('');
     }
 
     updateMarkers(data) {
