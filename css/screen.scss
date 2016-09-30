@@ -61,6 +61,19 @@ header {
     }
 }
 
+#info {
+    position: fixed;
+    z-index: 20;
+    right: 5px;
+
+    a {
+        cursor: pointer;
+        padding: 2px 5px 4px 5px;
+        background: rgba(0,0,0,0.8);
+        color: rgb(38, 199, 2);
+    }
+}
+
 #app {
     height: 95vh;
 }
@@ -178,6 +191,11 @@ header {
         & .eventstats {
             margin: 15px 0 10px 0;
         }
+
+        & .readmore {
+            cursor: pointer;
+            color: rgb(38, 199, 2);
+        }
     }
 }
 
@@ -201,6 +219,8 @@ header {
 }
 
 input[type="search"] {
+    width: 90%;
+    margin: 0 0 15px 0;
     border: none;
     height: 35px;
     outline: none;

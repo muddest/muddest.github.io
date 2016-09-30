@@ -65,16 +65,6 @@ class EventSearch extends React.Component {
                         minValue={0}
                         value={this.state.values}
                         onChange={this.handleValuesChange.bind(this)} />
-
-                <Select
-                    name="select-country"
-                    multi={true}
-                    clearable={true}
-                    searchable={false}
-                    value={this.state.selectedCountries}
-                    placeholder="Select one or more countries"
-                    options={this.props.countries}
-                    onChange={this.handleSelectedCountries} />
             </form>
         )
     }
