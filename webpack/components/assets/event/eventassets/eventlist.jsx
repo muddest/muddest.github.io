@@ -18,14 +18,6 @@ class EventList extends React.Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        let newHooveredPinId = nextProps.hooveredpinid;
-        if (newHooveredPinId !== '') {
-            let topPos = document.getElementById(newHooveredPinId).offsetTop;
-            //$("#eventlist").animate({ scrollTop: topPos-10 });
-            document.getElementById('eventlist').scrollTop = topPos;
-        }
-    }
 
 
 

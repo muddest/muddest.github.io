@@ -21862,23 +21862,18 @@
 
 	                marker.id = data[i].id;
 
-	                //marker.addListener('mouseover', function() { infowindow.open(map, marker); });
 	                marker.addListener('mouseover', function () {
 	                    return _this2.handleMousePinMouseover(marker, infowindow);
 	                });
 	                marker.addListener('mouseout', function () {
 	                    return _this2.handleMousePinMouseout(marker, infowindow);
 	                });
-	                //marker.addListener('mouseout', function() { infowindow.close(); });
 	                marker.addListener('mousedown', function () {
 	                    infowindow.open(map, marker);
 	                });
 	                marker.addListener('mouseup', function () {
 	                    infowindow.close();
 	                });
-
-	                //marker.addListener('mouseover', () => this.props.sethooveredpinid(44));
-	                //marker.addListener('mouseout', () => this.props.sethooveredpinid(0));
 
 	                markers.push(marker);
 	            };
@@ -21904,6 +21899,8 @@
 	    }, {
 	        key: 'updateMarkers',
 	        value: function updateMarkers(data) {
+	            var bounds = new google.maps.LatLngBounds();
+
 	            for (var i = 0; i < this.state.markers.length; i++) {
 	                var curMarker = this.state.markers[i];
 	                var foundMarker = false;
@@ -21911,6 +21908,7 @@
 	                    if (data[k].id === curMarker.id) {
 	                        curMarker.setVisible(true);
 	                        foundMarker = true;
+	                        bounds.extend(curMarker.getPosition());
 	                        break;
 	                    }
 	                }
@@ -21919,6 +21917,8 @@
 	                    curMarker.setVisible(false);
 	                }
 	            }
+
+	            map.fitBounds(bounds);
 	        }
 	    }, {
 	        key: 'zoomInMap',
@@ -22015,16 +22015,6 @@
 	                return diffDays;
 	            } else {
 	                return '-' + diffDays;
-	            }
-	        }
-	    }, {
-	        key: 'componentWillReceiveProps',
-	        value: function componentWillReceiveProps(nextProps) {
-	            var newHooveredPinId = nextProps.hooveredpinid;
-	            if (newHooveredPinId !== '') {
-	                var topPos = document.getElementById(newHooveredPinId).offsetTop;
-	                //$("#eventlist").animate({ scrollTop: topPos-10 });
-	                document.getElementById('eventlist').scrollTop = topPos;
 	            }
 	        }
 	    }, {

@@ -71,18 +71,12 @@ class EventMap extends React.Component {
                 content: data[i].Title,
             });
 
-
             marker.id = data[i].id;
 
-            //marker.addListener('mouseover', function() { infowindow.open(map, marker); });
             marker.addListener('mouseover', () => this.handleMousePinMouseover(marker, infowindow));
             marker.addListener('mouseout', () => this.handleMousePinMouseout(marker, infowindow));
-            //marker.addListener('mouseout', function() { infowindow.close(); });
             marker.addListener('mousedown', function() { infowindow.open(map, marker); });
             marker.addListener('mouseup', function() { infowindow.close(); });
-
-            //marker.addListener('mouseover', () => this.props.sethooveredpinid(44));
-            //marker.addListener('mouseout', () => this.props.sethooveredpinid(0));
 
             markers.push(marker);
         }
@@ -101,6 +95,8 @@ class EventMap extends React.Component {
     }
 
     updateMarkers(data) {
+        var bounds = new google.maps.LatLngBounds();
+
         for (let i=0; i < this.state.markers.length; i++) {
             let curMarker = this.state.markers[i];
             let foundMarker = false;
@@ -108,6 +104,7 @@ class EventMap extends React.Component {
                 if (data[k].id === curMarker.id) {
                     curMarker.setVisible(true);
                     foundMarker = true;
+                    bounds.extend(curMarker.getPosition());
                     break;
                 }
             }
@@ -116,6 +113,9 @@ class EventMap extends React.Component {
                 curMarker.setVisible(false);
             }
         }
+
+
+        map.fitBounds(bounds);
     }
 
     zoomInMap () {

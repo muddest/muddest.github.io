@@ -65,6 +65,8 @@ header {
     position: fixed;
     z-index: 20;
     right: 5px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
 
     a {
         cursor: pointer;
