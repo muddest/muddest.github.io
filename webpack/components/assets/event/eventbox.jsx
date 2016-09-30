@@ -67,12 +67,14 @@ class EventBox extends React.Component {
         var lookup = {};
         var items = data;
         var countries = [];
+        var countriesToCompare = [];
 
         for (var item, i = 0; item = items[i++];) {
-            var country = item.Country;
+            let country = item.Country;
 
             if (!(country in lookup)) {
                 lookup[country] = 1;
+                countriesToCompare.push(country.toLowerCase());
                 countries.push({value: country, label: country});
             }
         }
@@ -82,12 +84,61 @@ class EventBox extends React.Component {
         }
 
         let searchWord = this.state.searchWord.toLowerCase();
+        let wordArray = searchWord.split(' ');
         let filteredData = [];
 
+        var matchedCountries = [];
+
+        for(let i=0; i < wordArray.length; i++) {
+            let word = wordArray[i];
+            if (word !== '' && word !== ' ') {
+                countriesToCompare.filter(function(item){
+                    if (true === item.indexOf(word) > -1) {
+                        if (false === matchedCountries.indexOf(item) > -1) {
+                            matchedCountries.push(item);
+                        }
+                        wordArray[i] = '';
+                    }
+                });
+            }
+        }
+  
         var eventnodes = data.filter((event) => {
 
             var countryCheck = (this.state.country.indexOf(event.Country.toLowerCase()) > -1);
             if (false === countryCheck && 0 < this.state.country.length) {
+                return false;
+            }
+
+            if (matchedCountries.length > 0) {
+                var isInCountry = false;
+                var isInSearch = true;
+
+                for (let i=0; i < matchedCountries.length; i++) {
+                    if (matchedCountries[i] === event.Country.toLowerCase() && false === isInCountry) {
+                        isInCountry = true;
+                    }
+                }
+
+                for (let i=0; i < wordArray.length; i++) {
+                    let word = wordArray[i];
+                    if (word === '') {
+                        continue;
+                    }
+
+                    let lookingFor = new RegExp(".*"+word+".*", "i");
+                    if (lookingFor.test(event.Title.toLowerCase())) {
+                        isInSearch = true;
+                        break;
+                    } else {
+                        isInSearch = false;
+                    }
+                    
+                }
+
+                if (isInCountry && isInSearch) {
+                    filteredData.push(event);
+                }
                 return false;
             }
 

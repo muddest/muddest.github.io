@@ -21625,12 +21625,14 @@
 	            var lookup = {};
 	            var items = data;
 	            var countries = [];
+	            var countriesToCompare = [];
 
 	            for (var item, i = 0; item = items[i++];) {
 	                var country = item.Country;
 
 	                if (!(country in lookup)) {
 	                    lookup[country] = 1;
+	                    countriesToCompare.push(country.toLowerCase());
 	                    countries.push({ value: country, label: country });
 	                }
 	            }
@@ -21640,12 +21642,64 @@
 	            }
 
 	            var searchWord = this.state.searchWord.toLowerCase();
+	            var wordArray = searchWord.split(' ');
 	            var filteredData = [];
+
+	            var matchedCountries = [];
+
+	            var _loop = function _loop(_i) {
+	                var word = wordArray[_i];
+	                if (word !== '' && word !== ' ') {
+	                    countriesToCompare.filter(function (item) {
+	                        if (true === item.indexOf(word) > -1) {
+	                            if (false === matchedCountries.indexOf(item) > -1) {
+	                                matchedCountries.push(item);
+	                            }
+	                            wordArray[_i] = '';
+	                        }
+	                    });
+	                }
+	            };
+
+	            for (var _i = 0; _i < wordArray.length; _i++) {
+	                _loop(_i);
+	            }
 
 	            var eventnodes = data.filter(function (event) {
 
 	                var countryCheck = _this2.state.country.indexOf(event.Country.toLowerCase()) > -1;
 	                if (false === countryCheck && 0 < _this2.state.country.length) {
+	                    return false;
+	                }
+
+	                if (matchedCountries.length > 0) {
+	                    var isInCountry = false;
+	                    var isInSearch = true;
+
+	                    for (var _i2 = 0; _i2 < matchedCountries.length; _i2++) {
+	                        if (matchedCountries[_i2] === event.Country.toLowerCase() && false === isInCountry) {
+	                            isInCountry = true;
+	                        }
+	                    }
+
+	                    for (var _i3 = 0; _i3 < wordArray.length; _i3++) {
+	                        var _word = wordArray[_i3];
+	                        if (_word === '') {
+	                            continue;
+	                        }
+
+	                        var lookingFor = new RegExp(".*" + _word + ".*", "i");
+	                        if (lookingFor.test(event.Title.toLowerCase())) {
+	                            isInSearch = true;
+	                            break;
+	                        } else {
+	                            isInSearch = false;
+	                        }
+	                    }
+
+	                    if (isInCountry && isInSearch) {
+	                        filteredData.push(event);
+	                    }
 	                    return false;
 	                }
 
