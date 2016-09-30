@@ -21775,6 +21775,7 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var map = '';
+	var bounds = '';
 
 	var EventMap = function (_React$Component) {
 	    _inherits(EventMap, _React$Component);
@@ -21806,7 +21807,6 @@
 	            var mapRef = this.refs.map;
 	            var node = _reactDom2.default.findDOMNode(mapRef);
 	            var mapOptions = {
-
 	                center: new google.maps.LatLng(64.262903, -10.809107),
 	                zoom: 3,
 	                disableDefaultUI: true,
@@ -21814,6 +21814,7 @@
 	            };
 
 	            map = new google.maps.Map(node, mapOptions);
+	            bounds = new google.maps.LatLngBounds();
 
 	            this.addMarkers(this.props.data);
 	        }
@@ -21899,8 +21900,6 @@
 	    }, {
 	        key: 'updateMarkers',
 	        value: function updateMarkers(data) {
-	            var bounds = new google.maps.LatLngBounds();
-
 	            for (var i = 0; i < this.state.markers.length; i++) {
 	                var curMarker = this.state.markers[i];
 	                var foundMarker = false;

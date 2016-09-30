@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 var map = '';
+var bounds = '';
 
 class EventMap extends React.Component {
     constructor(props) {
@@ -27,7 +28,6 @@ class EventMap extends React.Component {
         const mapRef = this.refs.map;
         const node = ReactDOM.findDOMNode(mapRef);
         var mapOptions = {
-
             center: new google.maps.LatLng(64.262903, -10.809107),
             zoom: 3,
             disableDefaultUI: true,
@@ -35,6 +35,7 @@ class EventMap extends React.Component {
         };
 
         map = new google.maps.Map(node, mapOptions);
+        bounds = new google.maps.LatLngBounds();
 
         this.addMarkers(this.props.data);
     }
@@ -95,8 +96,6 @@ class EventMap extends React.Component {
     }
 
     updateMarkers(data) {
-        var bounds = new google.maps.LatLngBounds();
-
         for (let i=0; i < this.state.markers.length; i++) {
             let curMarker = this.state.markers[i];
             let foundMarker = false;
@@ -113,7 +112,6 @@ class EventMap extends React.Component {
                 curMarker.setVisible(false);
             }
         }
-
 
         map.fitBounds(bounds);
     }
