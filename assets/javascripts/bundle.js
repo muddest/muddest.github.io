@@ -21837,11 +21837,10 @@
 	        };
 
 	        _this.initMap = _this.initMap.bind(_this);
-
 	        _this.zoomInMap = _this.zoomInMap.bind(_this);
+	        _this.createContentString = _this.createContentString.bind(_this);
 	        _this.handleMousePinMouseout = _this.handleMousePinMouseout.bind(_this);
 	        _this.handleMousePinMouseover = _this.handleMousePinMouseover.bind(_this);
-
 	        _this.zoomOutMap = _this.zoomOutMap.bind(_this);
 	        _this.addMarkers = _this.addMarkers.bind(_this);
 	        _this.updateMarkers = _this.updateMarkers.bind(_this);
@@ -21849,6 +21848,16 @@
 	    }
 
 	    _createClass(EventMap, [{
+	        key: 'createContentString',
+	        value: function createContentString(data) {
+	            console.log(data.Title);
+	            var content = '';
+	            content += "<h2>" + data.Title + "</h2>";
+	            content += data.Date;
+	            content += "<a href=" + data.Site + ">Homepage</a>";
+	            return content;
+	        }
+	    }, {
 	        key: 'initMap',
 	        value: function initMap() {
 	            var mapRef = this.refs.map;
@@ -21903,8 +21912,9 @@
 	                    map: map,
 	                    title: data[i].Title
 	                });
+	                var contentString = _this2.createContentString(data[i]);
 	                var infowindow = new google.maps.InfoWindow({
-	                    content: data[i].Title
+	                    content: contentString
 	                });
 
 	                marker.id = data[i].id;

@@ -13,15 +13,22 @@ class EventMap extends React.Component {
         };
 
         this.initMap = this.initMap.bind(this);
-        
         this.zoomInMap = this.zoomInMap.bind(this);
+        this.createContentString = this.createContentString.bind(this);
         this.handleMousePinMouseout = this.handleMousePinMouseout.bind(this);
         this.handleMousePinMouseover = this.handleMousePinMouseover.bind(this);
-        
-
         this.zoomOutMap = this.zoomOutMap.bind(this);
         this.addMarkers = this.addMarkers.bind(this);
         this.updateMarkers = this.updateMarkers.bind(this);
+    }
+
+    createContentString(data) {
+        console.log(data.Title);
+        let content = '';
+        content += "<h2>"+data.Title+"</h2>";
+        content += data.Date;
+        content += "<a href="+data.Site+">Homepage</a>";
+        return content;
     }
 
     initMap () {
@@ -68,8 +75,9 @@ class EventMap extends React.Component {
                 map: map,
                 title: data[i].Title
             });
+            let contentString = this.createContentString(data[i]);
             let infowindow = new google.maps.InfoWindow({
-                content: data[i].Title,
+                content: contentString,
             });
 
             marker.id = data[i].id;
