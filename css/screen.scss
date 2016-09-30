@@ -134,7 +134,7 @@ header {
 #eventlist {
     background: rgba(0,0,0,0.8);
     position: relative;
-    height: calc(100% - 160px);
+    height: calc(100% - 140px);
     z-index: 2;
     width: 25%;
     min-width: 360px;
@@ -147,7 +147,9 @@ header {
         border-bottom: dashed 1px rgb(110,110,110);
 
         &:hover, &.highlight {
-            background: rgb(8, 6, 49);
+            //background: rgb(8, 6, 49);
+            background: rgba(230,230,230,0.9);
+            color: rgb(64, 64, 64);
         }
 
         & .daysleft {
@@ -155,6 +157,7 @@ header {
             width: 25%;
 
             &.red div {
+                color: white;
                 background: rgb(90, 17, 17);
                 display: inline;
                 padding: 2px 3px 2px 3px;
@@ -180,7 +183,6 @@ header {
 
 #filter {
     height: 140px;
-    margin-bottom: 20px;
     padding: 10px 0 15px 0;
     position: relative;
     z-index: 2;

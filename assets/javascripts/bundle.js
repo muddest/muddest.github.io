@@ -21796,14 +21796,16 @@
 	            var markers = [];
 
 	            var _loop = function _loop(i) {
-	                var infowindow = new google.maps.InfoWindow({
-	                    content: data[i].Title
-	                });
+
 	                var marker = new google.maps.Marker({
 	                    position: { lat: data[i].lat, lng: data[i].lng },
 	                    map: map,
 	                    title: data[i].Title
 	                });
+	                var infowindow = new google.maps.InfoWindow({
+	                    content: data[i].Title
+	                });
+
 	                marker.id = data[i].id;
 
 	                //marker.addListener('mouseover', function() { infowindow.open(map, marker); });
@@ -21967,12 +21969,9 @@
 	            var newHooveredPinId = nextProps.hooveredpinid;
 	            if (newHooveredPinId !== '') {
 	                var topPos = document.getElementById(newHooveredPinId).offsetTop;
-	                $("#eventlist").animate({ scrollTop: topPos - 10 });
-
-	                //document.getElementById('eventlist').scrollTop = topPos-10;
+	                //$("#eventlist").animate({ scrollTop: topPos-10 });
+	                document.getElementById('eventlist').scrollTop = topPos;
 	            }
-
-	            //console.log(document.getElementById(8));
 	        }
 	    }, {
 	        key: 'render',
@@ -22941,6 +22940,23 @@
 	            }
 
 	            var obstacles = this.props.obstacles === '' || this.props.obstacles === null ? 'Unknown' : this.props.obstacles;
+
+	            var daysleft = '';
+	            switch (this.props.daysleft) {
+	                case 0:
+	                    daysleft = 'Today';
+	                    break;
+	                case -1:
+	                    daysleft = 'Yesterday';
+	                    break;
+	                case 1:
+	                    daysleft = 'Tomorrow';
+	                    break;
+	                default:
+	                    daysleft = this.props.daysleft + ' days left';
+	                    break;
+	            }
+
 	            return _react2.default.createElement(
 	                'div',
 	                {
@@ -22964,8 +22980,7 @@
 	                    _react2.default.createElement(
 	                        'div',
 	                        null,
-	                        this.props.daysleft,
-	                        ' days left'
+	                        daysleft
 	                    )
 	                ),
 	                _react2.default.createElement(

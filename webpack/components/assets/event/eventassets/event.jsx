@@ -43,6 +43,24 @@ class Event extends React.Component {
         }
 
         let obstacles = (this.props.obstacles === '' || this.props.obstacles === null) ? 'Unknown' : this.props.obstacles;
+        
+
+        let daysleft = '';
+        switch (this.props.daysleft) {
+            case 0:
+                daysleft = 'Today';
+                break;
+            case -1:
+                daysleft = 'Yesterday';
+                break;
+            case 1:
+                daysleft = 'Tomorrow';
+                break;
+            default:
+                daysleft = this.props.daysleft+' days left';
+                break;
+        }
+
         return (
             <div 
                 id={this.props.id}
@@ -53,7 +71,7 @@ class Event extends React.Component {
 
                 <h2>{this.props.title}</h2>
 
-                    <span className={'daysleft '+daysColor}><div>{this.props.daysleft} days left</div></span>
+                    <span className={'daysleft '+daysColor}><div>{daysleft}</div></span>
                     <span className="date"><Fonty text={this.props.date} icon="fa-calendar" /></span>
                     <span className="country"><Fonty text={this.props.country} icon="fa-globe" /></span>
 

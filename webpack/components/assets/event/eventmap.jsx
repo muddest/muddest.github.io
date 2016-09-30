@@ -61,14 +61,17 @@ class EventMap extends React.Component {
     addMarkers(data) {
         let markers = [];
         for (let i=0; i < data.length; i++) {            
-            let infowindow = new google.maps.InfoWindow({
-                content: data[i].Title,
-            });
+            
             let marker = new google.maps.Marker({
                 position: {lat: data[i].lat, lng: data[i].lng},
                 map: map,
                 title: data[i].Title
             });
+            let infowindow = new google.maps.InfoWindow({
+                content: data[i].Title,
+            });
+
+
             marker.id = data[i].id;
 
             //marker.addListener('mouseover', function() { infowindow.open(map, marker); });
