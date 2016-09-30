@@ -11,7 +11,7 @@ class EventSearch extends React.Component {
         this.state = {
             values: {
                 min: 0,
-                max: 20,
+                max: 30,
             },
             searchVal: '',
             selectedCountries: [],
@@ -61,7 +61,7 @@ class EventSearch extends React.Component {
                     onChange={this.updateSearchVal} />
                 
                 <InputRange
-                        maxValue={20}
+                        maxValue={30}
                         minValue={0}
                         value={this.state.values}
                         onChange={this.handleValuesChange.bind(this)} />

@@ -66,9 +66,11 @@ class EventMap extends React.Component {
             });
             marker.addListener('mouseover', function() {
                 infowindow.open(map, marker);
+                this.props.sethooveredpinid(marker.id);
             });
                 marker.addListener('mouseout', function() {
                 infowindow.close();
+                this.props.sethooveredpinid('');
             });
 
             marker.id = data[i].id;

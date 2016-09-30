@@ -45,6 +45,7 @@ class Event extends React.Component {
         let obstacles = (this.props.obstacles === '' || this.props.obstacles === null) ? 'Unknown' : this.props.obstacles;
         return (
             <div 
+                id={this.props.id}
                 key={this.props.id}
                 onMouseEnter={() => this.props.sethoverid(this.props.id)}
                 onMouseLeave={() => this.props.sethoverid('')}

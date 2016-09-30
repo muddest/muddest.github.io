@@ -17,10 +17,12 @@ class EventBox extends React.Component {
             },
             hoveringId: '',
             country: [],
+            hooveredPinId: '',
         };
 
         this.setHoverId = this.setHoverId.bind(this);
         this.filterData = this.filterData.bind(this);
+        this.setHooveringPinId = this.setHooveringPinId.bind(this);
         this.changeSearchState = this.changeSearchState.bind(this);
     }
 
@@ -50,8 +52,13 @@ class EventBox extends React.Component {
         this.setState({ hoveringId: id });
     }
 
-    hovering (id) {
+    hoovering (id) {
         
+    }
+
+    setHooveringPinId (id) {
+        console.log('Hoveredpin: ', id);
+        this.setState({ hooveredPinId: id });
     }
 
     render() {
@@ -105,11 +112,13 @@ class EventBox extends React.Component {
                             changesearchstate={this.changeSearchState}
                             countries={countries} />
                         <EventList
+                            hooveredpinid={this.state.hooveredPinId}
                             sethoverid={this.setHoverId}
                             data={filteredData} />
                     </div>
                     <EventMap
                         data={filteredData}
+                        sethooveredpinid={this.setHooveringPinId}
                         hoveringid={this.state.hoveringId} />
                 </div>
                 

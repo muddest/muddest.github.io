@@ -18,6 +18,18 @@ class EventList extends React.Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        let curHooveredPinId = this.props.hooveredpinid;
+        let newHooveredPinId = nextProps.hooveredpinid;
+        if (curHooveredPinId !== '') {
+
+        }
+        var topPos = document.getElementById(8).offsetTop;
+        console.log(topPos);
+        document.getElementById('eventlist').scrollTop = topPos-10;
+        console.log(document.getElementById(8));
+    }
+
 
 
     render() {
@@ -25,6 +37,7 @@ class EventList extends React.Component {
             let days = this._getDifferenceInDays(event.Date);
             return (
                 <Event
+                    hooveredpinid={this.props.hooveredpinid}
                     sethoverid={this.props.sethoverid}
                     key={event.id}
                     title={event.Title}

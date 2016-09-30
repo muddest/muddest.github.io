@@ -21565,11 +21565,13 @@
 	                max: 20
 	            },
 	            hoveringId: '',
-	            country: []
+	            country: [],
+	            hooveredPinId: ''
 	        };
 
 	        _this.setHoverId = _this.setHoverId.bind(_this);
 	        _this.filterData = _this.filterData.bind(_this);
+	        _this.setHooveringPinId = _this.setHooveringPinId.bind(_this);
 	        _this.changeSearchState = _this.changeSearchState.bind(_this);
 	        return _this;
 	    }
@@ -21605,8 +21607,14 @@
 	            this.setState({ hoveringId: id });
 	        }
 	    }, {
-	        key: 'hovering',
-	        value: function hovering(id) {}
+	        key: 'hoovering',
+	        value: function hoovering(id) {}
+	    }, {
+	        key: 'setHooveringPinId',
+	        value: function setHooveringPinId(id) {
+	            console.log('Hoveredpin: ', id);
+	            this.setState({ hooveredPinId: id });
+	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
@@ -21667,11 +21675,13 @@
 	                            changesearchstate: this.changeSearchState,
 	                            countries: countries }),
 	                        _react2.default.createElement(_eventlist2.default, {
+	                            hooveredpinid: this.state.hooveredPinId,
 	                            sethoverid: this.setHoverId,
 	                            data: filteredData })
 	                    ),
 	                    _react2.default.createElement(_eventmap2.default, {
 	                        data: filteredData,
+	                        sethooveredpinid: this.setHooveringPinId,
 	                        hoveringid: this.state.hoveringId })
 	                )
 	            );
@@ -21791,9 +21801,11 @@
 	                });
 	                marker.addListener('mouseover', function () {
 	                    infowindow.open(map, marker);
+	                    this.props.sethooveredpinid(marker.id);
 	                });
 	                marker.addListener('mouseout', function () {
 	                    infowindow.close();
+	                    this.props.sethooveredpinid('');
 	                });
 
 	                marker.id = data[i].id;
@@ -21923,6 +21935,17 @@
 	            }
 	        }
 	    }, {
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            var curHooveredPinId = this.props.hooveredpinid;
+	            var newHooveredPinId = nextProps.hooveredpinid;
+	            if (curHooveredPinId !== '') {}
+	            var topPos = document.getElementById(8).offsetTop;
+	            console.log(topPos);
+	            document.getElementById('eventlist').scrollTop = topPos - 10;
+	            console.log(document.getElementById(8));
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _this2 = this;
@@ -21930,6 +21953,7 @@
 	            var eventnodes = this.props.data.map(function (event) {
 	                var days = _this2._getDifferenceInDays(event.Date);
 	                return _react2.default.createElement(_event2.default, {
+	                    hooveredpinid: _this2.props.hooveredpinid,
 	                    sethoverid: _this2.props.sethoverid,
 	                    key: event.id,
 	                    title: event.Title,
@@ -22890,6 +22914,7 @@
 	            return _react2.default.createElement(
 	                'div',
 	                {
+	                    id: this.props.id,
 	                    key: this.props.id,
 	                    onMouseEnter: function onMouseEnter() {
 	                        return _this2.props.sethoverid(_this2.props.id);
@@ -33575,7 +33600,7 @@
 	        _this.state = {
 	            values: {
 	                min: 0,
-	                max: 20
+	                max: 30
 	            },
 	            searchVal: '',
 	            selectedCountries: []
@@ -33633,7 +33658,7 @@
 	                    placeholder: 'Search for events',
 	                    onChange: this.updateSearchVal }),
 	                _react2.default.createElement(_reactInputRange2.default, {
-	                    maxValue: 20,
+	                    maxValue: 30,
 	                    minValue: 0,
 	                    value: this.state.values,
 	                    onChange: this.handleValuesChange.bind(this) }),
