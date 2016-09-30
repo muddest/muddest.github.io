@@ -21566,17 +21566,40 @@
 	            },
 	            hoveringId: '',
 	            country: [],
-	            hooveredPinId: ''
+	            hooveredPinId: '',
+	            fromDate: '',
+	            toDate: ''
 	        };
 
 	        _this.setHoverId = _this.setHoverId.bind(_this);
 	        _this.filterData = _this.filterData.bind(_this);
+	        _this.setToDate = _this.setToDate.bind(_this);
+	        _this.setFromDate = _this.setFromDate.bind(_this);
 	        _this.setHooveringPinId = _this.setHooveringPinId.bind(_this);
 	        _this.changeSearchState = _this.changeSearchState.bind(_this);
 	        return _this;
 	    }
 
 	    _createClass(EventBox, [{
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            var today = new Date();
+	            var dd = today.getDate();
+	            var mm = today.getMonth() + 1;
+	            var yyyy = today.getFullYear();
+	            var nyear = today.getFullYear() + 1;
+	            if (dd < 10) {
+	                dd = '0' + dd;
+	            }
+	            if (mm < 10) {
+	                mm = '0' + mm;
+	            }
+	            today = yyyy + '-' + mm + '-' + dd;
+	            var toDate = nyear + '-' + mm + '-' + dd;
+
+	            this.setState({ fromDate: new Date(today), toDate: new Date(toDate) });
+	        }
+	    }, {
 	        key: 'changeSearchState',
 	        value: function changeSearchState(whichState, value) {
 	            switch (whichState) {
@@ -21607,12 +21630,19 @@
 	            this.setState({ hoveringId: id });
 	        }
 	    }, {
-	        key: 'hoovering',
-	        value: function hoovering(id) {}
-	    }, {
 	        key: 'setHooveringPinId',
 	        value: function setHooveringPinId(id) {
 	            this.setState({ hooveredPinId: id });
+	        }
+	    }, {
+	        key: 'setFromDate',
+	        value: function setFromDate(value) {
+	            this.setState({ fromDate: new Date(value) });
+	        }
+	    }, {
+	        key: 'setToDate',
+	        value: function setToDate(value) {
+	            this.setState({ toDate: new Date(value) });
 	        }
 	    }, {
 	        key: 'render',
@@ -21627,6 +21657,7 @@
 	            var countries = [];
 	            var countriesToCompare = [];
 
+	            // Check available countries. Information from events
 	            for (var item, i = 0; item = items[i++];) {
 	                var country = item.Country;
 
@@ -21637,15 +21668,18 @@
 	                }
 	            }
 
+	            // Set ID for every event
 	            for (var i = 0; i < data.length; i++) {
 	                data[i].id = i;
 	            }
 
+	            // Split searchwords into array.
 	            var searchWord = this.state.searchWord.toLowerCase();
 	            var wordArray = searchWord.split(' ');
 	            var filteredData = [];
-
 	            var matchedCountries = [];
+
+	            // Remove countries from searchwordarray and put in own array. This to filter countries
 
 	            var _loop = function _loop(_i) {
 	                var word = wordArray[_i];
@@ -21665,23 +21699,28 @@
 	                _loop(_i);
 	            }
 
+	            // Filter every event. Remove those who doesnt fulfill criteria
 	            var eventnodes = data.filter(function (event) {
+	                var eventDate = new Date(event.Date);
 
-	                var countryCheck = _this2.state.country.indexOf(event.Country.toLowerCase()) > -1;
-	                if (false === countryCheck && 0 < _this2.state.country.length) {
+	                if (eventDate < _this2.state.fromDate || eventDate > _this2.state.toDate) {
 	                    return false;
 	                }
 
+	                // If search for country/countries do this, else skip.
 	                if (matchedCountries.length > 0) {
 	                    var isInCountry = false;
 	                    var isInSearch = true;
+	                    var isWithinLength = true;
 
+	                    // Check if event got country
 	                    for (var _i2 = 0; _i2 < matchedCountries.length; _i2++) {
 	                        if (matchedCountries[_i2] === event.Country.toLowerCase() && false === isInCountry) {
 	                            isInCountry = true;
 	                        }
 	                    }
 
+	                    // If searchword other than countries. Check if event fulfill both country and searchword.
 	                    for (var _i3 = 0; _i3 < wordArray.length; _i3++) {
 	                        var _word = wordArray[_i3];
 	                        if (_word === '') {
@@ -21697,16 +21736,22 @@
 	                        }
 	                    }
 
-	                    if (isInCountry && isInSearch) {
+	                    if (_this2.state.length.min > parseInt(event.Length) || _this2.state.length.max < parseInt(event.Length)) {
+	                        isWithinLength = false;
+	                    }
+
+	                    if (isInCountry && isInSearch && isWithinLength) {
 	                        filteredData.push(event);
 	                    }
 	                    return false;
 	                }
 
+	                // If no country given go for searchword
 	                if (event.Title.toLowerCase().indexOf(searchWord) === -1 && 1 < _this2.state.searchWord.length) {
 	                    return false;
 	                }
 
+	                // If no country given. Go for length
 	                if (_this2.state.length.min > parseInt(event.Length) || _this2.state.length.max < parseInt(event.Length)) {
 	                    return false;
 	                }
@@ -21726,7 +21771,9 @@
 	                        { id: 'leftbar' },
 	                        _react2.default.createElement(_eventsearch2.default, {
 	                            changesearchstate: this.changeSearchState,
-	                            countries: countries }),
+	                            countries: countries,
+	                            setfromdate: this.setFromDate,
+	                            settodate: this.setToDate }),
 	                        _react2.default.createElement(_eventlist2.default, {
 	                            hooveredpinid: this.state.hooveredPinId,
 	                            sethoverid: this.setHoverId,
@@ -21815,7 +21862,6 @@
 
 	            map = new google.maps.Map(node, mapOptions);
 	            bounds = new google.maps.LatLngBounds();
-
 	            this.addMarkers(this.props.data);
 	        }
 	    }, {
@@ -22017,13 +22063,59 @@
 	            }
 	        }
 	    }, {
+	        key: 'getMonthFromDate',
+	        value: function getMonthFromDate(date) {
+	            var d = new Date(date);
+	            var m = d.getMonth();
+
+	            switch (m) {
+	                case 1:
+	                    return 'january';
+	                case 2:
+	                    return 'february';
+	                case 3:
+	                    return 'mars';
+	                case 4:
+	                    return 'april';
+	                case 5:
+	                    return 'may';
+	                case 6:
+	                    return 'june';
+	                case 7:
+	                    return 'july';
+	                case 8:
+	                    return 'august';
+	                case 9:
+	                    return 'september';
+	                case 10:
+	                    return 'october';
+	                case 11:
+	                    return 'november';
+	                case 12:
+	                    return 'december';
+	            }
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _this2 = this;
 
+	            var curDate = '';
 	            var eventnodes = this.props.data.map(function (event) {
 	                var days = _this2._getDifferenceInDays(event.Date);
+	                var newDate = _this2.getMonthFromDate(event.Date);
 	                var classname = _this2.props.hooveredpinid === event.id ? 'highlight' : '';
+	                var header = '';
+
+	                if (newDate !== curDate) {
+	                    header += _react2.default.createElement(
+	                        'h2',
+	                        null,
+	                        '+newDate+'
+	                    );
+	                    curDate = newDate;
+	                }
+
 	                return _react2.default.createElement(_event2.default, {
 	                    classname: classname,
 	                    sethoverid: _this2.props.sethoverid,
@@ -22982,7 +23074,7 @@
 	                daysColor = 'yellow';
 	            }
 
-	            var obstacles = this.props.obstacles === '' || this.props.obstacles === null ? 'Unknown' : this.props.obstacles;
+	            var obstacles = this.props.obstacles === '' || this.props.obstacles === null ? '...' : this.props.obstacles;
 
 	            var daysleft = '';
 	            switch (this.props.daysleft) {
@@ -23042,32 +23134,27 @@
 	                    _react2.default.createElement(
 	                        'span',
 	                        null,
+	                        _react2.default.createElement(_fonty2.default, { text: obstacles + " obstacles", icon: 'fa-heartbeat' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
 	                        _react2.default.createElement(_fonty2.default, { text: this.props.length, icon: 'fa-map-marker' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'span',
-	                        null,
-	                        _react2.default.createElement(_fonty2.default, { text: obstacles + " obstacles", icon: 'fa-fire' })
-	                    ),
-	                    _react2.default.createElement(
-	                        'span',
-	                        null,
-	                        _react2.default.createElement(_fonty2.default, { text: 'Challenge 4.5', icon: 'fa-heartbeat' })
-	                    ),
-	                    _react2.default.createElement(
-	                        'span',
-	                        null,
-	                        _react2.default.createElement(
-	                            'a',
-	                            { href: this.props.site, target: '_blank' },
-	                            this.props.title
-	                        )
+	                        { className: 'readmore', 'data-name': 'openbox', onClick: this.toggleInfoBox },
+	                        'Watch trailer...'
 	                    )
 	                ),
 	                _react2.default.createElement(
 	                    'span',
-	                    { className: 'readmore', 'data-name': 'openbox', onClick: this.toggleInfoBox },
-	                    'Watch trailer...'
+	                    null,
+	                    _react2.default.createElement(
+	                        'a',
+	                        { href: this.props.site, target: '_blank' },
+	                        'Homepage'
+	                    )
 	                ),
 	                readMore
 	            );
@@ -33691,18 +33778,41 @@
 	                max: 30
 	            },
 	            searchVal: '',
-	            selectedCountries: []
+	            selectedCountries: [],
+	            fromDate: '',
+	            toDate: ''
 	        };
 
 	        _this.handleSubmit = _this.handleSubmit.bind(_this);
 	        _this.handleSearch = _this.handleSearch.bind(_this);
-	        _this.handleValuesChange = _this.handleValuesChange.bind(_this);
+	        _this.handleToDate = _this.handleToDate.bind(_this);
+	        _this.handleFromDate = _this.handleFromDate.bind(_this);
 	        _this.updateSearchVal = _this.updateSearchVal.bind(_this);
+	        _this.handleValuesChange = _this.handleValuesChange.bind(_this);
 	        _this.handleSelectedCountries = _this.handleSelectedCountries.bind(_this);
 	        return _this;
 	    }
 
 	    _createClass(EventSearch, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var today = new Date();
+	            var dd = today.getDate();
+	            var mm = today.getMonth() + 1;
+	            var yyyy = today.getFullYear();
+	            var nyear = today.getFullYear() + 1;
+	            if (dd < 10) {
+	                dd = '0' + dd;
+	            }
+	            if (mm < 10) {
+	                mm = '0' + mm;
+	            }
+	            today = yyyy + '-' + mm + '-' + dd;
+	            var toDate = nyear + '-' + mm + '-' + dd;
+
+	            this.setState({ fromDate: today, toDate: toDate });
+	        }
+	    }, {
 	        key: 'handleValuesChange',
 	        value: function handleValuesChange(component, values) {
 	            this.setState({ values: values });
@@ -33735,6 +33845,18 @@
 	            e.preventDefault();
 	        }
 	    }, {
+	        key: 'handleFromDate',
+	        value: function handleFromDate(e) {
+	            this.props.setfromdate(e.target.value);
+	            this.setState({ fromDate: e.target.value });
+	        }
+	    }, {
+	        key: 'handleToDate',
+	        value: function handleToDate(e) {
+	            this.props.settodate(e.target.value);
+	            this.setState({ toDate: e.target.value });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
@@ -33744,7 +33866,11 @@
 	                    autoComplete: 'off',
 	                    type: 'search',
 	                    placeholder: 'Search for events',
-	                    onChange: this.updateSearchVal }),
+	                    onChange: this.updateSearchVal,
+	                    tabIndex: '1' }),
+	                _react2.default.createElement('input', { type: 'date', name: 'from', value: this.state.fromDate, onChange: this.handleFromDate, tabIndex: '2' }),
+	                ' to ',
+	                _react2.default.createElement('input', { type: 'date', name: 'to', value: this.state.toDate, onChange: this.handleToDate, tabIndex: '3' }),
 	                _react2.default.createElement(_reactInputRange2.default, {
 	                    maxValue: 30,
 	                    minValue: 0,

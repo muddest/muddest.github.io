@@ -42,7 +42,7 @@ class Event extends React.Component {
             daysColor = 'yellow';
         }
 
-        let obstacles = (this.props.obstacles === '' || this.props.obstacles === null) ? 'Unknown' : this.props.obstacles;
+        let obstacles = (this.props.obstacles === '' || this.props.obstacles === null) ? '...' : this.props.obstacles;
         
 
         let daysleft = '';
@@ -76,13 +76,11 @@ class Event extends React.Component {
                     <span className="country"><Fonty text={this.props.country} icon="fa-globe" /></span>
 
                 <div className="eventstats">
+                    <span><Fonty text={obstacles+" obstacles"} icon="fa-heartbeat" /></span>
                     <span><Fonty text={this.props.length} icon="fa-map-marker" /></span>
-                    <span><Fonty text={obstacles+" obstacles"} icon="fa-fire" /></span>
-                    <span><Fonty text="Challenge 4.5" icon="fa-heartbeat" /></span>
-                    <span><a href={this.props.site} target="_blank">{this.props.title}</a></span>
+                    <span className="readmore" data-name="openbox" onClick={this.toggleInfoBox}>Watch trailer...</span>
                 </div>
-
-                <span className="readmore" data-name="openbox" onClick={this.toggleInfoBox}>Watch trailer...</span>
+                <span><a href={this.props.site} target="_blank">Homepage</a></span>
                 {readMore}
             </div>
         )

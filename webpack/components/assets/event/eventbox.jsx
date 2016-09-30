@@ -18,13 +18,36 @@ class EventBox extends React.Component {
             hoveringId: '',
             country: [],
             hooveredPinId: '',
+            fromDate: '',
+            toDate: '',
         };
 
         this.setHoverId = this.setHoverId.bind(this);
         this.filterData = this.filterData.bind(this);
+        this.setToDate = this.setToDate.bind(this);
+        this.setFromDate = this.setFromDate.bind(this);
         this.setHooveringPinId = this.setHooveringPinId.bind(this);
         this.changeSearchState = this.changeSearchState.bind(this);
     }
+
+    componentWillMount() {
+        let today = new Date();
+        let dd = today.getDate();
+        let mm = today.getMonth()+1;
+        let yyyy = today.getFullYear();
+        let nyear = today.getFullYear()+1;
+        if( dd < 10 ){
+            dd = '0'+dd;
+        } 
+        if(mm < 10){
+            mm = '0' + mm
+        }
+        today = yyyy+'-'+mm+'-'+dd;
+        let toDate = nyear+'-'+mm+'-'+dd;
+
+        this.setState({ fromDate: new Date(today), toDate: new Date(toDate) });
+    }
+
 
     changeSearchState(whichState, value) {
         switch (whichState) {
@@ -52,12 +75,17 @@ class EventBox extends React.Component {
         this.setState({ hoveringId: id });
     }
 
-    hoovering (id) {
-        
-    }
 
     setHooveringPinId (id) {
         this.setState({ hooveredPinId: id });
+    }
+
+    setFromDate(value) {
+        this.setState({ fromDate: new Date(value) });
+    }
+
+    setToDate(value) {
+        this.setState({ toDate: new Date(value) });
     }
 
     render() {
@@ -69,6 +97,7 @@ class EventBox extends React.Component {
         var countries = [];
         var countriesToCompare = [];
 
+        // Check available countries. Information from events
         for (var item, i = 0; item = items[i++];) {
             let country = item.Country;
 
@@ -79,16 +108,18 @@ class EventBox extends React.Component {
             }
         }
 
+        // Set ID for every event
         for (var i=0; i < data.length; i++) {
             data[i].id = i;
         }
 
+        // Split searchwords into array.
         let searchWord = this.state.searchWord.toLowerCase();
         let wordArray = searchWord.split(' ');
         let filteredData = [];
-
         var matchedCountries = [];
 
+        // Remove countries from searchwordarray and put in own array. This to filter countries
         for(let i=0; i < wordArray.length; i++) {
             let word = wordArray[i];
             if (word !== '' && word !== ' ') {
@@ -103,23 +134,28 @@ class EventBox extends React.Component {
             }
         }
   
+        // Filter every event. Remove those who doesnt fulfill criteria
         var eventnodes = data.filter((event) => {
-
-            var countryCheck = (this.state.country.indexOf(event.Country.toLowerCase()) > -1);
-            if (false === countryCheck && 0 < this.state.country.length) {
+            let eventDate = new Date(event.Date);
+            
+            if (eventDate < this.state.fromDate || eventDate > this.state.toDate) {
                 return false;
             }
 
+            // If search for country/countries do this, else skip.
             if (matchedCountries.length > 0) {
                 var isInCountry = false;
                 var isInSearch = true;
+                var isWithinLength = true;
 
+                // Check if event got country
                 for (let i=0; i < matchedCountries.length; i++) {
                     if (matchedCountries[i] === event.Country.toLowerCase() && false === isInCountry) {
                         isInCountry = true;
                     }
                 }
 
+                // If searchword other than countries. Check if event fulfill both country and searchword.
                 for (let i=0; i < wordArray.length; i++) {
                     let word = wordArray[i];
                     if (word === '') {
@@ -133,19 +169,24 @@ class EventBox extends React.Component {
                     } else {
                         isInSearch = false;
                     }
-                    
                 }
 
-                if (isInCountry && isInSearch) {
+                if (this.state.length.min > parseInt(event.Length) || this.state.length.max < parseInt(event.Length)) {
+                    isWithinLength = false;
+                }
+
+                if (isInCountry && isInSearch && isWithinLength) {
                     filteredData.push(event);
                 }
                 return false;
             }
 
+            // If no country given go for searchword
             if (event.Title.toLowerCase().indexOf(searchWord) === -1 && 1 < this.state.searchWord.length) {
                 return false;
             }
 
+            // If no country given. Go for length
             if (this.state.length.min > parseInt(event.Length) || this.state.length.max < parseInt(event.Length)) {
                 return false;
             }
@@ -160,7 +201,9 @@ class EventBox extends React.Component {
                     <div id="leftbar">
                         <EventSearch 
                             changesearchstate={this.changeSearchState}
-                            countries={countries} />
+                            countries={countries}
+                            setfromdate={this.setFromDate}
+                            settodate={this.setToDate} />
                         <EventList
                             hooveredpinid={this.state.hooveredPinId}
                             sethoverid={this.setHoverId}

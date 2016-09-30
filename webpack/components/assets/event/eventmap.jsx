@@ -36,13 +36,13 @@ class EventMap extends React.Component {
 
         map = new google.maps.Map(node, mapOptions);
         bounds = new google.maps.LatLngBounds();
-
         this.addMarkers(this.props.data);
     }
 
     componentDidMount() {
         this.initMap();
     }
+
 
     componentWillReceiveProps(nextProps) {
         let currentMarkId = this.props.hoveringid;
