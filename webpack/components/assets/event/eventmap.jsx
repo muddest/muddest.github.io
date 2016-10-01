@@ -23,7 +23,6 @@ class EventMap extends React.Component {
     }
 
     createContentString(data) {
-        console.log(data.Title);
         let content = '';
         content += "<h2>"+data.Title+"</h2>";
         content += data.Date;

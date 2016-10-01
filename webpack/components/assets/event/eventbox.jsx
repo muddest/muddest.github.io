@@ -95,7 +95,6 @@ class EventBox extends React.Component {
         var lookup = {};
         var items = data;
         var countries = [];
-        var countriesToCompare = [];
 
         // Check available countries. Information from events
         for (var item, i = 0; item = items[i++];) {
@@ -103,8 +102,7 @@ class EventBox extends React.Component {
 
             if (!(country in lookup)) {
                 lookup[country] = 1;
-                countriesToCompare.push(country.toLowerCase());
-                countries.push({value: country, label: country});
+                countries.push(country.toLowerCase());
             }
         }
 
@@ -123,7 +121,7 @@ class EventBox extends React.Component {
         for(let i=0; i < wordArray.length; i++) {
             let word = wordArray[i];
             if (word !== '' && word !== ' ') {
-                countriesToCompare.filter(function(item){
+                countries.filter(function(item){
                     if (true === item.indexOf(word) > -1) {
                         if (false === matchedCountries.indexOf(item) > -1) {
                             matchedCountries.push(item);

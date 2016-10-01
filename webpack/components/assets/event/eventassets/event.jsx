@@ -43,7 +43,6 @@ class Event extends React.Component {
         }
 
         let obstacles = (this.props.obstacles === '' || this.props.obstacles === null) ? '...' : this.props.obstacles;
-        
 
         let daysleft = '';
         switch (this.props.daysleft) {
