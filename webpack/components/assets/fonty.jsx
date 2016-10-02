@@ -8,6 +8,15 @@ class Fonty extends React.Component {
             </div>
         )
     }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.props.icon !== nextProps.icon
+            || this.props.text !== nextProps.text) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 export default Fonty;

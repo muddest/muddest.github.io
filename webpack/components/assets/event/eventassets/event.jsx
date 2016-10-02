@@ -9,12 +9,60 @@ class Event extends React.Component {
 
         this.state = {
             hidden: true,
+            daysleft: '',
+            daysColor: 'regular',
         };
 
       this.toggleInfoBox = this.toggleInfoBox.bind(this);
+      this.getDifferenceInDays = this.getDifferenceInDays.bind(this);
     }
 
-    
+    componentWillMount() {
+        let daysLeft = this.getDifferenceInDays(this.props.date);
+
+        if (daysLeft <= 20) {
+            this.setState({ daysColor: 'red' });
+        } else if (daysLeft > 20 && daysLeft <= 60) {
+            this.setState({ daysColor: 'yellow' });
+        }
+
+        let daysleft = '';
+        let days = daysLeft.toString();
+
+        switch (days) {
+            case '0':
+                daysleft = 'Today';
+                break;
+            case '-0':
+                daysleft = 'Today';
+                break;
+            case '-1':
+                daysleft = 'Yesterday';
+                break;
+            case '1':
+                daysleft = 'Tomorrow';
+                break;
+            default:
+                daysleft = days+' days left';
+                break;
+        }
+
+        this.setState({ daysleft: daysleft });
+    }
+
+    getDifferenceInDays(date) {
+        var oneDay = 24*60*60*1000;
+        var eventDate = new Date(date);
+        var now = new Date();
+
+        var diffDays = Math.round(Math.abs((eventDate.getTime() - now.getTime())/(oneDay)));
+        
+        if (eventDate >= now) {
+            return diffDays;
+        } else {
+            return '-'+diffDays;
+        }
+    }
 
     toggleInfoBox(e) {
         let clicked = e.target.getAttribute('data-name');
@@ -35,30 +83,8 @@ class Event extends React.Component {
             )
         }
 
-        let daysColor = 'regular';
-        if (this.props.daysleft <= 20) {
-            daysColor = 'red';
-        } else if (this.props.daysleft > 20 && this.props.daysleft <= 60) {
-            daysColor = 'yellow';
-        }
-
         let obstacles = (this.props.obstacles === '' || this.props.obstacles === null) ? '...' : this.props.obstacles;
-
-        let daysleft = '';
-        switch (this.props.daysleft) {
-            case 0:
-                daysleft = 'Today';
-                break;
-            case -1:
-                daysleft = 'Yesterday';
-                break;
-            case 1:
-                daysleft = 'Tomorrow';
-                break;
-            default:
-                daysleft = this.props.daysleft+' days left';
-                break;
-        }
+        let classname = (this.props.hooveredpinid === this.props.id) ? 'event highlight' : 'event';
 
         return (
             <div 
@@ -66,11 +92,10 @@ class Event extends React.Component {
                 key={this.props.id}
                 onMouseEnter={() => this.props.sethoverid(this.props.id)}
                 onMouseLeave={() => this.props.sethoverid('')}
-                className={"event "+this.props.classname}>
+                className={classname}>
 
                 <h2>{this.props.title}</h2>
-
-                    <span className={'daysleft '+daysColor}><div>{daysleft}</div></span>
+                    <span className={'daysleft '+this.state.daysColor}><div>{this.state.daysleft}</div></span>
                     <span className="date"><Fonty text={this.props.date} icon="fa-calendar" /></span>
                     <span className="country"><Fonty text={this.props.country} icon="fa-globe" /></span>
 
@@ -83,6 +108,15 @@ class Event extends React.Component {
                 {readMore}
             </div>
         )
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if ((nextProps.hooveredpinid === this.props.id && this.props.hooveredpinid !== this.props.id)
+            || (this.props.hooveredpinid === this.props.id && nextProps.hooveredpinid !== this.props.id)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 

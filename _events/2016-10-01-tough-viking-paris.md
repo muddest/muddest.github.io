@@ -5,7 +5,7 @@ Title: Tough Viking Paris
 Country: France
 City: Paris
 Address: 
-Date: 2016-10-01
+Date: 2016-10-02
 Site:  https://signup.eqtiming.no/Paris-le-1er-octobre-16/i826183?Event=tv_paris
 Obstacles: 
 Length: 8 km

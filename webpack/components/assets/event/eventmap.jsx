@@ -14,12 +14,12 @@ class EventMap extends React.Component {
 
         this.initMap = this.initMap.bind(this);
         this.zoomInMap = this.zoomInMap.bind(this);
-        this.createContentString = this.createContentString.bind(this);
-        this.handleMousePinMouseout = this.handleMousePinMouseout.bind(this);
-        this.handleMousePinMouseover = this.handleMousePinMouseover.bind(this);
         this.zoomOutMap = this.zoomOutMap.bind(this);
         this.addMarkers = this.addMarkers.bind(this);
         this.updateMarkers = this.updateMarkers.bind(this);
+        this.createContentString = this.createContentString.bind(this);
+        this.handleMousePinMouseout = this.handleMousePinMouseout.bind(this);
+        this.handleMousePinMouseover = this.handleMousePinMouseover.bind(this);
     }
 
     createContentString(data) {
@@ -30,25 +30,18 @@ class EventMap extends React.Component {
         return content;
     }
 
-    initMap () {
-        const mapRef = this.refs.map;
-        const node = ReactDOM.findDOMNode(mapRef);
-        var mapOptions = {
-            center: new google.maps.LatLng(64.262903, -10.809107),
-            zoom: 3,
-            disableDefaultUI: true,
-            scrollwheel: false,
-        };
-
-        map = new google.maps.Map(node, mapOptions);
-        bounds = new google.maps.LatLngBounds();
-        this.addMarkers(this.props.data);
-    }
-
     componentDidMount() {
         this.initMap();
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.props.hoveringid !== nextProps.hoveringid
+            || this.props.visible !== nextProps.visible) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     componentWillReceiveProps(nextProps) {
         let currentMarkId = this.props.hoveringid;
@@ -62,7 +55,22 @@ class EventMap extends React.Component {
             let mark = this.state.markers.filter(function(mark) { return mark.id == newMarkId });
             google.maps.event.trigger(mark[0], 'mousedown');
         }
-        this.updateMarkers(nextProps.data);
+        this.updateMarkers(nextProps.visible);
+    }
+
+    initMap () {
+        const mapRef = this.refs.map;
+        const node = ReactDOM.findDOMNode(mapRef);
+        var mapOptions = {
+            center: new google.maps.LatLng(64.262903, -10.809107),
+            zoom: 3,
+            disableDefaultUI: true,
+            scrollwheel: false,
+        };
+        map = new google.maps.Map(node, mapOptions);
+        bounds = new google.maps.LatLngBounds();
+        
+        this.addMarkers(this.props.data);
     }
 
     addMarkers(data) {
@@ -132,7 +140,6 @@ class EventMap extends React.Component {
     }
 
     render () {
-        
         return (
             <div id="eventmap">
                 <div id="zoomcontrol">

@@ -31,6 +31,16 @@ class InfoBox extends React.Component {
             </div>
         )
     }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.props.title !== nextProps.title
+            || this.props.youtube !== nextProps.youtube
+            || this.props.info !== nextProps.info) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 

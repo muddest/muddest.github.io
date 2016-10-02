@@ -14,6 +14,15 @@ class MapBox extends React.Component {
             </div>
         )
     }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.props.title !== nextProps.title
+            || this.props.content !== nextProps.content) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 

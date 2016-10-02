@@ -21497,13 +21497,35 @@
 	    }
 
 	    _createClass(EventContainer, [{
+	        key: 'sortByDate',
+	        value: function sortByDate(a, b) {
+	            return new Date(a.Date).getTime() - new Date(b.Date).getTime();
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var data = this.props.data;
+	            data.sort(this.sortByDate);
+
+	            // Set ID for every event
+	            for (var i = 0; i < data.length; i++) {
+	                data[i].id = i;
+	            }
+
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(_eventbox2.default, { data: this.props.data })
+	                _react2.default.createElement(_eventbox2.default, { data: data })
 	            );
+	        }
+	    }, {
+	        key: 'shouldComponentUpdate',
+	        value: function shouldComponentUpdate(nextProps, nextState) {
+	            if (this.props.data !== nextProps.data) {
+	                return true;
+	            } else {
+	                return false;
+	            }
 	        }
 	    }]);
 
@@ -21558,25 +21580,28 @@
 
 	        _this.state = {
 	            data: [],
-	            filteredData: [],
 	            searchWord: '',
 	            length: {
 	                min: 0,
 	                max: 20
 	            },
 	            hoveringId: '',
-	            country: [],
 	            hooveredPinId: '',
 	            fromDate: '',
-	            toDate: ''
+	            toDate: '',
+	            countries: [],
+	            filteredData: [],
+	            initMap: false
 	        };
 
 	        _this.setHoverId = _this.setHoverId.bind(_this);
 	        _this.filterData = _this.filterData.bind(_this);
 	        _this.setToDate = _this.setToDate.bind(_this);
 	        _this.setFromDate = _this.setFromDate.bind(_this);
+	        _this.setDataBySearch = _this.setDataBySearch.bind(_this);
 	        _this.setHooveringPinId = _this.setHooveringPinId.bind(_this);
 	        _this.changeSearchState = _this.changeSearchState.bind(_this);
+	        _this.setAvailableCountriesFromEvents = _this.setAvailableCountriesFromEvents.bind(_this);
 	        return _this;
 	    }
 
@@ -21598,6 +21623,32 @@
 	            var toDate = nyear + '-' + mm + '-' + dd;
 
 	            this.setState({ fromDate: new Date(today), toDate: new Date(toDate) });
+	            this.setAvailableCountriesFromEvents(this.props.data);
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            console.log('Mounted');
+	            this.setDataBySearch();
+	            this.setState({ initMap: true });
+	        }
+	    }, {
+	        key: 'setAvailableCountriesFromEvents',
+	        value: function setAvailableCountriesFromEvents(data) {
+	            var lookup = {};
+	            var items = data;
+	            var countries = [];
+
+	            for (var item, i = 0; item = items[i++];) {
+	                var country = item.Country;
+
+	                if (!(country in lookup)) {
+	                    lookup[country] = 1;
+	                    countries.push(country.toLowerCase());
+	                }
+	            }
+
+	            this.setState({ countries: countries });
 	        }
 	    }, {
 	        key: 'changeSearchState',
@@ -21606,18 +21657,15 @@
 	                case 'word':
 	                    this.setState({ searchWord: value });
 	                    break;
-	                case 'country':
-	                    this.setState({ country: value });
-	                    break;
 	                case 'length':
 	                    this.setState({ length: value });
 	                    break;
 	            }
 	        }
 	    }, {
-	        key: 'sortByDate',
-	        value: function sortByDate(a, b) {
-	            return new Date(a.Date).getTime() - new Date(b.Date).getTime();
+	        key: 'setHoverId',
+	        value: function setHoverId(id) {
+	            this.setState({ hoveringId: id });
 	        }
 	    }, {
 	        key: 'filterData',
@@ -21625,9 +21673,9 @@
 	            this.setState({ filteredData: data });
 	        }
 	    }, {
-	        key: 'setHoverId',
-	        value: function setHoverId(id) {
-	            this.setState({ hoveringId: id });
+	        key: 'setToDate',
+	        value: function setToDate(value) {
+	            this.setState({ toDate: new Date(value) });
 	        }
 	    }, {
 	        key: 'setHooveringPinId',
@@ -21640,65 +21688,48 @@
 	            this.setState({ fromDate: new Date(value) });
 	        }
 	    }, {
-	        key: 'setToDate',
-	        value: function setToDate(value) {
-	            this.setState({ toDate: new Date(value) });
+	        key: 'componentDidUpdate',
+	        value: function componentDidUpdate(prevProps, prevState) {
+	            if (this.state.searchWord !== prevState.searchWord || this.state.fromDate !== prevState.fromDate || this.state.toDate !== prevState.toDate) {
+	                // Do this then
+	                this.setDataBySearch();
+	            }
 	        }
 	    }, {
-	        key: 'render',
-	        value: function render() {
+	        key: 'setDataBySearch',
+	        value: function setDataBySearch() {
 	            var _this2 = this;
 
-	            var data = this.props.data;
-	            data.sort(this.sortByDate);
-
-	            var lookup = {};
-	            var items = data;
-	            var countries = [];
-
-	            // Check available countries. Information from events
-	            for (var item, i = 0; item = items[i++];) {
-	                var country = item.Country;
-
-	                if (!(country in lookup)) {
-	                    lookup[country] = 1;
-	                    countries.push(country.toLowerCase());
-	                }
-	            }
-
-	            // Set ID for every event
-	            for (var i = 0; i < data.length; i++) {
-	                data[i].id = i;
-	            }
-
+	            console.log('Searching');
 	            // Split searchwords into array.
 	            var searchWord = this.state.searchWord.toLowerCase();
+	            console.log('searchWord: ', searchWord);
 	            var wordArray = searchWord.split(' ');
 	            var filteredData = [];
 	            var matchedCountries = [];
 
 	            // Remove countries from searchwordarray and put in own array. This to filter countries
 
-	            var _loop = function _loop(_i) {
-	                var word = wordArray[_i];
+	            var _loop = function _loop(i) {
+	                var word = wordArray[i];
 	                if (word !== '' && word !== ' ') {
-	                    countries.filter(function (item) {
+	                    _this2.state.countries.filter(function (item) {
 	                        if (true === item.indexOf(word) > -1) {
 	                            if (false === matchedCountries.indexOf(item) > -1) {
 	                                matchedCountries.push(item);
 	                            }
-	                            wordArray[_i] = '';
+	                            wordArray[i] = '';
 	                        }
 	                    });
 	                }
 	            };
 
-	            for (var _i = 0; _i < wordArray.length; _i++) {
-	                _loop(_i);
+	            for (var i = 0; i < wordArray.length; i++) {
+	                _loop(i);
 	            }
 
 	            // Filter every event. Remove those who doesnt fulfill criteria
-	            var eventnodes = data.filter(function (event) {
+	            var eventnodes = this.props.data.filter(function (event) {
 	                var eventDate = new Date(event.Date);
 
 	                if (eventDate < _this2.state.fromDate || eventDate > _this2.state.toDate) {
@@ -21712,15 +21743,15 @@
 	                    var isWithinLength = true;
 
 	                    // Check if event got country
-	                    for (var _i2 = 0; _i2 < matchedCountries.length; _i2++) {
-	                        if (matchedCountries[_i2] === event.Country.toLowerCase() && false === isInCountry) {
+	                    for (var _i = 0; _i < matchedCountries.length; _i++) {
+	                        if (matchedCountries[_i] === event.Country.toLowerCase() && false === isInCountry) {
 	                            isInCountry = true;
 	                        }
 	                    }
 
 	                    // If searchword other than countries. Check if event fulfill both country and searchword.
-	                    for (var _i3 = 0; _i3 < wordArray.length; _i3++) {
-	                        var _word = wordArray[_i3];
+	                    for (var _i2 = 0; _i2 < wordArray.length; _i2++) {
+	                        var _word = wordArray[_i2];
 	                        if (_word === '') {
 	                            continue;
 	                        }
@@ -21757,7 +21788,20 @@
 	                filteredData.push(event);
 	                return true;
 	            });
+	            this.setState({ filteredData: filteredData });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var map = '';
 
+	            if (this.state.initMap) {
+	                map = _react2.default.createElement(_eventmap2.default, {
+	                    data: this.props.data,
+	                    visible: this.state.filteredData,
+	                    sethooveredpinid: this.setHooveringPinId,
+	                    hoveringid: this.state.hoveringId });
+	            }
 	            return _react2.default.createElement(
 	                'div',
 	                { id: 'eventbox' },
@@ -21769,20 +21813,25 @@
 	                        { id: 'leftbar' },
 	                        _react2.default.createElement(_eventsearch2.default, {
 	                            changesearchstate: this.changeSearchState,
-	                            countries: countries,
 	                            setfromdate: this.setFromDate,
 	                            settodate: this.setToDate }),
 	                        _react2.default.createElement(_eventlist2.default, {
 	                            hooveredpinid: this.state.hooveredPinId,
 	                            sethoverid: this.setHoverId,
-	                            data: filteredData })
+	                            data: this.state.filteredData })
 	                    ),
-	                    _react2.default.createElement(_eventmap2.default, {
-	                        data: filteredData,
-	                        sethooveredpinid: this.setHooveringPinId,
-	                        hoveringid: this.state.hoveringId })
+	                    map
 	                )
 	            );
+	        }
+	    }, {
+	        key: 'shouldComponentUpdate',
+	        value: function shouldComponentUpdate(nextProps, nextState) {
+	            if (this.state.hoveringId !== nextState.hoveringId || this.state.length.min !== nextState.length.min || this.state.length.max !== nextState.length.max || this.state.fromDate !== nextState.fromDate || this.state.toDate !== nextState.toDate || this.state.searchWord !== nextState.searchWord || this.state.hooveredPinId !== nextState.hooveredPinId || this.state.filteredData !== nextState.filteredData) {
+	                return true;
+	            } else {
+	                return false;
+	            }
 	        }
 	    }]);
 
@@ -21836,12 +21885,12 @@
 
 	        _this.initMap = _this.initMap.bind(_this);
 	        _this.zoomInMap = _this.zoomInMap.bind(_this);
-	        _this.createContentString = _this.createContentString.bind(_this);
-	        _this.handleMousePinMouseout = _this.handleMousePinMouseout.bind(_this);
-	        _this.handleMousePinMouseover = _this.handleMousePinMouseover.bind(_this);
 	        _this.zoomOutMap = _this.zoomOutMap.bind(_this);
 	        _this.addMarkers = _this.addMarkers.bind(_this);
 	        _this.updateMarkers = _this.updateMarkers.bind(_this);
+	        _this.createContentString = _this.createContentString.bind(_this);
+	        _this.handleMousePinMouseout = _this.handleMousePinMouseout.bind(_this);
+	        _this.handleMousePinMouseover = _this.handleMousePinMouseover.bind(_this);
 	        return _this;
 	    }
 
@@ -21855,25 +21904,18 @@
 	            return content;
 	        }
 	    }, {
-	        key: 'initMap',
-	        value: function initMap() {
-	            var mapRef = this.refs.map;
-	            var node = _reactDom2.default.findDOMNode(mapRef);
-	            var mapOptions = {
-	                center: new google.maps.LatLng(64.262903, -10.809107),
-	                zoom: 3,
-	                disableDefaultUI: true,
-	                scrollwheel: false
-	            };
-
-	            map = new google.maps.Map(node, mapOptions);
-	            bounds = new google.maps.LatLngBounds();
-	            this.addMarkers(this.props.data);
-	        }
-	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            this.initMap();
+	        }
+	    }, {
+	        key: 'shouldComponentUpdate',
+	        value: function shouldComponentUpdate(nextProps, nextState) {
+	            if (this.props.hoveringid !== nextProps.hoveringid || this.props.visible !== nextProps.visible) {
+	                return true;
+	            } else {
+	                return false;
+	            }
 	        }
 	    }, {
 	        key: 'componentWillReceiveProps',
@@ -21893,7 +21935,23 @@
 	                });
 	                google.maps.event.trigger(mark[0], 'mousedown');
 	            }
-	            this.updateMarkers(nextProps.data);
+	            this.updateMarkers(nextProps.visible);
+	        }
+	    }, {
+	        key: 'initMap',
+	        value: function initMap() {
+	            var mapRef = this.refs.map;
+	            var node = _reactDom2.default.findDOMNode(mapRef);
+	            var mapOptions = {
+	                center: new google.maps.LatLng(64.262903, -10.809107),
+	                zoom: 3,
+	                disableDefaultUI: true,
+	                scrollwheel: false
+	            };
+	            map = new google.maps.Map(node, mapOptions);
+	            bounds = new google.maps.LatLngBounds();
+
+	            this.addMarkers(this.props.data);
 	        }
 	    }, {
 	        key: 'addMarkers',
@@ -21985,7 +22043,6 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-
 	            return _react2.default.createElement(
 	                'div',
 	                { id: 'eventmap' },
@@ -22055,75 +22112,16 @@
 	    }
 
 	    _createClass(EventList, [{
-	        key: '_getDifferenceInDays',
-	        value: function _getDifferenceInDays(date) {
-	            var oneDay = 24 * 60 * 60 * 1000;
-	            var eventDate = new Date(date);
-	            var now = new Date();
-
-	            var diffDays = Math.round(Math.abs((eventDate.getTime() - now.getTime()) / oneDay));
-
-	            if (eventDate >= now) {
-	                return diffDays;
-	            } else {
-	                return '-' + diffDays;
-	            }
-	        }
-	    }, {
-	        key: 'getMonthFromDate',
-	        value: function getMonthFromDate(date) {
-	            var d = new Date(date);
-	            var m = d.getMonth();
-
-	            switch (m) {
-	                case 1:
-	                    return 'january';
-	                case 2:
-	                    return 'february';
-	                case 3:
-	                    return 'mars';
-	                case 4:
-	                    return 'april';
-	                case 5:
-	                    return 'may';
-	                case 6:
-	                    return 'june';
-	                case 7:
-	                    return 'july';
-	                case 8:
-	                    return 'august';
-	                case 9:
-	                    return 'september';
-	                case 10:
-	                    return 'october';
-	                case 11:
-	                    return 'november';
-	                case 12:
-	                    return 'december';
-	            }
-	        }
-	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _this2 = this;
 
 	            var curDate = '';
 	            var eventnodes = this.props.data.map(function (event) {
-	                var days = _this2._getDifferenceInDays(event.Date);
-	                var newDate = _this2.getMonthFromDate(event.Date);
 	                var classname = _this2.props.hooveredpinid === event.id ? 'highlight' : '';
-	                var header = '';
-
-	                if (newDate !== curDate) {
-	                    header += _react2.default.createElement(
-	                        'h2',
-	                        null,
-	                        '+newDate+'
-	                    );
-	                    curDate = newDate;
-	                }
 
 	                return _react2.default.createElement(_event2.default, {
+	                    hooveredpinid: _this2.props.hooveredpinid,
 	                    classname: classname,
 	                    sethoverid: _this2.props.sethoverid,
 	                    key: event.id,
@@ -22131,7 +22129,6 @@
 	                    info: event.content,
 	                    id: event.id,
 	                    date: event.Date,
-	                    daysleft: days,
 	                    country: event.Country,
 	                    city: event.City,
 	                    address: event.Address,
@@ -22156,6 +22153,15 @@
 	                    eventnodes
 	                )
 	            );
+	        }
+	    }, {
+	        key: 'shouldComponentUpdate',
+	        value: function shouldComponentUpdate(nextProps, nextState) {
+	            if (this.props.sethoverid !== nextProps.sethoverid || this.props.data !== nextProps.data || this.props.hooveredpinid !== nextProps.hooveredpinid) {
+	                return true;
+	            } else {
+	                return false;
+	            }
 	        }
 	    }]);
 
@@ -23045,14 +23051,66 @@
 	        var _this = _possibleConstructorReturn(this, (Event.__proto__ || Object.getPrototypeOf(Event)).call(this, props));
 
 	        _this.state = {
-	            hidden: true
+	            hidden: true,
+	            daysleft: '',
+	            daysColor: 'regular'
 	        };
 
 	        _this.toggleInfoBox = _this.toggleInfoBox.bind(_this);
+	        _this.getDifferenceInDays = _this.getDifferenceInDays.bind(_this);
 	        return _this;
 	    }
 
 	    _createClass(Event, [{
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            var daysLeft = this.getDifferenceInDays(this.props.date);
+
+	            if (daysLeft <= 20) {
+	                this.setState({ daysColor: 'red' });
+	            } else if (daysLeft > 20 && daysLeft <= 60) {
+	                this.setState({ daysColor: 'yellow' });
+	            }
+
+	            var daysleft = '';
+	            var days = daysLeft.toString();
+
+	            switch (days) {
+	                case '0':
+	                    daysleft = 'Today';
+	                    break;
+	                case '-0':
+	                    daysleft = 'Today';
+	                    break;
+	                case '-1':
+	                    daysleft = 'Yesterday';
+	                    break;
+	                case '1':
+	                    daysleft = 'Tomorrow';
+	                    break;
+	                default:
+	                    daysleft = days + ' days left';
+	                    break;
+	            }
+
+	            this.setState({ daysleft: daysleft });
+	        }
+	    }, {
+	        key: 'getDifferenceInDays',
+	        value: function getDifferenceInDays(date) {
+	            var oneDay = 24 * 60 * 60 * 1000;
+	            var eventDate = new Date(date);
+	            var now = new Date();
+
+	            var diffDays = Math.round(Math.abs((eventDate.getTime() - now.getTime()) / oneDay));
+
+	            if (eventDate >= now) {
+	                return diffDays;
+	            } else {
+	                return '-' + diffDays;
+	            }
+	        }
+	    }, {
 	        key: 'toggleInfoBox',
 	        value: function toggleInfoBox(e) {
 	            var clicked = e.target.getAttribute('data-name');
@@ -23074,30 +23132,8 @@
 	                    closebox: this.toggleInfoBox });
 	            }
 
-	            var daysColor = 'regular';
-	            if (this.props.daysleft <= 20) {
-	                daysColor = 'red';
-	            } else if (this.props.daysleft > 20 && this.props.daysleft <= 60) {
-	                daysColor = 'yellow';
-	            }
-
 	            var obstacles = this.props.obstacles === '' || this.props.obstacles === null ? '...' : this.props.obstacles;
-
-	            var daysleft = '';
-	            switch (this.props.daysleft) {
-	                case 0:
-	                    daysleft = 'Today';
-	                    break;
-	                case -1:
-	                    daysleft = 'Yesterday';
-	                    break;
-	                case 1:
-	                    daysleft = 'Tomorrow';
-	                    break;
-	                default:
-	                    daysleft = this.props.daysleft + ' days left';
-	                    break;
-	            }
+	            var classname = this.props.hooveredpinid === this.props.id ? 'event highlight' : 'event';
 
 	            return _react2.default.createElement(
 	                'div',
@@ -23110,7 +23146,7 @@
 	                    onMouseLeave: function onMouseLeave() {
 	                        return _this2.props.sethoverid('');
 	                    },
-	                    className: "event " + this.props.classname },
+	                    className: classname },
 	                _react2.default.createElement(
 	                    'h2',
 	                    null,
@@ -23118,11 +23154,11 @@
 	                ),
 	                _react2.default.createElement(
 	                    'span',
-	                    { className: 'daysleft ' + daysColor },
+	                    { className: 'daysleft ' + this.state.daysColor },
 	                    _react2.default.createElement(
 	                        'div',
 	                        null,
-	                        daysleft
+	                        this.state.daysleft
 	                    )
 	                ),
 	                _react2.default.createElement(
@@ -23165,6 +23201,15 @@
 	                ),
 	                readMore
 	            );
+	        }
+	    }, {
+	        key: 'shouldComponentUpdate',
+	        value: function shouldComponentUpdate(nextProps, nextState) {
+	            if (nextProps.hooveredpinid === this.props.id && this.props.hooveredpinid !== this.props.id || this.props.hooveredpinid === this.props.id && nextProps.hooveredpinid !== this.props.id) {
+	                return true;
+	            } else {
+	                return false;
+	            }
 	        }
 	    }]);
 
@@ -23219,6 +23264,15 @@
 	                    this.props.text
 	                )
 	            );
+	        }
+	    }, {
+	        key: "shouldComponentUpdate",
+	        value: function shouldComponentUpdate(nextProps, nextState) {
+	            if (this.props.icon !== nextProps.icon || this.props.text !== nextProps.text) {
+	                return true;
+	            } else {
+	                return false;
+	            }
 	        }
 	    }]);
 
@@ -23286,6 +23340,15 @@
 	                    )
 	                )
 	            );
+	        }
+	    }, {
+	        key: "shouldComponentUpdate",
+	        value: function shouldComponentUpdate(nextProps, nextState) {
+	            if (this.props.title !== nextProps.title || this.props.content !== nextProps.content) {
+	                return true;
+	            } else {
+	                return false;
+	            }
 	        }
 	    }]);
 
@@ -23372,6 +23435,15 @@
 	                    )
 	                )
 	            );
+	        }
+	    }, {
+	        key: 'shouldComponentUpdate',
+	        value: function shouldComponentUpdate(nextProps, nextState) {
+	            if (this.props.title !== nextProps.title || this.props.youtube !== nextProps.youtube || this.props.info !== nextProps.info) {
+	                return true;
+	            } else {
+	                return false;
+	            }
 	        }
 	    }]);
 
@@ -33785,7 +33857,6 @@
 	                max: 30
 	            },
 	            searchVal: '',
-	            selectedCountries: [],
 	            fromDate: '',
 	            toDate: ''
 	        };
@@ -33796,11 +33867,19 @@
 	        _this.handleFromDate = _this.handleFromDate.bind(_this);
 	        _this.updateSearchVal = _this.updateSearchVal.bind(_this);
 	        _this.handleValuesChange = _this.handleValuesChange.bind(_this);
-	        _this.handleSelectedCountries = _this.handleSelectedCountries.bind(_this);
 	        return _this;
 	    }
 
 	    _createClass(EventSearch, [{
+	        key: 'shouldComponentUpdate',
+	        value: function shouldComponentUpdate(nextProps, nextState) {
+	            if (this.state.values.min !== nextState.values.min || this.state.values.max !== nextState.values.max || this.state.searchVal !== nextState.searchVal || this.state.fromDate !== nextState.fromDate || this.state.toDate !== nextState.toDate) {
+	                return true;
+	            } else {
+	                return false;
+	            }
+	        }
+	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            var today = new Date();
@@ -33835,16 +33914,6 @@
 	        value: function updateSearchVal(e) {
 	            this.handleSearch('word', e.target.value);
 	            this.setState({ searchVal: e.target.value });
-	        }
-	    }, {
-	        key: 'handleSelectedCountries',
-	        value: function handleSelectedCountries(selectedCountries) {
-	            this.setState({ selectedCountries: selectedCountries });
-	            var countries = [];
-	            for (var i = 0; i < selectedCountries.length; i++) {
-	                countries.push(selectedCountries[i].label.toLowerCase());
-	            }
-	            this.handleSearch('country', countries);
 	        }
 	    }, {
 	        key: 'handleSubmit',

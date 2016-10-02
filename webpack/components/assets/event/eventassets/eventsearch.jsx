@@ -14,7 +14,6 @@ class EventSearch extends React.Component {
                 max: 30,
             },
             searchVal: '',
-            selectedCountries: [],
             fromDate: '',
             toDate: '',
         };
@@ -25,7 +24,18 @@ class EventSearch extends React.Component {
         this.handleFromDate = this.handleFromDate.bind(this);
         this.updateSearchVal = this.updateSearchVal.bind(this);
         this.handleValuesChange = this.handleValuesChange.bind(this);
-        this.handleSelectedCountries = this.handleSelectedCountries.bind(this);
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.state.values.min !== nextState.values.min
+            || this.state.values.max !== nextState.values.max
+            || this.state.searchVal !== nextState.searchVal
+            || this.state.fromDate !== nextState.fromDate
+            || this.state.toDate !== nextState.toDate) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     componentDidMount() {
@@ -58,15 +68,6 @@ class EventSearch extends React.Component {
     updateSearchVal(e) {
         this.handleSearch('word', e.target.value);
         this.setState({ searchVal: e.target.value });
-    }
-
-    handleSelectedCountries(selectedCountries) {
-        this.setState({selectedCountries});
-        let countries = [];
-        for (let i = 0; i < selectedCountries.length; i++) {
-            countries.push(selectedCountries[i].label.toLowerCase());
-        }
-        this.handleSearch('country', countries);
     }
 
     handleSubmit (e) {

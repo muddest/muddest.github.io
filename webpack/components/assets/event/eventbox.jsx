@@ -9,25 +9,28 @@ class EventBox extends React.Component {
 
         this.state = {
             data: [],
-            filteredData: [],
             searchWord: '',
             length: {
                 min: 0,
                 max: 20,
             },
             hoveringId: '',
-            country: [],
             hooveredPinId: '',
             fromDate: '',
             toDate: '',
+            countries: [],
+            filteredData: [],
+            initMap: false,
         };
 
         this.setHoverId = this.setHoverId.bind(this);
         this.filterData = this.filterData.bind(this);
         this.setToDate = this.setToDate.bind(this);
         this.setFromDate = this.setFromDate.bind(this);
+        this.setDataBySearch = this.setDataBySearch.bind(this);
         this.setHooveringPinId = this.setHooveringPinId.bind(this);
         this.changeSearchState = this.changeSearchState.bind(this);
+        this.setAvailableCountriesFromEvents = this.setAvailableCountriesFromEvents.bind(this);
     }
 
     componentWillMount() {
@@ -46,57 +49,21 @@ class EventBox extends React.Component {
         let toDate = nyear+'-'+mm+'-'+dd;
 
         this.setState({ fromDate: new Date(today), toDate: new Date(toDate) });
+        this.setAvailableCountriesFromEvents(this.props.data);
+    }
+
+    componentDidMount() {
+        console.log('Mounted');
+        this.setDataBySearch();
+        this.setState({ initMap: true });
     }
 
 
-    changeSearchState(whichState, value) {
-        switch (whichState) {
-            case 'word':
-                this.setState({ searchWord: value });
-                break;
-            case 'country':
-                this.setState({ country: value });
-                break;
-            case 'length':
-                this.setState({ length: value });
-                break;
-        }
-    }
-
-    sortByDate (a, b) {
-        return new Date(a.Date).getTime() - new Date(b.Date).getTime();
-    }
-
-    filterData (data) {
-        this.setState({ filteredData: data })
-    }
-
-    setHoverId (id) {
-        this.setState({ hoveringId: id });
-    }
-
-
-    setHooveringPinId (id) {
-        this.setState({ hooveredPinId: id });
-    }
-
-    setFromDate(value) {
-        this.setState({ fromDate: new Date(value) });
-    }
-
-    setToDate(value) {
-        this.setState({ toDate: new Date(value) });
-    }
-
-    render() {
-        var data = this.props.data;
-        data.sort(this.sortByDate);
-
+    setAvailableCountriesFromEvents(data) {
         var lookup = {};
         var items = data;
         var countries = [];
 
-        // Check available countries. Information from events
         for (var item, i = 0; item = items[i++];) {
             let country = item.Country;
 
@@ -106,13 +73,43 @@ class EventBox extends React.Component {
             }
         }
 
-        // Set ID for every event
-        for (var i=0; i < data.length; i++) {
-            data[i].id = i;
-        }
+        this.setState({ countries: countries });
+    }
 
+
+    changeSearchState(whichState, value) {
+        switch (whichState) {
+            case 'word':
+                this.setState({ searchWord: value });
+                break;
+            case 'length':
+                this.setState({ length: value });
+                break;
+        }
+    }
+
+    setHoverId (id) { this.setState({ hoveringId: id }); }
+    filterData (data) { this.setState({ filteredData: data }); }
+    setToDate(value) { this.setState({ toDate: new Date(value) }); }
+    setHooveringPinId (id) { this.setState({ hooveredPinId: id }); }
+    setFromDate(value) { this.setState({ fromDate: new Date(value) }); }
+
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.searchWord !== prevState.searchWord
+            || this.state.fromDate !== prevState.fromDate
+            || this.state.toDate !== prevState.toDate) {
+            // Do this then
+            this.setDataBySearch();
+        }
+    }
+
+
+    setDataBySearch() {
+        console.log('Searching');
         // Split searchwords into array.
         let searchWord = this.state.searchWord.toLowerCase();
+        console.log('searchWord: ', searchWord);
         let wordArray = searchWord.split(' ');
         let filteredData = [];
         var matchedCountries = [];
@@ -121,7 +118,7 @@ class EventBox extends React.Component {
         for(let i=0; i < wordArray.length; i++) {
             let word = wordArray[i];
             if (word !== '' && word !== ' ') {
-                countries.filter(function(item){
+                this.state.countries.filter(function(item){
                     if (true === item.indexOf(word) > -1) {
                         if (false === matchedCountries.indexOf(item) > -1) {
                             matchedCountries.push(item);
@@ -133,7 +130,7 @@ class EventBox extends React.Component {
         }
   
         // Filter every event. Remove those who doesnt fulfill criteria
-        var eventnodes = data.filter((event) => {
+        var eventnodes = this.props.data.filter((event) => {
             let eventDate = new Date(event.Date);
             
             if (eventDate < this.state.fromDate || eventDate > this.state.toDate) {
@@ -192,29 +189,54 @@ class EventBox extends React.Component {
             filteredData.push(event);
             return true;
         });
+        this.setState({ filteredData: filteredData });
+    }
 
+    render() {
+        var map = '';
+
+        if (this.state.initMap) {
+            map = (
+                <EventMap
+                    data={this.props.data}
+                    visible={this.state.filteredData}
+                    sethooveredpinid={this.setHooveringPinId}
+                    hoveringid={this.state.hoveringId} />
+            );
+        }
         return (
             <div id="eventbox">
                 <div id="eventcontainer">
                     <div id="leftbar">
                         <EventSearch 
                             changesearchstate={this.changeSearchState}
-                            countries={countries}
                             setfromdate={this.setFromDate}
                             settodate={this.setToDate} />
                         <EventList
                             hooveredpinid={this.state.hooveredPinId}
                             sethoverid={this.setHoverId}
-                            data={filteredData} />
+                            data={this.state.filteredData} />
                     </div>
-                    <EventMap
-                        data={filteredData}
-                        sethooveredpinid={this.setHooveringPinId}
-                        hoveringid={this.state.hoveringId} />
+                    {map}
                 </div>
                 
             </div>
         )
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.state.hoveringId !== nextState.hoveringId
+            || this.state.length.min !== nextState.length.min
+            || this.state.length.max !== nextState.length.max
+            || this.state.fromDate !== nextState.fromDate
+            || this.state.toDate !== nextState.toDate
+            || this.state.searchWord !== nextState.searchWord
+            || this.state.hooveredPinId !== nextState.hooveredPinId
+            || this.state.filteredData !== nextState.filteredData) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 
