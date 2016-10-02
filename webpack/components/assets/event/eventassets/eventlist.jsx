@@ -35,12 +35,7 @@ class EventList extends React.Component {
 
         return (
                 <div id="eventlist" key="eventkey">
-                    <ReactCSSTransitionGroup 
-                        transitionName="eventtransition" 
-                        transitionEnterTimeout={500} 
-                        transitionLeaveTimeout={300}>
-                        {eventnodes}
-                    </ReactCSSTransitionGroup>
+                    {eventnodes}
                 </div>
         )
     }

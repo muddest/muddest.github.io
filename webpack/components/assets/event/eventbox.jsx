@@ -53,7 +53,6 @@ class EventBox extends React.Component {
     }
 
     componentDidMount() {
-        console.log('Mounted');
         this.setDataBySearch();
         this.setState({ initMap: true });
     }
@@ -106,10 +105,8 @@ class EventBox extends React.Component {
 
 
     setDataBySearch() {
-        console.log('Searching');
         // Split searchwords into array.
         let searchWord = this.state.searchWord.toLowerCase();
-        console.log('searchWord: ', searchWord);
         let wordArray = searchWord.split(' ');
         let filteredData = [];
         var matchedCountries = [];

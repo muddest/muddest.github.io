@@ -2,7 +2,7 @@ import React from 'react';
 import Select from 'react-select';
 import InputRange from 'react-input-range';
 
-
+var timer = '';
 
 class EventSearch extends React.Component {
     constructor(props) {
@@ -11,11 +11,12 @@ class EventSearch extends React.Component {
         this.state = {
             values: {
                 min: 0,
-                max: 31,
+                max: 30,
             },
             searchVal: '',
             fromDate: '',
             toDate: '',
+            searching: false,
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -66,8 +67,13 @@ class EventSearch extends React.Component {
     }
 
     updateSearchVal(e) {
-        this.handleSearch('word', e.target.value);
-        this.setState({ searchVal: e.target.value });
+        var that = this;
+        var value = e.target.value;
+        timer = setTimeout(function() {
+            that.handleSearch('word', value);
+        }, 700);
+        
+        this.setState({ searchVal: value });
     }
 
     handleSubmit (e) {
@@ -84,6 +90,10 @@ class EventSearch extends React.Component {
         this.setState({ toDate: e.target.value });
     }
 
+    resetSearchTimer() {
+        clearTimeout(timer);
+    }
+
     render () {
         return (
             <form id="filter" autoComplete="off" onSubmit={this.handleSubmit}>
@@ -91,7 +101,8 @@ class EventSearch extends React.Component {
                     autoComplete="off"
                     type="search"
                     placeholder="Search for events"
-                    onChange={this.updateSearchVal}
+                    onKeyUp={this.updateSearchVal}
+                    onKeyDown={this.resetSearchTimer}
                     tabIndex="1" />
 
                 <input type="date" name="from" value={this.state.fromDate} onChange={this.handleFromDate} tabIndex="2" /> to <input type="date" name="to" value={this.state.toDate} onChange={this.handleToDate} tabIndex="3" />
