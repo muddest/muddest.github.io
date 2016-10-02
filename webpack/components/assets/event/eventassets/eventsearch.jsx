@@ -11,7 +11,7 @@ class EventSearch extends React.Component {
         this.state = {
             values: {
                 min: 0,
-                max: 30,
+                max: 31,
             },
             searchVal: '',
             fromDate: '',
