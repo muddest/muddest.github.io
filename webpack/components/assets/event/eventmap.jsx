@@ -81,11 +81,11 @@ class EventMap extends React.Component {
         var markers = locations.map(function(location, i) {
           return new google.maps.Marker({
             position: location,
-            zoom: 3,
+            zoom: 9,
           });
         });
         var markerCluster = new MarkerClusterer(map, markers,
-            {imagePath: '/assets/images/cluster/m'});
+            {imagePath: '/muddest/assets/images/cluster/m'});
     }
 
     addMarkers(data) {
