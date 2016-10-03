@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Select from 'react-select';
 import InputRange from 'react-input-range';
 
@@ -40,19 +41,55 @@ class EventSearch extends React.Component {
     }
 
     componentDidMount() {
+        ReactDOM.findDOMNode(this.refs.searchInput).focus(); 
         let today = new Date();
         let dd = today.getDate();
         let mm = today.getMonth()+1;
         let yyyy = today.getFullYear();
-        let nyear = today.getFullYear()+1;
+        let nyyear = yyyy;
+        let nymm = mm;
+
+        switch (nymm) {
+            case 7:
+                nymm = 1;
+                nyyear = nyyear + 1;
+                break;
+            case 8:
+                nymm = 2;
+                nyyear = nyyear + 1;
+                break;
+            case 9:
+                nymm = 3;
+                nyyear = nyyear + 1;
+                break;
+            case 10:
+                nymm = 4;
+                nyyear = nyyear + 1;
+                break;
+            case 11:
+                nymm = 5;
+                nyyear = nyyear + 1;
+                break;
+            case 12:
+                nymm = 6;
+                nyyear = nyyear + 1;
+                break;
+            default:
+                nymm = nymm + 6;
+                break;
+        }
+
         if( dd < 10 ){
             dd = '0'+dd;
         } 
         if(mm < 10){
             mm = '0' + mm
         }
+        if(nymm < 10){
+            nymm = '0' + nymm
+        }
         today = yyyy+'-'+mm+'-'+dd;
-        let toDate = nyear+'-'+mm+'-'+dd;
+        let toDate = nyyear+'-'+nymm+'-'+dd;
 
         this.setState({ fromDate: today, toDate: toDate });
     }
@@ -98,12 +135,17 @@ class EventSearch extends React.Component {
         return (
             <form id="filter" autoComplete="off" onSubmit={this.handleSubmit}>
                 <input
+                    ref="searchInput"
                     autoComplete="off"
                     type="search"
                     placeholder="Search for events"
                     onKeyUp={this.updateSearchVal}
                     onKeyDown={this.resetSearchTimer}
                     tabIndex="1" />
+                
+                <div id="searchedcountries">
+                    {this.props.searchedcountries}
+                </div>
 
                 <input type="date" name="from" value={this.state.fromDate} onChange={this.handleFromDate} tabIndex="2" /> to <input type="date" name="to" value={this.state.toDate} onChange={this.handleToDate} tabIndex="3" />
                 

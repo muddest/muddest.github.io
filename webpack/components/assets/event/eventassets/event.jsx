@@ -53,11 +53,18 @@ class Event extends React.Component {
     getDifferenceInDays(date) {
         var oneDay = 24*60*60*1000;
         var eventDate = new Date(date);
-        var now = new Date();
+        
+        let dateObj = new Date();
+        let month = dateObj.getUTCMonth() + 1; //months from 1-12
+        month = month.toString();
+        let day = dateObj.getUTCDate().toString();
+        let year = dateObj.getUTCFullYear().toString();
+        let nowString = year+'-'+month+'-'+day; 
+        let now = new Date(nowString);
 
         var diffDays = Math.round(Math.abs((eventDate.getTime() - now.getTime())/(oneDay)));
         
-        if (eventDate >= now) {
+        if (eventDate > now) {
             return diffDays;
         } else {
             return '-'+diffDays;

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 var map = '';
 var bounds = '';
+var markerCluster = '';
 
 class EventMap extends React.Component {
     constructor(props) {
@@ -31,6 +32,7 @@ class EventMap extends React.Component {
     }
 
     componentDidMount() {
+
         this.initMap();
     }
 
@@ -70,7 +72,20 @@ class EventMap extends React.Component {
         map = new google.maps.Map(node, mapOptions);
         bounds = new google.maps.LatLngBounds();
         
-        this.addMarkers(this.props.data);
+        //this.addMarkers(this.props.data);
+        let locations = [];
+        for (let i=0; i < this.props.data.length; i++) {
+            locations.push({ lat: this.props.data[i].lat, lng: this.props.data[i].lng });
+        }
+        
+        var markers = locations.map(function(location, i) {
+          return new google.maps.Marker({
+            position: location,
+            zoom: 3,
+          });
+        });
+        var markerCluster = new MarkerClusterer(map, markers,
+            {imagePath: '/assets/images/cluster/m'});
     }
 
     addMarkers(data) {

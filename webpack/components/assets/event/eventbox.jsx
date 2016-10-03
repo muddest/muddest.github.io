@@ -12,7 +12,7 @@ class EventBox extends React.Component {
             searchWord: '',
             length: {
                 min: 0,
-                max: 20,
+                max: 30,
             },
             hoveringId: '',
             hooveredPinId: '',
@@ -22,6 +22,8 @@ class EventBox extends React.Component {
             filteredData: [],
             initMap: false,
         };
+
+        this.checkToDate = this.checkToDate.bind(this);
 
         this.setHoverId = this.setHoverId.bind(this);
         this.filterData = this.filterData.bind(this);
@@ -38,15 +40,50 @@ class EventBox extends React.Component {
         let dd = today.getDate();
         let mm = today.getMonth()+1;
         let yyyy = today.getFullYear();
-        let nyear = today.getFullYear()+1;
+        let nyyear = yyyy;
+        let nymm = mm;
+
+        switch (nymm) {
+            case 7:
+                nymm = 1;
+                nyyear = nyyear + 1;
+                break;
+            case 8:
+                nymm = 2;
+                nyyear = nyyear + 1;
+                break;
+            case 9:
+                nymm = 3;
+                nyyear = nyyear + 1;
+                break;
+            case 10:
+                nymm = 4;
+                nyyear = nyyear + 1;
+                break;
+            case 11:
+                nymm = 5;
+                nyyear = nyyear + 1;
+                break;
+            case 12:
+                nymm = 6;
+                nyyear = nyyear + 1;
+                break;
+            default:
+                nymm = nymm + 6;
+                break;
+        }
+
         if( dd < 10 ){
             dd = '0'+dd;
         } 
         if(mm < 10){
             mm = '0' + mm
         }
+        if(nymm < 10){
+            nymm = '0' + nymm
+        }
         today = yyyy+'-'+mm+'-'+dd;
-        let toDate = nyear+'-'+mm+'-'+dd;
+        let toDate = nyyear+'-'+nymm+'-'+dd;
 
         this.setState({ fromDate: new Date(today), toDate: new Date(toDate) });
         this.setAvailableCountriesFromEvents(this.props.data);
@@ -97,10 +134,17 @@ class EventBox extends React.Component {
     componentDidUpdate(prevProps, prevState) {
         if (this.state.searchWord !== prevState.searchWord
             || this.state.fromDate !== prevState.fromDate
-            || this.state.toDate !== prevState.toDate) {
+            || this.state.toDate !== prevState.toDate
+            || this.state.length.max !== prevState.length.max
+            || this.state.length.min !== prevState.length.min) {
             // Do this then
             this.setDataBySearch();
         }
+    }
+
+    checkToDate(toDateString) {
+        let toDate = new Date(toDateString.Date);
+        return toDate > this.state.toDate;
     }
 
 
@@ -125,6 +169,10 @@ class EventBox extends React.Component {
                 });
             }
         }
+
+        var data = this.props.data;
+        var removeByDate = data.findIndex(this.checkToDate)
+        data = data.slice(0, removeByDate);
   
         // Filter every event. Remove those who doesnt fulfill criteria
         var eventnodes = this.props.data.filter((event) => {
