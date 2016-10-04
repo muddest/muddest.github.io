@@ -80,24 +80,43 @@ header {
     height: 95vh;
 }
 
-.articlecontainer {
+.content-segment {
+  &.content-bold {
+    font-family: Lora,'Times New Roman',serif;
+    font-size: 3em;
+    padding: 75px 20%;
+
+    .fine-print {
+      color: #666666;
+      font-size: .5em;
+
+      a {
+        color: #66AAEE;
+      }
+    }
+  }
+
+  &.about-intro {
     background: url('/assets/images/background_1800.jpg') no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
     color: #DDDDDD;
-    font-family: Lora,'Times New Roman',serif;
-    font-size: 3em;
-    padding: 75px 20%;
+  }
 
-    p {
-        margin: 0;
-    }
+  &.signup-cta {
+    background: #DDDDDD;
+    color: #333333;
+  }
 
-    p + p {
-        margin-top: 1.5em;
-    }
+  p {
+    margin: 0;
+  }
+
+  p + p {
+    margin-top: 1.5em;
+  }
 }
 
 
