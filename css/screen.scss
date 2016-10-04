@@ -172,6 +172,7 @@ header {
     z-index: 2;
     width: 25%;
     min-width: 360px;
+    max-width: 360px;
     overflow-y: scroll;
 
 
@@ -226,6 +227,7 @@ header {
 }
 
 #filter {
+    max-width: 360px;
     height: 150px;
     padding: 10px 0 15px 0;
     position: relative;
