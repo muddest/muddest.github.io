@@ -23,6 +23,7 @@ class InfoBox extends React.Component {
                     <div className="eventinfo">
                         <span className="close pointer" data-name="closebox" onClick={this.props.closebox}>Close</span>
                         <h3>{this.props.title}</h3>
+                        <span><a href={this.props.homepage} target="_blank">Homepage</a></span>
                         <div className="video-container">
                             <iframe src={this.props.youtube} frameBorder="0" allowFullScreen></iframe>
                         </div>

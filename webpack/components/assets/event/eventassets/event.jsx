@@ -73,9 +73,12 @@ class Event extends React.Component {
 
     toggleInfoBox(e) {
         let clicked = e.target.getAttribute('data-name');
-        if ('closebox' === clicked || 'openbox' === clicked) {
-            this.state.hidden ?  window.history.pushState("", "", this.props.slug) : window.history.pushState("", "", '/');
-            this.setState({ hidden: !this.state.hidden });
+        if ('closebox' === clicked) {
+            this.setState({ hidden: true });
+            window.history.pushState("", "", '/');
+        } else {
+            window.history.pushState("", "", this.props.slug);
+            this.setState({ hidden: false });
         }
     }
 
@@ -86,11 +89,12 @@ class Event extends React.Component {
                 <InfoBox
                     title={this.props.title}
                     youtube={this.props.youtube}
-                    closebox={this.toggleInfoBox} />
+                    closebox={this.toggleInfoBox}
+                    homepage={this.props.site} />
             )
         }
 
-        let obstacles = (this.props.obstacles === '' || this.props.obstacles === null) ? '...' : this.props.obstacles;
+        let obstacles = (this.props.obstacles === '' || this.props.obstacles === null) ? '' : <span><Fonty text={this.props.obstacles+" obstacles"} icon="fa-heartbeat" /></span>;
         let classname = (this.props.hooveredpinid === this.props.id) ? 'event highlight' : 'event';
 
         return (
@@ -99,7 +103,8 @@ class Event extends React.Component {
                 key={this.props.id}
                 onMouseEnter={() => this.props.sethoverid(this.props.id)}
                 onMouseLeave={() => this.props.sethoverid('')}
-                className={classname}>
+                className={classname}
+                onClick={this.toggleInfoBox}>
 
                 <h2>{this.props.title}</h2>
                     <span className={'daysleft '+this.state.daysColor}><div>{this.state.daysleft}</div></span>
@@ -107,11 +112,10 @@ class Event extends React.Component {
                     <span className="country"><Fonty text={this.props.country} icon="fa-globe" /></span>
 
                 <div className="eventstats">
-                    <span><Fonty text={obstacles+" obstacles"} icon="fa-heartbeat" /></span>
                     <span><Fonty text={this.props.length} icon="fa-map-marker" /></span>
-                    <span className="readmore" data-name="openbox" onClick={this.toggleInfoBox}>Watch trailer...</span>
+                    {obstacles}
                 </div>
-                <span><a href={this.props.site} target="_blank">Homepage</a></span>
+                
                 {readMore}
             </div>
         )
@@ -119,7 +123,8 @@ class Event extends React.Component {
 
     shouldComponentUpdate(nextProps, nextState) {
         if ((nextProps.hooveredpinid === this.props.id && this.props.hooveredpinid !== this.props.id)
-            || (this.props.hooveredpinid === this.props.id && nextProps.hooveredpinid !== this.props.id)) {
+            || (this.props.hooveredpinid === this.props.id && nextProps.hooveredpinid !== this.props.id)
+            || this.state.hidden !== nextState.hidden) {
             return true;
         } else {
             return false;

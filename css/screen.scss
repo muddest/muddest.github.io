@@ -158,9 +158,9 @@ header {
 
 
     .event {
-        margin: 0 0 15px 0;
+        cursor: pointer;
         color: rgb(230,230,230);
-        padding: 3px 5px 3px 5px;
+        padding: 12px 5px 12px 5px;
         border-bottom: dashed 1px rgb(110,110,110);
 
         &:hover, &.highlight {
@@ -197,7 +197,7 @@ header {
         }
 
         & .eventstats span {
-            width: 33%;
+            
         }
 
         & .readmore {

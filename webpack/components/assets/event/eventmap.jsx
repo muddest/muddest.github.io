@@ -35,17 +35,19 @@ class EventMap extends React.Component {
         map = new google.maps.Map(node, mapOptions);
         bounds = new google.maps.LatLngBounds();
         
-        this.addMarkers(this.props.data);  
+        this.addMarkers(this.props.data);
     }
 
     componentDidMount() {
+        $('#plus').click($.proxy(function() { this.zoomInMap(); }, this));
+        $('#minus').click($.proxy(function() { this.zoomOutMap(); }, this));
+
         markerCluster = new MarkerClusterer(map, this.state.markers, {imagePath: '/assets/images/cluster/m', ignoreHidden: true, zoomOnClick: false});
         google.maps.event.addListener(markerCluster, 'click', function(cluster) {
             var markers = cluster.getMarkers();
             var array = [];
             var num = 0;
             var string = '';
-            console.log(markers);
             for (let i = 0; i < markers.length; i++) {
                 string += markers[i].title+'<br>';
             }
@@ -55,6 +57,7 @@ class EventMap extends React.Component {
             infoWindowBig.open(map);
         });
         google.maps.event.addListener(map, "click", function(event) { infoWindowBig.close(); });
+        this.updateMarkers(this.props.visible);
     }
 
     addMarkers(data) {
@@ -115,30 +118,47 @@ class EventMap extends React.Component {
         let currentMarkId = this.props.hoveringid;
         let newMarkId = nextProps.hoveringid;
 
-        if (newMarkId === '') {
-            let mark = this.state.markers.filter(function(mark) { return mark.id == currentMarkId });
-            console.log('Dbclick');
-            google.maps.event.trigger(mark[0], 'dblclick');
-        }
-        if (newMarkId !== currentMarkId && newMarkId !== '') {
-            let mark = this.state.markers.filter(function(mark) { return mark.id == newMarkId });
-            console.log('Mousedown');
-            google.maps.event.trigger(mark[0], 'mousedown');
+        if (this.props.visible !== nextProps.visible) {
+            this.updateMarkers(nextProps.visible);
         }
 
+        let inCluster = false;
 
-        var clusters = markerCluster.getClusters();
-        for (let i = 0; i < clusters.length; i++) {
-            //console.log('Checking cluster: ', clusters[i]);
-            for( var j=0; j < clusters[i].markers_.length; j++){
-                let marker = clusters[i].markers_[j]; // <-- Here's your clustered marker
-                //console.log(marker);
+        if (newMarkId !== currentMarkId && '' !== newMarkId) {
+            var clusters = markerCluster.getClusters();
+            for (let i = 0; i < clusters.length; i++) {
+                for( var j=0; j < clusters[i].markers_.length; j++){
+                    if (clusters[i].markers_[j] !== '' && clusters[i].markers_[j].id === newMarkId && null === clusters[i].markers_[j].getMap()) {
+                        google.maps.event.trigger(markerCluster, 'click', clusters[i]);
+                        inCluster = true;
+                        break;
+                    }
+                }
             }
         }
 
+        if ((newMarkId === '') || (newMarkId !== currentMarkId && false === inCluster)) {
+            var clusters = markerCluster.getClusters();
+            for (let i = 0; i < clusters.length; i++) {
+                for( var j=0; j < clusters[i].markers_.length; j++){
+                    if ('' !== clusters[i].markers_[j] && clusters[i].markers_[j].id === currentMarkId && null === clusters[i].markers_[j].getMap()) {
+                        infoWindowBig.close();
+                        //inCluster = true;
+                        break;
+                    }
+                }
+            }
+        }
+        if ('' === newMarkId || newMarkId !== currentMarkId) {
+            let mark = this.state.markers.filter(function(mark) { return mark.id == currentMarkId });
+            google.maps.event.trigger(mark[0], 'dblclick');
+        }
+        if (newMarkId !== currentMarkId && '' !== newMarkId && false === inCluster) {
+            let mark = this.state.markers.filter(function(mark) { return mark.id == newMarkId });
+            google.maps.event.trigger(mark[0], 'mousedown');
+        }
 
         
-        this.updateMarkers(nextProps.visible);
     }
 
 
@@ -163,10 +183,10 @@ class EventMap extends React.Component {
             let curMarker = this.state.markers[i];
             let foundMarker = false;
             for (let k=0; k < data.length; k++) {
-                if (data[k].id === curMarker.id && curMarker.getVisible !== true) {
+                if (data[k].id === curMarker.id && true !== curMarker.getVisible) {
                     curMarker.setVisible(true);
                     foundMarker = true;
-                    //bounds.extend(curMarker.getPosition());
+                    bounds.extend(curMarker.getPosition());
                     //map.panTo(curMarker.getPosition());
                     break;
                 }
@@ -179,23 +199,20 @@ class EventMap extends React.Component {
         }
 
         if (markers !== this.state.markers) {
-            //console.log('Redoiing');
             this.setState({ markers: markers });
             map.fitBounds(bounds);
             markerCluster.repaint();
         }
     }
 
-    zoomInMap () { map.setZoom(map.getZoom() + 1); }
+    zoomInMap () { 
+        map.setZoom(map.getZoom() + 1);
+    }
     zoomOutMap () { map.setZoom(map.getZoom() - 1); }
 
     render () {
         return (
             <div>
-                <div id="zoomcontrol">
-                    <span id="plus" onClick={this.zoomInMap}>+</span>
-                    <span id="minus" onClick={this.zoomOutMap}>-</span>
-                </div>
             </div>
         )
     }
