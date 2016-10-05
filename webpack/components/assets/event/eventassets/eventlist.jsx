@@ -29,7 +29,8 @@ class EventList extends React.Component {
                     length={event.Length}
                     price={event.Price}
                     currency={event.Currency}
-                    slug={event.slug} />
+                    slug={event.slug}
+                    clickedpin={this.props.clickedpin} />
             );
         });
 
@@ -43,7 +44,8 @@ class EventList extends React.Component {
     shouldComponentUpdate(nextProps, nextState) {
         if (this.props.sethoverid !== nextProps.sethoverid
             || this.props.data !== nextProps.data
-            || this.props.hooveredpinid !== nextProps.hooveredpinid) {
+            || this.props.hooveredpinid !== nextProps.hooveredpinid
+            || this.props.clickedpin !== nextProps.clickedpin) {
             return true;
         } else {
             return false;

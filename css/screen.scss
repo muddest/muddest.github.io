@@ -23,7 +23,8 @@ html {
 }
 
 body {
-    
+    margin: 0;
+    padding: 0;
     background: rgb(25, 25, 25);
 
     i {
@@ -39,7 +40,7 @@ h1 {
 }
 
 h2 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     margin: 0 0 10px 0;
 }
 
@@ -80,6 +81,22 @@ header {
     height: 95vh;
 }
 
+#searchedcountries {
+    min-height: 30px;
+    margin-bottom: 15px;
+
+    h3 {
+        margin: 0;
+        color: rgb(200,200,200);
+    }
+
+    span {
+        font-size: 1.2rem;
+        color: rgb(210,210,210);
+        margin: 0 5px 0 5px;
+    }
+}
+
 .content-segment {
   &.content-bold {
     font-family: Lora,'Times New Roman',serif;
@@ -97,7 +114,7 @@ header {
   }
 
   &.about-intro {
-    background: url('/assets/images/background_1800.jpg') no-repeat center center;
+    background: url('/muddest/assets/images/background_1800.jpg') no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -203,7 +220,8 @@ header {
         text-align: center;
 
         &:hover {
-            background: rgba(30,30,30,1);
+            
+            background: rgba(103, 103, 103,0.8);
         }
     }
 
@@ -216,16 +234,15 @@ header {
     width: 25%;
     position: absolute;
     height: 95%;
+    min-width: 360px;
 }
 
 #eventlist {
     background: rgba(0,0,0,0.8);
     position: relative;
-    height: calc(100% - 150px);
+    height: calc(100% - 175px);
     z-index: 2;
-    width: 25%;
-    min-width: 360px;
-    max-width: 360px;
+    width: 100%;
     overflow-y: scroll;
 
 
@@ -236,9 +253,9 @@ header {
         border-bottom: dashed 1px rgb(110,110,110);
 
         &:hover, &.highlight {
-            //background: rgb(8, 6, 49);
-            background: rgba(230,230,230,0.9);
-            color: rgb(64, 64, 64);
+            //background: rgba(230,230,230,0.9);
+            background: rgba(103, 103, 103,0.8);
+            color: rgb(240, 240, 240);
         }
 
         & .daysleft {
@@ -262,25 +279,17 @@ header {
         & span {
             display: inline-block;
             width: 50%;
+            font-size: 1.2rem;
         }
 
         & .eventstats {
             margin: 5px 0 5px 0;
         }
-
-        & .eventstats span {
-            
-        }
-
-        & .readmore {
-            cursor: pointer;
-            color: rgb(38, 199, 2);
-        }
     }
 }
 
 #filter {
-    max-width: 360px;
+    width: 100%;
     height: 150px;
     padding: 10px 0 15px 0;
     position: relative;
@@ -409,7 +418,7 @@ input[type="search"] {
 
 #googleform {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 0;
     z-index: 50;
     left: 50%;
@@ -429,30 +438,38 @@ input[type="search"] {
 }
 
 
-@media screen and (max-width: 995px) {
-    #leftbar {
-    position: relative;
-    width: 100%;
-    display: block;
-    vertical-align: top;
-    height: auto;
-    min-width: 200px;
+@media screen and (max-width: 800px) {
+    header {
+        margin: 0 0 0 0;
+        position: relative;
+        transform: none;
+        text-align: center;
+    }
+    #zoomcontrol {
+        display: none;
+    }
+    #info {
+        display: none;
+    }
+    #app {
+        height: 100%;
+    }
 
-        & form {
-            position: inherit;
-            width: inherit;
-            height: inherit;
-            border-right: solid 1px rgb(53, 53, 53);
-        }
+    #leftbar {
+        width: 100%;
+        position: relative;
+    }
+
+    #filter {
+        max-width: 100%;
+        height: auto;
     }
 
     #eventlist {
+        min-width: 100%;
+        max-width: 100%;
         width: 100%;
-        padding: 0 5px 0 5px;
-
-        & .event {
-            margin: 0 auto;
-        }
+        height: 100%;
     }
 }
 

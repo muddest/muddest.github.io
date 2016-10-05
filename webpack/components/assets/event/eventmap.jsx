@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ReactDOMServer from 'react-dom/server';
 
 var map = '';
 var bounds = '';
@@ -13,6 +14,8 @@ class EventMap extends React.Component {
         this.state = {
             markers: [],
         };
+
+        this.testar = this.testar.bind(this);
 
         this.zoomInMap = this.zoomInMap.bind(this);
         this.zoomOutMap = this.zoomOutMap.bind(this);
@@ -52,12 +55,35 @@ class EventMap extends React.Component {
                 string += markers[i].title+'<br>';
             }
 
+            //marker.addListener('mouseup', () => this.props.handlepinclick(mark.id));
+
             infoWindowBig.setContent('<h1>Events</h1><br>'+string);
             infoWindowBig.setPosition(cluster.getCenter());
             infoWindowBig.open(map);
         });
+
+        google.maps.event.addListener(markerCluster, 'mouseover', function(cluster) {
+            var markers = cluster.getMarkers();
+            var array = [];
+            var num = 0;
+            var string = '';
+            for (let i = 0; i < markers.length; i++) {
+                console.log(markers[i].id);
+                let reactString = ReactDOMServer.renderToString(<div onClick={() => this.testar()}>YAYAYAY</div>);
+                string += reactString+markers[i].title+'<br>';
+            }
+
+            infoWindowBig.setContent('<h1>Events</h1><br>'+string);
+            infoWindowBig.setPosition(cluster.getCenter());
+            infoWindowBig.open(map);
+        });
+        
         google.maps.event.addListener(map, "click", function(event) { infoWindowBig.close(); });
         this.updateMarkers(this.props.visible);
+    }
+
+    testar() {
+        alert('HEJ');
     }
 
     addMarkers(data) {
@@ -85,9 +111,12 @@ class EventMap extends React.Component {
                 content: mark.content,
             });
 
-            //marker.addListener('mouseover', () => this.handleMousePinMouseover(marker, infowindow));
-            //marker.addListener('mouseout', () => this.handleMousePinMouseout(marker, infowindow));
-            marker.addListener('mousedown', function() { infowindow.open(map, marker); });
+            marker.addListener('mouseover', () => this.handleMousePinMouseover(marker, infowindow));
+            marker.addListener('mouseout', () => this.handleMousePinMouseout(marker, infowindow));
+
+            // Add support to open infobox
+            marker.addListener('mouseup', () => this.props.handlepinclick(mark.id));
+
             marker.addListener(map, 'mousedown', function() { infowindow.close(); });
             marker.addListener('dblclick', function() { infowindow.close(); });
             google.maps.event.addListener(map, 'click', function() {

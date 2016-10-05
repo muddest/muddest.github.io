@@ -33,7 +33,8 @@ class EventSearch extends React.Component {
             || this.state.values.max !== nextState.values.max
             || this.state.searchVal !== nextState.searchVal
             || this.state.fromDate !== nextState.fromDate
-            || this.state.toDate !== nextState.toDate) {
+            || this.state.toDate !== nextState.toDate
+            || this.props.searchedcountries !== nextProps.searchedcountries) {
             return true;
         } else {
             return false;
@@ -98,6 +99,10 @@ class EventSearch extends React.Component {
     }
 
     render () {
+        let countries = this.props.searchedcountries.map(function(country) {
+            return <span className="searchedcountry">{country}</span>;
+        });
+
         return (
             <form id="filter" autoComplete="off" onSubmit={this.handleSubmit}>
                 <input
@@ -110,7 +115,8 @@ class EventSearch extends React.Component {
                     tabIndex="1" />
                 
                 <div id="searchedcountries">
-                    {this.props.searchedcountries}
+                    <h3>{"Countries in search"}</h3>
+                    {countries}
                 </div>
 
                 <input type="date" name="from" value={this.state.fromDate} onChange={this.handleFromDate} tabIndex="2" /> to <input type="date" name="to" value={this.state.toDate} onChange={this.handleToDate} tabIndex="3" />

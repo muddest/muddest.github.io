@@ -50,6 +50,14 @@ class Event extends React.Component {
         this.setState({ daysleft: daysleft });
     }
 
+    componentDidMount() {
+        $(document).keyup(function(e) {
+            if (e.keyCode == 27) { // escape key maps to keycode `27`
+                // <DO YOUR WORK HERE>
+            }
+        });
+    }
+
     getDifferenceInDays(date) {
         var oneDay = 24*60*60*1000;
         var eventDate = new Date(date);
@@ -78,6 +86,12 @@ class Event extends React.Component {
             window.history.pushState("", "", '/');
         } else {
             window.history.pushState("", "", this.props.slug);
+            this.setState({ hidden: false });
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.clickedpin === this.props.id) {
             this.setState({ hidden: false });
         }
     }
@@ -124,7 +138,8 @@ class Event extends React.Component {
     shouldComponentUpdate(nextProps, nextState) {
         if ((nextProps.hooveredpinid === this.props.id && this.props.hooveredpinid !== this.props.id)
             || (this.props.hooveredpinid === this.props.id && nextProps.hooveredpinid !== this.props.id)
-            || this.state.hidden !== nextState.hidden) {
+            || this.state.hidden !== nextState.hidden
+            || nextProps.clickedpin === this.props.id) {
             return true;
         } else {
             return false;

@@ -21,9 +21,14 @@ class EventBox extends React.Component {
             countries: [],
             filteredData: [],
             initMap: false,
+            clickedPin: null,
+            searchedCountries: [],
+            windowWidth: 0,
         };
 
         this.checkToDate = this.checkToDate.bind(this);
+        this.handlePinClick = this.handlePinClick.bind(this);
+        this.handleResize = this.handleResize.bind(this);
 
         this.setHoverId = this.setHoverId.bind(this);
         this.filterData = this.filterData.bind(this);
@@ -56,10 +61,15 @@ class EventBox extends React.Component {
     }
 
     componentDidMount() {
+        window.addEventListener('resize', this.handleResize);
+        let curWidth = window.innerWidth;
         this.setDataBySearch();
-        this.setState({ initMap: true });
+        this.setState({ initMap: true, windowWidth: curWidth });
     }
 
+    handleResize() {
+        this.setState({windowWidth: window.innerWidth});
+    }
 
     setAvailableCountriesFromEvents(data) {
         var lookup = {};
@@ -135,8 +145,6 @@ class EventBox extends React.Component {
                 });
             }
         }
-
-
   
         // Filter every event. Remove those who doesnt fulfill criteria
         var eventnodes = this.props.data.filter((event) => {
@@ -199,15 +207,23 @@ class EventBox extends React.Component {
             return true;
         });
         this.setState({ filteredData: filteredData });
+        this.setState({ searchedCountries: matchedCountries });
+        
+    }
+
+    handlePinClick(eventId) {
+        this.setState({ clickedPin: eventId });
+        this.setState({ clickedPin: null });
     }
 
     render() {
-        var map = '';
+        let map = '';
 
-        if (this.state.initMap) {
+        if (this.state.initMap && this.state.windowWidth > 800) {
             map = (
                 <EventMap
                     data={this.props.data}
+                    handlepinclick={this.handlePinClick}
                     visible={this.state.filteredData}
                     sethooveredpinid={this.setHooveringPinId}
                     hoveringid={this.state.hoveringId} />
@@ -220,10 +236,12 @@ class EventBox extends React.Component {
                         <EventSearch 
                             changesearchstate={this.changeSearchState}
                             setfromdate={this.setFromDate}
-                            settodate={this.setToDate} />
+                            settodate={this.setToDate}
+                            searchedcountries={this.state.searchedCountries} />
                         <EventList
                             hooveredpinid={this.state.hooveredPinId}
                             sethoverid={this.setHoverId}
+                            clickedpin={this.state.clickedPin}
                             data={this.state.filteredData} />
                     </div>
                     {map}
@@ -241,7 +259,10 @@ class EventBox extends React.Component {
             || this.state.toDate !== nextState.toDate
             || this.state.searchWord !== nextState.searchWord
             || this.state.hooveredPinId !== nextState.hooveredPinId
-            || this.state.filteredData !== nextState.filteredData) {
+            || this.state.filteredData !== nextState.filteredData
+            || this.state.clickedPin !== nextState.clickedPin
+            || this.state.searchedCountries !== nextState.searchedCountries
+            || this.state.windowWidth !== nextState.windowWidth) {
             return true;
         } else {
             return false;
