@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server';
+import InfoWindow from './eventassets/infowindow.jsx';
 
 var map = '';
 var bounds = '';
 var markerCluster = '';
+var overlay = '';
 var infoWindowBig = new google.maps.InfoWindow();
 
 class EventMap extends React.Component {
@@ -15,7 +17,8 @@ class EventMap extends React.Component {
             markers: [],
         };
 
-        this.testar = this.testar.bind(this);
+        this.eventHovered = this.eventHovered.bind(this);
+        this.eventMouseout = this.eventMouseout.bind(this);
 
         this.zoomInMap = this.zoomInMap.bind(this);
         this.zoomOutMap = this.zoomOutMap.bind(this);
@@ -29,6 +32,7 @@ class EventMap extends React.Component {
     componentWillMount() {
         const mapRef = this.refs.map;
         const node = document.getElementById('map');
+        overlay = new google.maps.OverlayView();
         var mapOptions = {
             center: new google.maps.LatLng(64.262903, -10.809107),
             zoom: 3,
@@ -38,6 +42,9 @@ class EventMap extends React.Component {
         map = new google.maps.Map(node, mapOptions);
         bounds = new google.maps.LatLngBounds();
         
+        overlay.draw = function() {};
+        overlay.setMap(map);
+        
         this.addMarkers(this.props.data);
     }
 
@@ -46,20 +53,11 @@ class EventMap extends React.Component {
         $('#minus').click($.proxy(function() { this.zoomOutMap(); }, this));
 
         markerCluster = new MarkerClusterer(map, this.state.markers, {imagePath: '/muddest/assets/images/cluster/m', ignoreHidden: true, zoomOnClick: false});
+        
         google.maps.event.addListener(markerCluster, 'click', function(cluster) {
-            var markers = cluster.getMarkers();
-            var array = [];
-            var num = 0;
-            var string = '';
-            for (let i = 0; i < markers.length; i++) {
-                string += markers[i].title+'<br>';
-            }
-
-            //marker.addListener('mouseup', () => this.props.handlepinclick(mark.id));
-
-            infoWindowBig.setContent('<h1>Events</h1><br>'+string);
-            infoWindowBig.setPosition(cluster.getCenter());
-            infoWindowBig.open(map);
+            map.setCenter(cluster.getCenter());
+            map.setZoom(map.getZoom()+2);
+            infoWindowBig.close();
         });
 
         google.maps.event.addListener(markerCluster, 'mouseover', function(cluster) {
@@ -68,9 +66,11 @@ class EventMap extends React.Component {
             var num = 0;
             var string = '';
             for (let i = 0; i < markers.length; i++) {
-                console.log(markers[i].id);
-                let reactString = ReactDOMServer.renderToString(<div onClick={() => this.testar()}>YAYAYAY</div>);
-                string += reactString+markers[i].title+'<br>';
+                string += markers[i].title+' - '+markers[i].length+'<br>';
+                if (i > 5) {
+                    string += 'and more...';
+                    break;
+                }
             }
 
             infoWindowBig.setContent('<h1>Events</h1><br>'+string);
@@ -82,10 +82,6 @@ class EventMap extends React.Component {
         this.updateMarkers(this.props.visible);
     }
 
-    testar() {
-        alert('HEJ');
-    }
-
     addMarkers(data) {
         let markingRuff = [];
 
@@ -95,6 +91,7 @@ class EventMap extends React.Component {
                 title: data[i].Title,
                 content: this.createContentString(data[i]),
                 id: data[i].id,
+                length: data[i].Length,
             });
         }
 
@@ -102,9 +99,11 @@ class EventMap extends React.Component {
             let marker = new google.maps.Marker({
                 position: mark.location,
                 zoom: 3,
-                clusterSize: 70,
+                clusterSize: 30,
+                gridSize: 20,
                 title: mark.title,
-                id: mark.id
+                id: mark.id,
+                length: mark.length,
             });
             
             let infowindow = new google.maps.InfoWindow({
@@ -113,22 +112,34 @@ class EventMap extends React.Component {
 
             marker.addListener('mouseover', () => this.handleMousePinMouseover(marker, infowindow));
             marker.addListener('mouseout', () => this.handleMousePinMouseout(marker, infowindow));
-
-            // Add support to open infobox
             marker.addListener('mouseup', () => this.props.handlepinclick(mark.id));
-
-            marker.addListener(map, 'mousedown', function() { infowindow.close(); });
-            marker.addListener('dblclick', function() { infowindow.close(); });
-            google.maps.event.addListener(map, 'click', function() {
-                if (infowindow) {
-                    infowindow.close();
-                }
-            });
-            
+            marker.addListener('dblclick', () => this.eventHovered(marker, infowindow));
+            marker.addListener('tilt_changed', () => this.eventMouseout(infowindow));
+            google.maps.event.addListener(map, 'click', function() { infowindow.close(); });            
             return marker;
         });
 
         this.setState({ markers: markers });
+    }
+
+    eventMouseout(infowindow) {
+        infowindow.close();
+    }
+
+    eventHovered(marker, infowindow) {
+        infowindow.open(map, marker);
+    }
+
+    handleMousePinMouseover(marker, infowindow) {
+        infowindow.open(map, marker);
+        this.props.sethooveredpinid(marker.id);
+    }
+
+
+
+    handleMousePinMouseout(marker, infowindow) {
+        infowindow.close();
+        this.props.sethooveredpinid('');
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -151,60 +162,45 @@ class EventMap extends React.Component {
             this.updateMarkers(nextProps.visible);
         }
 
-        let inCluster = false;
+        let showCluster = false;
 
         if (newMarkId !== currentMarkId && '' !== newMarkId) {
             var clusters = markerCluster.getClusters();
             for (let i = 0; i < clusters.length; i++) {
                 for( var j=0; j < clusters[i].markers_.length; j++){
                     if (clusters[i].markers_[j] !== '' && clusters[i].markers_[j].id === newMarkId && null === clusters[i].markers_[j].getMap()) {
-                        google.maps.event.trigger(markerCluster, 'click', clusters[i]);
-                        inCluster = true;
+                        google.maps.event.trigger(markerCluster, 'mouseover', clusters[i]);
+                        showCluster = true;
                         break;
                     }
                 }
             }
         }
 
-        if ((newMarkId === '') || (newMarkId !== currentMarkId && false === inCluster)) {
+        if ((newMarkId === '') || (newMarkId !== currentMarkId && false === showCluster)) {
             var clusters = markerCluster.getClusters();
             for (let i = 0; i < clusters.length; i++) {
                 for( var j=0; j < clusters[i].markers_.length; j++){
                     if ('' !== clusters[i].markers_[j] && clusters[i].markers_[j].id === currentMarkId && null === clusters[i].markers_[j].getMap()) {
                         infoWindowBig.close();
-                        //inCluster = true;
                         break;
                     }
                 }
             }
         }
-        if ('' === newMarkId || newMarkId !== currentMarkId) {
+
+        if (('' === newMarkId && newMarkId !== currentMarkId) || (newMarkId !== currentMarkId && true === showCluster) || (newMarkId !== currentMarkId && false === showCluster && newMarkId !== '')) {
             let mark = this.state.markers.filter(function(mark) { return mark.id == currentMarkId });
+            google.maps.event.trigger(mark[0], 'tilt_changed');
+        }
+
+        if ( newMarkId !== currentMarkId && '' !== newMarkId && false === showCluster) {
+            console.log('Showpinwindow');
+            let mark = this.state.markers.filter(function(mark) { return mark.id == newMarkId });
+            console.log(mark[0]);
             google.maps.event.trigger(mark[0], 'dblclick');
         }
-        if (newMarkId !== currentMarkId && '' !== newMarkId && false === inCluster) {
-            let mark = this.state.markers.filter(function(mark) { return mark.id == newMarkId });
-            google.maps.event.trigger(mark[0], 'mousedown');
-        }
-
-        
     }
-
-
-
-    handleMousePinMouseover(marker, infowindow) {
-        infowindow.open(map, marker);
-        this.props.sethooveredpinid(marker.id);
-    }
-
-
-
-    handleMousePinMouseout(marker, infowindow) {
-        infowindow.close();
-        this.props.sethooveredpinid('');
-    }
-
-
 
     updateMarkers(data) {
         let markers = [];
@@ -216,7 +212,6 @@ class EventMap extends React.Component {
                     curMarker.setVisible(true);
                     foundMarker = true;
                     bounds.extend(curMarker.getPosition());
-                    //map.panTo(curMarker.getPosition());
                     break;
                 }
             }
@@ -235,9 +230,9 @@ class EventMap extends React.Component {
     }
 
     zoomInMap () { 
-        map.setZoom(map.getZoom() + 1);
+        map.setZoom(map.getZoom() + 2);
     }
-    zoomOutMap () { map.setZoom(map.getZoom() - 1); }
+    zoomOutMap () { map.setZoom(map.getZoom() - 2); }
 
     render () {
         return (
