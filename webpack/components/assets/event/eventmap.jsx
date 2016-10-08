@@ -6,7 +6,7 @@ import InfoWindow from './eventassets/infowindow.jsx';
 var map = '';
 //var bounds = '';
 var markerCluster = '';
-var infoWindowBig = new google.maps.InfoWindow();
+var infoWindowBig = new google.maps.InfoWindow({ pixelOffset: new google.maps.Size(0, -20) });
 
 class EventMap extends React.Component {
     constructor(props) {

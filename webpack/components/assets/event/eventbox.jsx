@@ -54,8 +54,8 @@ class EventBox extends React.Component {
                     if (curEvent.id === visibleEvents[k]
                         && parseInt(curEvent.Length) > this.state.length.min
                         && parseInt(curEvent.Length) < this.state.length.max
-                        && curEventDate > this.state.fromDate
-                        && curEventDate < this.state.toDate ) {
+                        && curEventDate >= this.state.fromDate
+                        && curEventDate <= this.state.toDate ) {
 
                         filteredData.push(curEvent);
                     }

@@ -21138,7 +21138,7 @@
 	
 	                    for (var k = 0; k < visibleEvents.length; k++) {
 	                        //console.log('Curevent length: ', parseInt(curEvent.Length));
-	                        if (curEvent.id === visibleEvents[k] && parseInt(curEvent.Length) > this.state.length.min && parseInt(curEvent.Length) < this.state.length.max && curEventDate > this.state.fromDate && curEventDate < this.state.toDate) {
+	                        if (curEvent.id === visibleEvents[k] && parseInt(curEvent.Length) > this.state.length.min && parseInt(curEvent.Length) < this.state.length.max && curEventDate >= this.state.fromDate && curEventDate <= this.state.toDate) {
 	
 	                            filteredData.push(curEvent);
 	                        }
@@ -21446,7 +21446,7 @@
 	var map = '';
 	//var bounds = '';
 	var markerCluster = '';
-	var infoWindowBig = new google.maps.InfoWindow();
+	var infoWindowBig = new google.maps.InfoWindow({ pixelOffset: new google.maps.Size(0, -20) });
 	
 	var EventMap = function (_React$Component) {
 	    _inherits(EventMap, _React$Component);
