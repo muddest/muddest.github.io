@@ -119,8 +119,9 @@ class EventSearch extends React.Component {
                     {countries}
                 </div>
 
-                <input type="date" name="from" value={this.state.fromDate} onChange={this.handleFromDate} tabIndex="2" /> to <input type="date" name="to" value={this.state.toDate} onChange={this.handleToDate} tabIndex="3" />
+                <input type="date" name="from" value={this.state.fromDate} onChange={this.handleFromDate} tabIndex="2" /> <span className="tolabel">to</span> <input type="date" name="to" value={this.state.toDate} onChange={this.handleToDate} tabIndex="3" />
                 
+                <span id="lengthfilter">Length</span>
                 <InputRange
                         maxValue={30}
                         minValue={0}

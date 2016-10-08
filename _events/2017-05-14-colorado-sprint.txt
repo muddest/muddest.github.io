@@ -10,7 +10,7 @@ Site: http://www.spartan.com/en/race/detail/1738/overview?filter=sprint
 
 Length: 5 miles
 
-Obstacles: 20-23
+Obstacles: 23
 Price: 84-109
 Currency: Dollar
 Youtube:

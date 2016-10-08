@@ -10,7 +10,7 @@ Site: http://www.spartan.com/en/race/detail/2075/overview
 
 Length: 10 miles
 
-Obstacles: 24-29
+Obstacles: 29
 Price: Unknown
 Currency: Euro
 Youtube:

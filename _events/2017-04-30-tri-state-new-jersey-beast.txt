@@ -10,7 +10,7 @@ Site: http://www.spartan.com/en/race/detail/1750/overview?filter=beast
 
 Length: 14 miles
 
-Obstacles: 30-35
+Obstacles: 35
 Price: 134-159
 Currency: Dollar
 Youtube:

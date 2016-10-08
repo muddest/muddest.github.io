@@ -13,7 +13,7 @@ Length: 20km
 Obstacles: 20
 Price: 85-99
 Currency: Euro
-Youtube: https://youtu.be/OHaebGO3Ko0
+Youtube: https://www.youtube.com/embed/OHaebGO3Ko0
 Challenge:
 ---
 

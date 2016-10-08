@@ -42,8 +42,6 @@ class EventMap extends React.Component {
             scrollwheel: false,
         };
         map = new google.maps.Map(node, mapOptions);
-        //bounds = new google.maps.LatLngBounds();
-        
         this.addMarkers(this.props.data);
     }
 
@@ -57,6 +55,7 @@ class EventMap extends React.Component {
         markerCluster = new MarkerClusterer(map, this.state.markers, {imagePath: '/muddest/assets/images/cluster/m', ignoreHidden: true, zoomOnClick: false});
         
         google.maps.event.addListener(map,'dblclick', this.updateBoundsChange);
+        google.maps.event.addListener(map,'dragend', this.updateBoundsChange);
 
         var _that = this;
 
@@ -80,7 +79,7 @@ class EventMap extends React.Component {
                 }
             }
 
-            infoWindowBig.setContent('<h1>Events</h1><br>'+string);
+            infoWindowBig.setContent('<h2>Events</h2><br>'+string);
             infoWindowBig.setPosition(cluster.getCenter());
             infoWindowBig.open(map);
         });
@@ -94,7 +93,6 @@ class EventMap extends React.Component {
 
 
     updateBoundsChange() {
-        console.log('mappedZoomed TRUE');
         let visibleIds = [];
         let markers = [];
         
@@ -110,7 +108,6 @@ class EventMap extends React.Component {
             markers.push(curMarker);
         }
         
-        console.log('Current:', visibleIds);
         this.props.visiblebyzoom(visibleIds);
         this.setState({ markers: markers });
     }

@@ -99,14 +99,22 @@ class Event extends React.Component {
     render() {
         let readMore = '';
         if (!this.state.hidden) {
-            let obstacles = (this.props.obstacles === '' || this.props.obstacles === null) ? '' : <span><Fonty text={this.props.obstacles+" obstacles"} icon="fa-heartbeat" /></span>;
             readMore = (
                 <InfoBox
                     title={this.props.title}
                     youtube={this.props.youtube}
                     closebox={this.toggleInfoBox}
+                    length={this.props.length}
+                    price={this.props.price}
+                    currency={this.props.currency}
+                    info={this.props.info}
+                    date={this.props.date}
+                    address={this.props.address}
+                    city={this.props.city}
+                    country={this.props.country}
                     homepage={this.props.site}
-                    obstacles={obstacles} />
+                    obstacles={this.props.obstacles}
+                    daysleft={this.state.daysleft} />
             )
         }
 
@@ -125,7 +133,7 @@ class Event extends React.Component {
                 <span className={'daysleft '+this.state.daysColor}><div>{this.state.daysleft}</div></span>
                 <span className="date"><Fonty text={this.props.date} icon="fa-calendar" /></span>
                 <span className="country"><Fonty text={this.props.country} icon="fa-globe" /></span>
-                <span><Fonty text={this.props.length} icon="fa-map-marker" /></span>
+                <span className="length"><Fonty text={this.props.length} icon="fa-map-marker" /></span>
                 
                 {readMore}
             </div>
