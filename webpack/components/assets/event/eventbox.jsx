@@ -24,6 +24,7 @@ class EventBox extends React.Component {
             clickedPin: null,
             searchedCountries: [],
             windowWidth: 0,
+            visibleByMapZoom: [],
         };
 
         this.checkToDate = this.checkToDate.bind(this);
@@ -38,6 +39,31 @@ class EventBox extends React.Component {
         this.setHooveringPinId = this.setHooveringPinId.bind(this);
         this.changeSearchState = this.changeSearchState.bind(this);
         this.setAvailableCountriesFromEvents = this.setAvailableCountriesFromEvents.bind(this);
+        this.changeVisibleEventsByMapZoom = this.changeVisibleEventsByMapZoom.bind(this);
+    }
+
+    changeVisibleEventsByMapZoom(visibleEvents) {
+        if (visibleEvents.length > 0) {
+            let filteredData = [];
+            for (let i = 0; i < this.props.data.length; i++) {
+                let curEvent = this.props.data[i];
+                let curEventDate = new Date(curEvent.Date);
+
+                for (let k = 0; k < visibleEvents.length; k++) {
+                    //console.log('Curevent length: ', parseInt(curEvent.Length));
+                    if (curEvent.id === visibleEvents[k]
+                        && parseInt(curEvent.Length) > this.state.length.min
+                        && parseInt(curEvent.Length) < this.state.length.max
+                        && curEventDate > this.state.fromDate
+                        && curEventDate < this.state.toDate ) {
+
+                        filteredData.push(curEvent);
+                    }
+                }
+            }
+            //console.log(filteredData);
+            this.setState({ filteredData: filteredData });
+        }
     }
 
     componentWillMount() {
@@ -206,9 +232,7 @@ class EventBox extends React.Component {
             filteredData.push(event);
             return true;
         });
-        this.setState({ filteredData: filteredData });
-        this.setState({ searchedCountries: matchedCountries });
-        
+        this.setState({ filteredData: filteredData, searchedCountries: matchedCountries });
     }
 
     handlePinClick(eventId) {
@@ -226,7 +250,8 @@ class EventBox extends React.Component {
                     handlepinclick={this.handlePinClick}
                     visible={this.state.filteredData}
                     sethooveredpinid={this.setHooveringPinId}
-                    hoveringid={this.state.hoveringId} />
+                    hoveringid={this.state.hoveringId}
+                    visiblebyzoom={this.changeVisibleEventsByMapZoom} />
             );
         }
         return (

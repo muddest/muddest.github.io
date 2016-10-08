@@ -8,7 +8,7 @@ Address: 9500 S Rodeo Drive, Fort McDowell, AZ 85264
 Date: 2017-02-25
 Site: http://www.spartan.com/en/race/detail/1713/overview?filter=sprint
 
-Length: 3-5 miles
+Length: 5 miles
 
 Obstacles: 20-23
 Price: 99-124

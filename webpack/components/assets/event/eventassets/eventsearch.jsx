@@ -110,7 +110,7 @@ class EventSearch extends React.Component {
                     autoComplete="off"
                     type="search"
                     placeholder="Search for events"
-                    onKeyUp={this.updateSearchVal}
+                    onChange={this.updateSearchVal}
                     onKeyDown={this.resetSearchTimer}
                     tabIndex="1" />
                 

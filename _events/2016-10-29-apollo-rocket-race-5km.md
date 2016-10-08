@@ -7,7 +7,7 @@ City: Henstridge
 Address: Toomer Farm, Sherborne Road, Henstridge, SOMERSET BA8 0PH
 Date: 2016-10-29
 Site: http://rocketrace.co.uk/enter-the-rocket-race-saturday-29th-october-2016/
-Length: 15 km
+Length: 5 km
 Obstacles: 30
 Price: 40-55
 Currency: Pound

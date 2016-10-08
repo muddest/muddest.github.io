@@ -8,7 +8,7 @@ Address: Zum Herdringer Schloss 7
 Date: 2017-05-13
 Site: https://en.toughmudder.de/events/nrw-2017 
 
-Length: 18-20km
+Length: 20km
 
 Obstacles: 20
 Price: 85-99

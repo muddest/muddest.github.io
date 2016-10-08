@@ -8,7 +8,7 @@ Address: Unknown
 Date: 2017-03-04
 Site: http://www.spartan.com/en/race/detail/2244/overview?filter=sprint
 
-Length: 3-5 miles
+Length: 5 miles
 
 Obstacles: 20-23
 Price: 79-119

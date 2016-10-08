@@ -99,16 +99,17 @@ class Event extends React.Component {
     render() {
         let readMore = '';
         if (!this.state.hidden) {
+            let obstacles = (this.props.obstacles === '' || this.props.obstacles === null) ? '' : <span><Fonty text={this.props.obstacles+" obstacles"} icon="fa-heartbeat" /></span>;
             readMore = (
                 <InfoBox
                     title={this.props.title}
                     youtube={this.props.youtube}
                     closebox={this.toggleInfoBox}
-                    homepage={this.props.site} />
+                    homepage={this.props.site}
+                    obstacles={obstacles} />
             )
         }
 
-        let obstacles = (this.props.obstacles === '' || this.props.obstacles === null) ? '' : <span><Fonty text={this.props.obstacles+" obstacles"} icon="fa-heartbeat" /></span>;
         let classname = (this.props.hooveredpinid === this.props.id) ? 'event highlight' : 'event';
 
         return (
@@ -121,14 +122,10 @@ class Event extends React.Component {
                 onClick={this.toggleInfoBox}>
 
                 <h2>{this.props.title}</h2>
-                    <span className={'daysleft '+this.state.daysColor}><div>{this.state.daysleft}</div></span>
-                    <span className="date"><Fonty text={this.props.date} icon="fa-calendar" /></span>
-                    <span className="country"><Fonty text={this.props.country} icon="fa-globe" /></span>
-
-                <div className="eventstats">
-                    <span><Fonty text={this.props.length} icon="fa-map-marker" /></span>
-                    {obstacles}
-                </div>
+                <span className={'daysleft '+this.state.daysColor}><div>{this.state.daysleft}</div></span>
+                <span className="date"><Fonty text={this.props.date} icon="fa-calendar" /></span>
+                <span className="country"><Fonty text={this.props.country} icon="fa-globe" /></span>
+                <span><Fonty text={this.props.length} icon="fa-map-marker" /></span>
                 
                 {readMore}
             </div>

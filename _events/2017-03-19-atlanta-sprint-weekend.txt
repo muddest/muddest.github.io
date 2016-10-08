@@ -8,7 +8,7 @@ Address: 1996 Centennial Olympic Parkway, Conyers, GA 30013
 Date: 2017-03-19
 Site: http://www.spartan.com/en/race/detail/1673/overview?filter=sprint
 
-Length: 3-5 miles
+Length: 5 miles
 
 Obstacles: 20-23
 Price: 79-150

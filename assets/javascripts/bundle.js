@@ -21107,7 +21107,8 @@
 	            initMap: false,
 	            clickedPin: null,
 	            searchedCountries: [],
-	            windowWidth: 0
+	            windowWidth: 0,
+	            visibleByMapZoom: []
 	        };
 	
 	        _this.checkToDate = _this.checkToDate.bind(_this);
@@ -21122,10 +21123,32 @@
 	        _this.setHooveringPinId = _this.setHooveringPinId.bind(_this);
 	        _this.changeSearchState = _this.changeSearchState.bind(_this);
 	        _this.setAvailableCountriesFromEvents = _this.setAvailableCountriesFromEvents.bind(_this);
+	        _this.changeVisibleEventsByMapZoom = _this.changeVisibleEventsByMapZoom.bind(_this);
 	        return _this;
 	    }
 	
 	    _createClass(EventBox, [{
+	        key: 'changeVisibleEventsByMapZoom',
+	        value: function changeVisibleEventsByMapZoom(visibleEvents) {
+	            if (visibleEvents.length > 0) {
+	                var filteredData = [];
+	                for (var i = 0; i < this.props.data.length; i++) {
+	                    var curEvent = this.props.data[i];
+	                    var curEventDate = new Date(curEvent.Date);
+	
+	                    for (var k = 0; k < visibleEvents.length; k++) {
+	                        //console.log('Curevent length: ', parseInt(curEvent.Length));
+	                        if (curEvent.id === visibleEvents[k] && parseInt(curEvent.Length) > this.state.length.min && parseInt(curEvent.Length) < this.state.length.max && curEventDate > this.state.fromDate && curEventDate < this.state.toDate) {
+	
+	                            filteredData.push(curEvent);
+	                        }
+	                    }
+	                }
+	                //console.log(filteredData);
+	                this.setState({ filteredData: filteredData });
+	            }
+	        }
+	    }, {
 	        key: 'componentWillMount',
 	        value: function componentWillMount() {
 	            var today = new Date();
@@ -21319,8 +21342,7 @@
 	                filteredData.push(event);
 	                return true;
 	            });
-	            this.setState({ filteredData: filteredData });
-	            this.setState({ searchedCountries: matchedCountries });
+	            this.setState({ filteredData: filteredData, searchedCountries: matchedCountries });
 	        }
 	    }, {
 	        key: 'handlePinClick',
@@ -21339,7 +21361,8 @@
 	                    handlepinclick: this.handlePinClick,
 	                    visible: this.state.filteredData,
 	                    sethooveredpinid: this.setHooveringPinId,
-	                    hoveringid: this.state.hoveringId });
+	                    hoveringid: this.state.hoveringId,
+	                    visiblebyzoom: this.changeVisibleEventsByMapZoom });
 	            }
 	            return _react2.default.createElement(
 	                'div',
@@ -21421,9 +21444,8 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var map = '';
-	var bounds = '';
+	//var bounds = '';
 	var markerCluster = '';
-	var overlay = '';
 	var infoWindowBig = new google.maps.InfoWindow();
 	
 	var EventMap = function (_React$Component) {
@@ -21435,16 +21457,19 @@
 	        var _this = _possibleConstructorReturn(this, (EventMap.__proto__ || Object.getPrototypeOf(EventMap)).call(this, props));
 	
 	        _this.state = {
-	            markers: []
+	            markers: [],
+	            mappedZoomed: false
 	        };
-	
-	        _this.eventHovered = _this.eventHovered.bind(_this);
-	        _this.eventMouseout = _this.eventMouseout.bind(_this);
 	
 	        _this.zoomInMap = _this.zoomInMap.bind(_this);
 	        _this.zoomOutMap = _this.zoomOutMap.bind(_this);
 	        _this.addMarkers = _this.addMarkers.bind(_this);
+	        _this.eventHovered = _this.eventHovered.bind(_this);
+	        _this.eventMouseout = _this.eventMouseout.bind(_this);
 	        _this.updateMarkers = _this.updateMarkers.bind(_this);
+	
+	        _this.updateBoundsChange = _this.updateBoundsChange.bind(_this);
+	
 	        _this.createContentString = _this.createContentString.bind(_this);
 	        _this.handleMousePinMouseout = _this.handleMousePinMouseout.bind(_this);
 	        _this.handleMousePinMouseover = _this.handleMousePinMouseover.bind(_this);
@@ -21456,18 +21481,15 @@
 	        value: function componentWillMount() {
 	            var mapRef = this.refs.map;
 	            var node = document.getElementById('map');
-	            overlay = new google.maps.OverlayView();
 	            var mapOptions = {
-	                center: new google.maps.LatLng(64.262903, -10.809107),
+	                center: new google.maps.LatLng(48.413684, -52.064998),
 	                zoom: 3,
+	                maxZoom: 13,
 	                disableDefaultUI: true,
 	                scrollwheel: false
 	            };
 	            map = new google.maps.Map(node, mapOptions);
-	            bounds = new google.maps.LatLngBounds();
-	
-	            overlay.draw = function () {};
-	            overlay.setMap(map);
+	            //bounds = new google.maps.LatLngBounds();
 	
 	            this.addMarkers(this.props.data);
 	        }
@@ -21483,10 +21505,15 @@
 	
 	            markerCluster = new MarkerClusterer(map, this.state.markers, { imagePath: '/muddest/assets/images/cluster/m', ignoreHidden: true, zoomOnClick: false });
 	
+	            google.maps.event.addListener(map, 'dblclick', this.updateBoundsChange);
+	
+	            var _that = this;
+	
 	            google.maps.event.addListener(markerCluster, 'click', function (cluster) {
 	                map.setCenter(cluster.getCenter());
 	                map.setZoom(map.getZoom() + 2);
 	                infoWindowBig.close();
+	                _that.updateBoundsChange();
 	            });
 	
 	            google.maps.event.addListener(markerCluster, 'mouseover', function (cluster) {
@@ -21511,6 +21538,28 @@
 	                infoWindowBig.close();
 	            });
 	            this.updateMarkers(this.props.visible);
+	        }
+	    }, {
+	        key: 'updateBoundsChange',
+	        value: function updateBoundsChange() {
+	            console.log('mappedZoomed TRUE');
+	            var visibleIds = [];
+	            var markers = [];
+	
+	            for (var i = 0; i < this.state.markers.length; i++) {
+	                var curMarker = this.state.markers[i];
+	                if (map.getBounds().contains(curMarker.getPosition())) {
+	                    curMarker.setVisible(true);
+	                    visibleIds.push(curMarker.id);
+	                } else if (!map.getBounds().contains(curMarker.getPosition()) && curMarker.getVisible()) {
+	                    curMarker.setVisible(false);
+	                }
+	                markers.push(curMarker);
+	            }
+	
+	            console.log('Current:', visibleIds);
+	            this.props.visiblebyzoom(visibleIds);
+	            this.setState({ markers: markers });
 	        }
 	    }, {
 	        key: 'addMarkers',
@@ -21599,14 +21648,17 @@
 	            }
 	        }
 	    }, {
+	        key: 'componentWillUpdate',
+	        value: function componentWillUpdate(nextProps, nextState) {
+	            if (this.props.visible !== nextProps.visible) {
+	                this.updateMarkers(nextProps.visible);
+	            }
+	        }
+	    }, {
 	        key: 'componentWillReceiveProps',
 	        value: function componentWillReceiveProps(nextProps) {
 	            var currentMarkId = this.props.hoveringid;
 	            var newMarkId = nextProps.hoveringid;
-	
-	            if (this.props.visible !== nextProps.visible) {
-	                this.updateMarkers(nextProps.visible);
-	            }
 	
 	            var showCluster = false;
 	
@@ -21643,11 +21695,9 @@
 	            }
 	
 	            if (newMarkId !== currentMarkId && '' !== newMarkId && false === showCluster) {
-	                console.log('Showpinwindow');
 	                var _mark = this.state.markers.filter(function (mark) {
 	                    return mark.id == newMarkId;
 	                });
-	                console.log(_mark[0]);
 	                google.maps.event.trigger(_mark[0], 'dblclick');
 	            }
 	        }
@@ -21655,6 +21705,7 @@
 	        key: 'updateMarkers',
 	        value: function updateMarkers(data) {
 	            var markers = [];
+	            var bounds = new google.maps.LatLngBounds();
 	            for (var i = 0; i < this.state.markers.length; i++) {
 	                var curMarker = this.state.markers[i];
 	                var foundMarker = false;
@@ -21675,19 +21726,22 @@
 	
 	            if (markers !== this.state.markers) {
 	                this.setState({ markers: markers });
-	                map.fitBounds(bounds);
 	                markerCluster.repaint();
+	                map.setCenter(bounds.getCenter());
+	                //map.fitBounds(bounds);
 	            }
 	        }
 	    }, {
 	        key: 'zoomInMap',
 	        value: function zoomInMap() {
 	            map.setZoom(map.getZoom() + 2);
+	            this.updateBoundsChange();
 	        }
 	    }, {
 	        key: 'zoomOutMap',
 	        value: function zoomOutMap() {
 	            map.setZoom(map.getZoom() - 2);
+	            this.updateBoundsChange();
 	        }
 	    }, {
 	        key: 'render',
@@ -23046,18 +23100,19 @@
 	
 	            var readMore = '';
 	            if (!this.state.hidden) {
+	                var obstacles = this.props.obstacles === '' || this.props.obstacles === null ? '' : _react2.default.createElement(
+	                    'span',
+	                    null,
+	                    _react2.default.createElement(_fonty2.default, { text: this.props.obstacles + " obstacles", icon: 'fa-heartbeat' })
+	                );
 	                readMore = _react2.default.createElement(_infobox2.default, {
 	                    title: this.props.title,
 	                    youtube: this.props.youtube,
 	                    closebox: this.toggleInfoBox,
-	                    homepage: this.props.site });
+	                    homepage: this.props.site,
+	                    obstacles: obstacles });
 	            }
 	
-	            var obstacles = this.props.obstacles === '' || this.props.obstacles === null ? '' : _react2.default.createElement(
-	                'span',
-	                null,
-	                _react2.default.createElement(_fonty2.default, { text: this.props.obstacles + " obstacles", icon: 'fa-heartbeat' })
-	            );
 	            var classname = this.props.hooveredpinid === this.props.id ? 'event highlight' : 'event';
 	
 	            return _react2.default.createElement(
@@ -23098,14 +23153,9 @@
 	                    _react2.default.createElement(_fonty2.default, { text: this.props.country, icon: 'fa-globe' })
 	                ),
 	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'eventstats' },
-	                    _react2.default.createElement(
-	                        'span',
-	                        null,
-	                        _react2.default.createElement(_fonty2.default, { text: this.props.length, icon: 'fa-map-marker' })
-	                    ),
-	                    obstacles
+	                    'span',
+	                    null,
+	                    _react2.default.createElement(_fonty2.default, { text: this.props.length, icon: 'fa-map-marker' })
 	                ),
 	                readMore
 	            );
@@ -34082,7 +34132,7 @@
 	                    autoComplete: 'off',
 	                    type: 'search',
 	                    placeholder: 'Search for events',
-	                    onKeyUp: this.updateSearchVal,
+	                    onChange: this.updateSearchVal,
 	                    onKeyDown: this.resetSearchTimer,
 	                    tabIndex: '1' }),
 	                _react2.default.createElement(

@@ -8,7 +8,7 @@ Address: 18601 Sky Meadows Ln, Snohomish, WA 98290
 Date: 2017-04-22
 Site: http://www.spartan.com/en/race/detail/1726/overview?filter=super
 
-Length: 8-10 miles
+Length: 10 miles
 
 Obstacles: 24-29
 Price: 109-129

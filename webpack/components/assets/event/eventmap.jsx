@@ -4,9 +4,8 @@ import ReactDOMServer from 'react-dom/server';
 import InfoWindow from './eventassets/infowindow.jsx';
 
 var map = '';
-var bounds = '';
+//var bounds = '';
 var markerCluster = '';
-var overlay = '';
 var infoWindowBig = new google.maps.InfoWindow();
 
 class EventMap extends React.Component {
@@ -15,15 +14,18 @@ class EventMap extends React.Component {
 
         this.state = {
             markers: [],
+            mappedZoomed: false,
         };
-
-        this.eventHovered = this.eventHovered.bind(this);
-        this.eventMouseout = this.eventMouseout.bind(this);
 
         this.zoomInMap = this.zoomInMap.bind(this);
         this.zoomOutMap = this.zoomOutMap.bind(this);
         this.addMarkers = this.addMarkers.bind(this);
+        this.eventHovered = this.eventHovered.bind(this);
+        this.eventMouseout = this.eventMouseout.bind(this);
         this.updateMarkers = this.updateMarkers.bind(this);
+
+        this.updateBoundsChange = this.updateBoundsChange.bind(this);
+
         this.createContentString = this.createContentString.bind(this);
         this.handleMousePinMouseout = this.handleMousePinMouseout.bind(this);
         this.handleMousePinMouseover = this.handleMousePinMouseover.bind(this);
@@ -32,21 +34,21 @@ class EventMap extends React.Component {
     componentWillMount() {
         const mapRef = this.refs.map;
         const node = document.getElementById('map');
-        overlay = new google.maps.OverlayView();
         var mapOptions = {
-            center: new google.maps.LatLng(64.262903, -10.809107),
+            center: new google.maps.LatLng(48.413684, -52.064998),
             zoom: 3,
+            maxZoom: 13,
             disableDefaultUI: true,
             scrollwheel: false,
         };
         map = new google.maps.Map(node, mapOptions);
-        bounds = new google.maps.LatLngBounds();
-        
-        overlay.draw = function() {};
-        overlay.setMap(map);
+        //bounds = new google.maps.LatLngBounds();
         
         this.addMarkers(this.props.data);
     }
+
+
+
 
     componentDidMount() {
         $('#plus').click($.proxy(function() { this.zoomInMap(); }, this));
@@ -54,10 +56,15 @@ class EventMap extends React.Component {
 
         markerCluster = new MarkerClusterer(map, this.state.markers, {imagePath: '/muddest/assets/images/cluster/m', ignoreHidden: true, zoomOnClick: false});
         
+        google.maps.event.addListener(map,'dblclick', this.updateBoundsChange);
+
+        var _that = this;
+
         google.maps.event.addListener(markerCluster, 'click', function(cluster) {
             map.setCenter(cluster.getCenter());
             map.setZoom(map.getZoom()+2);
             infoWindowBig.close();
+            _that.updateBoundsChange();
         });
 
         google.maps.event.addListener(markerCluster, 'mouseover', function(cluster) {
@@ -81,6 +88,36 @@ class EventMap extends React.Component {
         google.maps.event.addListener(map, "click", function(event) { infoWindowBig.close(); });
         this.updateMarkers(this.props.visible);
     }
+
+
+
+
+
+    updateBoundsChange() {
+        console.log('mappedZoomed TRUE');
+        let visibleIds = [];
+        let markers = [];
+        
+        for (let i = 0; i < this.state.markers.length; i++) {
+            let curMarker = this.state.markers[i];
+            if (map.getBounds().contains(curMarker.getPosition())) {
+                curMarker.setVisible(true);
+                visibleIds.push(curMarker.id);
+            } 
+            else if (!map.getBounds().contains(curMarker.getPosition()) && curMarker.getVisible()) {
+                curMarker.setVisible(false);
+            }
+            markers.push(curMarker);
+        }
+        
+        console.log('Current:', visibleIds);
+        this.props.visiblebyzoom(visibleIds);
+        this.setState({ markers: markers });
+    }
+
+
+
+
 
     addMarkers(data) {
         let markingRuff = [];
@@ -122,20 +159,13 @@ class EventMap extends React.Component {
         this.setState({ markers: markers });
     }
 
-    eventMouseout(infowindow) {
-        infowindow.close();
-    }
-
-    eventHovered(marker, infowindow) {
-        infowindow.open(map, marker);
-    }
+    eventMouseout(infowindow) { infowindow.close(); }
+    eventHovered(marker, infowindow) { infowindow.open(map, marker); }
 
     handleMousePinMouseover(marker, infowindow) {
         infowindow.open(map, marker);
         this.props.sethooveredpinid(marker.id);
     }
-
-
 
     handleMousePinMouseout(marker, infowindow) {
         infowindow.close();
@@ -152,15 +182,17 @@ class EventMap extends React.Component {
         }
     }
 
+    componentWillUpdate(nextProps, nextState) {
+        if (this.props.visible !== nextProps.visible) {
+            this.updateMarkers(nextProps.visible);
+        }
+    }
+
 
 
     componentWillReceiveProps(nextProps) {
         let currentMarkId = this.props.hoveringid;
         let newMarkId = nextProps.hoveringid;
-
-        if (this.props.visible !== nextProps.visible) {
-            this.updateMarkers(nextProps.visible);
-        }
 
         let showCluster = false;
 
@@ -195,15 +227,14 @@ class EventMap extends React.Component {
         }
 
         if ( newMarkId !== currentMarkId && '' !== newMarkId && false === showCluster) {
-            console.log('Showpinwindow');
             let mark = this.state.markers.filter(function(mark) { return mark.id == newMarkId });
-            console.log(mark[0]);
             google.maps.event.trigger(mark[0], 'dblclick');
         }
     }
 
     updateMarkers(data) {
         let markers = [];
+        let bounds = new google.maps.LatLngBounds();
         for (let i=0; i < this.state.markers.length; i++) {
             let curMarker = this.state.markers[i];
             let foundMarker = false;
@@ -224,15 +255,20 @@ class EventMap extends React.Component {
 
         if (markers !== this.state.markers) {
             this.setState({ markers: markers });
-            map.fitBounds(bounds);
             markerCluster.repaint();
+            map.setCenter(bounds.getCenter());
+            //map.fitBounds(bounds);
         }
     }
 
-    zoomInMap () { 
+    zoomInMap () {
         map.setZoom(map.getZoom() + 2);
+        this.updateBoundsChange();
     }
-    zoomOutMap () { map.setZoom(map.getZoom() - 2); }
+    zoomOutMap () {
+        map.setZoom(map.getZoom() - 2);
+        this.updateBoundsChange();
+    }
 
     render () {
         return (

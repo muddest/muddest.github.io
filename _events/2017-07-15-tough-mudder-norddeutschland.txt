@@ -8,7 +8,7 @@ Address: Hof Severloh
 Date: 2017-07-15
 Site: https://en.toughmudder.de/events/norddeutschland-2017
 
-Length: 18-20km
+Length: 20km
 
 Obstacles: 20
 Price: 85-99

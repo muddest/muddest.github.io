@@ -7,7 +7,7 @@ City: Sacramento
 Address: Van Vleck Ranch, 7879 Van Vleck Road, Sacramento, CA 95683
 Date: 2016-11-13
 Site: http://www.spartan.com/en/race/detail/1539/overview?filter=sprint
-Length: 3-5 miles
+Length: 5 miles
 Obstacles: 20-23
 Price: 109-129
 Currency: Dollars

@@ -8,7 +8,7 @@ Address: 12799 California Highway 76, Pala, CA 92059
 Date: 2017-01-29
 Site: http://www.spartan.com/en/race/detail/1730/overview?filter=sprint
 
-Length: 3-5 miles
+Length: 5 miles
 
 Obstacles: 20-23
 Price: 89-114

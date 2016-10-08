@@ -7,7 +7,7 @@ City: Saraland
 Address: 8787 Celeste Rd, Saraland, AL 36571
 Date: 2016-11-19
 Site: http://www.spartan.com/en/race/detail/1405/overview?filter=super
-Length: 8-10 miles
+Length: 10 miles
 Obstacles: 24-29
 Price: 119-159
 Currency: Dollar

@@ -7,7 +7,7 @@ City: Fort McDowell
 Address: 9500 S Rodeo Drive, Fort McDowell, AZ 85264
 Date: 2017-02-26
 Site: http://www.spartan.com/en/race/detail/1713/overview?filter=super
-Length: 8-10 miles
+Length: 10 miles
 
 Obstacles: 24-29
 Price: 109-134
