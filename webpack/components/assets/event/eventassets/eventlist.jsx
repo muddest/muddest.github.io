@@ -4,6 +4,19 @@ import Event from './event.jsx';
 
 
 class EventList extends React.Component {
+    constructor(props) {
+      super(props);
+    
+      this.state = {
+        hideOverflow: false,
+      };
+
+      this.setBodyOverFlowHidden = this.setBodyOverFlowHidden.bind(this);
+    }
+
+    setBodyOverFlowHidden() {
+        this.setState({ hideOverflow: !hideOverflow });
+    }
 
     render() {
         var curDate = '';
@@ -12,6 +25,7 @@ class EventList extends React.Component {
 
             return (
                 <Event
+                    hideoverflow={this.setBodyOverFlowHidden}
                     hooveredpinid={this.props.hooveredpinid}
                     classname={classname}
                     sethoverid={this.props.sethoverid}

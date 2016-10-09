@@ -83,11 +83,14 @@ class Event extends React.Component {
         let clicked = e.target.getAttribute('data-name');
         if ('closebox' === clicked) {
             this.setState({ hidden: true });
+            $('body').removeClass('hideoverflow');
             window.history.pushState("", "", '/');
         } else {
             window.history.pushState("", "", this.props.slug);
             this.setState({ hidden: false });
+            $('body').addClass('hideoverflow');
         }
+        //this.props.hideoverflow();
     }
 
     componentWillReceiveProps(nextProps) {

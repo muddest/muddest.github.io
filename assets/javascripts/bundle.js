@@ -22035,13 +22035,25 @@
 	var EventList = function (_React$Component) {
 	    _inherits(EventList, _React$Component);
 	
-	    function EventList() {
+	    function EventList(props) {
 	        _classCallCheck(this, EventList);
 	
-	        return _possibleConstructorReturn(this, (EventList.__proto__ || Object.getPrototypeOf(EventList)).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, (EventList.__proto__ || Object.getPrototypeOf(EventList)).call(this, props));
+	
+	        _this.state = {
+	            hideOverflow: false
+	        };
+	
+	        _this.setBodyOverFlowHidden = _this.setBodyOverFlowHidden.bind(_this);
+	        return _this;
 	    }
 	
 	    _createClass(EventList, [{
+	        key: 'setBodyOverFlowHidden',
+	        value: function setBodyOverFlowHidden() {
+	            this.setState({ hideOverflow: !hideOverflow });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _this2 = this;
@@ -22051,6 +22063,7 @@
 	                var classname = _this2.props.hooveredpinid === event.id ? 'highlight' : '';
 	
 	                return _react2.default.createElement(_event2.default, {
+	                    hideoverflow: _this2.setBodyOverFlowHidden,
 	                    hooveredpinid: _this2.props.hooveredpinid,
 	                    classname: classname,
 	                    sethoverid: _this2.props.sethoverid,
@@ -23077,11 +23090,14 @@
 	            var clicked = e.target.getAttribute('data-name');
 	            if ('closebox' === clicked) {
 	                this.setState({ hidden: true });
+	                $('body').removeClass('hideoverflow');
 	                window.history.pushState("", "", '/');
 	            } else {
 	                window.history.pushState("", "", this.props.slug);
 	                this.setState({ hidden: false });
+	                $('body').addClass('hideoverflow');
 	            }
+	            //this.props.hideoverflow();
 	        }
 	    }, {
 	        key: 'componentWillReceiveProps',

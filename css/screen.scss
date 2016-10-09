@@ -32,6 +32,10 @@ body {
         width: 20px;
         text-align: left;
     }
+
+    &.hideoverflow {
+        overflow: hidden !important;
+    }
 }
 
 h1 {
