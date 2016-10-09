@@ -21501,7 +21501,7 @@
 	                this.zoomOutMap();
 	            }, this));
 	
-	            markerCluster = new MarkerClusterer(map, this.state.markers, { imagePath: '/assets/images/cluster/m', ignoreHidden: true, zoomOnClick: false });
+	            markerCluster = new MarkerClusterer(map, this.state.markers, { imagePath: '/muddest/assets/images/cluster/m', ignoreHidden: true, zoomOnClick: false });
 	
 	            google.maps.event.addListener(map, 'dblclick', this.updateBoundsChange);
 	            google.maps.event.addListener(map, 'dragend', this.updateBoundsChange);
