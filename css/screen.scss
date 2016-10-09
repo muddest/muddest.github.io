@@ -43,7 +43,6 @@ h1 {
 
 h2 {
     margin: 0 0 10px 0;
-    color: rgb(136, 136, 136);
     font-size: 1.4rem;
 }
 
@@ -253,10 +252,9 @@ header {
 
 
     .event {
+        color: rgb(136, 136, 136);
         cursor: pointer;
-        color: rgb(230,230,230);
         padding: 20px 5px 20px 5px;
-        border-bottom: solid 1px rgb(70, 70, 70);
 
         &:hover, &.highlight {
             //background: rgba(230,230,230,0.9);
@@ -278,8 +276,9 @@ header {
         }
 
         & h2 {
-            width: 75%;
+            color: rgb(230,230,230);
             display: inline-block;
+            width: 75%;
         }
 
         & span {
@@ -368,7 +367,7 @@ input[type="search"] {
     .box_background {
         z-index: 102;
         position: fixed;
-        background: rgba(0,0,0,0.5);
+        background: rgba(0, 0, 0, 0.8);
         width: 100%;
         height: 100%;
         left: 0;
@@ -379,12 +378,12 @@ input[type="search"] {
         font-size: 1.4rem;
         cursor: auto;
         z-index: 103;
-        height: 100%;
+        height: 94%;
         overflow-y: scroll;
         background: rgba(0,0,0,1);
         position: fixed;
         left: 50%;
-        top: 0;
+        top: 3%;
         transform: translate(-50%, 0);
         background: rgb(240,240,240);
         display: block;
