@@ -120,7 +120,7 @@ header {
   }
 
   &.about-intro {
-    background: url('/muddest/assets/images/background_1800.jpg') no-repeat center center;
+    background: url('/assets/images/background_1800.jpg') no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -569,6 +569,7 @@ input[type="search"] {
     }
 
     #eventlist {
+        position: relative;
         min-width: 100%;
         max-width: 100%;
         width: 100%;
