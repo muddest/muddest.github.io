@@ -32,10 +32,6 @@ body {
         width: 20px;
         text-align: left;
     }
-
-    &.hideoverflow {
-        overflow: hidden !important;
-    }
 }
 
 h1 {
@@ -519,6 +515,11 @@ input[type="search"] {
 
 .center {
   text-align: center;
+}
+
+
+.hideoverflow {
+  overflow: hidden !important;
 }
 
 

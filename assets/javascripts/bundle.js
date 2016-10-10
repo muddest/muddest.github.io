@@ -23098,10 +23098,13 @@
 	            if ('closebox' === clicked) {
 	                this.setState({ hidden: true });
 	                $('body').removeClass('hideoverflow');
-	                //window.history.pushState("", "", '/');
+	                window.history.pushState("", "", '/');
+	                $('body,#eventlist').removeClass('hideoverflow');
+	                window.history.pushState("", "", '/');
 	            } else {
 	                //window.history.pushState("", "", this.props.slug);
 	                this.setState({ hidden: false });
+	                $('body,#eventlist').addClass('hideoverflow');
 	                $('body').addClass('hideoverflow');
 	            }
 	            //this.props.hideoverflow();
