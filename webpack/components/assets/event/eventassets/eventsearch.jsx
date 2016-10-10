@@ -42,7 +42,7 @@ class EventSearch extends React.Component {
     }
 
     componentDidMount() {
-        ReactDOM.findDOMNode(this.refs.searchInput).focus(); 
+        ReactDOM.findDOMNode(this.refs.searchInput).focus();
         let today = new Date();
         let dd = today.getDate();
         let mm = today.getMonth()+1;
@@ -82,6 +82,7 @@ class EventSearch extends React.Component {
 
     handleSubmit (e) {
         e.preventDefault();
+        this.handleSearch('word', e.target['search'].value);
     }
 
     handleFromDate(e) {
@@ -99,37 +100,41 @@ class EventSearch extends React.Component {
     }
 
     render () {
-        let countries = this.props.searchedcountries.map(function(country) {
-            return <span className="searchedcountry">{country}</span>;
-        });
-
         return (
             <form id="filter" autoComplete="off" onSubmit={this.handleSubmit}>
                 <input
                     ref="searchInput"
+                    name="search"
                     autoComplete="off"
                     type="search"
                     placeholder="Search for events"
                     onChange={this.updateSearchVal}
                     onKeyDown={this.resetSearchTimer}
-                    tabIndex="1" />
-                
-                <div id="searchedcountries">
-                    <h3>{"Countries in search"}</h3>
-                    {countries}
-                </div>
-
-                <input type="date" name="from" value={this.state.fromDate} onChange={this.handleFromDate} tabIndex="2" /> <span className="tolabel">to</span> <input type="date" name="to" value={this.state.toDate} onChange={this.handleToDate} tabIndex="3" />
-                
-                <span id="lengthfilter">Length</span>
-                <InputRange
-                        maxValue={30}
-                        minValue={0}
-                        value={this.state.values}
-                        onChange={this.handleValuesChange.bind(this)} />
+                    tabIndex="1" /> 
             </form>
         )
     }
 }
+
+// Removed from Render. Put back to get Date and Length filter
+
+//BEFORE RETURN
+//let countries = this.props.searchedcountries.map(function(country) {
+  //          return <span className="searchedcountry">{country}</span>;
+    //    });
+//AS RETURN
+//<div id="searchedcountries">
+  //                  <h3>{"Countries in search"}</h3>
+    //                {countries}
+      //          </div>
+
+//<input type="date" name="from" value={this.state.fromDate} onChange={this.handleFromDate} tabIndex="2" /> <span className="tolabel">to</span> <input type="date" name="to" value={this.state.toDate} onChange={this.handleToDate} tabIndex="3" />
+                
+                //<span id="lengthfilter">Length</span>
+                //<InputRange
+                  //      maxValue={30}
+                    //    minValue={0}
+                      //  value={this.state.values}
+                        //onChange={this.handleValuesChange.bind(this)} />
 
 export default EventSearch;

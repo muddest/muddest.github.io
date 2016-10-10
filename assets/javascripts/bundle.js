@@ -22040,10 +22040,7 @@
 	
 	        var _this = _possibleConstructorReturn(this, (EventList.__proto__ || Object.getPrototypeOf(EventList)).call(this, props));
 	
-	        _this.state = {
-	            hideOverflow: false
-	        };
-	
+	        _this.state = {};
 	        _this.setBodyOverFlowHidden = _this.setBodyOverFlowHidden.bind(_this);
 	        return _this;
 	    }
@@ -22051,7 +22048,17 @@
 	    _createClass(EventList, [{
 	        key: 'setBodyOverFlowHidden',
 	        value: function setBodyOverFlowHidden() {
-	            this.setState({ hideOverflow: !hideOverflow });
+	            this.setState({ hideOverflow: !this.state.hideOverflow });
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.refs.eventlist.addEventListener('mouseenter', function () {
+	                $('body').addClass('hideoverflow');
+	            });
+	            this.refs.eventlist.addEventListener('mouseleave', function () {
+	                $('body').removeClass('hideoverflow');
+	            });
 	        }
 	    }, {
 	        key: 'render',
@@ -22087,7 +22094,7 @@
 	
 	            return _react2.default.createElement(
 	                'div',
-	                { id: 'eventlist', key: 'eventkey' },
+	                { id: 'eventlist', key: 'eventkey', ref: 'eventlist' },
 	                eventnodes
 	            );
 	        }
@@ -23091,9 +23098,9 @@
 	            if ('closebox' === clicked) {
 	                this.setState({ hidden: true });
 	                $('body').removeClass('hideoverflow');
-	                window.history.pushState("", "", '/');
+	                //window.history.pushState("", "", '/');
 	            } else {
-	                window.history.pushState("", "", this.props.slug);
+	                //window.history.pushState("", "", this.props.slug);
 	                this.setState({ hidden: false });
 	                $('body').addClass('hideoverflow');
 	            }
@@ -23103,6 +23110,7 @@
 	        key: 'componentWillReceiveProps',
 	        value: function componentWillReceiveProps(nextProps) {
 	            if (nextProps.clickedpin === this.props.id) {
+	                $('body').addClass('hideoverflow');
 	                this.setState({ hidden: false });
 	            }
 	        }
@@ -34182,6 +34190,7 @@
 	        key: 'handleSubmit',
 	        value: function handleSubmit(e) {
 	            e.preventDefault();
+	            this.handleSearch('word', e.target['search'].value);
 	        }
 	    }, {
 	        key: 'handleFromDate',
@@ -34203,60 +34212,45 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var countries = this.props.searchedcountries.map(function (country) {
-	                return _react2.default.createElement(
-	                    'span',
-	                    { className: 'searchedcountry' },
-	                    country
-	                );
-	            });
-	
 	            return _react2.default.createElement(
 	                'form',
 	                { id: 'filter', autoComplete: 'off', onSubmit: this.handleSubmit },
 	                _react2.default.createElement('input', {
 	                    ref: 'searchInput',
+	                    name: 'search',
 	                    autoComplete: 'off',
 	                    type: 'search',
 	                    placeholder: 'Search for events',
 	                    onChange: this.updateSearchVal,
 	                    onKeyDown: this.resetSearchTimer,
-	                    tabIndex: '1' }),
-	                _react2.default.createElement(
-	                    'div',
-	                    { id: 'searchedcountries' },
-	                    _react2.default.createElement(
-	                        'h3',
-	                        null,
-	                        "Countries in search"
-	                    ),
-	                    countries
-	                ),
-	                _react2.default.createElement('input', { type: 'date', name: 'from', value: this.state.fromDate, onChange: this.handleFromDate, tabIndex: '2' }),
-	                ' ',
-	                _react2.default.createElement(
-	                    'span',
-	                    { className: 'tolabel' },
-	                    'to'
-	                ),
-	                ' ',
-	                _react2.default.createElement('input', { type: 'date', name: 'to', value: this.state.toDate, onChange: this.handleToDate, tabIndex: '3' }),
-	                _react2.default.createElement(
-	                    'span',
-	                    { id: 'lengthfilter' },
-	                    'Length'
-	                ),
-	                _react2.default.createElement(_reactInputRange2.default, {
-	                    maxValue: 30,
-	                    minValue: 0,
-	                    value: this.state.values,
-	                    onChange: this.handleValuesChange.bind(this) })
+	                    tabIndex: '1' })
 	            );
 	        }
 	    }]);
 	
 	    return EventSearch;
 	}(_react2.default.Component);
+	
+	// Removed from Render. Put back to get Date and Length filter
+	
+	//BEFORE RETURN
+	//let countries = this.props.searchedcountries.map(function(country) {
+	//          return <span className="searchedcountry">{country}</span>;
+	//    });
+	//AS RETURN
+	//<div id="searchedcountries">
+	//                  <h3>{"Countries in search"}</h3>
+	//                {countries}
+	//          </div>
+	
+	//<input type="date" name="from" value={this.state.fromDate} onChange={this.handleFromDate} tabIndex="2" /> <span className="tolabel">to</span> <input type="date" name="to" value={this.state.toDate} onChange={this.handleToDate} tabIndex="3" />
+	
+	//<span id="lengthfilter">Length</span>
+	//<InputRange
+	//      maxValue={30}
+	//    minValue={0}
+	//  value={this.state.values}
+	//onChange={this.handleValuesChange.bind(this)} />
 	
 	exports.default = EventSearch;
 

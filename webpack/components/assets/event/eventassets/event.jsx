@@ -84,9 +84,9 @@ class Event extends React.Component {
         if ('closebox' === clicked) {
             this.setState({ hidden: true });
             $('body').removeClass('hideoverflow');
-            window.history.pushState("", "", '/');
+            //window.history.pushState("", "", '/');
         } else {
-            window.history.pushState("", "", this.props.slug);
+            //window.history.pushState("", "", this.props.slug);
             this.setState({ hidden: false });
             $('body').addClass('hideoverflow');
         }
@@ -95,6 +95,7 @@ class Event extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.clickedpin === this.props.id) {
+            $('body').addClass('hideoverflow');
             this.setState({ hidden: false });
         }
     }

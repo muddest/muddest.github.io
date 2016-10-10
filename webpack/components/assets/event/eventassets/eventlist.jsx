@@ -6,16 +6,21 @@ import Event from './event.jsx';
 class EventList extends React.Component {
     constructor(props) {
       super(props);
-    
-      this.state = {
-        hideOverflow: false,
-      };
-
+      this.state = {};
       this.setBodyOverFlowHidden = this.setBodyOverFlowHidden.bind(this);
     }
 
     setBodyOverFlowHidden() {
-        this.setState({ hideOverflow: !hideOverflow });
+        this.setState({ hideOverflow: !this.state.hideOverflow });
+    }
+
+    componentDidMount() {
+        this.refs.eventlist.addEventListener('mouseenter', function() {
+            $('body').addClass('hideoverflow');
+        });
+        this.refs.eventlist.addEventListener('mouseleave', function() {
+            $('body').removeClass('hideoverflow');
+        });
     }
 
     render() {
@@ -49,7 +54,7 @@ class EventList extends React.Component {
         });
 
         return (
-                <div id="eventlist" key="eventkey">
+                <div id="eventlist" key="eventkey" ref="eventlist">
                     {eventnodes}
                 </div>
         )
