@@ -142,6 +142,11 @@ class Event extends React.Component {
                 <span className="date"><Fonty text={this.props.date} icon="fa-calendar" /></span>
                 <span className="country"><Fonty text={this.props.country} icon="fa-globe" /></span>
                 <span className="length"><Fonty text={this.props.length} icon="fa-map-marker" /></span>
+
+                <span className="socialmedia">
+                    <Fonty text="Like" icon="fa-facebook-official" />
+                    <Fonty text="Tweet" icon="fa-twitter" />
+                </span>
                 
                 {readMore}
             </div>

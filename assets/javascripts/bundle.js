@@ -21501,7 +21501,7 @@
 	                this.zoomOutMap();
 	            }, this));
 	
-	            markerCluster = new MarkerClusterer(map, this.state.markers, { imagePath: '/muddest/assets/images/cluster/m', ignoreHidden: true, zoomOnClick: false });
+	            markerCluster = new MarkerClusterer(map, this.state.markers, { imagePath: '/assets/images/cluster/m', ignoreHidden: true, zoomOnClick: false });
 	
 	            google.maps.event.addListener(map, 'dblclick', this.updateBoundsChange);
 	            google.maps.event.addListener(map, 'dragend', this.updateBoundsChange);
@@ -23184,6 +23184,12 @@
 	                    'span',
 	                    { className: 'length' },
 	                    _react2.default.createElement(_fonty2.default, { text: this.props.length, icon: 'fa-map-marker' })
+	                ),
+	                _react2.default.createElement(
+	                    'span',
+	                    { className: 'socialmedia' },
+	                    _react2.default.createElement(_fonty2.default, { text: 'Like', icon: 'fa-facebook-official' }),
+	                    _react2.default.createElement(_fonty2.default, { text: 'Tweet', icon: 'fa-twitter' })
 	                ),
 	                readMore
 	            );
