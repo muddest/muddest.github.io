@@ -278,7 +278,7 @@ header {
         & h2 {
             color: rgb(230,230,230);
             display: inline-block;
-            width: 75%;
+            width: 69%;
         }
 
         & span {
@@ -303,6 +303,32 @@ header {
 
         & .eventstats {
             margin: 5px 0 5px 0;
+        }
+
+        & .socialmedia {
+            position: relative;
+
+            & .share {
+                position: absolute;
+                display: none;
+                width: 80px;
+                background: rgb(0,0,0);
+                font-size: 1.5rem;
+                border-radius: 3px;
+            }
+
+            & .share > div > div {
+                padding: 3px 5px 3px 5px;
+            }
+
+            & .share > div:hover .filter-text-before {
+                background: blue;
+                color: rgb(240,240,240);
+            }
+
+            &:hover .share {
+                display: block;
+            }
         }
     }
 }

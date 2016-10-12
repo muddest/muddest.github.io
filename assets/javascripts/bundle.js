@@ -23153,6 +23153,17 @@
 	                        return _this2.props.toggleinfobox(_this2.props.id);
 	                    } },
 	                _react2.default.createElement(
+	                    'span',
+	                    { className: 'socialmedia' },
+	                    _react2.default.createElement(_fonty2.default, { icon: 'fa-share-alt' }),
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'share' },
+	                        _react2.default.createElement(_fonty2.default, { text: 'Like', icon: 'fa-facebook-official' }),
+	                        _react2.default.createElement(_fonty2.default, { text: 'Tweet', icon: 'fa-twitter' })
+	                    )
+	                ),
+	                _react2.default.createElement(
 	                    'h2',
 	                    null,
 	                    this.props.title
@@ -23180,12 +23191,6 @@
 	                    'span',
 	                    { className: 'length' },
 	                    _react2.default.createElement(_fonty2.default, { text: this.props.length, icon: 'fa-map-marker' })
-	                ),
-	                _react2.default.createElement(
-	                    'span',
-	                    { className: 'socialmedia' },
-	                    _react2.default.createElement(_fonty2.default, { text: 'Like', icon: 'fa-facebook-official' }),
-	                    _react2.default.createElement(_fonty2.default, { text: 'Tweet', icon: 'fa-twitter' })
 	                )
 	            );
 	        }

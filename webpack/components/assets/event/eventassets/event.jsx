@@ -89,16 +89,18 @@ class Event extends React.Component {
                 className={classname}
                 onClick={() => this.props.toggleinfobox(this.props.id)}>
 
+                <span className="socialmedia">
+                    <Fonty icon="fa-share-alt" />
+                    <span className="share">
+                        <Fonty text="Like" icon="fa-facebook-official" />
+                        <Fonty text="Tweet" icon="fa-twitter" />
+                    </span>
+                </span>
                 <h2>{this.props.title}</h2>
                 <span className={'daysleft '+this.state.daysColor}><div>{this.state.daysleft}</div></span>
                 <span className="date"><Fonty text={this.props.date} icon="fa-calendar" /></span>
                 <span className="country"><Fonty text={this.props.country} icon="fa-globe" /></span>
                 <span className="length"><Fonty text={this.props.length} icon="fa-map-marker" /></span>
-
-                <span className="socialmedia">
-                    <Fonty text="Like" icon="fa-facebook-official" />
-                    <Fonty text="Tweet" icon="fa-twitter" />
-                </span>
             </div>
         )
     }
