@@ -8,12 +8,10 @@ class Event extends React.Component {
         super(props);
 
         this.state = {
-            hidden: true,
             daysleft: '',
             daysColor: 'regular',
         };
 
-      this.toggleInfoBox = this.toggleInfoBox.bind(this);
       this.getDifferenceInDays = this.getDifferenceInDays.bind(this);
     }
 
@@ -79,53 +77,7 @@ class Event extends React.Component {
         }
     }
 
-    toggleInfoBox(e) {
-        let clicked = e.target.getAttribute('data-name');
-        if ('closebox' === clicked) {
-            this.setState({ hidden: true });
-            $('body').removeClass('hideoverflow');
-            window.history.pushState("", "", '/');
-            $('body,#eventlist').removeClass('hideoverflow');
-            window.history.pushState("", "", '/');
-        } else {
-            //window.history.pushState("", "", this.props.slug);
-            this.setState({ hidden: false });
-            $('body,#eventlist').addClass('hideoverflow');
-            $('body').addClass('hideoverflow');
-
-        }
-        //this.props.hideoverflow();
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.clickedpin === this.props.id) {
-            $('body').addClass('hideoverflow');
-            this.setState({ hidden: false });
-        }
-    }
-
     render() {
-        let readMore = '';
-        if (!this.state.hidden) {
-            readMore = (
-                <InfoBox
-                    title={this.props.title}
-                    youtube={this.props.youtube}
-                    closebox={this.toggleInfoBox}
-                    length={this.props.length}
-                    price={this.props.price}
-                    currency={this.props.currency}
-                    info={this.props.info}
-                    date={this.props.date}
-                    address={this.props.address}
-                    city={this.props.city}
-                    country={this.props.country}
-                    homepage={this.props.site}
-                    obstacles={this.props.obstacles}
-                    daysleft={this.state.daysleft} />
-            )
-        }
-
         let classname = (this.props.hooveredpinid === this.props.id) ? 'event highlight' : 'event';
 
         return (
@@ -135,7 +87,7 @@ class Event extends React.Component {
                 onMouseEnter={() => this.props.sethoverid(this.props.id)}
                 onMouseLeave={() => this.props.sethoverid('')}
                 className={classname}
-                onClick={this.toggleInfoBox}>
+                onClick={() => this.props.toggleinfobox(this.props.id)}>
 
                 <h2>{this.props.title}</h2>
                 <span className={'daysleft '+this.state.daysColor}><div>{this.state.daysleft}</div></span>
@@ -147,8 +99,6 @@ class Event extends React.Component {
                     <Fonty text="Like" icon="fa-facebook-official" />
                     <Fonty text="Tweet" icon="fa-twitter" />
                 </span>
-                
-                {readMore}
             </div>
         )
     }
@@ -156,8 +106,7 @@ class Event extends React.Component {
     shouldComponentUpdate(nextProps, nextState) {
         if ((nextProps.hooveredpinid === this.props.id && this.props.hooveredpinid !== this.props.id)
             || (this.props.hooveredpinid === this.props.id && nextProps.hooveredpinid !== this.props.id)
-            || this.state.hidden !== nextState.hidden
-            || nextProps.clickedpin === this.props.id) {
+            || this.state.hidden !== nextState.hidden) {
             return true;
         } else {
             return false;

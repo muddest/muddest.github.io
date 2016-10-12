@@ -21067,6 +21067,10 @@
 	
 	var _eventmap2 = _interopRequireDefault(_eventmap);
 	
+	var _infobox = __webpack_require__(/*! ./eventassets/infobox.jsx */ 182);
+	
+	var _infobox2 = _interopRequireDefault(_infobox);
+	
 	var _eventlist = __webpack_require__(/*! ./eventassets/eventlist.jsx */ 171);
 	
 	var _eventlist2 = _interopRequireDefault(_eventlist);
@@ -21093,27 +21097,24 @@
 	
 	        _this.state = {
 	            data: [],
-	            searchWord: '',
-	            length: {
-	                min: 0,
-	                max: 30
-	            },
-	            hoveringId: '',
-	            hooveredPinId: '',
 	            fromDate: '',
 	            toDate: '',
+	            searchWord: '',
+	            hoveringId: '',
+	            hooveredPinId: '',
 	            countries: [],
 	            filteredData: [],
 	            initMap: false,
 	            clickedPin: null,
-	            searchedCountries: [],
 	            windowWidth: 0,
-	            visibleByMapZoom: []
+	            showInfoBox: false,
+	            infoBoxId: ''
 	        };
 	
 	        _this.checkToDate = _this.checkToDate.bind(_this);
 	        _this.handlePinClick = _this.handlePinClick.bind(_this);
 	        _this.handleResize = _this.handleResize.bind(_this);
+	        _this.toggleInfoBox = _this.toggleInfoBox.bind(_this);
 	
 	        _this.setHoverId = _this.setHoverId.bind(_this);
 	        _this.filterData = _this.filterData.bind(_this);
@@ -21137,8 +21138,7 @@
 	                    var curEventDate = new Date(curEvent.Date);
 	
 	                    for (var k = 0; k < visibleEvents.length; k++) {
-	                        //console.log('Curevent length: ', parseInt(curEvent.Length));
-	                        if (curEvent.id === visibleEvents[k] && parseInt(curEvent.Length) > this.state.length.min && parseInt(curEvent.Length) < this.state.length.max && curEventDate >= this.state.fromDate && curEventDate <= this.state.toDate) {
+	                        if (curEvent.id === visibleEvents[k] && curEventDate >= this.state.fromDate && curEventDate <= this.state.toDate) {
 	
 	                            filteredData.push(curEvent);
 	                        }
@@ -21240,7 +21240,7 @@
 	    }, {
 	        key: 'componentDidUpdate',
 	        value: function componentDidUpdate(prevProps, prevState) {
-	            if (this.state.searchWord !== prevState.searchWord || this.state.fromDate !== prevState.fromDate || this.state.toDate !== prevState.toDate || this.state.length.max !== prevState.length.max || this.state.length.min !== prevState.length.min) {
+	            if (this.state.searchWord !== prevState.searchWord || this.state.fromDate !== prevState.fromDate || this.state.toDate !== prevState.toDate) {
 	                // Do this then
 	                this.setDataBySearch();
 	            }
@@ -21319,11 +21319,7 @@
 	                        }
 	                    }
 	
-	                    if (_this2.state.length.min > parseInt(event.Length) || _this2.state.length.max < parseInt(event.Length)) {
-	                        isWithinLength = false;
-	                    }
-	
-	                    if (isInCountry && isInSearch && isWithinLength) {
+	                    if (isInCountry && isInSearch) {
 	                        filteredData.push(event);
 	                    }
 	                    return false;
@@ -21331,11 +21327,6 @@
 	
 	                // If no country given go for searchword
 	                if (event.Title.toLowerCase().indexOf(searchWord) === -1 && 1 < _this2.state.searchWord.length) {
-	                    return false;
-	                }
-	
-	                // If no country given. Go for length
-	                if (_this2.state.length.min > parseInt(event.Length) || _this2.state.length.max < parseInt(event.Length)) {
 	                    return false;
 	                }
 	
@@ -21348,12 +21339,30 @@
 	        key: 'handlePinClick',
 	        value: function handlePinClick(eventId) {
 	            this.setState({ clickedPin: eventId });
-	            this.setState({ clickedPin: null });
+	            this.toggleInfoBox(eventId);
+	        }
+	        //daysleft={this.state.daysleft}
+	
+	    }, {
+	        key: 'toggleInfoBox',
+	        value: function toggleInfoBox(infoId) {
+	            if (true === this.state.showInfoBox) {
+	                $('body').removeClass('hideoverflow');
+	                $('body,#eventlist').removeClass('hideoverflow');
+	                this.setState({ showInfoBox: false, infoBoxId: null });
+	            } else {
+	                $('body,#eventlist').addClass('hideoverflow');
+	                $('body').addClass('hideoverflow');
+	                this.setState({ showInfoBox: true, infoBoxId: infoId });
+	            }
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _this3 = this;
+	
 	            var map = '';
+	            var infobox = '';
 	
 	            if (this.state.initMap && this.state.windowWidth > 800) {
 	                map = _react2.default.createElement(_eventmap2.default, {
@@ -21363,6 +21372,32 @@
 	                    sethooveredpinid: this.setHooveringPinId,
 	                    hoveringid: this.state.hoveringId,
 	                    visiblebyzoom: this.changeVisibleEventsByMapZoom });
+	            }
+	
+	            if (true === this.state.showInfoBox && '' !== this.state.infoBoxId) {
+	                var filteredArray = this.props.data.filter(function (element) {
+	                    return element.id === _this3.state.infoBoxId;
+	                });
+	
+	                if (filteredArray.length > 0) {
+	                    infobox = _react2.default.createElement(_infobox2.default, {
+	                        title: filteredArray[0].Title,
+	                        youtube: filteredArray[0].Youtube,
+	                        closebox: this.toggleInfoBox,
+	                        length: filteredArray[0].Length,
+	                        price: filteredArray[0].Price,
+	                        currency: filteredArray[0].Currency,
+	                        info: filteredArray[0].content,
+	                        date: filteredArray[0].Date,
+	                        address: filteredArray[0].address,
+	                        city: filteredArray[0].City,
+	                        country: filteredArray[0].Country,
+	                        homepage: filteredArray[0].Site,
+	                        obstacles: filteredArray[0].Obstacles
+	                    });
+	                } else {
+	                    this.setState({ showInfoBox: false });
+	                }
 	            }
 	            return _react2.default.createElement(
 	                'div',
@@ -21376,22 +21411,24 @@
 	                        _react2.default.createElement(_eventsearch2.default, {
 	                            changesearchstate: this.changeSearchState,
 	                            setfromdate: this.setFromDate,
-	                            settodate: this.setToDate,
-	                            searchedcountries: this.state.searchedCountries }),
+	                            settodate: this.setToDate }),
 	                        _react2.default.createElement(_eventlist2.default, {
 	                            hooveredpinid: this.state.hooveredPinId,
+	                            toggleinfobox: this.toggleInfoBox,
 	                            sethoverid: this.setHoverId,
 	                            clickedpin: this.state.clickedPin,
-	                            data: this.state.filteredData })
+	                            data: this.state.filteredData,
+	                            handlepinclick: this.handlePinClick })
 	                    ),
-	                    map
+	                    map,
+	                    infobox
 	                )
 	            );
 	        }
 	    }, {
 	        key: 'shouldComponentUpdate',
 	        value: function shouldComponentUpdate(nextProps, nextState) {
-	            if (this.state.hoveringId !== nextState.hoveringId || this.state.length.min !== nextState.length.min || this.state.length.max !== nextState.length.max || this.state.fromDate !== nextState.fromDate || this.state.toDate !== nextState.toDate || this.state.searchWord !== nextState.searchWord || this.state.hooveredPinId !== nextState.hooveredPinId || this.state.filteredData !== nextState.filteredData || this.state.clickedPin !== nextState.clickedPin || this.state.searchedCountries !== nextState.searchedCountries || this.state.windowWidth !== nextState.windowWidth) {
+	            if (this.state.hoveringId !== nextState.hoveringId || this.state.searchWord !== nextState.searchWord || this.state.hooveredPinId !== nextState.hooveredPinId || this.state.filteredData !== nextState.filteredData || this.state.clickedPin !== nextState.clickedPin || this.state.searchedCountries !== nextState.searchedCountries || this.state.windowWidth !== nextState.windowWidth || this.state.showInfoBox !== nextState.showInfoBox) {
 	                return true;
 	            } else {
 	                return false;
@@ -21401,6 +21438,17 @@
 	
 	    return EventBox;
 	}(_react2.default.Component);
+	// REMOVED FILTER SEARCH
+	//|| this.state.length.min !== nextState.length.min
+	//|| this.state.length.max !== nextState.length.max
+	//|| this.state.fromDate !== nextState.fromDate
+	//|| this.state.toDate !== nextState.toDate
+	
+	// REMOVED FROM STATE
+	//length: {
+	//    min: 0,
+	//    max: 30,
+	//},
 	
 	exports.default = EventBox;
 
@@ -22041,16 +22089,10 @@
 	        var _this = _possibleConstructorReturn(this, (EventList.__proto__ || Object.getPrototypeOf(EventList)).call(this, props));
 	
 	        _this.state = {};
-	        _this.setBodyOverFlowHidden = _this.setBodyOverFlowHidden.bind(_this);
 	        return _this;
 	    }
 	
 	    _createClass(EventList, [{
-	        key: 'setBodyOverFlowHidden',
-	        value: function setBodyOverFlowHidden() {
-	            this.setState({ hideOverflow: !this.state.hideOverflow });
-	        }
-	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            this.refs.eventlist.addEventListener('mouseenter', function () {
@@ -22070,7 +22112,6 @@
 	                var classname = _this2.props.hooveredpinid === event.id ? 'highlight' : '';
 	
 	                return _react2.default.createElement(_event2.default, {
-	                    hideoverflow: _this2.setBodyOverFlowHidden,
 	                    hooveredpinid: _this2.props.hooveredpinid,
 	                    classname: classname,
 	                    sethoverid: _this2.props.sethoverid,
@@ -22089,7 +22130,7 @@
 	                    price: event.Price,
 	                    currency: event.Currency,
 	                    slug: event.slug,
-	                    clickedpin: _this2.props.clickedpin });
+	                    toggleinfobox: _this2.props.toggleinfobox });
 	            });
 	
 	            return _react2.default.createElement(
@@ -23016,12 +23057,10 @@
 	        var _this = _possibleConstructorReturn(this, (Event.__proto__ || Object.getPrototypeOf(Event)).call(this, props));
 	
 	        _this.state = {
-	            hidden: true,
 	            daysleft: '',
 	            daysColor: 'regular'
 	        };
 	
-	        _this.toggleInfoBox = _this.toggleInfoBox.bind(_this);
 	        _this.getDifferenceInDays = _this.getDifferenceInDays.bind(_this);
 	        return _this;
 	    }
@@ -23092,54 +23131,9 @@
 	            }
 	        }
 	    }, {
-	        key: 'toggleInfoBox',
-	        value: function toggleInfoBox(e) {
-	            var clicked = e.target.getAttribute('data-name');
-	            if ('closebox' === clicked) {
-	                this.setState({ hidden: true });
-	                $('body').removeClass('hideoverflow');
-	                window.history.pushState("", "", '/');
-	                $('body,#eventlist').removeClass('hideoverflow');
-	                window.history.pushState("", "", '/');
-	            } else {
-	                //window.history.pushState("", "", this.props.slug);
-	                this.setState({ hidden: false });
-	                $('body,#eventlist').addClass('hideoverflow');
-	                $('body').addClass('hideoverflow');
-	            }
-	            //this.props.hideoverflow();
-	        }
-	    }, {
-	        key: 'componentWillReceiveProps',
-	        value: function componentWillReceiveProps(nextProps) {
-	            if (nextProps.clickedpin === this.props.id) {
-	                $('body').addClass('hideoverflow');
-	                this.setState({ hidden: false });
-	            }
-	        }
-	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _this2 = this;
-	
-	            var readMore = '';
-	            if (!this.state.hidden) {
-	                readMore = _react2.default.createElement(_infobox2.default, {
-	                    title: this.props.title,
-	                    youtube: this.props.youtube,
-	                    closebox: this.toggleInfoBox,
-	                    length: this.props.length,
-	                    price: this.props.price,
-	                    currency: this.props.currency,
-	                    info: this.props.info,
-	                    date: this.props.date,
-	                    address: this.props.address,
-	                    city: this.props.city,
-	                    country: this.props.country,
-	                    homepage: this.props.site,
-	                    obstacles: this.props.obstacles,
-	                    daysleft: this.state.daysleft });
-	            }
 	
 	            var classname = this.props.hooveredpinid === this.props.id ? 'event highlight' : 'event';
 	
@@ -23155,7 +23149,9 @@
 	                        return _this2.props.sethoverid('');
 	                    },
 	                    className: classname,
-	                    onClick: this.toggleInfoBox },
+	                    onClick: function onClick() {
+	                        return _this2.props.toggleinfobox(_this2.props.id);
+	                    } },
 	                _react2.default.createElement(
 	                    'h2',
 	                    null,
@@ -23190,14 +23186,13 @@
 	                    { className: 'socialmedia' },
 	                    _react2.default.createElement(_fonty2.default, { text: 'Like', icon: 'fa-facebook-official' }),
 	                    _react2.default.createElement(_fonty2.default, { text: 'Tweet', icon: 'fa-twitter' })
-	                ),
-	                readMore
+	                )
 	            );
 	        }
 	    }, {
 	        key: 'shouldComponentUpdate',
 	        value: function shouldComponentUpdate(nextProps, nextState) {
-	            if (nextProps.hooveredpinid === this.props.id && this.props.hooveredpinid !== this.props.id || this.props.hooveredpinid === this.props.id && nextProps.hooveredpinid !== this.props.id || this.state.hidden !== nextState.hidden || nextProps.clickedpin === this.props.id) {
+	            if (nextProps.hooveredpinid === this.props.id && this.props.hooveredpinid !== this.props.id || this.props.hooveredpinid === this.props.id && nextProps.hooveredpinid !== this.props.id || this.state.hidden !== nextState.hidden) {
 	                return true;
 	            } else {
 	                return false;
@@ -23398,12 +23393,72 @@
 	
 	        var _this = _possibleConstructorReturn(this, (InfoBox.__proto__ || Object.getPrototypeOf(InfoBox)).call(this, props));
 	
-	        _this.state = {};
+	        _this.state = {
+	            daysleft: null
+	        };
+	
 	        _this.rawMarkup = _this.rawMarkup.bind(_this);
+	        _this.getDifferenceInDays = _this.getDifferenceInDays.bind(_this);
 	        return _this;
 	    }
 	
 	    _createClass(InfoBox, [{
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            var daysLeft = this.getDifferenceInDays(this.props.date);
+	
+	            if (daysLeft <= 20) {
+	                this.setState({ daysColor: 'red' });
+	            } else if (daysLeft > 20 && daysLeft <= 60) {
+	                this.setState({ daysColor: 'yellow' });
+	            }
+	
+	            var daysleft = '';
+	            var days = daysLeft.toString();
+	
+	            switch (days) {
+	                case '0':
+	                    daysleft = 'Today';
+	                    break;
+	                case '-0':
+	                    daysleft = 'Today';
+	                    break;
+	                case '-1':
+	                    daysleft = 'Yesterday';
+	                    break;
+	                case '1':
+	                    daysleft = 'Tomorrow';
+	                    break;
+	                default:
+	                    daysleft = days + ' days left';
+	                    break;
+	            }
+	
+	            this.setState({ daysleft: daysleft });
+	        }
+	    }, {
+	        key: 'getDifferenceInDays',
+	        value: function getDifferenceInDays(date) {
+	            var oneDay = 24 * 60 * 60 * 1000;
+	            var eventDate = new Date(date);
+	
+	            var dateObj = new Date();
+	            var month = dateObj.getUTCMonth() + 1; //months from 1-12
+	            month = month.toString();
+	            var day = dateObj.getUTCDate().toString();
+	            var year = dateObj.getUTCFullYear().toString();
+	            var nowString = year + '-' + month + '-' + day;
+	            var now = new Date(nowString);
+	
+	            var diffDays = Math.round(Math.abs((eventDate.getTime() - now.getTime()) / oneDay));
+	
+	            if (eventDate > now) {
+	                return diffDays;
+	            } else {
+	                return '-' + diffDays;
+	            }
+	        }
+	    }, {
 	        key: 'rawMarkup',
 	        value: function rawMarkup() {
 	            var md = new _remarkable2.default();
@@ -23432,7 +23487,7 @@
 	                                _react2.default.createElement(
 	                                    'span',
 	                                    { className: 'daysleftbox' },
-	                                    this.props.daysleft
+	                                    this.state.daysleft
 	                                )
 	                            ),
 	                            _react2.default.createElement(

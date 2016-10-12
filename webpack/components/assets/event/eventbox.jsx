@@ -1,5 +1,6 @@
 import React from 'react';
 import EventMap from './eventmap.jsx';
+import InfoBox from './eventassets/infobox.jsx';
 import EventList from './eventassets/eventlist.jsx';
 import EventSearch from './eventassets/eventsearch.jsx';
 
@@ -9,27 +10,24 @@ class EventBox extends React.Component {
 
         this.state = {
             data: [],
-            searchWord: '',
-            length: {
-                min: 0,
-                max: 30,
-            },
-            hoveringId: '',
-            hooveredPinId: '',
             fromDate: '',
             toDate: '',
+            searchWord: '',
+            hoveringId: '',
+            hooveredPinId: '',
             countries: [],
             filteredData: [],
             initMap: false,
             clickedPin: null,
-            searchedCountries: [],
             windowWidth: 0,
-            visibleByMapZoom: [],
+            showInfoBox: false,
+            infoBoxId: '',
         };
 
         this.checkToDate = this.checkToDate.bind(this);
         this.handlePinClick = this.handlePinClick.bind(this);
         this.handleResize = this.handleResize.bind(this);
+        this.toggleInfoBox = this.toggleInfoBox.bind(this);
 
         this.setHoverId = this.setHoverId.bind(this);
         this.filterData = this.filterData.bind(this);
@@ -50,10 +48,7 @@ class EventBox extends React.Component {
                 let curEventDate = new Date(curEvent.Date);
 
                 for (let k = 0; k < visibleEvents.length; k++) {
-                    //console.log('Curevent length: ', parseInt(curEvent.Length));
                     if (curEvent.id === visibleEvents[k]
-                        && parseInt(curEvent.Length) > this.state.length.min
-                        && parseInt(curEvent.Length) < this.state.length.max
                         && curEventDate >= this.state.fromDate
                         && curEventDate <= this.state.toDate ) {
 
@@ -136,9 +131,7 @@ class EventBox extends React.Component {
     componentDidUpdate(prevProps, prevState) {
         if (this.state.searchWord !== prevState.searchWord
             || this.state.fromDate !== prevState.fromDate
-            || this.state.toDate !== prevState.toDate
-            || this.state.length.max !== prevState.length.max
-            || this.state.length.min !== prevState.length.min) {
+            || this.state.toDate !== prevState.toDate) {
             // Do this then
             this.setDataBySearch();
         }
@@ -209,11 +202,7 @@ class EventBox extends React.Component {
                     }
                 }
 
-                if (this.state.length.min > parseInt(event.Length) || this.state.length.max < parseInt(event.Length)) {
-                    isWithinLength = false;
-                }
-
-                if (isInCountry && isInSearch && isWithinLength) {
+                if (isInCountry && isInSearch) {
                     filteredData.push(event);
                 }
                 return false;
@@ -221,11 +210,6 @@ class EventBox extends React.Component {
 
             // If no country given go for searchword
             if (event.Title.toLowerCase().indexOf(searchWord) === -1 && 1 < this.state.searchWord.length) {
-                return false;
-            }
-
-            // If no country given. Go for length
-            if (this.state.length.min > parseInt(event.Length) || this.state.length.max < parseInt(event.Length)) {
                 return false;
             }
 
@@ -237,11 +221,23 @@ class EventBox extends React.Component {
 
     handlePinClick(eventId) {
         this.setState({ clickedPin: eventId });
-        this.setState({ clickedPin: null });
+        this.toggleInfoBox(eventId);
     }
-
+//daysleft={this.state.daysleft}
+    toggleInfoBox(infoId) {
+        if (true === this.state.showInfoBox) {
+            $('body').removeClass('hideoverflow');
+            $('body,#eventlist').removeClass('hideoverflow');
+            this.setState({ showInfoBox: false, infoBoxId: null });
+        } else {
+            $('body,#eventlist').addClass('hideoverflow');
+            $('body').addClass('hideoverflow');
+            this.setState({ showInfoBox: true, infoBoxId: infoId });
+        }
+    }
     render() {
         let map = '';
+        let infobox = '';
 
         if (this.state.initMap && this.state.windowWidth > 800) {
             map = (
@@ -254,6 +250,34 @@ class EventBox extends React.Component {
                     visiblebyzoom={this.changeVisibleEventsByMapZoom} />
             );
         }
+
+        if (true === this.state.showInfoBox && '' !== this.state.infoBoxId) {
+            var filteredArray = this.props.data.filter((element) => { 
+                return element.id === this.state.infoBoxId;
+            });
+
+            if (filteredArray.length > 0) {
+                infobox = (
+                    <InfoBox
+                        title={filteredArray[0].Title}
+                        youtube={filteredArray[0].Youtube}
+                        closebox={this.toggleInfoBox}
+                        length={filteredArray[0].Length}
+                        price={filteredArray[0].Price}
+                        currency={filteredArray[0].Currency}
+                        info={filteredArray[0].content}
+                        date={filteredArray[0].Date}
+                        address={filteredArray[0].address}
+                        city={filteredArray[0].City}
+                        country={filteredArray[0].Country}
+                        homepage={filteredArray[0].Site}
+                        obstacles={filteredArray[0].Obstacles}
+                         />
+                );
+            } else {
+                this.setState({ showInfoBox: false });
+            }
+        }
         return (
             <div id="eventbox">
                 <div id="eventcontainer">
@@ -261,15 +285,17 @@ class EventBox extends React.Component {
                         <EventSearch 
                             changesearchstate={this.changeSearchState}
                             setfromdate={this.setFromDate}
-                            settodate={this.setToDate}
-                            searchedcountries={this.state.searchedCountries} />
+                            settodate={this.setToDate} />
                         <EventList
                             hooveredpinid={this.state.hooveredPinId}
+                            toggleinfobox={this.toggleInfoBox}
                             sethoverid={this.setHoverId}
                             clickedpin={this.state.clickedPin}
-                            data={this.state.filteredData} />
+                            data={this.state.filteredData}
+                            handlepinclick={this.handlePinClick} />
                     </div>
                     {map}
+                    {infobox}
                 </div>
                 
             </div>
@@ -278,23 +304,29 @@ class EventBox extends React.Component {
 
     shouldComponentUpdate(nextProps, nextState) {
         if (this.state.hoveringId !== nextState.hoveringId
-            || this.state.length.min !== nextState.length.min
-            || this.state.length.max !== nextState.length.max
-            || this.state.fromDate !== nextState.fromDate
-            || this.state.toDate !== nextState.toDate
             || this.state.searchWord !== nextState.searchWord
             || this.state.hooveredPinId !== nextState.hooveredPinId
             || this.state.filteredData !== nextState.filteredData
             || this.state.clickedPin !== nextState.clickedPin
             || this.state.searchedCountries !== nextState.searchedCountries
-            || this.state.windowWidth !== nextState.windowWidth) {
+            || this.state.windowWidth !== nextState.windowWidth
+            || this.state.showInfoBox !== nextState.showInfoBox) {
             return true;
         } else {
             return false;
         }
     }
 }
+// REMOVED FILTER SEARCH
+//|| this.state.length.min !== nextState.length.min
+//|| this.state.length.max !== nextState.length.max
+//|| this.state.fromDate !== nextState.fromDate
+//|| this.state.toDate !== nextState.toDate
 
-
+// REMOVED FROM STATE
+//length: {
+//    min: 0,
+//    max: 30,
+//},
 
 export default EventBox;

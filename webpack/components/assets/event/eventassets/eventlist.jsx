@@ -7,11 +7,6 @@ class EventList extends React.Component {
     constructor(props) {
       super(props);
       this.state = {};
-      this.setBodyOverFlowHidden = this.setBodyOverFlowHidden.bind(this);
-    }
-
-    setBodyOverFlowHidden() {
-        this.setState({ hideOverflow: !this.state.hideOverflow });
     }
 
     componentDidMount() {
@@ -30,7 +25,6 @@ class EventList extends React.Component {
 
             return (
                 <Event
-                    hideoverflow={this.setBodyOverFlowHidden}
                     hooveredpinid={this.props.hooveredpinid}
                     classname={classname}
                     sethoverid={this.props.sethoverid}
@@ -49,7 +43,7 @@ class EventList extends React.Component {
                     price={event.Price}
                     currency={event.Currency}
                     slug={event.slug}
-                    clickedpin={this.props.clickedpin} />
+                    toggleinfobox={this.props.toggleinfobox} />
             );
         });
 
