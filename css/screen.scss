@@ -46,23 +46,25 @@ h2 {
     font-size: 1.4rem;
 }
 
-header {
-    z-index: 10;
-    margin-left: 50%;
-    position: fixed;
-    color: rgb(230, 230, 230);
-    padding: 3px 10px 5px 10px;
-    transform: translateX(-50%);
-    background: rgba(0,0,0,0.8);
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
+.page-header {
+  color: #eee;
+  height: 90vh;
+  text-align: center;
 
-    #slogan {
-        text-align: right;
-        margin: 0 0 0 0;
-        min-width: 185px;
-        font-size: 1.4rem;
-    }
+  .page-header-metadata {
+    position: relative;
+    top: 40vh;
+  }
+
+  .page-header-video {
+    filter: blur(15px);
+    filter: brightness(50%);
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
 }
 
 #info {
@@ -82,10 +84,6 @@ header {
     }
 }
 
-#app {
-    height: 95vh;
-}
-
 #searchedcountries {
     min-height: 30px;
     margin-bottom: 15px;
@@ -100,6 +98,20 @@ header {
         color: rgb(210,210,210);
         margin: 0 5px 0 5px;
     }
+}
+
+.content {
+  position: relative;
+
+  #app, #eventmap {
+    height: 95vh;
+  }
+
+  #app {
+    &> div, #eventbox, #eventcontainer, #leftbar {
+      height: 100%;
+    }
+  }
 }
 
 .content-segment {
@@ -201,7 +213,6 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    height: 95%;
 
     #map {
         width: 100%;
@@ -225,7 +236,6 @@ header {
         text-align: center;
 
         &:hover {
-            
             background: rgba(103, 103, 103,0.8);
         }
     }
@@ -237,8 +247,6 @@ header {
 
 #leftbar {
     width: 25%;
-    position: absolute;
-    height: 95%;
     min-width: 360px;
 }
 
@@ -572,12 +580,6 @@ input[type="search"] {
 
 
 @media screen and (max-width: 800px) {
-    header {
-        margin: 0 0 0 0;
-        position: relative;
-        transform: none;
-        text-align: center;
-    }
     #zoomcontrol {
         display: none;
     }
