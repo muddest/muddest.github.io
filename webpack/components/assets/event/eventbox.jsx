@@ -28,7 +28,12 @@ class EventBox extends React.Component {
         this.checkToDate = this.checkToDate.bind(this);
         this.handlePinClick = this.handlePinClick.bind(this);
         this.handleResize = this.handleResize.bind(this);
-        this.toggleInfoBox = this.toggleInfoBox.bind(this);
+
+
+        
+        this.closeInfoBox = this.closeInfoBox.bind(this);
+        this.openInfoBox = this.openInfoBox.bind(this);
+
 
         this.setHoverId = this.setHoverId.bind(this);
         this.filterData = this.filterData.bind(this);
@@ -225,18 +230,20 @@ class EventBox extends React.Component {
         this.setState({ clickedPin: eventId });
         this.toggleInfoBox(eventId);
     }
-//daysleft={this.state.daysleft}
-    toggleInfoBox(infoId) {
-        if (true === this.state.showInfoBox) {
+
+    closeInfoBox(event) {
+        let clicked = event.target.getAttribute('data-name');
+        if ('closebox' === clicked) {
             $('body').removeClass('hideoverflow');
             $('body,#eventlist').removeClass('hideoverflow');
             this.setState({ showInfoBox: false, infoBoxId: null });
-        } else {
-            console.log('Addera skiten');
-            $('body').addClass('hideoverflow');
-            $('body,#eventlist').addClass('hideoverflow');
-            this.setState({ showInfoBox: true, infoBoxId: infoId });
         }
+    }
+
+    openInfoBox(infoId) {
+        $('body').addClass('hideoverflow');
+        $('body,#eventlist').addClass('hideoverflow');
+        this.setState({ showInfoBox: true, infoBoxId: infoId });
     }
     render() {
         let map = '';
@@ -265,7 +272,7 @@ class EventBox extends React.Component {
                     <InfoBox
                         title={filteredArray[0].Title}
                         youtube={filteredArray[0].Youtube}
-                        closebox={this.toggleInfoBox}
+                        closebox={this.closeInfoBox}
                         length={filteredArray[0].Length}
                         price={filteredArray[0].Price}
                         currency={filteredArray[0].Currency}
@@ -275,8 +282,7 @@ class EventBox extends React.Component {
                         city={filteredArray[0].City}
                         country={filteredArray[0].Country}
                         homepage={filteredArray[0].Site}
-                        obstacles={filteredArray[0].Obstacles}
-                         />
+                        obstacles={filteredArray[0].Obstacles} />
                 );
             } else {
                 this.setState({ showInfoBox: false });
@@ -293,7 +299,7 @@ class EventBox extends React.Component {
                         <EventList
                             showinginfobox={this.state.showInfoBox}
                             hooveredpinid={this.state.hooveredPinId}
-                            toggleinfobox={this.toggleInfoBox}
+                            toggleinfobox={this.openInfoBox}
                             sethoverid={this.setHoverId}
                             clickedpin={this.state.clickedPin}
                             data={this.state.filteredData}

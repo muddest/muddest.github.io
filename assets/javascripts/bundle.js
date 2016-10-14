@@ -21115,7 +21115,9 @@
 	        _this.checkToDate = _this.checkToDate.bind(_this);
 	        _this.handlePinClick = _this.handlePinClick.bind(_this);
 	        _this.handleResize = _this.handleResize.bind(_this);
-	        _this.toggleInfoBox = _this.toggleInfoBox.bind(_this);
+	
+	        _this.closeInfoBox = _this.closeInfoBox.bind(_this);
+	        _this.openInfoBox = _this.openInfoBox.bind(_this);
 	
 	        _this.setHoverId = _this.setHoverId.bind(_this);
 	        _this.filterData = _this.filterData.bind(_this);
@@ -21343,21 +21345,22 @@
 	            this.setState({ clickedPin: eventId });
 	            this.toggleInfoBox(eventId);
 	        }
-	        //daysleft={this.state.daysleft}
-	
 	    }, {
-	        key: 'toggleInfoBox',
-	        value: function toggleInfoBox(infoId) {
-	            if (true === this.state.showInfoBox) {
+	        key: 'closeInfoBox',
+	        value: function closeInfoBox(event) {
+	            var clicked = event.target.getAttribute('data-name');
+	            if ('closebox' === clicked) {
 	                $('body').removeClass('hideoverflow');
 	                $('body,#eventlist').removeClass('hideoverflow');
 	                this.setState({ showInfoBox: false, infoBoxId: null });
-	            } else {
-	                console.log('Addera skiten');
-	                $('body').addClass('hideoverflow');
-	                $('body,#eventlist').addClass('hideoverflow');
-	                this.setState({ showInfoBox: true, infoBoxId: infoId });
 	            }
+	        }
+	    }, {
+	        key: 'openInfoBox',
+	        value: function openInfoBox(infoId) {
+	            $('body').addClass('hideoverflow');
+	            $('body,#eventlist').addClass('hideoverflow');
+	            this.setState({ showInfoBox: true, infoBoxId: infoId });
 	        }
 	    }, {
 	        key: 'render',
@@ -21387,7 +21390,7 @@
 	                    infobox = _react2.default.createElement(_infobox2.default, {
 	                        title: filteredArray[0].Title,
 	                        youtube: filteredArray[0].Youtube,
-	                        closebox: this.toggleInfoBox,
+	                        closebox: this.closeInfoBox,
 	                        length: filteredArray[0].Length,
 	                        price: filteredArray[0].Price,
 	                        currency: filteredArray[0].Currency,
@@ -21397,8 +21400,7 @@
 	                        city: filteredArray[0].City,
 	                        country: filteredArray[0].Country,
 	                        homepage: filteredArray[0].Site,
-	                        obstacles: filteredArray[0].Obstacles
-	                    });
+	                        obstacles: filteredArray[0].Obstacles });
 	                } else {
 	                    this.setState({ showInfoBox: false });
 	                }
@@ -21419,7 +21421,7 @@
 	                        _react2.default.createElement(_eventlist2.default, {
 	                            showinginfobox: this.state.showInfoBox,
 	                            hooveredpinid: this.state.hooveredPinId,
-	                            toggleinfobox: this.toggleInfoBox,
+	                            toggleinfobox: this.openInfoBox,
 	                            sethoverid: this.setHoverId,
 	                            clickedpin: this.state.clickedPin,
 	                            data: this.state.filteredData,
