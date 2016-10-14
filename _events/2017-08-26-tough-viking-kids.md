@@ -1,7 +1,7 @@
 ---
 lat: 59.3263
 lng: 18.1132
-Title: Tough Viking Kids
+Title: Tough Viking Kids Djurgården
 Country: Sweden
 City: Stockholm
 Address: Kungliga Djurgården
