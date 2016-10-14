@@ -1,7 +1,7 @@
 ---
 lat: 59.3439479
 lng: 18.077459
-Title: Tough Viking Kids
+Title: Tough Viking Kids Stadion
 Country: Sweden
 City: Stockholm
 Address: Stockholms stadion
