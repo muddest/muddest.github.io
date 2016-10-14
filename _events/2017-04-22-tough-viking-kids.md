@@ -1,7 +1,7 @@
 ---
 lat: 59.6860
 lng: 18.9486
-Title: Tough Viking Kids
+Title: Tough Viking Kids Slottsskogen
 Country: Sweden
 City: Stockholm
 Address: Slottsskogen
