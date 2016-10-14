@@ -1,5 +1,4 @@
 ---
-57.6860° N, 11.9486
 lat: 59.6860
 lng: 18.9486
 Title: Tough Viking Kids
