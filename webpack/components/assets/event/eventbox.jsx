@@ -22,6 +22,7 @@ class EventBox extends React.Component {
             windowWidth: 0,
             showInfoBox: false,
             infoBoxId: '',
+            zooming: false,
         };
 
         this.checkToDate = this.checkToDate.bind(this);
@@ -57,7 +58,7 @@ class EventBox extends React.Component {
                 }
             }
             //console.log(filteredData);
-            this.setState({ filteredData: filteredData });
+            this.setState({ filteredData: filteredData, zooming: true });
         }
     }
 
@@ -111,6 +112,7 @@ class EventBox extends React.Component {
 
 
     changeSearchState(whichState, value) {
+        this.setState({ zooming: false });
         switch (whichState) {
             case 'word':
                 this.setState({ searchWord: value });
@@ -248,7 +250,8 @@ class EventBox extends React.Component {
                     visible={this.state.filteredData}
                     sethooveredpinid={this.setHooveringPinId}
                     hoveringid={this.state.hoveringId}
-                    visiblebyzoom={this.changeVisibleEventsByMapZoom} />
+                    visiblebyzoom={this.changeVisibleEventsByMapZoom}
+                    zooming={this.state.zooming} />
             );
         }
 

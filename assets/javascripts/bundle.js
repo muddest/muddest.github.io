@@ -21108,7 +21108,8 @@
 	            clickedPin: null,
 	            windowWidth: 0,
 	            showInfoBox: false,
-	            infoBoxId: ''
+	            infoBoxId: '',
+	            zooming: false
 	        };
 	
 	        _this.checkToDate = _this.checkToDate.bind(_this);
@@ -21145,7 +21146,7 @@
 	                    }
 	                }
 	                //console.log(filteredData);
-	                this.setState({ filteredData: filteredData });
+	                this.setState({ filteredData: filteredData, zooming: true });
 	            }
 	        }
 	    }, {
@@ -21203,6 +21204,7 @@
 	    }, {
 	        key: 'changeSearchState',
 	        value: function changeSearchState(whichState, value) {
+	            this.setState({ zooming: false });
 	            switch (whichState) {
 	                case 'word':
 	                    this.setState({ searchWord: value });
@@ -21372,7 +21374,8 @@
 	                    visible: this.state.filteredData,
 	                    sethooveredpinid: this.setHooveringPinId,
 	                    hoveringid: this.state.hoveringId,
-	                    visiblebyzoom: this.changeVisibleEventsByMapZoom });
+	                    visiblebyzoom: this.changeVisibleEventsByMapZoom,
+	                    zooming: this.state.zooming });
 	            }
 	
 	            if (true === this.state.showInfoBox && '' !== this.state.infoBoxId) {
@@ -21494,7 +21497,7 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var map = '';
-	//var bounds = '';
+	var bounds = '';
 	var markerCluster = '';
 	var infoWindowBig = new google.maps.InfoWindow({ pixelOffset: new google.maps.Size(0, -20) });
 	
@@ -21752,7 +21755,7 @@
 	        key: 'updateMarkers',
 	        value: function updateMarkers(data) {
 	            var markers = [];
-	            var bounds = new google.maps.LatLngBounds();
+	            bounds = new google.maps.LatLngBounds();
 	            for (var i = 0; i < this.state.markers.length; i++) {
 	                var curMarker = this.state.markers[i];
 	                var foundMarker = false;
@@ -21774,8 +21777,10 @@
 	            if (markers !== this.state.markers) {
 	                this.setState({ markers: markers });
 	                markerCluster.repaint();
-	                map.setCenter(bounds.getCenter());
-	                //map.fitBounds(bounds);
+	                if (!this.props.zooming) {
+	                    map.setCenter(bounds.getCenter());
+	                    map.fitBounds(bounds);
+	                }
 	            }
 	        }
 	    }, {

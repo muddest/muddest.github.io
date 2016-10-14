@@ -4,7 +4,7 @@ import ReactDOMServer from 'react-dom/server';
 import InfoWindow from './eventassets/infowindow.jsx';
 
 var map = '';
-//var bounds = '';
+var bounds = '';
 var markerCluster = '';
 var infoWindowBig = new google.maps.InfoWindow({ pixelOffset: new google.maps.Size(0, -20) });
 
@@ -156,6 +156,9 @@ class EventMap extends React.Component {
         this.setState({ markers: markers });
     }
 
+
+
+
     eventMouseout(infowindow) { infowindow.close(); }
     eventHovered(marker, infowindow) { infowindow.open(map, marker); }
 
@@ -168,6 +171,10 @@ class EventMap extends React.Component {
         infowindow.close();
         this.props.sethooveredpinid('');
     }
+
+
+
+
 
     shouldComponentUpdate(nextProps, nextState) {
         if (this.props.hoveringid !== nextProps.hoveringid
@@ -231,7 +238,7 @@ class EventMap extends React.Component {
 
     updateMarkers(data) {
         let markers = [];
-        let bounds = new google.maps.LatLngBounds();
+        bounds = new google.maps.LatLngBounds();
         for (let i=0; i < this.state.markers.length; i++) {
             let curMarker = this.state.markers[i];
             let foundMarker = false;
@@ -253,8 +260,10 @@ class EventMap extends React.Component {
         if (markers !== this.state.markers) {
             this.setState({ markers: markers });
             markerCluster.repaint();
-            map.setCenter(bounds.getCenter());
-            //map.fitBounds(bounds);
+            if (!this.props.zooming) {
+                map.setCenter(bounds.getCenter());
+                map.fitBounds(bounds);
+            }
         }
     }
 
