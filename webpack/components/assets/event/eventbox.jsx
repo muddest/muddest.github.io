@@ -230,8 +230,9 @@ class EventBox extends React.Component {
             $('body,#eventlist').removeClass('hideoverflow');
             this.setState({ showInfoBox: false, infoBoxId: null });
         } else {
-            $('body,#eventlist').addClass('hideoverflow');
+            console.log('Addera skiten');
             $('body').addClass('hideoverflow');
+            $('body,#eventlist').addClass('hideoverflow');
             this.setState({ showInfoBox: true, infoBoxId: infoId });
         }
     }
@@ -287,6 +288,7 @@ class EventBox extends React.Component {
                             setfromdate={this.setFromDate}
                             settodate={this.setToDate} />
                         <EventList
+                            showinginfobox={this.state.showInfoBox}
                             hooveredpinid={this.state.hooveredPinId}
                             toggleinfobox={this.toggleInfoBox}
                             sethoverid={this.setHoverId}

@@ -10,11 +10,14 @@ class EventList extends React.Component {
     }
 
     componentDidMount() {
+        var _that = this;
         this.refs.eventlist.addEventListener('mouseenter', function() {
             $('body').addClass('hideoverflow');
         });
         this.refs.eventlist.addEventListener('mouseleave', function() {
-            $('body').removeClass('hideoverflow');
+            if (!_that.props.showinginfobox) {
+                $('body').removeClass('hideoverflow');
+            }
         });
     }
 
@@ -58,7 +61,8 @@ class EventList extends React.Component {
         if (this.props.sethoverid !== nextProps.sethoverid
             || this.props.data !== nextProps.data
             || this.props.hooveredpinid !== nextProps.hooveredpinid
-            || this.props.clickedpin !== nextProps.clickedpin) {
+            || this.props.clickedpin !== nextProps.clickedpin
+            || this.state.showinginfobox !== nextState.showinginfobox) {
             return true;
         } else {
             return false;

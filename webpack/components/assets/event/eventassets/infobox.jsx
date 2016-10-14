@@ -10,7 +10,7 @@ class InfoBox extends React.Component {
       this.state = {
         daysleft: null,
       };
-      
+
       this.rawMarkup = this.rawMarkup.bind(this);
       this.getDifferenceInDays = this.getDifferenceInDays.bind(this);
     }
@@ -95,7 +95,13 @@ class InfoBox extends React.Component {
                                 <span className="date"><Fonty text={this.props.date} icon="fa-calendar" /></span>
                                 <span className="eventlength"><Fonty text={this.props.length} icon="fa-map-marker" /></span>
                                 <span className="obstacles">{obstacles}</span>
-                                <span>{this.props.price+" "+this.props.currency}</span>
+                                <span className="socialmedia">
+                                    <Fonty icon="fa-share-alt" />
+                                    <span className="share">
+                                        <Fonty text="Like" icon="fa-facebook-official" />
+                                        <Fonty text="Tweet" icon="fa-twitter" />
+                                    </span>
+                                </span>
                             </div>
 
                             <address>

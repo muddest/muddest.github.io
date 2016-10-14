@@ -21351,8 +21351,9 @@
 	                $('body,#eventlist').removeClass('hideoverflow');
 	                this.setState({ showInfoBox: false, infoBoxId: null });
 	            } else {
-	                $('body,#eventlist').addClass('hideoverflow');
+	                console.log('Addera skiten');
 	                $('body').addClass('hideoverflow');
+	                $('body,#eventlist').addClass('hideoverflow');
 	                this.setState({ showInfoBox: true, infoBoxId: infoId });
 	            }
 	        }
@@ -21413,6 +21414,7 @@
 	                            setfromdate: this.setFromDate,
 	                            settodate: this.setToDate }),
 	                        _react2.default.createElement(_eventlist2.default, {
+	                            showinginfobox: this.state.showInfoBox,
 	                            hooveredpinid: this.state.hooveredPinId,
 	                            toggleinfobox: this.toggleInfoBox,
 	                            sethoverid: this.setHoverId,
@@ -22095,11 +22097,14 @@
 	    _createClass(EventList, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
+	            var _that = this;
 	            this.refs.eventlist.addEventListener('mouseenter', function () {
 	                $('body').addClass('hideoverflow');
 	            });
 	            this.refs.eventlist.addEventListener('mouseleave', function () {
-	                $('body').removeClass('hideoverflow');
+	                if (!_that.props.showinginfobox) {
+	                    $('body').removeClass('hideoverflow');
+	                }
 	            });
 	        }
 	    }, {
@@ -22142,7 +22147,7 @@
 	    }, {
 	        key: 'shouldComponentUpdate',
 	        value: function shouldComponentUpdate(nextProps, nextState) {
-	            if (this.props.sethoverid !== nextProps.sethoverid || this.props.data !== nextProps.data || this.props.hooveredpinid !== nextProps.hooveredpinid || this.props.clickedpin !== nextProps.clickedpin) {
+	            if (this.props.sethoverid !== nextProps.sethoverid || this.props.data !== nextProps.data || this.props.hooveredpinid !== nextProps.hooveredpinid || this.props.clickedpin !== nextProps.clickedpin || this.state.showinginfobox !== nextState.showinginfobox) {
 	                return true;
 	            } else {
 	                return false;
@@ -23153,17 +23158,6 @@
 	                        return _this2.props.toggleinfobox(_this2.props.id);
 	                    } },
 	                _react2.default.createElement(
-	                    'span',
-	                    { className: 'socialmedia' },
-	                    _react2.default.createElement(_fonty2.default, { icon: 'fa-share-alt' }),
-	                    _react2.default.createElement(
-	                        'span',
-	                        { className: 'share' },
-	                        _react2.default.createElement(_fonty2.default, { text: 'Like', icon: 'fa-facebook-official' }),
-	                        _react2.default.createElement(_fonty2.default, { text: 'Tweet', icon: 'fa-twitter' })
-	                    )
-	                ),
-	                _react2.default.createElement(
 	                    'h2',
 	                    null,
 	                    this.props.title
@@ -23533,8 +23527,14 @@
 	                                ),
 	                                _react2.default.createElement(
 	                                    'span',
-	                                    null,
-	                                    this.props.price + " " + this.props.currency
+	                                    { className: 'socialmedia' },
+	                                    _react2.default.createElement(_fonty2.default, { icon: 'fa-share-alt' }),
+	                                    _react2.default.createElement(
+	                                        'span',
+	                                        { className: 'share' },
+	                                        _react2.default.createElement(_fonty2.default, { text: 'Like', icon: 'fa-facebook-official' }),
+	                                        _react2.default.createElement(_fonty2.default, { text: 'Tweet', icon: 'fa-twitter' })
+	                                    )
 	                                )
 	                            ),
 	                            _react2.default.createElement(
