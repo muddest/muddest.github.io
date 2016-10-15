@@ -628,6 +628,10 @@ input[type="search"] {
     .content-segment.content-bold {
         padding: 15px 10px 15px 10px;
     }
+
+    #googleform iframe {
+        width: 95%;
+    }
 }
 
 @media screen and (max-width: 400px) {
