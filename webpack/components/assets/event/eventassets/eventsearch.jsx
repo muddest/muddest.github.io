@@ -34,7 +34,8 @@ class EventSearch extends React.Component {
             || this.state.searchVal !== nextState.searchVal
             || this.state.fromDate !== nextState.fromDate
             || this.state.toDate !== nextState.toDate
-            || this.props.searchedcountries !== nextProps.searchedcountries) {
+            || this.props.searchedcountries !== nextProps.searchedcountries
+            || this.props.emptysearch !== nextProps.emptysearch) {
             return true;
         } else {
             return false;
@@ -100,6 +101,7 @@ class EventSearch extends React.Component {
     }
 
     render () {
+        let emptySearch = this.props.emptysearch ? <span id="emptysearch"><a className="tipus" href="https://goo.gl/forms/tYewWTC3GNKI2GDs1" target="_blank">{"No results. Click this link to add event"}</a></span> : '';
         return (
             <form id="filter" autoComplete="off" onSubmit={this.handleSubmit}>
                 <input
@@ -110,7 +112,9 @@ class EventSearch extends React.Component {
                     placeholder="Search for events"
                     onChange={this.updateSearchVal}
                     onKeyDown={this.resetSearchTimer}
-                    tabIndex="1" /> 
+                    tabIndex="1" />
+
+                {emptySearch}
             </form>
         )
     }

@@ -23,6 +23,7 @@ class EventBox extends React.Component {
             showInfoBox: false,
             infoBoxId: '',
             zooming: false,
+            emptysearch: false,
         };
 
         this.checkToDate = this.checkToDate.bind(this);
@@ -223,7 +224,10 @@ class EventBox extends React.Component {
             filteredData.push(event);
             return true;
         });
-        this.setState({ filteredData: filteredData, searchedCountries: matchedCountries });
+
+        let wasItEmpty = 0 < filteredData.length ? false : true;
+
+        this.setState({ filteredData: filteredData, searchedCountries: matchedCountries, emptysearch: wasItEmpty });
     }
 
     handlePinClick(eventId) {
@@ -295,7 +299,8 @@ class EventBox extends React.Component {
                         <EventSearch 
                             changesearchstate={this.changeSearchState}
                             setfromdate={this.setFromDate}
-                            settodate={this.setToDate} />
+                            settodate={this.setToDate}
+                            emptysearch={this.state.emptysearch} />
                         <EventList
                             showinginfobox={this.state.showInfoBox}
                             hooveredpinid={this.state.hooveredPinId}

@@ -21109,7 +21109,8 @@
 	            windowWidth: 0,
 	            showInfoBox: false,
 	            infoBoxId: '',
-	            zooming: false
+	            zooming: false,
+	            emptysearch: false
 	        };
 	
 	        _this.checkToDate = _this.checkToDate.bind(_this);
@@ -21337,7 +21338,10 @@
 	                filteredData.push(event);
 	                return true;
 	            });
-	            this.setState({ filteredData: filteredData, searchedCountries: matchedCountries });
+	
+	            var wasItEmpty = 0 < filteredData.length ? false : true;
+	
+	            this.setState({ filteredData: filteredData, searchedCountries: matchedCountries, emptysearch: wasItEmpty });
 	        }
 	    }, {
 	        key: 'handlePinClick',
@@ -21417,7 +21421,8 @@
 	                        _react2.default.createElement(_eventsearch2.default, {
 	                            changesearchstate: this.changeSearchState,
 	                            setfromdate: this.setFromDate,
-	                            settodate: this.setToDate }),
+	                            settodate: this.setToDate,
+	                            emptysearch: this.state.emptysearch }),
 	                        _react2.default.createElement(_eventlist2.default, {
 	                            showinginfobox: this.state.showInfoBox,
 	                            hooveredpinid: this.state.hooveredPinId,
@@ -34224,7 +34229,7 @@
 	    _createClass(EventSearch, [{
 	        key: 'shouldComponentUpdate',
 	        value: function shouldComponentUpdate(nextProps, nextState) {
-	            if (this.state.values.min !== nextState.values.min || this.state.values.max !== nextState.values.max || this.state.searchVal !== nextState.searchVal || this.state.fromDate !== nextState.fromDate || this.state.toDate !== nextState.toDate || this.props.searchedcountries !== nextProps.searchedcountries) {
+	            if (this.state.values.min !== nextState.values.min || this.state.values.max !== nextState.values.max || this.state.searchVal !== nextState.searchVal || this.state.fromDate !== nextState.fromDate || this.state.toDate !== nextState.toDate || this.props.searchedcountries !== nextProps.searchedcountries || this.props.emptysearch !== nextProps.emptysearch) {
 	                return true;
 	            } else {
 	                return false;
@@ -34299,6 +34304,15 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var emptySearch = this.props.emptysearch ? _react2.default.createElement(
+	                'span',
+	                { id: 'emptysearch' },
+	                _react2.default.createElement(
+	                    'a',
+	                    { className: 'tipus', href: 'https://goo.gl/forms/tYewWTC3GNKI2GDs1', target: '_blank' },
+	                    "No results. Click this link to add event"
+	                )
+	            ) : '';
 	            return _react2.default.createElement(
 	                'form',
 	                { id: 'filter', autoComplete: 'off', onSubmit: this.handleSubmit },
@@ -34310,7 +34324,8 @@
 	                    placeholder: 'Search for events',
 	                    onChange: this.updateSearchVal,
 	                    onKeyDown: this.resetSearchTimer,
-	                    tabIndex: '1' })
+	                    tabIndex: '1' }),
+	                emptySearch
 	            );
 	        }
 	    }]);

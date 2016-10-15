@@ -3,7 +3,7 @@ layout: default
 title: muddest.com
 slogan: a world of OCR
 ---
-<div id="info">
+<div id="info" class="tipus">
     <a href="https://goo.gl/forms/tYewWTC3GNKI2GDs1" target="_blank">Can't find your event? Click this link and let us know</a>
 </div>
 
@@ -38,5 +38,6 @@ slogan: a world of OCR
 <script> events = {{ site.events | jsonify }}; </script>
 
 <div id="googleform">
+    <span id="closegoogleform">Close</span>
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdgX7HeKXb0CJr_KU3_XA4B0h_iVj-DIMgq4d7aIkeDwbLUOg/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Läser in...</iframe>
 </div>
