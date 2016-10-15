@@ -260,7 +260,10 @@ class EventMap extends React.Component {
         if (markers !== this.state.markers) {
             this.setState({ markers: markers });
             markerCluster.repaint();
-            if (!this.props.zooming && this.props.emptysearch) {
+
+            if (this.props.zooming || !this.props.emptysearch) {
+                return false;
+            } else {
                 map.setCenter(bounds.getCenter());
                 map.fitBounds(bounds);
             }

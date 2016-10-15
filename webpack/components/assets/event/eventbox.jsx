@@ -225,8 +225,7 @@ class EventBox extends React.Component {
             return true;
         });
 
-        let wasItEmpty = 0 < filteredData.length ? false : true;
-
+        let wasItEmpty = (0 < filteredData.length) ? false : true;
         this.setState({ filteredData: filteredData, searchedCountries: matchedCountries, emptysearch: wasItEmpty });
     }
 
@@ -327,7 +326,8 @@ class EventBox extends React.Component {
             || this.state.clickedPin !== nextState.clickedPin
             || this.state.searchedCountries !== nextState.searchedCountries
             || this.state.windowWidth !== nextState.windowWidth
-            || this.state.showInfoBox !== nextState.showInfoBox) {
+            || this.state.showInfoBox !== nextState.showInfoBox
+            || this.state.emptysearch !== nextState.emptysearch) {
             return true;
         } else {
             return false;
