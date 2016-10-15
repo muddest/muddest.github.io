@@ -11,6 +11,7 @@ class InfoBox extends React.Component {
         daysleft: null,
       };
 
+      this.share = this.share.bind(this);
       this.rawMarkup = this.rawMarkup.bind(this);
       this.getDifferenceInDays = this.getDifferenceInDays.bind(this);
     }
@@ -83,6 +84,15 @@ class InfoBox extends React.Component {
         return { __html: rawMarkup };
     }
 
+    share() {
+        FB.ui({
+            appId: '1207443182632875',
+            method: 'share',
+            display: 'popup',
+            href: "http://muddest.com/",
+        }, function(response){});
+    }
+
     render() {
         var obstacles = (this.props.obstacles === '' || this.props.obstacles === null) ? '' : <Fonty text={this.props.obstacles+" obstacles"} icon="fa-heartbeat" />;
         return (
@@ -103,14 +113,6 @@ class InfoBox extends React.Component {
                                 <span className="date"><Fonty text={this.props.date} icon="fa-calendar" /></span>
                                 <span className="eventlength"><Fonty text={this.props.length} icon="fa-map-marker" /></span>
                                 <span className="obstacles">{obstacles}</span>
-                                <span className="socialmedia">
-                                    <Fonty icon="fa-share-alt" />
-                                    <span className="share">
-                                        <div className="fb-like" data-href="http://www.muddest.com" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
-                                        <Fonty text="Like" icon="fa-facebook-official" />
-                                        <Fonty text="Tweet" icon="fa-twitter" />
-                                    </span>
-                                </span>
                             </div>
 
                             <address>
@@ -118,6 +120,7 @@ class InfoBox extends React.Component {
                                 <span className="address">{this.props.address}</span>
                                 <span className="address">{this.props.city}</span>
                                 <span className="address">{this.props.country}</span>
+                                <div className="fb-like" data-href="http://www.muddest.com" data-layout="button" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
                             </address>
                             <span className="infotextaboutevent" dangerouslySetInnerHTML={this.rawMarkup()} />
                         </article>

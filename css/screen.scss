@@ -433,35 +433,8 @@ input[type="search"] {
             text-decoration: none;
         }
 
-        & .socialmedia {
-            position: relative;
-
-            & .share {
-                position: absolute;
-                z-index: 104;
-                text-align: left;
-                left: 0px;
-                width: 90px;
-
-                & > div {
-                    cursor: pointer;
-                    background: rgb(70, 70, 70);
-                    width: 90px;
-                    padding: 4px;
-                }
-
-                & > div:hover {
-                    background: rgb(43, 85, 255);
-                }
-
-                & .pluginButton {
-                    background: rgb(70, 70, 70);
-                }
-                & .pluginButton:hover {
-                    
-
-                }
-            }
+        & .fb-like {
+            margin-top: 15px;
         }
     }
 

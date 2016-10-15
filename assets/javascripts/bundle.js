@@ -23403,6 +23403,7 @@
 	            daysleft: null
 	        };
 	
+	        _this.share = _this.share.bind(_this);
 	        _this.rawMarkup = _this.rawMarkup.bind(_this);
 	        _this.getDifferenceInDays = _this.getDifferenceInDays.bind(_this);
 	        return _this;
@@ -23482,6 +23483,16 @@
 	            return { __html: rawMarkup };
 	        }
 	    }, {
+	        key: 'share',
+	        value: function share() {
+	            FB.ui({
+	                appId: '1207443182632875',
+	                method: 'share',
+	                display: 'popup',
+	                href: "http://muddest.com/"
+	            }, function (response) {});
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var obstacles = this.props.obstacles === '' || this.props.obstacles === null ? '' : _react2.default.createElement(_fonty2.default, { text: this.props.obstacles + " obstacles", icon: 'fa-heartbeat' });
@@ -23541,18 +23552,6 @@
 	                                    'span',
 	                                    { className: 'obstacles' },
 	                                    obstacles
-	                                ),
-	                                _react2.default.createElement(
-	                                    'span',
-	                                    { className: 'socialmedia' },
-	                                    _react2.default.createElement(_fonty2.default, { icon: 'fa-share-alt' }),
-	                                    _react2.default.createElement(
-	                                        'span',
-	                                        { className: 'share' },
-	                                        _react2.default.createElement('div', { className: 'fb-like', 'data-href': 'http://www.muddest.com', 'data-layout': 'button', 'data-action': 'like', 'data-show-faces': 'false', 'data-share': 'false' }),
-	                                        _react2.default.createElement(_fonty2.default, { text: 'Like', icon: 'fa-facebook-official' }),
-	                                        _react2.default.createElement(_fonty2.default, { text: 'Tweet', icon: 'fa-twitter' })
-	                                    )
 	                                )
 	                            ),
 	                            _react2.default.createElement(
@@ -23581,7 +23580,8 @@
 	                                    'span',
 	                                    { className: 'address' },
 	                                    this.props.country
-	                                )
+	                                ),
+	                                _react2.default.createElement('div', { className: 'fb-like', 'data-href': 'http://www.muddest.com', 'data-layout': 'button', 'data-action': 'like', 'data-size': 'small', 'data-show-faces': 'false', 'data-share': 'true' })
 	                            ),
 	                            _react2.default.createElement('span', { className: 'infotextaboutevent', dangerouslySetInnerHTML: this.rawMarkup() })
 	                        ),
