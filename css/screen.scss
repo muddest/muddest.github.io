@@ -453,6 +453,14 @@ input[type="search"] {
                 & > div:hover {
                     background: rgb(43, 85, 255);
                 }
+
+                & .pluginButton {
+                    background: rgb(70, 70, 70);
+                }
+                & .pluginButton:hover {
+                    
+
+                }
             }
         }
     }

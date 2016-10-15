@@ -23465,6 +23465,16 @@
 	            }
 	        }
 	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            FB.XFBML.parse(document);
+	        }
+	    }, {
+	        key: 'componentDidUpdate',
+	        value: function componentDidUpdate(prevProps, prevState) {
+	            FB.XFBML.parse(document);
+	        }
+	    }, {
 	        key: 'rawMarkup',
 	        value: function rawMarkup() {
 	            var md = new _remarkable2.default();
@@ -23539,6 +23549,7 @@
 	                                    _react2.default.createElement(
 	                                        'span',
 	                                        { className: 'share' },
+	                                        _react2.default.createElement('div', { className: 'fb-like', 'data-href': 'http://www.muddest.com', 'data-layout': 'button', 'data-action': 'like', 'data-show-faces': 'false', 'data-share': 'false' }),
 	                                        _react2.default.createElement(_fonty2.default, { text: 'Like', icon: 'fa-facebook-official' }),
 	                                        _react2.default.createElement(_fonty2.default, { text: 'Tweet', icon: 'fa-twitter' })
 	                                    )

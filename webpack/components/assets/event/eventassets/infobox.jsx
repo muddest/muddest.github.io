@@ -69,6 +69,14 @@ class InfoBox extends React.Component {
         }
     }
 
+    componentDidMount() {
+        FB.XFBML.parse(document);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        FB.XFBML.parse(document);
+    }
+
     rawMarkup() {
         var md = new Remarkable();
         var rawMarkup = md.render(this.props.info.toString());
@@ -98,6 +106,7 @@ class InfoBox extends React.Component {
                                 <span className="socialmedia">
                                     <Fonty icon="fa-share-alt" />
                                     <span className="share">
+                                        <div className="fb-like" data-href="http://www.muddest.com" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
                                         <Fonty text="Like" icon="fa-facebook-official" />
                                         <Fonty text="Tweet" icon="fa-twitter" />
                                     </span>
