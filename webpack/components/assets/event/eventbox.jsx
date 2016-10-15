@@ -262,7 +262,8 @@ class EventBox extends React.Component {
                     sethooveredpinid={this.setHooveringPinId}
                     hoveringid={this.state.hoveringId}
                     visiblebyzoom={this.changeVisibleEventsByMapZoom}
-                    zooming={this.state.zooming} />
+                    zooming={this.state.zooming}
+                    emptysearch={this.state.emptysearch} />
             );
         }
 

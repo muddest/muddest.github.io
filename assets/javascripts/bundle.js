@@ -21382,7 +21382,8 @@
 	                    sethooveredpinid: this.setHooveringPinId,
 	                    hoveringid: this.state.hoveringId,
 	                    visiblebyzoom: this.changeVisibleEventsByMapZoom,
-	                    zooming: this.state.zooming });
+	                    zooming: this.state.zooming,
+	                    emptysearch: this.state.emptysearch });
 	            }
 	
 	            if (true === this.state.showInfoBox && '' !== this.state.infoBoxId) {
@@ -21784,7 +21785,7 @@
 	            if (markers !== this.state.markers) {
 	                this.setState({ markers: markers });
 	                markerCluster.repaint();
-	                if (!this.props.zooming) {
+	                if (!this.props.zooming && this.props.emptysearch) {
 	                    map.setCenter(bounds.getCenter());
 	                    map.fitBounds(bounds);
 	                }
