@@ -11,7 +11,6 @@ class InfoBox extends React.Component {
         daysleft: null,
       };
 
-      this.share = this.share.bind(this);
       this.rawMarkup = this.rawMarkup.bind(this);
       this.getDifferenceInDays = this.getDifferenceInDays.bind(this);
     }
@@ -79,20 +78,14 @@ class InfoBox extends React.Component {
     }
 
     rawMarkup() {
+        var content = '<p>'+this.props.info.toString()+'</p>';
+        var text = $(content).text();
         var md = new Remarkable();
-        var rawMarkup = md.render(this.props.info.toString());
+        var rawMarkup = md.render(text);
         return { __html: rawMarkup };
     }
 
-    share() {
-        FB.ui({
-            appId: '1207443182632875',
-            method: 'share',
-            display: 'popup',
-            href: "http://muddest.com/",
-        }, function(response){});
-    }
-
+    
     render() {
         var obstacles = (this.props.obstacles === '' || this.props.obstacles === null) ? '' : <Fonty text={this.props.obstacles+" obstacles"} icon="fa-heartbeat" />;
         return (

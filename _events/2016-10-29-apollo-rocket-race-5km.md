@@ -11,7 +11,7 @@ Length: 5 km
 Obstacles: 30
 Price: 40-55
 Currency: Pound
-Youtube: 
+Youtube: https://www.youtube.com/embed/IRoit6DG9GU
 Challenge:
 ---
 
