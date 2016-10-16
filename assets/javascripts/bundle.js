@@ -21346,7 +21346,7 @@
 	        key: 'handlePinClick',
 	        value: function handlePinClick(eventId) {
 	            this.setState({ clickedPin: eventId });
-	            this.toggleInfoBox(eventId);
+	            this.openInfoBox(eventId);
 	        }
 	    }, {
 	        key: 'closeInfoBox',

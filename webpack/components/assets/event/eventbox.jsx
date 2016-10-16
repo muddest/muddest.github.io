@@ -231,7 +231,7 @@ class EventBox extends React.Component {
 
     handlePinClick(eventId) {
         this.setState({ clickedPin: eventId });
-        this.toggleInfoBox(eventId);
+        this.openInfoBox(eventId);
     }
 
     closeInfoBox(event) {

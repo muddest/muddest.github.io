@@ -67,6 +67,31 @@ h2 {
   }
 }
 
+#sharebutton {
+    cursor: pointer;
+    margin-top: 30px;
+    width: 130px;
+    margin: 30px auto 0 auto;
+    display: block;
+
+    i {
+        text-align: center;
+        font-size: 4rem;
+    }
+
+    .socialmedia {
+        display: none;
+        text-align: left;
+    }
+
+    &:hover .socialmedia {
+        display: block;
+    }
+    &.visible .socialmedia {
+        display: block;
+    }
+}
+
 #emptysearch {
     width: 100%;
     display: block;

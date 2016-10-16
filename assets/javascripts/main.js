@@ -14,4 +14,12 @@ $(document).ready(function() {
         $('#googleform').fadeOut();
         $('body').removeClass('hideoverflow');
     });
+
+    $('#sharebutton').click(function() {
+        if ($(this).hasClass('visible')) {
+            $(this).removeClass('visible');
+        } else {
+            $(this).addClass('visible');
+        }
+    })
 });
