@@ -83,10 +83,7 @@ h2 {
         display: none;
         text-align: left;
     }
-
-    &:hover .socialmedia {
-        display: block;
-    }
+    
     &.visible .socialmedia {
         display: block;
     }
@@ -628,11 +625,12 @@ input[type="search"] {
     #info {
         display: none;
     }
-    #app {
+    .content #app {
         height: 100%;
     }
 
     #leftbar {
+
         width: 100%;
         position: relative;
     }

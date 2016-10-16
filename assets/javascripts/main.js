@@ -15,11 +15,12 @@ $(document).ready(function() {
         $('body').removeClass('hideoverflow');
     });
 
-    $('#sharebutton').click(function() {
-        if ($(this).hasClass('visible')) {
-            $(this).removeClass('visible');
-        } else {
-            $(this).addClass('visible');
-        }
-    })
+    
+
+    $("#sharebutton").mouseover(function() {
+        $(this).addClass('visible');
+    }).mouseout(function() {
+        $(this).removeClass('visible');
+    });
+    
 });
