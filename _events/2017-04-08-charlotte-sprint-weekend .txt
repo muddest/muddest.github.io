@@ -13,7 +13,7 @@ Length: 5 miles
 Obstacles: 23
 Price: 89-109
 Currency: Dollar
-Youtube:
+Youtube: https://www.youtube.com/embed/mKu9oQq-NsQ
 Challenge:
 ---
 
