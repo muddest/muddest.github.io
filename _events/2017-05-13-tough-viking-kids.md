@@ -11,7 +11,7 @@ Obstacles:
 Length: 1-1.5 km
 Price: 295
 Currency: SEK
-Youtube: 
+Youtube: https://www.youtube.com/embed/YALIcLMvUvE
 Challenge: 
 Age: 5-11
 ---
