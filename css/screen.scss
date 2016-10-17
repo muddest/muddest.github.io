@@ -46,6 +46,18 @@ h2 {
     font-size: 1.4rem;
 }
 
+h4 {
+    color: rgb(90, 90, 90);
+    font-size: 2.4rem;
+    margin: 0;
+}
+
+h5 {
+    color: rgb(90,90,90);
+    font-size: 2rem;
+    margin: 10px 0 0 15px;
+}
+
 .page-header {
   color: #eee;
   height: 90vh;
@@ -83,7 +95,7 @@ h2 {
         display: none;
         text-align: left;
     }
-    
+
     &.visible .socialmedia {
         display: block;
     }
