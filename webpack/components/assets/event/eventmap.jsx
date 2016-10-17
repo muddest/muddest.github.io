@@ -15,7 +15,10 @@ class EventMap extends React.Component {
         this.state = {
             markers: [],
             mappedZoomed: false,
+            fitToBounds: true,
         };
+
+        this.updatePanning = this.updatePanning.bind(this);
 
         this.zoomInMap = this.zoomInMap.bind(this);
         this.zoomOutMap = this.zoomOutMap.bind(this);
@@ -55,6 +58,8 @@ class EventMap extends React.Component {
         markerCluster = new MarkerClusterer(map, this.state.markers, {imagePath: '/assets/images/cluster/m', ignoreHidden: true, zoomOnClick: false});
         
         google.maps.event.addListener(map,'dblclick', this.updateBoundsChange);
+
+        google.maps.event.addListener(map,'dragstart', this.updatePanning);
         google.maps.event.addListener(map,'dragend', this.updateBoundsChange);
 
         var _that = this;
@@ -86,6 +91,11 @@ class EventMap extends React.Component {
         
         google.maps.event.addListener(map, "click", function(event) { infoWindowBig.close(); });
         this.updateMarkers(this.props.visible);
+    }
+
+
+    updatePanning() {
+        this.setState({ fitToBounds: false });
     }
 
 
@@ -179,7 +189,8 @@ class EventMap extends React.Component {
     shouldComponentUpdate(nextProps, nextState) {
         if (this.props.hoveringid !== nextProps.hoveringid
             || this.props.visible !== nextProps.visible
-            || this.props.data !== nextProps.data) {
+            || this.props.data !== nextProps.data
+            || this.state.fitToBounds || nextState.fitToBounds) {
             return true;
         } else {
             return false;
@@ -261,13 +272,12 @@ class EventMap extends React.Component {
             this.setState({ markers: markers });
             markerCluster.repaint();
 
-            if (this.props.zooming || !this.props.emptysearch) {
-                return false;
-            } else {
+            if (this.state.fitToBounds) {
                 map.setCenter(bounds.getCenter());
                 map.fitBounds(bounds);
             }
         }
+        this.setState({ fitToBounds: true });
     }
 
     zoomInMap () {
