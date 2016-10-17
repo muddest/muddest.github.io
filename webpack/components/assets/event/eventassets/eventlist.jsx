@@ -46,6 +46,7 @@ class EventList extends React.Component {
                     price={event.Price}
                     currency={event.Currency}
                     slug={event.slug}
+                    outputdate={event.outPutDate}
                     toggleinfobox={this.props.toggleinfobox} />
             );
         });

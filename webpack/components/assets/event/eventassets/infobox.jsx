@@ -103,7 +103,7 @@ class InfoBox extends React.Component {
                         <article>
                             <h3>{this.props.title}</h3>
                             <div className="details">
-                                <span className="date"><Fonty text={this.props.date} icon="fa-calendar" /></span>
+                                <span className="date"><Fonty text={this.props.outputdate} icon="fa-calendar" /></span>
                                 <span className="eventlength"><Fonty text={this.props.length} icon="fa-map-marker" /></span>
                                 <span className="obstacles">{obstacles}</span>
                             </div>

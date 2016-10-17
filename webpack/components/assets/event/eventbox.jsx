@@ -282,6 +282,7 @@ class EventBox extends React.Component {
                         currency={filteredArray[0].Currency}
                         info={filteredArray[0].content}
                         date={filteredArray[0].Date}
+                        outputdate={filteredArray[0].outPutDate}
                         address={filteredArray[0].address}
                         city={filteredArray[0].City}
                         country={filteredArray[0].Country}
