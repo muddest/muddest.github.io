@@ -36,7 +36,7 @@ class EventList extends React.Component {
             
 
             if (eventYear !== curYear.getFullYear()) {
-                addHead = <h4>{curYear.getFullYear()}</h4>
+                addHead = <h4 className="year">{curYear.getFullYear()}</h4>
                 eventYear = curYear.getFullYear();
             }
             if (monthInInt !== curYear.getMonth()) {

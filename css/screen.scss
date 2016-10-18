@@ -47,15 +47,20 @@ h2 {
 }
 
 h4 {
-    color: rgb(90, 90, 90);
+    color: rgb(216, 216, 216);
     font-size: 2.4rem;
     margin: 0;
+    text-align: center;
+
+    &.year:not(:first-child) {
+        margin: 15px 0 0 0;
+    }
 }
 
 h5 {
     color: rgb(90,90,90);
     font-size: 2rem;
-    margin: 10px 0 0 15px;
+    margin: 10px 0 0 0;
 }
 
 .page-header {
@@ -316,7 +321,7 @@ h5 {
     .event {
         color: rgb(136, 136, 136);
         cursor: pointer;
-        padding: 20px 5px 20px 5px;
+        padding: 20px 5px 20px 20px;
 
         &:hover, &.highlight {
             //background: rgba(230,230,230,0.9);
@@ -354,14 +359,14 @@ h5 {
             width: 33%;
         }
         .country {
-            width: 44%;
-            min-width: 154px;
+            width: 43%;
+            min-width: 144px;
         }
 
         .length {
             text-align: right;
-            width: 23%;
-            min-width: 80.5px;
+            width: 21%;
+            min-width: 70.34px;
         }
 
         & .eventstats {
