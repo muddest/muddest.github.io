@@ -23,7 +23,10 @@
     <link rel="stylesheet" href="{{base}}/css/inputrange.css" type="text/css">
 
     <script>
-        while ('grit' != prompt('Enter your password')) { }
+        var password;
+        do {
+            password = prompt('Enter your password');
+        } while ('grit' != password && 'charles' != password)
     </script>
 
     <!-- INCLUDE JQUERY & JQUERY UI -->
