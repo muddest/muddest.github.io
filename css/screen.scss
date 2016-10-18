@@ -51,10 +51,7 @@ h4 {
     font-size: 2.4rem;
     margin: 0;
     text-align: center;
-
-    &.year:not(:first-child) {
-        margin: 15px 0 0 0;
-    }
+    margin: 15px 0 0 0;
 }
 
 h5 {
@@ -359,14 +356,14 @@ h5 {
             width: 33%;
         }
         .country {
-            width: 43%;
-            min-width: 144px;
+            width: 42%;
+            min-width: 140.69px;
         }
 
         .length {
             text-align: right;
-            width: 21%;
-            min-width: 70.34px;
+            width: 23%;
+            min-width: 77.05px;
         }
 
         & .eventstats {
