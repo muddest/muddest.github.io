@@ -15,12 +15,21 @@ $(document).ready(function() {
         $('body').removeClass('hideoverflow');
     });
 
-    
+    $('#organizer-link').click(function() {
+        $('#organizerform').fadeIn();
+        $('body').addClass('hideoverflow');
+    });
 
-    $("#sharebutton").mouseover(function() {
-        $(this).addClass('visible');
-    }).mouseout(function() {
-        $(this).removeClass('visible');
+    $('#closeorganizerform').click(function() {
+        $('#organizerform').fadeOut();
+        $('body').removeClass('hideoverflow');
+    });
+
+    $('#organizerform').click(function(e) {
+        if($('#organizerform').is(':visible')) {
+            $('#organizerform').fadeOut();
+            $('body').removeClass('hideoverflow');
+        }
     });
     
 });

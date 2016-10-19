@@ -81,28 +81,6 @@ h5 {
   }
 }
 
-#sharebutton {
-    cursor: pointer;
-    margin-top: 30px;
-    width: 130px;
-    margin: 30px auto 0 auto;
-    display: block;
-
-    i {
-        text-align: center;
-        font-size: 4rem;
-    }
-
-    .socialmedia {
-        display: none;
-        text-align: left;
-    }
-
-    &.visible .socialmedia {
-        display: block;
-    }
-}
-
 #emptysearch {
     width: 100%;
     display: block;
@@ -592,8 +570,31 @@ input[type="search"] {
   overflow: hidden !important;
 }
 
+.follow-header-buttons {
+    display: inline-block;
+    vertical-align: top;
+}
 
-#googleform {
+#for-organizer {
+    display: block;
+}
+#organizer-link {
+    cursor: pointer;
+    background: rgb(30, 23, 214);
+    display: inline-block;
+    padding: 10px;
+    font-size: 1.4rem;
+    border-radius: 3px;
+    border: solid 1px rgb(0, 9, 78);
+    box-shadow: 0 1px 1px 1px rgb(1, 16, 93);
+
+    &:hover {
+        background: rgb(111, 106, 236);
+    }
+}
+
+
+#googleform, #organizerform {
     display: none;
     position: fixed;
     top: 0;
@@ -604,7 +605,7 @@ input[type="search"] {
     width: 100%;
     height: 100%;
 
-    #closegoogleform {
+    #closegoogleform, #closeorganizerform {
         cursor: pointer;
         background: rgb(140, 140, 140);
         right: 50%;
