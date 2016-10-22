@@ -38,7 +38,7 @@ h1 {
     font-family: 'Averia Serif Libre', cursive;
     margin: 0;
     display: inline;
-    font-size: 3.4rem;
+    font-size: 6rem;
 }
 
 h2 {
@@ -61,24 +61,44 @@ h5 {
 }
 
 .page-header {
-  color: #eee;
-  height: 90vh;
-  text-align: center;
-
-  .page-header-metadata {
-    position: relative;
-    top: 40vh;
-  }
-
-  .page-header-video {
-    filter: blur(15px);
-    filter: brightness(50%);
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
+    color: #eee;
+    height: 90vh;
     width: 100%;
-  }
+    text-align: center;
+
+    .page-header-metadata {
+        position: relative;
+        top: 40vh;
+
+        .page-title {
+            font-size: 6rem;
+        }
+
+        .page-slogan {
+        }
+    }
+
+    .page-header-video {
+        filter: blur(15px);
+        filter: brightness(50%);
+        left: 0;
+        min-height: 100%;
+        min-width: 100%;
+        position: absolute;
+        top: 0;
+    }
+}
+
+.page-footer {
+    padding: 5em;
+
+    .page-footer-social-media {
+        text-align: right;
+
+        .page-footer-social-media-network + .page-footer-social-media-network {
+            margin-left: 3em;
+        }
+    }
 }
 
 #emptysearch {
@@ -568,11 +588,6 @@ input[type="search"] {
 
 .hideoverflow {
   overflow: hidden !important;
-}
-
-.follow-header-buttons {
-    display: inline-block;
-    vertical-align: top;
 }
 
 #for-organizer {
