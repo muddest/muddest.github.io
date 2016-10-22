@@ -37,6 +37,22 @@
             'ryan' != password
             &&
             'gary' != password
+            &&
+            'vincent' != password
+            &&
+            'paul' != password
+            &&
+            'steph' != password
+            &&
+            'sam' != password
+            &&
+            'robin' != password
+            &&
+            'april' != password
+            &&
+            'styves' != password
+            &&
+            'matt' != password
         )
     </script>
 
@@ -60,6 +76,7 @@
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - HEADER -->
     <section class="page-header">
+<<<<<<< HEAD
     <div class="header-card">
                 <h3>For organizers</h3>
                 <ul>
@@ -70,28 +87,21 @@
             </div>
         <video loop muted autoplay poster="img/videoframe.jpg" class="page-header-video">
             <!-- <source src="video/big_buck_bunny.webm" type="video/webm"> -->
+=======
+        <video loop muted autoplay class="page-header-video">
+>>>>>>> d5a5fed04e87fe49cc0afb9c8dbd1581f3cb6d50
             <source src="assets/video/header-background.mp4" type="video/mp4">
-            <!-- <source src="video/big_buck_bunny.ogv" type="video/ogg"> -->
         </video>
 
         <header class="page-header-metadata">
-            <h1>{{ page.title }}</h1>
-            <h2 id="slogan">- {{ page.slogan }}</h2>
+            <h1 class="page-title">{{ page.title }}</h1>
+            <h2 class="page-slogan">{{ page.slogan }}</h2>
 
             <!--<span id="for-organizer"><p id="organizer-link">Click here if you're an organizer</p></span>
             <div id="organizerform">
                 <span id="closeorganizerform">Close</span>
                 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdQPXtzp-Q0BIp2w_n0N0vEIV_fQqbl9fXQoMMXCQ6b18Z0ZQ/viewform?embedded=true" width="760" height="500" frameborder="0" marginheight="0" marginwidth="0">Läser in...</iframe>
             </div> -->
-
-            <div class="follow-header-buttons">
-                <span>
-                    <a href="https://twitter.com/themuddest" data-size="large" class="twitter-follow-button" data-show-count="false">Follow @themuddest</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-                </span>
-                <span>
-                    <div class="fb-share-button" data-href="http://www.muddest.com" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.muddest.com%2F&amp;src=sdkpreparse">Share</a></div>
-                </span>
-            </div>
         </header>
     </section>
 
@@ -105,7 +115,15 @@
 
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - FOOTER -->
-    <footer>
+    <footer class="page-footer">
+        <div class="page-footer-social-media">
+            <span class="page-footer-social-media-network">
+                <a href="https://twitter.com/themuddest" data-size="large" class="twitter-follow-button" data-show-count="false">Follow @themuddest</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </span>
+            <span class="page-footer-social-media-network">
+                <div class="fb-share-button" data-href="http://www.muddest.com" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.muddest.com%2F&amp;src=sdkpreparse">Share</a></div>
+            </span>
+        </div>
     </footer>
     <script type="text/javascript" src="{{base}}/assets/javascripts/bundle.js" charset="utf-8"></script>
 
