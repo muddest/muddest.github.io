@@ -60,6 +60,25 @@ h5 {
     margin: 10px 0 0 0;
 }
 
+.header-card {
+    z-index: 150;
+    position: absolute;
+    background: rgba(0,0,0,0.7);
+    top: 20px;
+    left: 70px;
+    padding: 10px;
+    border-radius: 3px;
+
+    ul {
+        padding: 0;
+        text-align: left;
+
+        & li {
+            list-style: none;
+        }
+    }
+}
+
 .page-header {
   color: #eee;
   height: 90vh;
