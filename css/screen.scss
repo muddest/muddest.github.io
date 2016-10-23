@@ -63,18 +63,34 @@ h5 {
 .header-card {
     z-index: 150;
     position: absolute;
-    background: rgba(0,0,0,0.7);
     top: 20px;
     left: 70px;
     padding: 10px;
     border-radius: 3px;
 
-    ul {
+    .card {
+        background: rgba(0,0,0,0.7);
+        display: inline-block;
+        vertical-align: top;
+
+        & ul {
+        height: 0;
+        overflow-y: hidden;
         padding: 0;
         text-align: left;
+        -webkit-transition: height 0.4s ease-in-out;
+        -moz-transition: height 0.4s ease-in-out;
+        -ms-transition: height 0.4s ease-in-out;
+        -o-transition: height 0.4s ease-in-out;
+        transition: height 0.4s ease-in-out;
 
-        & li {
-            list-style: none;
+            & li {
+                list-style: none;
+            }
+        }
+
+        &:hover ul {
+            height: 200px;
         }
     }
 }
