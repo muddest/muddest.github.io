@@ -7,6 +7,13 @@ foreach (scandir($directory) as $file) {
     if (!is_file("$directory/$file")) continue;
 
     $lines = file("$directory/$file");
+
+    $lines = addLatLng($lines);
+
+    file_put_contents("$directory/$file", implode('', $lines));
+}
+
+function addLatLng($lines) {
     $frontMatter = false;
     $attributes = [];
 
@@ -15,7 +22,7 @@ foreach (scandir($directory) as $file) {
             if ($frontMatter) break;
             $frontMatter = true;
             continue;
-        } elseif (!$frontMatter) continue 2;
+        } elseif (!$frontMatter) return $lines;
 
         $attributes[substr($line, 0, strpos($line, ':'))] = substr($line, strpos($line, ':')+2, -1);
     }
@@ -34,9 +41,9 @@ foreach (scandir($directory) as $file) {
             "lat: {$data->results[0]->geometry->location->lat}\n",
             "lng: {$data->results[0]->geometry->location->lng}\n",
         ]);
-
-        file_put_contents("$directory/$file", implode('', $lines));
     }
+
+    return $lines;
 }
 
 function getCountryCode($country) {
