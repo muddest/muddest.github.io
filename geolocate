@@ -1,0 +1,62 @@
+#!/usr/bin/env php
+<?php
+
+$directory = __DIR__.'/_events';
+
+foreach (scandir($directory) as $file) {
+    if (!is_file("$directory/$file")) continue;
+
+    $lines = file("$directory/$file");
+    $frontMatter = false;
+    $attributes = [];
+
+    foreach ($lines as $line) {
+        if ($line === "---\n") {
+            if ($frontMatter) break;
+            $frontMatter = true;
+            continue;
+        } elseif (!$frontMatter) continue 2;
+
+        $attributes[substr($line, 0, strpos($line, ':'))] = substr($line, strpos($line, ':')+2, -1);
+    }
+
+    if (
+        (empty($attributes['lat']) || empty($attributes['lng']))
+        && !empty($attributes['City']) && !empty($attributes['Country'])
+    ) {
+        $json = file_get_contents(sprintf(
+            'http://maps.googleapis.com/maps/api/geocode/json?address=%s,%s,%s',
+            @$attributes['Address'] ?: '', $attributes['City'], $attributes['Country']
+        ));
+        $data = json_decode($json);
+
+        array_splice($lines, 1, 0, [
+            "lat: {$data->results[0]->geometry->location->lat}\n",
+            "lng: {$data->results[0]->geometry->location->lng}\n",
+        ]);
+
+        file_put_contents("$directory/$file", implode('', $lines));
+    }
+}
+
+function getCountryCode($country) {
+    $country = strtolower($country);
+    switch ($country) {
+    case 'sweden':
+        return 'SE';
+    case 'france':
+        return 'FR';
+    case 'denmark':
+        return 'DK';
+    case 'united kingdom':
+        return 'UK';
+    case 'norway':
+        return 'NO';
+    case 'usa':
+        return 'USA';
+    case 'germany':
+        return 'DEU';
+    case 'spain':
+        return 'ESP';
+    }
+}
