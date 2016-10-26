@@ -6,11 +6,43 @@ $directory = __DIR__.'/_events';
 foreach (scandir($directory) as $file) {
     if (!is_file("$directory/$file")) continue;
 
-    $lines = file("$directory/$file");
+    $content = file_get_contents("$directory/$file");
+    $lines =  explode("\n", str_replace("\r", "\n", str_replace("\r\n", "\n", $content)));
 
+    $lines = addFrontMatter($lines);
+    $lines = fixCharacters($lines);
     $lines = addLatLng($lines);
+    $newContent = implode("\n", $lines);
 
-    file_put_contents("$directory/$file", implode('', $lines));
+    if ($newContent !== $content) {
+        file_put_contents("$directory/$file", $newContent);
+    }
+}
+
+function addFrontMatter($lines) {
+    if ('---' === $lines[0]) return $lines;
+
+    $newLines = [];
+    foreach ($lines as $key => $line) {
+        if (in_array($line, ['', 'Infotext:'])) continue;
+
+        if (!preg_match('~[a-zA-Z0-9]+: .*~', $line)) {
+            array_splice($lines, 0, $key, array_merge(['---'], $newLines, ['---', '']));
+            return $lines;
+        }
+
+        $newLines[] = $line;
+    }
+
+    return $lines;
+}
+
+function fixCharacters($lines) {
+    foreach ($lines as $key => $line) {
+        $lines[$key] = rtrim($line);
+    }
+
+    return $lines;
 }
 
 function addLatLng($lines) {
@@ -18,52 +50,49 @@ function addLatLng($lines) {
     $attributes = [];
 
     foreach ($lines as $line) {
-        if ($line === "---\n") {
+        if ($line === '---') {
             if ($frontMatter) break;
             $frontMatter = true;
             continue;
         } elseif (!$frontMatter) return $lines;
 
-        $attributes[substr($line, 0, strpos($line, ':'))] = substr($line, strpos($line, ':')+2, -1);
+        $attributes[substr($line, 0, strpos($line, ':'))] = substr($line, strpos($line, ':')+2);
     }
 
     if (
         (empty($attributes['lat']) || empty($attributes['lng']))
         && !empty($attributes['City']) && !empty($attributes['Country'])
     ) {
-        $json = file_get_contents(sprintf(
-            'http://maps.googleapis.com/maps/api/geocode/json?address=%s,%s,%s',
-            @$attributes['Address'] ?: '', $attributes['City'], $attributes['Country']
-        ));
-        $data = json_decode($json);
+        $data = geocode($attributes['Country'], $attributes['City'], @$attributes['Address']);
+
+        if (!count($data->results)) {
+            if (!empty($attributes['Address'])) {
+                $data = geocode($attributes['Country'], $attributes['City']);
+            }
+
+            if (!count($data->results)) {
+                return $lines;
+            }
+        }
+        $result = reset($data->results);
 
         array_splice($lines, 1, 0, [
-            "lat: {$data->results[0]->geometry->location->lat}\n",
-            "lng: {$data->results[0]->geometry->location->lng}\n",
+            "lat: {$result->geometry->location->lat}",
+            "lng: {$result->geometry->location->lng}",
         ]);
     }
 
     return $lines;
 }
 
-function getCountryCode($country) {
-    $country = strtolower($country);
-    switch ($country) {
-    case 'sweden':
-        return 'SE';
-    case 'france':
-        return 'FR';
-    case 'denmark':
-        return 'DK';
-    case 'united kingdom':
-        return 'UK';
-    case 'norway':
-        return 'NO';
-    case 'usa':
-        return 'USA';
-    case 'germany':
-        return 'DEU';
-    case 'spain':
-        return 'ESP';
+function geocode($country, $city, $address = null) {
+    $url = 'http://maps.googleapis.com/maps/api/geocode/json?address=';
+
+    if ($address) {
+        $url .= urlencode($address).',';
     }
+
+    $url .= urlencode($city).','.urlencode($country);
+
+    return json_decode(file_get_contents($url));
 }
