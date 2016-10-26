@@ -6,6 +6,8 @@ $directory = __DIR__.'/_events';
 foreach (scandir($directory) as $file) {
     if (!is_file("$directory/$file")) continue;
 
+    echo "$file\n";
+
     $content = file_get_contents("$directory/$file");
     $lines =  explode("\n", str_replace("\r", "\n", str_replace("\r\n", "\n", $content)));
 
@@ -80,6 +82,8 @@ function addLatLng($lines) {
         }
         $result = reset($data->results);
 
+        echo "    -> {$result->geometry->location->lat}, {$result->geometry->location->lng}\n";
+
         array_splice($lines, 1, 0, [
             "lat: {$result->geometry->location->lat}",
             "lng: {$result->geometry->location->lng}",
@@ -90,6 +94,10 @@ function addLatLng($lines) {
 }
 
 function geocode($country, $city, $address = null) {
+    static $lastCall;
+    if ($lastCall) usleep(round(1000000 * (1 - (microtime(true) - $lastCall))));
+    $lastCall = microtime(true);
+
     setlocale(LC_ALL, "en_US.utf8");
 
     $url = 'http://maps.googleapis.com/maps/api/geocode/json?address=';
@@ -99,6 +107,8 @@ function geocode($country, $city, $address = null) {
     }
 
     $url .= urlencode(iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $city)).','.urlencode(iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $country));
+
+    echo "    $url\n";
 
     return json_decode(file_get_contents($url));
 }
