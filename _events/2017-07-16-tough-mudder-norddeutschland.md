@@ -3,7 +3,7 @@ lat: 50.3135391
 lng: 11.9127814
 Title: Tough Mudder Norddeutschland
 Country: Germany
-City: Hermannsburg 
+City: Hermannsburg
 Address: Hof Severloh
 Date: 2017-07-16
 Site: https://en.toughmudder.de/events/norddeutschland-2017

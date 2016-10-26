@@ -19,4 +19,4 @@ Challenge:
 
 The Reebok Spartan Sprint: This is our shortest distance. It is perfect for athletes of all levels; from Spartan first timers to seasoned racers. The 3-5 Mile Sprint may be our shortest distance but it packs more than 20 Signature Spartan Obstacles. If you think you can’t do it, you’re wrong. Get to the starting line and show yourself what you are capable of.
 
-The Georgia International Horse Park was the home to the 1996 Olympic Equestrian events. Rolling hills and deep southern woods keep Spartans guessing what's around the next corner. Georgia red clay makes slippery mud pits. 
+The Georgia International Horse Park was the home to the 1996 Olympic Equestrian events. Rolling hills and deep southern woods keep Spartans guessing what's around the next corner. Georgia red clay makes slippery mud pits.

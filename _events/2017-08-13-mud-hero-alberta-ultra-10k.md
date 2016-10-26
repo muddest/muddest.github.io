@@ -1,17 +1,19 @@
+---
+lat: 52.2681118
+lng: -113.8112386
 Title: Mud Hero Alberta Ultra 10k
 Country: Canada
 City: Red Deer
 Address: Range Road 264A, Red Deer, Alberta T4N 5E2, Canada
 Date: 2017-08-13
 Site: http://www.mudhero.com/en/events/alberta-ultra-10k/
-   
 Length: 10 km
-
 Obstacles: 21+
 Youtube: https://www.youtube.com/watch?v=vXfA4GunWEQ
-Challenge: 
+Challenge:
+---
 
-Infotext: Mud Heroes looking for the next challenge should look no further than our NEW Ultra 10k! What takes our Ultra 10k to the next level is more than just the extra distance; we feature five harder challenges on top of the obstacles and mud featured in our traditional 6 km event. These include Brick and Morter, Turf and Surf, True North Climb, Top Out and Hole Punch plus assorted obstacles featuring hard or easy options.
+Mud Heroes looking for the next challenge should look no further than our NEW Ultra 10k! What takes our Ultra 10k to the next level is more than just the extra distance; we feature five harder challenges on top of the obstacles and mud featured in our traditional 6 km event. These include Brick and Morter, Turf and Surf, True North Climb, Top Out and Hole Punch plus assorted obstacles featuring hard or easy options.
 
 Is the Ultra 10k for me?
 

@@ -1,7 +1,7 @@
 ---
 lat: 30.147117
 lng: -95.931876
-Title: Houston Sprint 
+Title: Houston Sprint
 Country: USA
 City: Hempstead
 Address: 34523 Joseph Road, Hempstead, TX 77445

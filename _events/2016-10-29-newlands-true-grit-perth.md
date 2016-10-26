@@ -1,8 +1,17 @@
-Title: Perth WA Australia True Grit 2016Country: AustraliaCity: NewlandsAddress: True Grit Perth, 1901 Ryalls Road, Newlands, AustraliaDate: 2016-10-29Site: http://www.truegrit.com.au/event-detail.php?event=2016-10-29-perth-2016
-
-Length: 10-12km
-Obstacles: 30Youtube: https://www.youtube.com/watch?v=mXK4AoGrFyYChallenge: 
-Infotext:
+---
+lat: -33.6755546
+lng: 115.8580914
+Title: Perth WA Australia True Grit 2016
+Country: Australia
+City: Newlands
+Address: True Grit Perth, 1901 Ryalls Road, Newlands, Australia
+Date: 2016-10-29
+Site: http://www.truegrit.com.au/event-detail.php?event=2016-10-29-perth-2016
+Length: 10-12km
+Obstacles: 30
+Youtube: https://www.youtube.com/watch?v=mXK4AoGrFyY
+Challenge:
+---
 
 True Grit is the first Australian designed military style obstacle course
 

@@ -1,17 +1,19 @@
+---
+lat: 52.1332144
+lng: -106.6700458
 Title: 5K Foam Fest Canada Saskatoon
 Country: Canada
 City: Saskatoon
 Address: Pike Lake Hwy 60, Saskatoon, Saskatchewan, Canada
 Date: 2017-07-08
 Site: http://www.5kfoamfest.ca/locations/saskatoon/
-   
 Length: 5 km
-
 Obstacles: 22+
 Youtube: https://www.youtube.com/watch?v=-RZG8iWehVg
-Challenge: 
+Challenge:
+---
 
-Infotext:  The obstacles won’t be easy and some are inherently dangerous—so be careful and don’t try and do anything beyond your skill level. If you are questioning your physical/mental capabilities or have a medical condition please consult with your physician before signing up for the run. You are responsible for avoiding an obstacle if you feel you are unable to complete that particular part of the course. This is your run remember! Mud is fun but only when it’s safe!
+The obstacles won’t be easy and some are inherently dangerous—so be careful and don’t try and do anything beyond your skill level. If you are questioning your physical/mental capabilities or have a medical condition please consult with your physician before signing up for the run. You are responsible for avoiding an obstacle if you feel you are unable to complete that particular part of the course. This is your run remember! Mud is fun but only when it’s safe!
 
 Whether it’s your mother, brother, boyfriend, or twice removed cousin, grab anyone you can think of and get prepared to get FOAMY.
 

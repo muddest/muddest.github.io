@@ -3,7 +3,7 @@ lat: 40.5089712
 lng: -74.2126853
 Title: Upstate New York Winter Sprint
 Country: USA
-City: New York 
+City: New York
 Address: Unknown
 Date: 2017-03-04
 Site: http://www.spartan.com/en/race/detail/2244/overview?filter=sprint

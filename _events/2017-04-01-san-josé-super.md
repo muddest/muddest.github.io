@@ -10,7 +10,7 @@ Site: http://www.spartan.com/en/race/detail/2247/overview?filter=super
 
 Length: 10 miles
 
-Obstacles: 29 
+Obstacles: 29
 Price: 104-124
 Currency: Dollar
 Youtube: https://www.youtube.com/embed/bdmvtmRkho4

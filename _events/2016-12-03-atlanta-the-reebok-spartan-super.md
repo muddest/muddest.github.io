@@ -19,4 +19,4 @@ Challenge:
 
 The Reebok Spartan Super: This is our middle distance course. With a longer distance than the Sprint and more obstacles, the Super will test your endurance, perseverance and grit. The 8-10 Mile Super packs more than 25 Signature Spartan Obstacles through tougher and more rugged terrain. The Super is the test en route to your Spartan TRIFECTA.
 
-The Georgia International Horse Park was the home to the 1996 Olympic Equestrian events. Rolling hills and deep southern woods keep Spartans guessing what's around the next corner. Georgia red clay makes slippery mud pits. 
+The Georgia International Horse Park was the home to the 1996 Olympic Equestrian events. Rolling hills and deep southern woods keep Spartans guessing what's around the next corner. Georgia red clay makes slippery mud pits.

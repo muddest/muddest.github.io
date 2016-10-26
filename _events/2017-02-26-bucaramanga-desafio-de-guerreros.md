@@ -1,9 +1,17 @@
-Title: Bucaramanga Colombia Desafio de Guerreros 2017Country: ColombiaCity: BucaramangaAddress: TBA Bucaramanga, Bucaramanga, ColombiaDate: 2017-02-26Site: http://desafiodeguerreros.com/bucaramanga/
-
-Length: 5km 
+---
+lat: 7.119349
+lng: -73.1227416
+Title: Bucaramanga Colombia Desafio de Guerreros 2017
+Country: Colombia
+City: Bucaramanga
+Address: TBA Bucaramanga, Bucaramanga, Colombia
+Date: 2017-02-26
+Site: http://desafiodeguerreros.com/bucaramanga/
+Length: 5km
 Obstacles: 12+
-Youtube:Challenge: 
-Infotext:
+Youtube:
+Challenge:
+---
 
 The challenge of your life means that you will leave everything for the new, chasing your dreams and reaching something something you never thought possible. A race of 5K, 12 military style obstacles plus water and mud!
 The obstacles are a mix of the existing terrain and man-build challenges. They'll test your strenght, resilience, mental power and camaraderie while you're having fun in the mud with friends.

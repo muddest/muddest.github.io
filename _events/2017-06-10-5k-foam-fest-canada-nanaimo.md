@@ -1,17 +1,19 @@
+---
+lat: 49.2822046
+lng: -124.2460179
 Title: 5K Foam Fest Canada Nanaimo
 Country: Canada
 City: Nanoose Bay
 Address: 1515 Island Hwy E, Nanoose Bay, British Columbia V9P 9A3, Canada
 Date: 2017-06-10
-Site: http://www.5kfoamfest.ca/locations/nanaimo/ 
-   
+Site: http://www.5kfoamfest.ca/locations/nanaimo/
 Length: 5 km
-
 Obstacles: 22+
 Youtube: https://youtu.be/-RZG8iWehVg
-Challenge: 
+Challenge:
+---
 
-Infotext: Whether it’s your mother, brother, boyfriend, or twice removed cousin, grab anyone you can think of and get prepared to get FOAMY.
+Whether it’s your mother, brother, boyfriend, or twice removed cousin, grab anyone you can think of and get prepared to get FOAMY.
 
 You’ll need bodies, not only to create a fun and foamtastic atmosphere, but hey maybe you could use your team mate as a stepping stool for the climbing walls, or a flotation device for the muddy madness?
 

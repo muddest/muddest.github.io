@@ -12,7 +12,7 @@ Length: 8 km
 Price: 595-895
 Currency: SEK
 Youtube: https://www.youtube.com/embed/_i0EFNbqJmM
-Challenge: 
+Challenge:
 ---
 
 Toughest Malmo is this year’s OCR highlight. The race runs along beautiful Ribersborgsstranden and is always a festival with huge crowds.

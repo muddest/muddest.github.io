@@ -2,7 +2,7 @@
 lat: 32.3024139
 lng: -84.9831474
 Title: Fort Benning Sprint
-Country: USA 
+Country: USA
 City: Fort Mitchell
 Address: 101st Airborne Division Rd, Fort Mitchell, AL 36856
 Date: 2017-04-08

@@ -1,17 +1,19 @@
+---
+lat: 53.2570658
+lng: -113.5274938
 Title: 5K Foam Fest Canada Leduc
 Country: Canada
 City: Leduc
 Address: 4330 Black Gold Dr, Leduc, Alberta T9E 3C3, Canada
 Date: 2017-07-01
 Site: http://www.5kfoamfest.ca/locations/leduc/
-   
 Length: 5 km
-
 Obstacles: 22+
 Youtube: https://www.youtube.com/watch?v=jD9ho6yCfII
-Challenge: 
+Challenge:
+---
 
-Infotext:  The obstacles won’t be easy and some are inherently dangerous—so be careful and don’t try and do anything beyond your skill level. If you are questioning your physical/mental capabilities or have a medical condition please consult with your physician before signing up for the run. You are responsible for avoiding an obstacle if you feel you are unable to complete that particular part of the course. This is your run remember! Mud is fun but only when it’s safe!
+The obstacles won’t be easy and some are inherently dangerous—so be careful and don’t try and do anything beyond your skill level. If you are questioning your physical/mental capabilities or have a medical condition please consult with your physician before signing up for the run. You are responsible for avoiding an obstacle if you feel you are unable to complete that particular part of the course. This is your run remember! Mud is fun but only when it’s safe!
 
 Whether it’s your mother, brother, boyfriend, or twice removed cousin, grab anyone you can think of and get prepared to get FOAMY.
 

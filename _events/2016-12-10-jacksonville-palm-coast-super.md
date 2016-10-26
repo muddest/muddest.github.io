@@ -5,7 +5,7 @@ Title: Jacksonville Palm Coast Super
 Country: USA
 City: Bunell
 Address: Florida Cracker Ranch 500 Cemetery Rd, Bunnell, FL 32110
-Date: 2016-12-10 
+Date: 2016-12-10
 Site: http://www.spartan.com/en/race/detail/1100/overview?filter=super
 
 Length: 10 miles

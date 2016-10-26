@@ -2,7 +2,7 @@
 lat: 48.020768
 lng: -114.063667
 Title: Montana Beast
-Country: USA 
+Country: USA
 City: Bigfork
 Address: Quarter Cir Way, Bigfork, MT 59911
 Date: 2017-05-06

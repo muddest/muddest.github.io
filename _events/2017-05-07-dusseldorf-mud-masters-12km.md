@@ -1,9 +1,17 @@
-Title: Düsseldorf Germany Mud Masters Airport Weeze 2017Country: GermanyCity: DüsseldorfAddress: Airport Weeze, Airport Weeze, Baaler Straﬂe, GermanyDate: 2017-05–07Site: http://mudmasters.com/event/airport-weeze-2017/
-
-Length: 12km
+---
+lat: 51.2277411
+lng: 6.7734556
+Title: Düsseldorf Germany Mud Masters Airport Weeze 2017
+Country: Germany
+City: Düsseldorf
+Address: Airport Weeze, Airport Weeze, Baaler Straﬂe, Germany
+Date: 2017-05–07
+Site: http://mudmasters.com/event/airport-weeze-2017/
+Length: 12km
 Obstacles: 14+
-Youtube:Challenge: 
-Infotext:
+Youtube:
+Challenge:
+---
 
 There is a 6-, 12-, 18- trail. Everyone to Mud Masters so the challenge; from novice runners to die-hards! Not sure which challenge the best for you? On our preparation page you will find more information about the input level per distance.
 At 6, 12 and 18 km course participants a unique circular descent. The 42 km trail is composed of one round of 18 km and two rounds of 12 km. The event location and the surrounding nature largely determine the route and the choice of the obstacles, so the editions in Haarlemmermeer, Weeze and Biddinghuizen have each offer a unique course.

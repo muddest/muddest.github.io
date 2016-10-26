@@ -6,7 +6,7 @@ Country: Germany
 City: Arnsberg
 Address: Zum Herdringer Schloss 7
 Date: 2017-05-13
-Site: https://en.toughmudder.de/events/nrw-2017 
+Site: https://en.toughmudder.de/events/nrw-2017
 
 Length: 20km
 

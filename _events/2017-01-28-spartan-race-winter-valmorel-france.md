@@ -2,7 +2,7 @@
 lat: 45.4657999
 lng: 6.4551745
 Title: Spartan Race Winter Valmorel France
-Country: France 
+Country: France
 City: Valmorel
 Address: Les Avanchers - Valmorel, 25 Bourg Morel 73260 Valmorel
 Date: 2017-01-28

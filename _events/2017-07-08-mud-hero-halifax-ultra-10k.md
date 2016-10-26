@@ -1,17 +1,19 @@
+---
+lat: 44.9352628
+lng: -64.1718163
 Title: Mud Hero Halifax Ultra 10k
 Country: Canada
 City: Windsor
 Address: 370 Ski Martock Rd, Windsor, Nova Scotia B0N 2T0, Canada
 Date: 2017-07-08
 Site: http://www.mudhero.com/en/events/halifax-ultra-10k/
-   
 Length: 10 km
-
 Obstacles: 21+
 Youtube: https://www.youtube.com/watch?v=vXfA4GunWEQ
-Challenge: 
+Challenge:
+---
 
-Infotext: Mud Heroes looking for the next challenge should look no further than our NEW Ultra 10k! What takes our Ultra 10k to the next level is more than just the extra distance; we feature five harder challenges on top of the obstacles and mud featured in our traditional 6 km event. These include Brick and Morter, Turf and Surf, True North Climb, Top Out and Hole Punch plus assorted obstacles featuring hard or easy options.
+Mud Heroes looking for the next challenge should look no further than our NEW Ultra 10k! What takes our Ultra 10k to the next level is more than just the extra distance; we feature five harder challenges on top of the obstacles and mud featured in our traditional 6 km event. These include Brick and Morter, Turf and Surf, True North Climb, Top Out and Hole Punch plus assorted obstacles featuring hard or easy options.
 
 Is the Ultra 10k for me?
 

@@ -7,11 +7,11 @@ City: Stockholm
 Address: Kungliga Djurgården
 Date: 2017-08-26
 Site: https://signup.eqtiming.no/Anmalan/g295?lang=swedish&Event=TV_Sverige&groupchain=295
-Obstacles: 
+Obstacles:
 Length: 1-1.5 km
 Price: 295
 Currency: SEK
 Youtube: https://www.youtube.com/watch?v=YALIcLMvUvE
-Challenge: 
+Challenge:
 Age: 5-11
 ---

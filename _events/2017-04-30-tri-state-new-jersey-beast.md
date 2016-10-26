@@ -2,7 +2,7 @@
 lat: 41.190739
 lng: -74.505202
 Title: Tri-State New Jersey Beast
-Country: USA 
+Country: USA
 City: Vernon
 Address: 120 Route 94, Vernon, NJ 07462 Vernon, NJ 07462
 Date: 2017-04-30

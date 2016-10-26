@@ -12,7 +12,7 @@ Length: 8 km
 Price: 595-895
 Currency: SEK
 Youtube: https://www.youtube.com/embed/Jg2eJUX-QtM
-Challenge: 
+Challenge:
 ---
 
 TEXTEN INFO OM TÄVLING

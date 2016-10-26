@@ -2,7 +2,7 @@
 lat: 30.8120461
 lng: -98.3520453
 Title: Austin Super
-Country: USA 
+Country: USA
 City: Burnet
 Address: 105 CR 114 Burnet, TX 78611
 Date: 2017-05-20

@@ -1,17 +1,19 @@
+---
+lat: 44.506718
+lng: -80.318511
 Title: Met Con Blue Intel
 Country: Canada
 City: Blue Mountains
 Address: 108 Jozo Weider Boulevard, Blue Mountains, Ontario L9Y 3Z2, Canada
 Date: 2017-06-09
 Site: http://metconrace.com/intel/
-   
 Length: 5-8 km
-
 Obstacles: 18
-Youtube: 
-Challenge: 
+Youtube:
+Challenge:
+---
 
-Infotext: This one is 100% Certified Canadian. What does that mean? We live in igloos and eat snow for breakfast. We invented poutine, and top it with back bacon; we use beer in our cereal. We can make a fire by snapping our fingers.
+This one is 100% Certified Canadian. What does that mean? We live in igloos and eat snow for breakfast. We invented poutine, and top it with back bacon; we use beer in our cereal. We can make a fire by snapping our fingers.
 
 Only 10% of the country has hydro and running water.
 

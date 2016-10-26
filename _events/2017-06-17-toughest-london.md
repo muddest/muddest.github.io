@@ -44,4 +44,3 @@ Water and other drinks will be available at the finish line and once during the 
 Food:
 
 Hot and cold food will be sold at the event area.
- 

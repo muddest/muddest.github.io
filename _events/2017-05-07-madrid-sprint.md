@@ -3,7 +3,7 @@ lat: 40.692138
 lng: -3.610055
 Title: Madrid Sprint
 Country: Spain
-City: Madrid 
+City: Madrid
 Address: Av. Madrid, 34 San Agustín del Guadalix, Madrid 28750
 Date: 2017-05-07
 Site: http://www.spartan.com/en/race/detail/2076/overview
