@@ -1,4 +1,10 @@
 $(document).ready(function() {
+
+    $('.show-google-form').click(function(e) {
+        e.preventDefault();
+        $('.tipus').trigger('click');
+    });
+
     $(document).on('click', '.tipus', function(e) {
         e.preventDefault();
         $('#googleform').fadeIn(300);
@@ -31,5 +37,8 @@ $(document).ready(function() {
             $('body').removeClass('hideoverflow');
         }
     });
-    
+
+    $('#menu-bars').click(function() {
+        $('.card').toggle();
+    });
 });

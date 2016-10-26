@@ -60,37 +60,54 @@ h5 {
     margin: 10px 0 0 0;
 }
 
+#menu-bars {
+    display: none;
+}
+
 .header-card {
     z-index: 150;
     position: absolute;
-    top: 20px;
-    left: 70px;
-    padding: 10px;
     border-radius: 3px;
+    top: 0;
+    padding: 0;
+    left: 50%;
+    transform: translate(-50%);
 
     .card {
+        width: 200px;
+        padding: 0;
         background: rgba(0,0,0,0.7);
         display: inline-block;
         vertical-align: top;
 
         & ul {
+        padding: 0;
+        margin: 0;
+        text-align: left;
         height: 0;
         overflow-y: hidden;
-        padding: 0;
-        text-align: left;
-        -webkit-transition: height 0.4s ease-in-out;
-        -moz-transition: height 0.4s ease-in-out;
-        -ms-transition: height 0.4s ease-in-out;
-        -o-transition: height 0.4s ease-in-out;
-        transition: height 0.4s ease-in-out;
 
             & li {
                 list-style: none;
             }
+
+            & li a {
+                padding: 10px 0 10px 0;
+                width: 100%;
+                display: block;
+                text-decoration: none;
+                color: rgb(230,230,230);
+                text-align: center;
+                font-size: 1.4rem;
+
+                &:hover {
+                    background: rgb(76, 76, 76);
+                }
+            }
         }
 
         &:hover ul {
-            height: 200px;
+            height: auto;
         }
     }
 }
@@ -648,7 +665,7 @@ input[type="search"] {
     display: none;
     position: fixed;
     top: 0;
-    z-index: 50;
+    z-index: 151;
     left: 50%;
     transform: translateX(-50%);
     background: rgba(0,0,0,0.9);
@@ -659,7 +676,7 @@ input[type="search"] {
         cursor: pointer;
         background: rgb(140, 140, 140);
         right: 50%;
-        z-index: 150;
+        z-index: 152;
         padding: 6px;
         font-size: 1.4rem;
         display: block;
@@ -720,6 +737,25 @@ input[type="search"] {
 
     #googleform iframe {
         width: 95%;
+    }
+
+    #menu-bars {
+        position: absolute;
+        top: 10px;
+        right: 0;
+        z-index: 160;
+        font-size: 1.8rem;
+        display: block;
+    }
+
+    .header-card {
+        & .card {
+            display: none;
+
+            & ul {
+                height: auto;
+            }
+        }
     }
 }
 
