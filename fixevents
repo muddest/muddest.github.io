@@ -24,7 +24,7 @@ function addFrontMatter($lines) {
 
     $newLines = [];
     foreach ($lines as $key => $line) {
-        if (in_array($line, ['', 'Infotext:'])) continue;
+        if (in_array(trim($line), ['', 'Infotext:'])) continue;
 
         if ('Infotext:' === substr($line, 0, 9)) {
             $lines[$key] = $line = trim(substr($line, 9));
