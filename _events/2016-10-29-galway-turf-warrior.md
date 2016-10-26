@@ -13,7 +13,7 @@ Youtube:
 Challenge:
 ---
 
-The Turf Guy course will be approx 10km long but don’t let this short distance fool you into thinking that it won’t test your endurance!
+The Turf Guy course will be approx 10km long but donâ€™t let this short distance fool you into thinking that it wonâ€™t test your endurance!
 
 We have built lots of elements throughout the course which tested your fitness, endurance, mental strength! As it was a long winter and a very wet summer we have had a lot of spare time to come up with more weird and wonderful elements, so you never know what you might find around the corner this year!!!
 

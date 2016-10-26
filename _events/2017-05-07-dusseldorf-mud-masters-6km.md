@@ -1,10 +1,10 @@
 ---
 lat: 51.2277411
 lng: 6.7734556
-Title: Düsseldorf Germany Mud Masters Airport Weeze 2017
+Title: D≈∏sseldorf Germany Mud Masters Airport Weeze 2017
 Country: Germany
-City: Düsseldorf
-Address: Airport Weeze, Airport Weeze, Baaler Straﬂe, Germany
+City: D≈∏sseldorf
+Address: Airport Weeze, Airport Weeze, Baaler Stra√üe, Germany
 Date: 2017-05-07
 Site: http://mudmasters.com/event/airport-weeze-2017/
 Length: 6km
@@ -18,7 +18,7 @@ At 6, 12 and 18 km course participants a unique circular descent. The 42 km trai
 
 All-round fitness, teamwork, hardship and fun. This is what you need to complete the challenging Mud Masters course, which is designed by Marines and inspired on the most challenging military obstacle courses in the world.
 
-Mud Masters is a challenge. Finishing together is more important than winning. Completing the course is a goal to train for alone or with your (sport) friends, family members or colleagues. Itís hard work, but the reward of finishing together is worth it!
+Mud Masters is a challenge. Finishing together is more important than winning. Completing the course is a goal to train for alone or with your (sport) friends, family members or colleagues. It‚Äôs hard work, but the reward of finishing together is worth it!
 
 Obstacles may include:
 Getting Tyred, Sizzler, Jump-Overs, Monkey Bars, Golden Stairs, Walk of Fire, Splash Jump, Trenches, Water, Pipe Runner, Indiana Bridge, Battlefield, Night Crawlers, Great Walls, and much much more!

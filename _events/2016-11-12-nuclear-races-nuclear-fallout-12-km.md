@@ -13,8 +13,8 @@ Youtube:
 Challenge:
 ---
 
-The wetter, colder and muddier race; the one you need to train for – take it for granted and it’ll bite you. It’s our last event of the year, so we throw everything at it – every obstacle Nuclear has is included and the 6km and 12km courses are muddier than any other time of the year.
+The wetter, colder and muddier race; the one you need to train for â€“ take it for granted and itâ€™ll bite you. Itâ€™s our last event of the year, so we throw everything at it â€“ every obstacle Nuclear has is included and the 6km and 12km courses are muddier than any other time of the year.
 
-Hypothermia isn’t uncommon – cuts, bruises, scrapes and sores are all abundant.
+Hypothermia isnâ€™t uncommon â€“ cuts, bruises, scrapes and sores are all abundant.
 
-We’ve over 60 natural and man-made obstacles all on hilly, undulating farmland and heavy Essex Clay – so duck-taping your trainers on isn’t a bad idea!
+Weâ€™ve over 60 natural and man-made obstacles all on hilly, undulating farmland and heavy Essex Clay â€“ so duck-taping your trainers on isnâ€™t a bad idea!

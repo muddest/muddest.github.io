@@ -1,10 +1,10 @@
 ---
 lat: 45.5626241
 lng: -73.3333459
-Title: Mud Hero Montréal
+Title: Mud Hero MontrÃ©al
 Country: Canada
-City: Montréal
-Address: 550, Rang des Vingt-cinq Est, Saint-Bruno-de-Montarville, Québec J3V 0G6, Canada
+City: MontrÃ©al
+Address: 550, Rang des Vingt-cinq Est, Saint-Bruno-de-Montarville, QuÃ©bec J3V 0G6, Canada
 Date: 2017-06-17
 Site: http://www.mudhero.com/en/events/montreal/
 Length: 6 km
@@ -13,7 +13,7 @@ Youtube: https://youtu.be/-PKFvnh5JjI
 Challenge:
 ---
 
-6KM, 18+ obstacles, 10,000-watt afterparty – Mud Hero Montreal is a mud run at the gorgeous Mont Saint-Bruno overlooking Montreal. Register now before tickets are gone!
+6KM, 18+ obstacles, 10,000-watt afterparty â€“ Mud Hero Montreal is a mud run at the gorgeous Mont Saint-Bruno overlooking Montreal. Register now before tickets are gone!
 
 6 km  - 16+ obstacles - challenging yet fun for participants of all fitness levels
-Mud Hero’s course will get your adrenaline and blood pumping, while announcers, music and zany obstacles make this course like no other.
+Mud Heroâ€™s course will get your adrenaline and blood pumping, while announcers, music and zany obstacles make this course like no other.

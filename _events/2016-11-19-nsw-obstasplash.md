@@ -13,7 +13,7 @@ Youtube: https://www.youtube.com/watch?v=TzeQr69pvOg
 Challenge:
 ---
 
-ObstaSplash spans 3-5km of flat grassland with a mixture of wet and dry inflatable obstacles such as ìObstaScreamî ObstaBlueBalls and ObstaDance stations (giant inflatable dance floors) with themed music to get your groove on. ObstaSplash is open to ages 13+
+ObstaSplash spans 3-5km of flat grassland with a mixture of wet and dry inflatable obstacles such as ‚ÄúObstaScream‚Äù ObstaBlueBalls and ObstaDance stations (giant inflatable dance floors) with themed music to get your groove on. ObstaSplash is open to ages 13+
 
 Participants will be required to park in designated parking areas and will be transported to-and-from the event by free shuttles.
 Must be 13 or older.

@@ -13,4 +13,4 @@ Youtube: https://www.youtube.com/watch?v=DLYQkDibBpE
 Challenge:
 ---
 
-The Rampage Run has been designed around the equestrian gallops and cross country course as well as making the most of the natural topography of undulating countryside, steeper hills, river and woodland. For adults (18-65 years) and juniors (11-18 years). £2 from each entry will be donated to one of the charities Rampage Run supports.
+The Rampage Run has been designed around the equestrian gallops and cross country course as well as making the most of the natural topography of undulating countryside, steeper hills, river and woodland. For adults (18-65 years) and juniors (11-18 years). Â£2 from each entry will be donated to one of the charities Rampage Run supports.

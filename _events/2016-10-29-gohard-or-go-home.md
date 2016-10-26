@@ -12,4 +12,4 @@ Youtube:
 Challenge:
 ---
 
-The GoHard or GoHome event is a short and fast +6km obstacle course with around 20 obstacles. The theme of the event is based around a sprint ethos, that will require you to dig in and get around the course like a true Jack Russell whipper snapper. The obstacles are packed in to slow you down though and you’ll be tripping over the next obstacle before you even now what hit you. Feel like you’ve got the energy after your first trip around the park, providing you get around your first lap in under 75 minutes, we challenge you to another lap
+The GoHard or GoHome event is a short and fast +6km obstacle course with around 20 obstacles. The theme of the event is based around a sprint ethos, that will require you to dig in and get around the course like a true Jack Russell whipper snapper. The obstacles are packed in to slow you down though and youâ€™ll be tripping over the next obstacle before you even now what hit you. Feel like youâ€™ve got the energy after your first trip around the park, providing you get around your first lap in under 75 minutes, we challenge you to another lap

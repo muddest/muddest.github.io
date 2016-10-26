@@ -19,4 +19,4 @@ Is the Ultra 10k for me?
 
 Even more of the Muddiest. Challenge. EVER.
 
-Are you a Mud Hero veteran looking for the next challenge? Want to try something a little tougher, but still jam packed with fun? While there won’t be any electric shock or burpees to contend with, Mud Hero Ultra obstacles are more physically demanding. The 10K course features 25+ obstacles, and the same 10,000 watt after-party! Remember, if the obstacle is too hard, you have the option of doing an easy variation, or skipping it (no burpees required!)
+Are you a Mud Hero veteran looking for the next challenge? Want to try something a little tougher, but still jam packed with fun? While there wonâ€™t be any electric shock or burpees to contend with, Mud Hero Ultra obstacles are more physically demanding. The 10K course features 25+ obstacles, and the same 10,000 watt after-party! Remember, if the obstacle is too hard, you have the option of doing an easy variation, or skipping it (no burpees required!)

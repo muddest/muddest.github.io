@@ -13,6 +13,6 @@ Youtube:
 Challenge:
 ---
 
-The Zombies Mud Run is based on a post apocalyptic event where the dead have risen and the earth is filled with flesh eating zombies.  It’s vital that humans work together for the good of all mankind.  You can sign up as a human or a zombie, humans run the course with three red flags attached to different parts of your body, these flags represent different parts of your body.
+The Zombies Mud Run is based on a post apocalyptic event where the dead have risen and the earth is filled with flesh eating zombies.  Itâ€™s vital that humans work together for the good of all mankind.  You can sign up as a human or a zombie, humans run the course with three red flags attached to different parts of your body, these flags represent different parts of your body.
 
-Zombies are scattered throughout the course ready to eat your body parts, {capture your flags}, some of the zombies you can see and some are hidden ready to strike, it’s up to you to make it to the safe zone alive and uninfected.  If you reach the safe zone with more than one red flay then you have survived, however if you loose all your flags then you have been infected.
+Zombies are scattered throughout the course ready to eat your body parts, {capture your flags}, some of the zombies you can see and some are hidden ready to strike, itâ€™s up to you to make it to the safe zone alive and uninfected.  If you reach the safe zone with more than one red flay then you have survived, however if you loose all your flags then you have been infected.

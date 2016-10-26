@@ -13,7 +13,7 @@ Youtube: https://youtu.be/-PKFvnh5JjI
 Challenge:
 ---
 
-6KM, 18+ Obstacles, 10,000 watt after-party – Thank you Alberta for making Mud Hero Alberta Canada’s largest obstacle event! Just 1 hour, 40 minutes north of Calgary, and 1 hour, 50 minutes south of Edmonton, Canyon Ski Resort features hills, mud, water and plenty of challenging terrain for an unsurpassed event experience. Don’t miss out on this awesome experience as waves and days sell out quickly!
+6KM, 18+ Obstacles, 10,000 watt after-party â€“ Thank you Alberta for making Mud Hero Alberta Canadaâ€™s largest obstacle event! Just 1 hour, 40 minutes north of Calgary, and 1 hour, 50 minutes south of Edmonton, Canyon Ski Resort features hills, mud, water and plenty of challenging terrain for an unsurpassed event experience. Donâ€™t miss out on this awesome experience as waves and days sell out quickly!
 
 6 km  - 16+ obstacles - challenging yet fun for participants of all fitness levels
-Mud Hero’s course will get your adrenaline and blood pumping, while announcers, music and zany obstacles make this course like no other.
+Mud Heroâ€™s course will get your adrenaline and blood pumping, while announcers, music and zany obstacles make this course like no other.

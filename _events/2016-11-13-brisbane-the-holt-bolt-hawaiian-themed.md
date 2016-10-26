@@ -4,7 +4,7 @@ lng: 153.0048695
 Title: Queensland Australia The Holt Bolt Hawaiian Themed 2016
 Country: Australia
 City: Brisbane
-Address: St. Paul’s School, 34 Strsthpine Road, Brisbane, Queensland, Australia
+Address: St. Paulâ€™s School, 34 Strsthpine Road, Brisbane, Queensland, Australia
 Date: 2016-11-13
 Site: http://theholtbolt.com/?post_type=dd_events&p=1135
 Length: 6-8km

@@ -13,8 +13,8 @@ Youtube:
 Challenge:
 ---
 
-Welcome to Natural Fitness Company’s event focused on kids obstacle course fun this Halloween. It’s designed for all your active little ones to enjoy Halloween with a muddy, ghoulish run – and in costume if they’d like!
+Welcome to Natural Fitness Companyâ€™s event focused on kids obstacle course fun this Halloween. Itâ€™s designed for all your active little ones to enjoy Halloween with a muddy, ghoulish run â€“ and in costume if theyâ€™d like!
 
-Set among 300 acres of beautiful Surrey Hills landscape, our course will give your kids a 2.5km trail of mud and some fantastic new obstacles to overcome, which they can tackle as many times as they’d like. Not only will they burn off some energy, they’ll have a great time in the process and leave with a shiny new medal.
+Set among 300 acres of beautiful Surrey Hills landscape, our course will give your kids a 2.5km trail of mud and some fantastic new obstacles to overcome, which they can tackle as many times as theyâ€™d like. Not only will they burn off some energy, theyâ€™ll have a great time in the process and leave with a shiny new medal.
 
-Many of our participants make it a thoroughly memorable experience by taking part as a family. There’s nothing like jumping walls, wading through water, climbing ropes and getting covered in mud this Halloween for bonding!
+Many of our participants make it a thoroughly memorable experience by taking part as a family. Thereâ€™s nothing like jumping walls, wading through water, climbing ropes and getting covered in mud this Halloween for bonding!

@@ -3,8 +3,8 @@ lat: 46.195426
 lng: -73.620458
 Title: Dead End Race Apocalypse
 Country: Canada
-City: Sainte-Béatrix
-Address: 1124 Rang Sainte Cecile, Sainte-Béatrix, QC J0K 1Y0 Canada
+City: Sainte-BÃ©atrix
+Address: 1124 Rang Sainte Cecile, Sainte-BÃ©atrix, QC J0K 1Y0 Canada
 Date: 2017-07-16
 Site: http://deadendraceseries.com/index.php/summer/12km-apocalypse-july-16th-2017
 Length: 12 km

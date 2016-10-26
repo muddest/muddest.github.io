@@ -1,7 +1,7 @@
 ---
 lat: 54.02576
 lng: 9.38697
-Title: Wacken Germany Fisherman’s Friend StrongmanRun 2017
+Title: Wacken Germany Fishermanâ€™s Friend StrongmanRun 2017
 Country: Germany
 City: Wacken
 Address: Reselithweg 17, Wacken, Germany

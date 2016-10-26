@@ -13,7 +13,7 @@ Youtube: https://youtu.be/-PKFvnh5JjI
 Challenge:
 ---
 
-6KM, 18+Obstacles, 10,000 watt after-party – Mud Hero Halifax is located at Ski Martock – only 45 minutes outside of Halifax in beautiful Windsor, Nova Scotia. With amazing views of the city, hills and swamps, Mud Hero Halifax offers a weekend you won’t soon forget. Canada's favourite obstacle series will make a giant splash in Halifax, so get ready to dive in!
+6KM, 18+Obstacles, 10,000 watt after-party â€“ Mud Hero Halifax is located at Ski Martock â€“ only 45 minutes outside of Halifax in beautiful Windsor, Nova Scotia. With amazing views of the city, hills and swamps, Mud Hero Halifax offers a weekend you wonâ€™t soon forget. Canada's favourite obstacle series will make a giant splash in Halifax, so get ready to dive in!
 
 6 km  - 16+ obstacles - challenging yet fun for participants of all fitness levels
-Mud Hero’s course will get your adrenaline and blood pumping, while announcers, music and zany obstacles make this course like no other.
+Mud Heroâ€™s course will get your adrenaline and blood pumping, while announcers, music and zany obstacles make this course like no other.

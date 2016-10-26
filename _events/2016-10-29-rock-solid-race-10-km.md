@@ -14,16 +14,16 @@ Challenge:
 
 Our Milton Keynes event is staged at the stunning Silverstone Woodlands.
 
-As the home of ROCKSOLID RACE, it’s where you’ll find our most inventive obstacles to push you and your muscles to the max!
+As the home of ROCKSOLID RACE, itâ€™s where youâ€™ll find our most inventive obstacles to push you and your muscles to the max!
 
-On top of that, you’ll face your fears, our finest mud and the best facilities of any obstacle course race on the planet, bar none.
+On top of that, youâ€™ll face your fears, our finest mud and the best facilities of any obstacle course race on the planet, bar none.
 
-You and your team are ready to beat Bambi, smash through Summit Plummet and boss The Bomb. So don’t miss training folks – you’ll be showing your team exactly what you’re made of!
+You and your team are ready to beat Bambi, smash through Summit Plummet and boss The Bomb. So donâ€™t miss training folks â€“ youâ€™ll be showing your team exactly what youâ€™re made of!
 
-You’re going to get wet right through, totally muddy, and you’re going to laugh more than you ever thought possible. You start the day as a ROCKSOLID RACE Contender, but you’re going to earn a Champion’s reward…
+Youâ€™re going to get wet right through, totally muddy, and youâ€™re going to laugh more than you ever thought possible. You start the day as a ROCKSOLID RACE Contender, but youâ€™re going to earn a Championâ€™s rewardâ€¦
 
 Once you cross the line, our legendary free hot showers will be a total lifesaver after an afternoon knee deep in the elements!
 
-Post race, it’s time to grab a beer and check out the kick-ass after-party!
+Post race, itâ€™s time to grab a beer and check out the kick-ass after-party!
 
-Don’t forget your tent! We’ve got awesome camping facilities, so you can keep the party going late into the night!
+Donâ€™t forget your tent! Weâ€™ve got awesome camping facilities, so you can keep the party going late into the night!

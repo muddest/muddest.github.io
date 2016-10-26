@@ -13,8 +13,8 @@ Youtube:
 Challenge:
 ---
 
-There are 36 obstacles in just 5km, thatís an average of 7.2 obstacles per kilometre. So what will you be up against? A hell of a lot!
-All obstacles have been carefully designed to test you regardless of whether youíre an office-working novice or a hardened, crossfitting elite. In fact, out of all our test-racers who recently pioneered the course, 87% said they found it the ìideal difficultyî
+There are 36 obstacles in just 5km, that‚Äôs an average of 7.2 obstacles per kilometre. So what will you be up against? A hell of a lot!
+All obstacles have been carefully designed to test you regardless of whether you‚Äôre an office-working novice or a hardened, crossfitting elite. In fact, out of all our test-racers who recently pioneered the course, 87% said they found it the ‚Äúideal difficulty‚Äù
 
 There will be roving first aid officers at the event. There will also be water stations throughout the event.
 

@@ -17,11 +17,11 @@ Obstacles: 20+
 Youtube: https://www.youtube.com/watch?v=k5C-B6lGI_4
 Challenge:
 
-Infotext: An intense 5Km obstacle and adventure race... with PROFESSIONAL ZOMBIES! Youíre running from brain hungry, virus spreading, Freakín Zombies who are trying to snatch the flags/lives on your flag belt.
+Infotext: An intense 5Km obstacle and adventure race... with PROFESSIONAL ZOMBIES! You‚Äôre running from brain hungry, virus spreading, Freak‚Äôn Zombies who are trying to snatch the flags/lives on your flag belt.
 
-Along the way you will have to navigate a series of 13 Freakín obstacles.
+Along the way you will have to navigate a series of 13 Freak‚Äôn obstacles.
 
-This is one race where your legs giving out are the least of your problems. ìRun for your Freakín Lifeî is a first-of-its-kind in New Zealand event, one part 5K, one part obstacle course, one part escaping the clutches of zombies ñ and all parts are awesome.
+This is one race where your legs giving out are the least of your problems. ‚ÄúRun for your Freak‚Äôn Life‚Äù is a first-of-its-kind in New Zealand event, one part 5K, one part obstacle course, one part escaping the clutches of zombies ‚Äì and all parts are awesome.
 
 Before the race, you will be given a flag belt, just like the childhood game of flag football. These flags represent your vigour. The zombies want to take your flags and thus your vigour and maybe eat your brains. If you lose all your vigour flags, you die. And the zombies win. If you are unable to complete an obstacle, you need to surrender 1 of your flags.
 
@@ -31,7 +31,7 @@ The 5km course will include parts of the Kingseat grounds, Spookers Freaky Fores
 
 Throughout the 5K obstacle race, there will be over 20 man-made and natural obstacles for you to conquer. Competitors may choose not to complete an obstacle, but any runner who skips an obstacle will need to give up a flag.
 
-Our hand-selected zombies are the best of the worst from Spookers Haunted Attraction Scream Park. They are trained professionals with many years of serious experience. Spookersí zombies have a goal; to chase you down and snatch your vigour flags until you are dead. Zombies will not physically touch the competitors other than trying to get a vigour flag.
+Our hand-selected zombies are the best of the worst from Spookers Haunted Attraction Scream Park. They are trained professionals with many years of serious experience. Spookers‚Äô zombies have a goal; to chase you down and snatch your vigour flags until you are dead. Zombies will not physically touch the competitors other than trying to get a vigour flag.
 
 We will be feeding our zombies before the race, to give them strength to last the day, so what you need is cunning, speed, and lightning agility.
 

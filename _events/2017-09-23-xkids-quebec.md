@@ -1,7 +1,7 @@
 ---
 lat: 46.9421359
 lng: -71.2992611
-Title: XKIDS Québec
+Title: XKIDS QuÃ©bec
 Country: Canada
 City: Lac-Beauport
 Address: 1084 Boulevard du Lac, Lac-Beauport, Quebec, Canada

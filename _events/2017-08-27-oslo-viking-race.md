@@ -20,4 +20,4 @@ Bag check is available for 20 NOK at the race venue.
 
 For Viking Race Kids the age limit for participation in Viking Race Kids is 3-8 years. The obstacles are in mini-versions of the grown up race and we believe children older than 8y will be bored in this course, unfortunately. For Oslo-event in 2017 we will have a mass-start for the kids race at 14.00 on Saturday 26th and Sunday 27st of August. All kids receive a t-shirt.
 
-Norway’s biggest obstacle race inspired by the Viking age and Norse mythology.
+Norwayâ€™s biggest obstacle race inspired by the Viking age and Norse mythology.
