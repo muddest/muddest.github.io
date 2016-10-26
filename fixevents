@@ -26,7 +26,11 @@ function addFrontMatter($lines) {
     foreach ($lines as $key => $line) {
         if (in_array($line, ['', 'Infotext:'])) continue;
 
-        if (!preg_match('~[a-zA-Z0-9]+: .*~', $line)) {
+        if ('Infotext:' === substr($line, 0, 9)) {
+            $lines[$key] = $line = trim(substr($line, 9));
+        }
+
+        if (!preg_match('~^[a-zA-Z0-9]+:.*~', $line)) {
             array_splice($lines, 0, $key, array_merge(['---'], $newLines, ['---', '']));
             return $lines;
         }
@@ -86,13 +90,15 @@ function addLatLng($lines) {
 }
 
 function geocode($country, $city, $address = null) {
+    setlocale(LC_ALL, "en_US.utf8");
+
     $url = 'http://maps.googleapis.com/maps/api/geocode/json?address=';
 
     if ($address) {
-        $url .= urlencode($address).',';
+        $url .= urlencode(iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $address)).',';
     }
 
-    $url .= urlencode($city).','.urlencode($country);
+    $url .= urlencode(iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $city)).','.urlencode(iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $country));
 
     return json_decode(file_get_contents($url));
 }
