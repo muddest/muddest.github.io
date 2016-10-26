@@ -7,12 +7,12 @@ City: Stockholm
 Address: Stockholms stadion
 Date: 2017-05-13
 Site:  https://signup.eqtiming.no/Stockholms-Stadion-13-maj-2017/i826214?Event=TV_Sverige
-Obstacles: 
+Obstacles:
 Length: 8 km
 Price: 595-895
 Currency: SEK
 Youtube: https://www.youtube.com/embed/o39jJH7_knA
-Challenge: 
+Challenge:
 ---
 
 TEXTEN INFO OM TÄVLING

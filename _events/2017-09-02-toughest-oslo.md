@@ -12,7 +12,7 @@ Length: 8 km
 Price: 695-895
 Currency: NOK
 Youtube: https://www.youtube.com/embed/hjdFCu7snpo
-Challenge: 
+Challenge:
 ---
 
 Holmenkollen is one of the most spectacular places to run Toughest at! This race will be tougher than ever before. Join us for this legendary race and accept the toughest challenge of your life.

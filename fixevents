@@ -1,0 +1,114 @@
+#!/usr/bin/env php
+<?php
+
+$directory = __DIR__.'/_events';
+
+foreach (scandir($directory) as $file) {
+    if (!is_file("$directory/$file")) continue;
+
+    echo "$file\n";
+
+    $content = file_get_contents("$directory/$file");
+    $lines =  explode("\n", str_replace("\r", "\n", str_replace("\r\n", "\n", $content)));
+
+    $lines = addFrontMatter($lines);
+    $lines = fixCharacters($lines);
+    $lines = addLatLng($lines);
+    $newContent = implode("\n", $lines);
+
+    if ($newContent !== $content) {
+        file_put_contents("$directory/$file", $newContent);
+    }
+}
+
+function addFrontMatter($lines) {
+    if ('---' === $lines[0]) return $lines;
+
+    $newLines = [];
+    foreach ($lines as $key => $line) {
+        if (in_array(trim($line), ['', 'Infotext:'])) continue;
+
+        if ('Infotext:' === substr($line, 0, 9)) {
+            $lines[$key] = $line = trim(substr($line, 9));
+        }
+
+        if (!preg_match('~^[a-zA-Z0-9]+:.*~', $line)) {
+            array_splice($lines, 0, $key, array_merge(['---'], $newLines, ['---', '']));
+            return $lines;
+        }
+
+        $newLines[] = $line;
+    }
+
+    return $lines;
+}
+
+function fixCharacters($lines) {
+    foreach ($lines as $key => $line) {
+        $lines[$key] = rtrim($line);
+    }
+
+    return $lines;
+}
+
+function addLatLng($lines) {
+    $frontMatter = false;
+    $attributes = [];
+
+    foreach ($lines as $line) {
+        if ($line === '---') {
+            if ($frontMatter) break;
+            $frontMatter = true;
+            continue;
+        } elseif (!$frontMatter) return $lines;
+
+        $attributes[substr($line, 0, strpos($line, ':'))] = substr($line, strpos($line, ':')+2);
+    }
+
+    if (
+        (empty($attributes['lat']) || empty($attributes['lng']))
+        && !empty($attributes['City']) && !empty($attributes['Country'])
+    ) {
+        $data = geocode($attributes['Country'], $attributes['City'], @$attributes['Address']);
+
+        if (!count($data->results)) {
+            if (!empty($attributes['Address'])) {
+                $data = geocode($attributes['Country'], $attributes['City']);
+            }
+
+            if (!count($data->results)) {
+                return $lines;
+            }
+        }
+        $result = reset($data->results);
+
+        echo "    -> {$result->geometry->location->lat}, {$result->geometry->location->lng}\n";
+
+        array_splice($lines, 1, 0, [
+            "lat: {$result->geometry->location->lat}",
+            "lng: {$result->geometry->location->lng}",
+        ]);
+    }
+
+    return $lines;
+}
+
+function geocode($country, $city, $address = null) {
+    static $lastCall;
+    if ($lastCall) usleep(round(1000000 * (1 - (microtime(true) - $lastCall))));
+    $lastCall = microtime(true);
+
+    setlocale(LC_ALL, "en_US.utf8");
+
+    $url = 'http://maps.googleapis.com/maps/api/geocode/json?address=';
+
+    if ($address) {
+        $url .= urlencode(iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $address)).',';
+    }
+
+    $url .= urlencode(iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $city)).','.urlencode(iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $country));
+
+    echo "    $url\n";
+
+    return json_decode(file_get_contents($url));
+}
