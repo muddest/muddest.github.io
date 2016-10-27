@@ -38,7 +38,10 @@ $(document).ready(function() {
         }
     });
 
-    $('#menu-bars').click(function() {
-        $('.card').toggle();
+    $('.about-us-link').click(function(e) {
+        e.preventDefault();
+        var toAbout = $('.about-intro').offset().top - $(window).scrollTop();
+        //$(window).scrollTop(toAbout);
+        $('html, body').animate({scrollTop:toAbout}, 'fast');
     });
 });
