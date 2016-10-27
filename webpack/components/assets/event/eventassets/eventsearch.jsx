@@ -109,7 +109,7 @@ class EventSearch extends React.Component {
                     name="search"
                     autoComplete="off"
                     type="search"
-                    placeholder="Search for events"
+                    placeholder="Search for events, countries"
                     onChange={this.updateSearchVal}
                     onKeyDown={this.resetSearchTimer}
                     tabIndex="1" />
