@@ -40,7 +40,7 @@ $(document).ready(function() {
 
     $('.about-us-link').click(function(e) {
         e.preventDefault();
-        var toAbout = $('.about-intro').offset().top - $(window).scrollTop();
+        var toAbout = $('.about-intro').offset().top;
         //$(window).scrollTop(toAbout);
         $('html, body').animate({scrollTop:toAbout}, 'fast');
     });
