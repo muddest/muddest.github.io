@@ -1,7 +1,7 @@
 ---
 lat: -33.3625441
 lng: 151.4408885
-Title: NSW Australia ObstaSplash 2016
+Title: NSW Australia ObstaSplash
 Country: Australia
 City: NSW
 Address: Mingara Recreation Club, Tumbi Umbi, NSW, Australia

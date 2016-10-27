@@ -1,7 +1,7 @@
 ---
 lat: -30.0002315
 lng: 136.2091547
-Title: Adelaide Australia Battlefield Challenge 2016
+Title: Adelaide Australia Battlefield Challenge
 Country: Australia
 City: Outbank, South Australia
 Address: Oakbank Race Course 46 Oakwood Road

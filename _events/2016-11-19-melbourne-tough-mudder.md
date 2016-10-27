@@ -1,7 +1,7 @@
 ---
 lat: -37.8136276
 lng: 144.9630576
-Title: Melbourne Australia Tough Mudder 2016
+Title: Melbourne Australia Tough Mudder
 Country: Australia
 City: Melbourne
 Address: St. Anne’s Winery, 64 Garrards Rd, Myrniong, Australia

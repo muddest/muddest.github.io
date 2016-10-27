@@ -1,7 +1,7 @@
 ---
 lat: -27.567
 lng: 151.897
-Title: Queensland Australia Kryptonite Challenge 2016
+Title: Queensland Australia Kryptonite Challenge
 Country: Australia
 City: Glenvale
 Address: Toowomba Showgrounds, Glenvale Road, Glenvale, Queensland, Australia

@@ -1,7 +1,7 @@
 ---
 lat: -35.3075
 lng: 149.124417
-Title: Canberra Australia Battlefield Challenge 2017
+Title: Canberra Australia Battlefield Challenge
 Country: Australia
 City: Canberra
 Address: Paintball Sports Grounds ACT 600 Pialligo Ave , Canberra, Australia

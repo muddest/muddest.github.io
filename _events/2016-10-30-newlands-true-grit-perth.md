@@ -1,7 +1,7 @@
 ---
 lat: -33.6755546
 lng: 115.8580914
-Title: Perth WA Australia True Grit 2016
+Title: Perth WA Australia True Grit
 Country: Australia
 City: Newlands
 Address: True Grit Perth, 1901 Ryalls Road, Newlands, Australia

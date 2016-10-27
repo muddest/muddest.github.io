@@ -1,7 +1,7 @@
 ---
 lat: 6.2272897
 lng: -75.573519
-Title: Medellin Colombia Desafio de Guerreros 2016
+Title: Medellin Colombia Desafio de Guerreros
 Country: Colombia
 City: Medellin
 Address: TBA Medellin, Medellin, Colombia

@@ -1,7 +1,7 @@
 ---
 lat: 3.0738379
 lng: 101.5183469
-Title: Selangor Malaysia Great Eastern Viper Challenge 2016
+Title: Selangor Malaysia Great Eastern Viper Challenge
 Country: Malaysia
 City: Selangor
 Address: Sepang International Circuit, Sepang International Circuit, Sepang, Selangor, Malaysia

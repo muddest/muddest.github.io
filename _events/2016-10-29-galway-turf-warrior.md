@@ -1,7 +1,7 @@
 ---
 lat: 53.270668
 lng: -9.0567905
-Title: Ireland Gaelforce Turf Warrior 2016
+Title: Ireland Gaelforce Turf Warrior
 Country: Ireland
 City: Galway
 Address: Killary Adventure Centre, Killary Lodge, Leenane, Co. Galway, Ireland

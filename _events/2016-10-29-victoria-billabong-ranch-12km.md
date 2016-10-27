@@ -1,7 +1,7 @@
 ---
 lat: -37.4713077
 lng: 144.7851531
-Title: Victoria Australia Billabong Ranch Brumby Run 2016
+Title: Victoria Australia Billabong Ranch Brumby Run
 Country: Australia
 City: Victoria
 Address: Billabong Ranch Glanville Road, Victoria, Australia

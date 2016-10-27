@@ -1,7 +1,7 @@
 ---
 lat: 7.119349
 lng: -73.1227416
-Title: Bucaramanga Colombia Desafio de Guerreros 2017
+Title: Bucaramanga Colombia Desafio de Guerreros
 Country: Colombia
 City: Bucaramanga
 Address: TBA Bucaramanga, Bucaramanga, Colombia

@@ -1,7 +1,7 @@
 ---
 lat: 51.5995781
 lng: 6.1503945
-Title: DŸsseldorf Germany Mud Masters Airport Weeze 2017
+Title: DŸsseldorf Germany Mud Masters Airport Weeze
 Country: Germany
 City: DŸsseldorf
 Address: Airport Weeze

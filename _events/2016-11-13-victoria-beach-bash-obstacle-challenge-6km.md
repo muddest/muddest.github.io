@@ -1,7 +1,7 @@
 ---
 lat: -37.8678765
 lng: 144.9740049
-Title: Victoria Australia Beach Bash Obstacle Challenge 2016
+Title: Victoria Australia Beach Bash Obstacle Challenge
 Country: Australia
 City: Victoria
 Address: St Kilda Beach, St Kilda Beach, St Kilda, Victoria, Australia

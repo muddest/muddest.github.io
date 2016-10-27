@@ -1,7 +1,7 @@
 ---
 lat: -33.426667
 lng: 151.341667
-Title: NSW Australia Battlefield Challenge 2017
+Title: NSW Australia Battlefield Challenge
 Country: Australia
 City: Gosford
 Address: The Entertainment Grounds 6 Racecourse, Racecourse Road , Gosford, NSW, Australia

@@ -1,7 +1,7 @@
 ---
 lat: -33.7154534
 lng: 151.3007454
-Title: NSW Australia Beach Bash Obstacle Challenge 2017
+Title: NSW Australia Beach Bash Obstacle Challenge
 Country: Australia
 City: Narrabeen
 Address: North Narrabeen Beach, North Narrabeen, NSW, Australia

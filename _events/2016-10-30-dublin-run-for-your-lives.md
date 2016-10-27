@@ -1,7 +1,7 @@
 ---
 lat: 53.3498053
 lng: -6.2603097
-Title: Dublin Ireland Run For Your Lives 2016
+Title: Dublin Ireland Run For Your Lives
 Country: Ireland
 City: Dublin
 Address: Malahide Castle, Malahide Castle, Dublin, Ireland
