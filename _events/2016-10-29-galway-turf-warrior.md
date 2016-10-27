@@ -8,7 +8,7 @@ Address: Killary Adventure Centre, Killary Lodge, Leenane, Co. Galway, Ireland
 Date: 2016-10-29
 Site: http://www.turfwarriorchallenge.com/en/about_the_event/course.html
 Length: 10km
-Obstacles: 
+Obstacles:
 Youtube:
 Challenge:
 ---
