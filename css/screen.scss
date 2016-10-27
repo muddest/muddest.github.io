@@ -64,50 +64,57 @@ h5 {
     display: none;
 }
 
-.header-card {
-    z-index: 150;
-    position: absolute;
-    border-radius: 3px;
-    top: 0;
-    padding: 0;
-    left: 50%;
-    transform: translate(-50%);
+
+
+
+#header-card-scrolling {
+    width: 200px;
+    position: fixed;
+    z-index: 151;
+    right: 10px;
+    top: 10px;
+
+    i {
+        text-align: center;
+        font-size: 4rem;
+    }
 
     .card {
-        width: 200px;
-        padding: 0;
         background: rgba(0,0,0,0.7);
-        display: inline-block;
-        vertical-align: top;
+        display: none;
 
-        & ul {
-        padding: 0;
-        margin: 0;
-        text-align: left;
-        height: 0;
-        overflow-y: hidden;
-
-            & li {
-                list-style: none;
-            }
-
-            & li a {
-                padding: 10px 0 10px 0;
-                width: 100%;
-                display: block;
-                text-decoration: none;
-                color: rgb(230,230,230);
-                text-align: center;
-                font-size: 1.4rem;
-
-                &:hover {
-                    background: rgb(76, 76, 76);
-                }
-            }
+        & h3 {
+            font-size: 1.7rem;
+            padding-top: 5px;
         }
 
-        &:hover ul {
-            height: auto;
+        & ul {
+            padding: 0;
+        }
+
+        & li {
+            list-style: none;
+        }
+
+        & li a {
+            cursor: pointer;
+            padding: 10px 0 10px 0;
+            width: 100%;
+            display: block;
+            text-decoration: none;
+            color: rgb(230,230,230);
+            text-align: center;
+            font-size: 1.4rem;
+
+            &:hover {
+                background: rgb(76, 76, 76);
+            }
+        }
+    }
+
+    &:hover, &:focus {
+        & .card {
+            display: block;
         }
     }
 }
@@ -753,6 +760,7 @@ input[type="search"] {
             display: none;
 
             & ul {
+                background: rgba(0,0,0,0.7);
                 height: auto;
             }
         }

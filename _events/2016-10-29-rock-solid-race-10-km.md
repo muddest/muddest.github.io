@@ -5,7 +5,8 @@ Title: Rock Solid Race
 Country: United Kingdom
 City: Milton Keynes
 Address: Silverstone Woodlands Milton Keynes, MK18 5LJ United Kingdom
-Date: 2016-10-29Site: https://www.rocksolidrace.com/events/mudrun/2016-october-milton-keynes/
+Date: 2016-10-29
+Site: https://www.rocksolidrace.com/events/mudrun/2016-october-milton-keynes/
 Length: 10 km
 Obstacles: 25
 Youtube: https://www.youtube.com/watch?v=ZO0H2rDTzL8

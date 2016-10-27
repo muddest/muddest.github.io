@@ -5,7 +5,8 @@ Title: GoHard Or Go Home
 Country: United Kingdom
 City: Exminster
 Address: Days-Pottles Ln Exminster, Exeter, United Kingdom
-Date: 2016-10-29Site: http://gohardevents.co.uk/go-hard-go-home/
+Date: 2016-10-29
+Site: http://gohardevents.co.uk/go-hard-go-home/
 Length: 6 km
 Obstacles: 20
 Youtube:
