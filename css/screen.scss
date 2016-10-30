@@ -753,6 +753,14 @@ input[type="search"] {
         width: 95%;
     }
 
+    #header-card-scrolling {
+        position: absolute;
+
+        & i {
+            text-align: right;
+        }
+    }
+
 
     .page-header {
         color: #eee;
