@@ -40,8 +40,14 @@ $(document).ready(function() {
 
     $('.about-us-link').click(function(e) {
         e.preventDefault();
-        var toAbout = $('.about-intro').offset().top;
-        //$(window).scrollTop(toAbout);
-        $('html, body').animate({scrollTop:toAbout}, 'fast');
+        //var toAbout = $('.about-intro').offset().top;
+        //$('html, body').animate({scrollTop:toAbout}, 'fast');
+        $('body').addClass('hideoverflow');
+        $('#about').fadeIn(300);
     });
+
+    $('#about, #about .close').click(function() {
+        $('body').removeClass('hideoverflow');
+        $('#about').fadeOut(200);
+    })
 });
