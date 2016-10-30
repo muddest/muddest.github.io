@@ -24,6 +24,7 @@ class EventBox extends React.Component {
             infoBoxId: '',
             zooming: false,
             emptysearch: false,
+            cities: [],
         };
 
         this.checkToDate = this.checkToDate.bind(this);
@@ -43,8 +44,8 @@ class EventBox extends React.Component {
         this.setDataBySearch = this.setDataBySearch.bind(this);
         this.setHooveringPinId = this.setHooveringPinId.bind(this);
         this.changeSearchState = this.changeSearchState.bind(this);
-        this.setAvailableCountriesFromEvents = this.setAvailableCountriesFromEvents.bind(this);
         this.changeVisibleEventsByMapZoom = this.changeVisibleEventsByMapZoom.bind(this);
+        this.setAvailableCountriesAndCitiesFromEvents = this.setAvailableCountriesAndCitiesFromEvents.bind(this);
     }
 
     changeVisibleEventsByMapZoom(visibleEvents) {
@@ -85,7 +86,7 @@ class EventBox extends React.Component {
         let toDate = nyyear+'-'+mm+'-'+dd;
 
         this.setState({ fromDate: new Date(today), toDate: new Date(toDate) });
-        this.setAvailableCountriesFromEvents(this.props.data);
+        this.setAvailableCountriesAndCitiesFromEvents(this.props.data);
     }
 
     componentDidMount() {
@@ -99,21 +100,29 @@ class EventBox extends React.Component {
         this.setState({windowWidth: window.innerWidth});
     }
 
-    setAvailableCountriesFromEvents(data) {
+    setAvailableCountriesAndCitiesFromEvents(data) {
         var lookup = {};
+        var lookupCity = {};
+        var cities = [];
         var items = data;
         var countries = [];
 
         for (var item, i = 0; item = items[i++];) {
             let country = item.Country;
+            let city = item.City;
 
             if (!(country in lookup)) {
                 lookup[country] = 1;
                 countries.push(country.toLowerCase());
             }
+
+            if (!(city in lookupCity)) {
+                lookupCity[city] = 1;
+                cities.push(city.toLowerCase());
+            }
         }
 
-        this.setState({ countries: countries });
+        this.setState({ countries: countries, cities: cities });
     }
 
 
@@ -216,8 +225,10 @@ class EventBox extends React.Component {
                 return false;
             }
 
+            let lookingFor = new RegExp(".*"+searchWord+".*", "i");
+            console.log(this.state.cities.indexOf(lookingFor));
             // If no country given go for searchword
-            if (event.Title.toLowerCase().indexOf(searchWord) === -1 && 1 < this.state.searchWord.length) {
+            if ((event.Title.toLowerCase().indexOf(searchWord) === -1 && 1 < this.state.searchWord.length)) {
                 return false;
             }
 

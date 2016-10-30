@@ -4,20 +4,16 @@ lng: 174.8006735
 Title: Run for Your Freakn Life
 Country: New Zealand
 City: Auckland
-Address: 833 Kingseat Road
----
-
-Auckland, 2580 New Zealand
-Date: 2017-05-13
+Address: 833 Kingseat Road, Auckland, 2580 New Zealand
 Site: http://www.runforyourfreaknlife.com/
-
+Date: 2017-05-13
 Length: 5 km
-
 Obstacles: 20+
 Youtube: https://www.youtube.com/watch?v=k5C-B6lGI_4
 Challenge:
+---
 
-Infotext: An intense 5Km obstacle and adventure race... with PROFESSIONAL ZOMBIES! You’re running from brain hungry, virus spreading, Freak’n Zombies who are trying to snatch the flags/lives on your flag belt.
+An intense 5Km obstacle and adventure race... with PROFESSIONAL ZOMBIES! You’re running from brain hungry, virus spreading, Freak’n Zombies who are trying to snatch the flags/lives on your flag belt.
 
 Along the way you will have to navigate a series of 13 Freak’n obstacles.
 
