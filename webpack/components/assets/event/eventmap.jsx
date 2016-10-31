@@ -19,6 +19,7 @@ class EventMap extends React.Component {
         };
 
         this.updatePanning = this.updatePanning.bind(this);
+        this.resetMap = this.resetMap.bind(this);
 
         this.zoomInMap = this.zoomInMap.bind(this);
         this.zoomOutMap = this.zoomOutMap.bind(this);
@@ -54,6 +55,7 @@ class EventMap extends React.Component {
     componentDidMount() {
         $('#plus').click($.proxy(function() { this.zoomInMap(); }, this));
         $('#minus').click($.proxy(function() { this.zoomOutMap(); }, this));
+        $('#reset').click($.proxy(function() { this.resetMap(); }, this));
 
         markerCluster = new MarkerClusterer(map, this.state.markers, {imagePath: '/assets/images/cluster/m', ignoreHidden: true, zoomOnClick: false});
         
@@ -288,6 +290,10 @@ class EventMap extends React.Component {
         map.setZoom(map.getZoom() - 2);
         this.updateBoundsChange();
     }
+    resetMap() {
+        map.setZoom(1);
+        this.updateBoundsChange();
+    }
 
     render () {
         return (
@@ -300,7 +306,6 @@ class EventMap extends React.Component {
         let content = '';
         content += "<h2>"+data.Title+"</h2>";
         content += data.Date;
-        content += "<a href="+data.Site+">Homepage</a>";
         return content;
     }
 }

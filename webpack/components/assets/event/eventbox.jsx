@@ -226,7 +226,7 @@ class EventBox extends React.Component {
             }
 
             let lookingFor = new RegExp(".*"+searchWord+".*", "i");
-            console.log(this.state.cities.indexOf(lookingFor));
+            // console.log(this.state.cities.indexOf(lookingFor));
             // If no country given go for searchword
             if ((event.Title.toLowerCase().indexOf(searchWord) === -1 && 1 < this.state.searchWord.length)) {
                 return false;
