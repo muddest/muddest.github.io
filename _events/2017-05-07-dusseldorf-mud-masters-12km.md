@@ -5,7 +5,7 @@ Title: DŸsseldorf Germany Mud Masters Airport Weeze
 Country: Germany
 City: DŸsseldorf
 Address: Airport Weeze, Airport Weeze, Baaler Straße, Germany
-Date: 2017-05Ð07
+Date: 2017-05-07
 Site: http://mudmasters.com/event/airport-weeze-2017/
 Length: 12km
 Obstacles: 14+

@@ -5,7 +5,7 @@ Title: Wacken Germany Fisherman’s Friend StrongmanRun 2017
 Country: Germany
 City: Wacken
 Address: Reselithweg 17, Wacken, Germany
-Date: June 17, 2017-06-17
+Date: 2017-06-17
 Site: http://www.strongmanrun.de/runs/wacken/#bidding
 Length: 20km
 Obstacles: 40
