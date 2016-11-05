@@ -85,9 +85,21 @@ class InfoBox extends React.Component {
         return { __html: rawMarkup };
     }
 
+    getYoutubeId(url) {
+        var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        var match = url.match(regExp);
+
+        if (match && match[2].length == 11) {
+            return match[2];
+        } else {
+            return 'error';
+        }
+    }
+
     
     render() {
         var obstacles = (this.props.obstacles === '' || this.props.obstacles === null) ? '' : <Fonty text={this.props.obstacles+" obstacles"} icon="fa-heartbeat" />;
+        var youTubeId = (this.props.youtube) ? this.getYoutubeId(this.props.youtube) : 'VO5I03AcrBU';
         return (
             <div className="box">
                 <div className="box_background" data-name="closebox" onClick={this.props.closebox}>
@@ -118,7 +130,7 @@ class InfoBox extends React.Component {
                             <span className="infotextaboutevent" dangerouslySetInnerHTML={this.rawMarkup()} />
                         </article>
                         <div className="video-container">
-                            <iframe src={this.props.youtube} frameBorder="0" allowFullScreen></iframe>
+                            <iframe src={"https://www.youtube.com/embed/"+youTubeId} frameBorder="0" allowFullScreen></iframe>
                         </div>
                     </div>
                 </div>

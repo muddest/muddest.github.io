@@ -9,7 +9,7 @@ Date: 2017-09-23
 Site: http://xmanrace.com/en/circuits/xman-sherbrooke/
 Length: 7-8 km
 Obstacles: 40+
-Youtube: https://www.youtube.com/watch?v=nJ9wV1EYah4
+Youtube: https://www.youtube.com/embed/nJ9wV1EYah4
 Challenge:
 ---
 

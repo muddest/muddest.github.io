@@ -9,7 +9,7 @@ Date: 2017-08-27
 Site: http://www.vikingrace.no/events
 Length: 10km
 Obstacles: Unknown
-Youtube: https://www.youtube.com/watch?v=tDa2T95iW3I
+Youtube: https://www.youtube.com/embed/tDa2T95iW3I
 Challenge:
 ---
 

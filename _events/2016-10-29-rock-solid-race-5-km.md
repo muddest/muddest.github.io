@@ -9,7 +9,7 @@ Date: 2016-10-29
 Site: https://www.rocksolidrace.com/events/mudrun/2016-october-milton-keynes/
 Length: 5 km
 Obstacles: 16
-Youtube: https://www.youtube.com/watch?v=ZO0H2rDTzL8
+Youtube: https://www.youtube.com/embed/ZO0H2rDTzL8
 Challenge:
 ---
 

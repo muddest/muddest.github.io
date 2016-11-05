@@ -9,7 +9,7 @@ Date: 2017-08-26
 Site: http://www.mudhero.com/en/events/ultra-10k/
 Length: 10 km
 Obstacles: 26
-Youtube: https://www.youtube.com/watch?v=vXfA4GunWEQ
+Youtube: https://www.youtube.com/embed/vXfA4GunWEQ
 Challenge:
 ---
 
