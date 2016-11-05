@@ -39,7 +39,8 @@ class EventMap extends React.Component {
         const mapRef = this.refs.map;
         const node = document.getElementById('map');
         var mapOptions = {
-            center: new google.maps.LatLng(48.413684, -52.064998),
+            // center: new google.maps.LatLng(48.413684, -52.064998),
+            center: new google.maps.LatLng(59.320146, 18.062149),
             zoom: 3,
             maxZoom: 13,
             disableDefaultUI: true,
@@ -80,7 +81,7 @@ class EventMap extends React.Component {
             var string = '';
             for (let i = 0; i < markers.length; i++) {
                 string += markers[i].title+' - '+markers[i].length+'<br>';
-                if (i > 5) {
+                if (i > 1) {
                     string += 'and more...';
                     break;
                 }
