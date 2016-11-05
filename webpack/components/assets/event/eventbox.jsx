@@ -163,6 +163,7 @@ class EventBox extends React.Component {
     setDataBySearch() {
         // Split searchwords into array.
         let searchWord = this.state.searchWord.toLowerCase();
+        // searchWord = searchWord.replace(/[^a-zA-Z ]/g, "");
         let wordArray = searchWord.split(' ');
         let filteredData = [];
         var matchedCountries = [];
@@ -185,6 +186,7 @@ class EventBox extends React.Component {
         // Filter every event. Remove those who doesnt fulfill criteria
         var eventnodes = this.props.data.filter((event) => {
             let eventDate = new Date(event.Date);
+            let eventTitle = event.Title.toLowerCase().replace(/[^a-zA-Z ]/g, "");
             
             if (eventDate < this.state.fromDate || eventDate > this.state.toDate) {
                 return false;
@@ -211,7 +213,7 @@ class EventBox extends React.Component {
                     }
 
                     let lookingFor = new RegExp(".*"+word+".*", "i");
-                    if (lookingFor.test(event.Title.toLowerCase())) {
+                    if (lookingFor.test(eventTitle)) {
                         isInSearch = true;
                         break;
                     } else {
@@ -228,7 +230,8 @@ class EventBox extends React.Component {
             let lookingFor = new RegExp(".*"+searchWord+".*", "i");
             // console.log(this.state.cities.indexOf(lookingFor));
             // If no country given go for searchword
-            if ((event.Title.toLowerCase().indexOf(searchWord) === -1 && 1 < this.state.searchWord.length)) {
+            
+            if ((eventTitle.indexOf(searchWord) === -1 && 1 < this.state.searchWord.length)) {
                 return false;
             }
 
