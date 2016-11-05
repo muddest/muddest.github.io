@@ -6,7 +6,7 @@ import InfoWindow from './eventassets/infowindow.jsx';
 var map = '';
 var bounds = '';
 var markerCluster = '';
-// var infoWindowBig = new google.maps.InfoWindow({ pixelOffset: new google.maps.Size(0, -20) });
+var infoWindowBig = new google.maps.InfoWindow({ pixelOffset: new google.maps.Size(0, -20) });
 
 class EventMap extends React.Component {
     constructor(props) {
@@ -69,7 +69,7 @@ class EventMap extends React.Component {
         google.maps.event.addListener(markerCluster, 'click', function(cluster) {
             map.setCenter(cluster.getCenter());
             map.setZoom(map.getZoom()+2);
-            // infoWindowBig.close();
+            infoWindowBig.close();
             _that.updateBoundsChange();
         });
 
@@ -86,12 +86,12 @@ class EventMap extends React.Component {
                 }
             }
 
-            // infoWindowBig.setContent('<h2>Events</h2><br>'+string);
-            // infoWindowBig.setPosition(cluster.getCenter());
-            // infoWindowBig.open(map);
+            infoWindowBig.setContent('<h2>Events</h2><br>'+string);
+            infoWindowBig.setPosition(cluster.getCenter());
+            infoWindowBig.open(map);
         });
         
-        // google.maps.event.addListener(map, "click", function(event) { infoWindowBig.close(); });
+        google.maps.event.addListener(map, "click", function(event) { infoWindowBig.close(); });
         this.updateMarkers(this.props.visible);
     }
 
@@ -226,17 +226,17 @@ class EventMap extends React.Component {
             }
         }
 
-        // if ((newMarkId === '') || (newMarkId !== currentMarkId && false === showCluster)) {
-        //     var clusters = markerCluster.getClusters();
-        //     for (let i = 0; i < clusters.length; i++) {
-        //         for( var j=0; j < clusters[i].markers_.length; j++){
-        //             if ('' !== clusters[i].markers_[j] && clusters[i].markers_[j].id === currentMarkId && null === clusters[i].markers_[j].getMap()) {
-        //                 infoWindowBig.close();
-        //                 break;
-        //             }
-        //         }
-        //     }
-        // }
+        if ((newMarkId === '') || (newMarkId !== currentMarkId && false === showCluster)) {
+            var clusters = markerCluster.getClusters();
+            for (let i = 0; i < clusters.length; i++) {
+                for( var j=0; j < clusters[i].markers_.length; j++){
+                    if ('' !== clusters[i].markers_[j] && clusters[i].markers_[j].id === currentMarkId && null === clusters[i].markers_[j].getMap()) {
+                        infoWindowBig.close();
+                        break;
+                    }
+                }
+            }
+        }
 
         if (('' === newMarkId && newMarkId !== currentMarkId) || (newMarkId !== currentMarkId && true === showCluster) || (newMarkId !== currentMarkId && false === showCluster && newMarkId !== '')) {
             let mark = this.state.markers.filter(function(mark) { return mark.id == currentMarkId });
