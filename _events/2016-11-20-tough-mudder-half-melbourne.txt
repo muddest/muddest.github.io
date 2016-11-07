@@ -1,0 +1,20 @@
+---
+lat: -37.610301
+lng: 144.3223674
+Title: Tough Mudder Half Melbourne
+Country: Australia
+City: Myrniong
+Address: 64 Garrards Ln, Myrniong VIC 3341, Australia
+Date: 2016-11-20
+Site: https://toughmudder.com.au/events/2016-melbourne-half
+Length: 10km
+Obstacles: 13
+Youtube: https://youtu.be/fNZf5shOq5k
+Challenge: 
+---
+
+Same Awesome Venue. All New Event Series
+Tough Mudder Half Melbourne Presented by Merrell is the leading ten kilometre obstacle course challenge in the world. The latest creation from our mad-minded course designers offers all the thrills of Tough Mudder, in just half the distance. The energy doubles with this course running on the same day as Tough Mudder with 13 obstacles to test teamwork.
+
+10 kilometres. 13 Obstacles
+Tough Mudder Half Melbourne comes to you from the sprawling vineyards of St Anne’s winery. But you won’t have time to relax with cheese and wine, as this course packs a punch with 13 obstacles over only 10 kilometres. So grab your friends and family and commit to this unique quest for muddy fun.

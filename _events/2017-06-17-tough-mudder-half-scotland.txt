@@ -1,0 +1,22 @@
+---
+lat: 55.273669
+lng: -3.808915
+Title: Tough Mudder Half Scotland
+Country: United Kingdom
+City: Thornhill
+Address: Drumlanrig Castle
+Date: 2017-06-17
+Site: https://toughmudder.co.uk/events/2017-scotland-half
+
+Length: 5 miles
+
+Obstacles: 13
+Youtube: https://youtu.be/AH2d3sQGP0w
+Challenge: 
+---
+
+Awesome Venue, New Course
+In 2017 we’re taking you back to Drumlanrig Castle for Tough Mudder Half Scotland Presented by Merrell. This year you and your team must be ready to run through dark wooded trails, over scenic hilltops and crawl through plenty of thick, dark mud.
+
+5 Miles, 13 Obstacles
+You'll need to work together as a team to conquer this brand new course featuring some of our most challenging obstacles. So don't just sit there, get out and recruit your friends and be ready to join us in the mud.

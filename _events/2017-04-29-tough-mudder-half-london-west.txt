@@ -1,0 +1,23 @@
+---
+lat: 51.5622306
+lng: -0.8942412
+Title: Tough Mudder Half London West
+Country: United Kingdom
+City: Henley on Thames
+Address: Fawley, Henley on Thames, RG9 3AP, GB
+Date: 2017-04-29
+Site: https://toughmudder.co.uk/events/2017-london-west-half
+
+Length: 5 miles
+
+Obstacles: 13
+Youtube: https://youtu.be/AH2d3sQGP0w
+Challenge: 
+---
+
+Awesome Venue, New Course
+The first Tough Mudder Half of the 2017 season will take place in the mud at the majestic Culden Faw Estate. Tough Mudder Half London West Presented by Merrell is set to challenge your teamwork and mental grit in an all new way.
+
+5 Miles, 13 Obstacles
+Tough Mudder Half London West is a mud lover's playground: get ready for a course that will both challenge and thrill your team. Gather your friends and get ready to start 2017 off the right way. In the mud.
+

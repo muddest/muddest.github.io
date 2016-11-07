@@ -1,0 +1,22 @@
+---
+lat: -26.9156906
+lng: 152.7609236
+Title: Tough Mudder Half South East Queensland
+Country: Australia
+City: Woodford
+Address: 87 Woodrow Road, Woodford, 4514, AU
+Date: 2017-05-20
+Site: https://toughmudder.com.au/events/2017-south-east-queensland-half
+
+Length: 10km
+
+Obstacles: 13
+Youtube: https://youtu.be/MDMF-KMWd8g
+Challenge: 
+---
+
+Epic New Event Series
+The ALL NEW Tough Mudder Half SEQ - Presented by Merrell-will kick off with a brand new location, new event format and new challenges. Experience the rush of Tough Mudder's amazing new event series with thousands of first-timers looking for a challenge.
+
+10 KM, 13 Obstacles
+Located at the home of the Woodford Folk Festival (Woodfordia) we've got rolling hills, epic valleys and lots of thick mud lined up, ready for our Mudders. Get your team together for this brand new challenege and we'll see you in the mud.

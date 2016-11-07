@@ -1,0 +1,16 @@
+---
+lat: 25.2048493
+lng: 55.2707828
+Title: du Tough Mudder
+Country: United Arab Emirates
+City: Dubai
+Address: Exit 611, Opp. Global Village, Emirates Rd, Dubai
+Date: 2016-12-09
+Site: http://toughmudder.ae
+Length: 8km
+Obstacles: 20+
+Youtube: https://youtu.be/0UxslSefXCs
+Challenge: 
+---
+
+du Tough Mudder is an 8KM & 16KM mud and obstacle course designed to test your physical strength, stamina, and mental grit. It is a team-oriented challenge with no winners, finisher medals, or clocks to race against. Join friends on a life-changing adventure where what you accomplish is almost as tough as who you are.
