@@ -10,7 +10,7 @@ Site: https://toughmudder.com.au/events/2016-melbourne-half
 Length: 10km
 Obstacles: 13
 Youtube: https://youtu.be/fNZf5shOq5k
-Challenge: 
+Challenge:
 ---
 
 Same Awesome Venue. All New Event Series

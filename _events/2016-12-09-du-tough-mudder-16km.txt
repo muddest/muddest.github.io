@@ -10,7 +10,7 @@ Site: http://toughmudder.ae
 Length: 16km
 Obstacles: 20+
 Youtube: https://youtu.be/0UxslSefXCs
-Challenge: 
+Challenge:
 ---
 
 du Tough Mudder is an 8KM & 16KM mud and obstacle course designed to test your physical strength, stamina, and mental grit. It is a team-oriented challenge with no winners, finisher medals, or clocks to race against. Join friends on a life-changing adventure where what you accomplish is almost as tough as who you are.

@@ -45,7 +45,7 @@ Participant, Spectator, Volunteer, and Kids Waiver  2016 Carolina Athlete Guide
 ### Sunday
 
 - 7:30am - 8:15am Competitive Start Times
-- 8:30am - 10:00am Morning 
+- 8:30am - 10:00am Morning
 
 *Waves of 250+ racers will be released every 15 minutes.*
 
@@ -107,7 +107,7 @@ Registration opens at 5:30am.
 
 ## What To Wear
 
-There’s no dress code, but you’ll be running in mud and water, climbing hills and mountains, under barbed wire and jumping fire. Our elites recommend: performance gear (NOT COTTON), water packs, compression underwear, Clif bars and energy gel. Visit shop.spartan.com to gear up for your race.  Advice from experience: is to race in what you train in - new shoes on race day are NOT recommended. 
+There’s no dress code, but you’ll be running in mud and water, climbing hills and mountains, under barbed wire and jumping fire. Our elites recommend: performance gear (NOT COTTON), water packs, compression underwear, Clif bars and energy gel. Visit shop.spartan.com to gear up for your race.  Advice from experience: is to race in what you train in - new shoes on race day are NOT recommended.
 
 
 ## Photos

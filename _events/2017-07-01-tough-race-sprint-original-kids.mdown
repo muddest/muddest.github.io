@@ -1,0 +1,22 @@
+---
+lat: 60.4903979
+lng: 15.517334
+Title: Tough Race Sweden Weekend - Sprint - Original - Kids
+Country: Sweden
+City: Borlänge
+Address: Dalsjö 8
+Date: 2017-07-01
+Site:  https://www.toughracesweden.se/
+Obstacles: 10-40+
+Length: 500m-8km
+Price:
+Currency: SKR
+Youtube: https://www.youtube.com/watch?v=6pckleuCtIA
+Challenge:
+---
+
+This is Tough Race Sweden Weekend. Three OCR in two days!
+
+- Sprint 4km from 8 years
+- Original 8km from 15 years
+- Kids 500-1000m
